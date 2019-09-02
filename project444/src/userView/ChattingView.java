@@ -13,6 +13,7 @@ public class ChattingView extends JFrame {
 	private JButton jbtProductInfo, jbtSend, jbtOk, jbtCancle;
 
 	public ChattingView() {
+		super("Ã¤ÆÃ");
 		jlNotice = new JLabel("¹é½Â±Ô ´Ô¿¡°Ô ¹°°ÇÀ» ¹ÞÀ¸¼Ì³ª¿ä?");
 		jtaChatView = new JTextArea();
 		jtaChatField = new JTextField();

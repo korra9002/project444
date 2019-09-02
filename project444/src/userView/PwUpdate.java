@@ -13,6 +13,7 @@ public class PwUpdate extends JFrame {
 	private JButton jbtOk, jbtCancle;
 
 	public PwUpdate() {
+		super("비밀번호 변경");
 		// JLabel
 		JLabel jlCurrentPw = new JLabel("현재 비밀번호");
 		JLabel jlUpdatePw = new JLabel("변경할 비밀번호");

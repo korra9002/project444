@@ -16,6 +16,7 @@ public class SuccessChat extends JFrame {
 //	jbtOk, jbtCancle;
 
 	public SuccessChat() {
+		super("거래 완료 채팅");
 		JLabel jlSuccessNotice = new JLabel("거래완료된 채팅입니다.");
 //		jlNotice = new JLabel("백승규 님에게 물건을 받으셨나요?");
 		jtaChatView = new JTextArea();

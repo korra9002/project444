@@ -15,6 +15,7 @@ public class ForgotPw extends JFrame {
 	private JButton jbtSearch, jbtCancle;
 
 	public ForgotPw() {
+		super("비밀번호 찾기");
 		JLabel jlId = new JLabel("아이디");
 		JLabel  jlPwHint= new JLabel("비밀번호 힌트");
 		JLabel jlPwAnswer= new JLabel("내용");
