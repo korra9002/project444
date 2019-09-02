@@ -1,4 +1,4 @@
-package login;
+package userView;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;

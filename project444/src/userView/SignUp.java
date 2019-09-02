@@ -1,4 +1,4 @@
-package login;
+package userView;
 
 import java.awt.Checkbox;
 import java.awt.CheckboxGroup;
