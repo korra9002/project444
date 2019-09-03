@@ -1,0 +1,341 @@
+package adminView;
+
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
+@SuppressWarnings("serial")
+public class adminView extends JFrame {
+	
+	private JTabbedPane jtp;
+	private JButton jbtSearch1, jbtRefresh1, jbtRecent1, jbtSearch2, jbtRefresh2, jbtRecent2, 
+		jbtSearch3, jbtRefresh3;
+	private JTable jtCheckList, jtProductList, jtUserList;
+	private DefaultTableModel dtmCheckList, dtmProductList, dtmUserList;
+	private JComboBox<String> jcbCategory1, jcbCategory2, jcbCategory3;
+	private DefaultComboBoxModel<String> dcbCategory1, dcbCategory2, dcbCategory3;
+	private JTextField jtfSearch1, jtfSearch2, jtfSearch3;
+	private JRadioButton jrbID1, jrbSubject1, jrbID2, jrbSubject2;
+	
+	public adminView() {
+		super("관리자");
+		////////////////////////////////첫번째 탭 시작////////////////////////////////
+		String[] categoryList1= {"카테고리 종류","디지털/가전","가구/인테리어","유아동/유아도서","생활/가공식품","여성의류","여성잡화",
+				"뷰티/미용","남성패션/잡화","스포츠/레저","게임/취미","도서/티켓/음반","반려동물용품","기타 중고물품"};
+
+		dcbCategory1 = new DefaultComboBoxModel<String>(categoryList1);
+		jcbCategory1 = new JComboBox<String>(dcbCategory1);
+		
+		jtfSearch1 = new JTextField();
+		
+		jrbSubject1 = new JRadioButton("제목");
+		jrbID1 = new JRadioButton("아이디");
+		ButtonGroup bg = new ButtonGroup();//두개 다 선택되는 것을 방지
+		bg.add(jrbSubject1);
+		bg.add(jrbID1);
+		
+		jbtSearch1 = new JButton("검색");
+		jbtRefresh1 = new JButton("새로고침");
+		jbtRecent1 = new JButton("최신순");
+		
+		
+		String[] checkCol= {"카테고리","판매자","이미지","가격","제목","올린날짜",""};
+		Object[][] checkRow = {
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7}
+				};
+		
+		dtmCheckList = new DefaultTableModel(checkRow, checkCol){//셀 내용 수정 금지
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}//isCellEditable
+		};
+		jtCheckList = new JTable(dtmCheckList) {
+			@Override
+			public Class<?> getColumnClass(int column) {
+				return getValueAt(0, column).getClass();
+			}//getColumnClass
+		};
+		
+		JScrollPane jspCheckList = new JScrollPane(jtCheckList);
+		
+		//////////////테이블 데이터 가운데 정렬 시작//////////////
+		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();//테이블 데이터 가운데 정렬을 하기 위해
+		dtcr.setHorizontalAlignment(SwingConstants.CENTER);//가운데 정렬 세팅
+		TableColumnModel tcm = jtCheckList.getColumnModel();//정렬할 테이블의 컬럼모델을 가져옴
+		
+		for (int i = 0; i < tcm.getColumnCount(); i++) {//컬럼의 수만큼 반복하여 가운데정렬함
+			tcm.getColumn(i).setCellRenderer(dtcr);
+		}//end for
+		//////////////테이블 데이터 가운데 정렬 끝//////////////
+		
+		////////테이블 크기설정 시작////////
+		jtCheckList.getTableHeader().setReorderingAllowed(false);//테이블 컬럼 위치 변경 금지
+		
+		jtCheckList.getColumnModel().getColumn(0).setPreferredWidth(70);
+		jtCheckList.getColumnModel().getColumn(0).setResizable(false);;//테이블 컬럼 사이즈 변경 금지
+		jtCheckList.getColumnModel().getColumn(1).setPreferredWidth(80);
+		jtCheckList.getColumnModel().getColumn(1).setResizable(false);;
+		jtCheckList.getColumnModel().getColumn(2).setPreferredWidth(120);
+		jtCheckList.getColumnModel().getColumn(2).setResizable(false);;
+		jtCheckList.getColumnModel().getColumn(3).setPreferredWidth(70);
+		jtCheckList.getColumnModel().getColumn(3).setResizable(false);;
+		jtCheckList.getColumnModel().getColumn(4).setPreferredWidth(120);
+		jtCheckList.getColumnModel().getColumn(4).setResizable(false);;
+		jtCheckList.getColumnModel().getColumn(5).setPreferredWidth(70);
+		jtCheckList.getColumnModel().getColumn(5).setResizable(false);;
+		jtCheckList.getColumnModel().getColumn(6).setPreferredWidth(70);
+		jtCheckList.getColumnModel().getColumn(6).setResizable(false);;
+		
+		jtCheckList.setRowHeight(100);
+		////////테이블 크기설정 끝////////
+		
+		JPanel jpCheckList = new JPanel(null);
+		
+		jspCheckList.setBounds(10, 10, 600, 500);
+		jbtRefresh1.setBounds(500, 550, 90, 30);
+		jbtRecent1.setBounds(50, 580, 90, 30);
+		jcbCategory1.setBounds(50, 530, 120, 30);
+		jtfSearch1.setBounds(200, 530, 150, 30);
+		jbtSearch1.setBounds(380, 530, 90, 30);
+		jrbSubject1.setBounds(200, 580, 70, 30);
+		jrbID1.setBounds(270, 580, 70, 30);
+		
+		jpCheckList.add(jspCheckList);
+		jpCheckList.add(jbtRecent1);
+		jpCheckList.add(jbtRefresh1);
+		jpCheckList.add(jcbCategory1);
+		jpCheckList.add(jtfSearch1);
+		jpCheckList.add(jbtSearch1);
+		jpCheckList.add(jrbSubject1);
+		jpCheckList.add(jrbID1);
+		
+		/////////////////////////////////첫번째 탭 끝/////////////////////////////////
+		
+		
+		////////////////////////////////두번째 탭 시작////////////////////////////////
+		String[] categoryList2= {"카테고리 종류","디지털/가전","가구/인테리어","유아동/유아도서","생활/가공식품","여성의류","여성잡화",
+				"뷰티/미용","남성패션/잡화","스포츠/레저","게임/취미","도서/티켓/음반","반려동물용품","기타 중고물품"};
+
+		dcbCategory2 = new DefaultComboBoxModel<String>(categoryList2);
+		jcbCategory2 = new JComboBox<String>(dcbCategory2);
+		
+		
+		jtfSearch2 = new JTextField();
+		
+		jrbSubject2 = new JRadioButton("제목");
+		jrbID2 = new JRadioButton("아이디");
+		ButtonGroup bg2 = new ButtonGroup();//두개 다 선택되는 것을 방지
+		bg2.add(jrbSubject2);
+		bg2.add(jrbID2);
+		
+		jbtSearch2 = new JButton("검색");
+		jbtRefresh2 = new JButton("새로고침");
+		jbtRecent2 = new JButton("최신순");
+
+		
+		String[] productCol= {"카테고리","판매자","이미지","가격","제목","올린날짜","판매중/판매완료"};
+		Object[][] productRow = {
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7}
+				};
+		
+		dtmProductList = new DefaultTableModel(productRow, productCol) {//셀 내용 수정 금지
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}//isCellEditable
+		};
+		jtProductList = new JTable(dtmProductList) {
+			@Override
+			public Class<?> getColumnClass(int column) {
+				return getValueAt(0, column).getClass();
+			}//getColumnClass
+		};
+		
+		JScrollPane jspProductList = new JScrollPane(jtProductList);
+
+		//////////////테이블 데이터 가운데 정렬 시작//////////////
+		DefaultTableCellRenderer dtcr2 = new DefaultTableCellRenderer();//테이블 데이터 가운데 정렬을 하기 위해
+		dtcr2.setHorizontalAlignment(SwingConstants.CENTER);//가운데 정렬 세팅
+		TableColumnModel tcm2 = jtProductList.getColumnModel();//정렬할 테이블의 컬럼모델을 가져옴
+		
+		for (int i = 0; i < tcm2.getColumnCount(); i++) {//컬럼의 수만큼 반복하여 가운데정렬함
+			tcm2.getColumn(i).setCellRenderer(dtcr2);
+		}//end for
+		//////////////테이블 데이터 가운데 정렬 끝//////////////
+		
+		////////테이블 크기설정 시작////////
+		jtProductList.getTableHeader().setReorderingAllowed(false);//테이블 컬럼 위치 변경 금지
+		
+		jtProductList.getColumnModel().getColumn(0).setPreferredWidth(70);
+		jtProductList.getColumnModel().getColumn(0).setResizable(false);;//테이블 컬럼 사이즈 변경 금지
+		jtProductList.getColumnModel().getColumn(1).setPreferredWidth(80);
+		jtProductList.getColumnModel().getColumn(1).setResizable(false);;
+		jtProductList.getColumnModel().getColumn(2).setPreferredWidth(120);
+		jtProductList.getColumnModel().getColumn(2).setResizable(false);;
+		jtProductList.getColumnModel().getColumn(3).setPreferredWidth(70);
+		jtProductList.getColumnModel().getColumn(3).setResizable(false);;
+		jtProductList.getColumnModel().getColumn(4).setPreferredWidth(120);
+		jtProductList.getColumnModel().getColumn(4).setResizable(false);;
+		jtProductList.getColumnModel().getColumn(5).setPreferredWidth(70);
+		jtProductList.getColumnModel().getColumn(5).setResizable(false);;
+		jtProductList.getColumnModel().getColumn(6).setPreferredWidth(70);
+		jtProductList.getColumnModel().getColumn(6).setResizable(false);;
+		
+		jtProductList.setRowHeight(100);
+		////////테이블 크기설정 끝////////
+
+		JPanel jpProductList = new JPanel(null);
+		
+		jspProductList.setBounds(10, 10, 600, 500);
+		jbtRefresh2.setBounds(500, 550, 90, 30);
+		jbtRecent2.setBounds(50, 580, 90, 30);
+		jcbCategory2.setBounds(50, 530, 120, 30);
+		jtfSearch2.setBounds(200, 530, 150, 30);
+		jbtSearch2.setBounds(380, 530, 90, 30);
+		jrbSubject2.setBounds(200, 580, 70, 30);
+		jrbID2.setBounds(270, 580, 70, 30);
+		
+		jpProductList.add(jspProductList);
+		jpProductList.add(jbtRecent2);
+		jpProductList.add(jbtRefresh2);
+		jpProductList.add(jcbCategory2);
+		jpProductList.add(jtfSearch2);
+		jpProductList.add(jbtSearch2);
+		jpProductList.add(jrbSubject2);
+		jpProductList.add(jrbID2);
+		/////////////////////////////////두번째 탭 끝/////////////////////////////////
+		
+		
+		////////////////////////////////세번째 탭 시작////////////////////////////////
+		String[] searchList= {"전체","아이디","이름","전화번호","이메일"};
+
+		dcbCategory3 = new DefaultComboBoxModel<String>(searchList);
+		jcbCategory3 = new JComboBox<String>(dcbCategory3);
+		
+		jtfSearch3 = new JTextField();
+		
+		jbtSearch3 = new JButton("검색");
+		jbtRefresh3 = new JButton("새로고침");
+		
+		String[] idCol= {"아이디","이름","성별","전화번호","이메일","가입날짜"," "};
+		Object[][] idRow = {
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7}
+				};
+		
+		dtmUserList = new DefaultTableModel(idRow, idCol) {//셀 내용 수정 금지
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}//isCellEditable
+		};
+		jtUserList = new JTable(dtmUserList) {
+			@Override
+			public Class<?> getColumnClass(int column) {
+				return getValueAt(0, column).getClass();
+			}//getColumnClass
+		};
+		
+		JScrollPane jspUserList = new JScrollPane(jtUserList);
+		
+		//////////////테이블 데이터 가운데 정렬 시작//////////////
+		DefaultTableCellRenderer dtcr3 = new DefaultTableCellRenderer();//테이블 데이터 가운데 정렬을 하기 위해
+		dtcr3.setHorizontalAlignment(SwingConstants.CENTER);//가운데 정렬 세팅
+		TableColumnModel tcm3 = jtUserList.getColumnModel();//정렬할 테이블의 컬럼모델을 가져옴
+		
+		for (int i = 0; i < tcm3.getColumnCount(); i++) {//컬럼의 수만큼 반복하여 가운데정렬함
+			tcm3.getColumn(i).setCellRenderer(dtcr3);
+		}//end for
+		//////////////테이블 데이터 가운데 정렬 끝//////////////
+		
+		////////테이블 크기설정 시작////////
+		jtUserList.getTableHeader().setReorderingAllowed(false);//테이블 컬럼 위치 변경 금지
+		
+		jtUserList.getColumnModel().getColumn(0).setPreferredWidth(70);
+		jtUserList.getColumnModel().getColumn(0).setResizable(false);;//테이블 컬럼 사이즈 변경 금지
+		jtUserList.getColumnModel().getColumn(1).setPreferredWidth(80);
+		jtUserList.getColumnModel().getColumn(1).setResizable(false);;
+		jtUserList.getColumnModel().getColumn(2).setPreferredWidth(120);
+		jtUserList.getColumnModel().getColumn(2).setResizable(false);;
+		jtUserList.getColumnModel().getColumn(3).setPreferredWidth(70);
+		jtUserList.getColumnModel().getColumn(3).setResizable(false);;
+		jtUserList.getColumnModel().getColumn(4).setPreferredWidth(120);
+		jtUserList.getColumnModel().getColumn(4).setResizable(false);;
+		jtUserList.getColumnModel().getColumn(5).setPreferredWidth(70);
+		jtUserList.getColumnModel().getColumn(5).setResizable(false);;
+		jtUserList.getColumnModel().getColumn(6).setPreferredWidth(70);
+		jtUserList.getColumnModel().getColumn(6).setResizable(false);;
+		
+		jtUserList.setRowHeight(100);
+		////////테이블 크기설정 끝////////
+		
+		JPanel jpUserList = new JPanel(null);
+		
+		jspUserList.setBounds(10, 10, 600, 500);
+		jcbCategory3.setBounds(50, 550, 120, 30);
+		jbtRefresh3.setBounds(500, 550, 90, 30);
+		jtfSearch3.setBounds(200, 550, 150, 30);
+		jbtSearch3.setBounds(380, 550, 90, 30);
+		
+		jpUserList.add(jspUserList);
+		jpUserList.add(jcbCategory3);
+		jpUserList.add(jbtRefresh3);
+		jpUserList.add(jtfSearch3);
+		jpUserList.add(jbtSearch3);
+		/////////////////////////////////세번째 탭 끝/////////////////////////////////
+		
+		jtp = new JTabbedPane();
+		
+		jtp.add("검수목록",jpCheckList);
+		jtp.add("제품목록",jpProductList);
+		jtp.add("유저목록",jpUserList);
+		add(jtp);
+		
+		setBounds(100, 100, 640, 700);
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	}//SaleList
+
+	public static void main(String[] args) {
+		new adminView();
+	}//main
+
+}//class
