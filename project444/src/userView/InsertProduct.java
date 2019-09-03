@@ -22,7 +22,7 @@ public class InsertProduct extends JFrame {
 	private JTextField jtfSubject, jtfPrice;
 	private JTextArea jtaExplain;
 	private JComboBox<String> jcbCategory;
-	private DefaultComboBoxModel<String> dcbCategory;
+	private DefaultComboBoxModel<String> dcbCategory; 
 	
 	public InsertProduct() {
 		super("제품 입력");

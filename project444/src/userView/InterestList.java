@@ -18,7 +18,7 @@ public class InterestList extends JFrame {
 	
 	private JButton jbtDelete;
 	private JTable jtInterest;
-	private DefaultTableModel dtmInterest;
+	private DefaultTableModel dtmInterest; 
 	
 	public InterestList() {
 		super("관심목록");

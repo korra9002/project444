@@ -24,7 +24,7 @@ public class PurchaseHistory extends JFrame {
 	public PurchaseHistory() {
 		super("구매내역");
 		String[] sellCol= {"이미지","제품명","가격","아이디","지역","구매시간"};
-		Object[][] sellRow = {
+		Object[][] sellRow = { 
 				{1,2,3,4,5,6},
 				{1,2,3,4,5,6},
 				{1,2,3,4,5,6},
