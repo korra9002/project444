@@ -13,8 +13,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class SignUp extends JFrame {
-	private JLabel jlId, jlPw, jlName, jlGender, jlPhone, jlLoc, jlPwHint, jlPwAnswer;
-	private JTextField jtfId, jtfPass, jtfName, jtfPhone, jtfPwAnswer;
+	private JLabel jlId, jlPw,jlRePw, jlName, jlGender, jlPhone, jlLoc, jlPwHint, jlPwAnswer;
+	private JTextField jtfId, jtfPass,jtfRePass, jtfName, jtfPhone, jtfPwAnswer;
 	private JPasswordField jpfPw;
 	private JButton jbtIdCheck, jbtRegister, jbtCancle;
 	private CheckboxGroup cbgGender;
@@ -27,6 +27,7 @@ public class SignUp extends JFrame {
 		// JLabel
 		jlId = new JLabel("아이디  ");
 		jlPw = new JLabel("비밀번호  ");
+		jlRePw = new JLabel("비밀번호 확인");
 		jlName = new JLabel("이름  ");
 		jlGender = new JLabel("성별");
 		jlPhone = new JLabel("연락처");
@@ -40,7 +41,7 @@ public class SignUp extends JFrame {
 		jtfName = new JTextField();
 		jtfPhone = new JTextField();
 		jtfPwAnswer = new JTextField();
-
+		jtfRePass = new JTextField();
 		// JPasswordField
 		jpfPw = new JPasswordField();
 
@@ -81,25 +82,27 @@ public class SignUp extends JFrame {
 
 		jlId.setBounds(60, 100, 80, 25);
 		jlPw.setBounds(60, 150, 80, 25);
-		jlName.setBounds(60, 200, 50, 25);
-		jlGender.setBounds(60, 260, 50, 25);
-		jlPhone.setBounds(60, 310, 60, 25);
-		jlLoc.setBounds(60, 360, 50, 25);
-		jlPwHint.setBounds(40, 410, 100, 25);
-		jlPwAnswer.setBounds(60, 470, 100, 25);
-
+		jlRePw.setBounds(50, 200, 120, 25);
+		jlName.setBounds(60, 240, 50, 25);
+		jlGender.setBounds(60, 280, 50, 25);
+		jlPhone.setBounds(60, 320, 60, 25);
+		jlLoc.setBounds(60, 370, 50, 25);
+		jlPwHint.setBounds(40, 420, 100, 25);
+		jlPwAnswer.setBounds(60, 480, 100, 25);
+		
 		jtfId.setBounds(140, 100, 180, 25);
 		jtfPass.setBounds(140, 150, 220, 25);
-		jtfName.setBounds(140, 200, 220, 25);
-		jtfPhone.setBounds(205, 310, 180, 25);
-		jtfPwAnswer.setBounds(140, 470, 250, 25);
+		jtfRePass.setBounds(140, 200, 220, 25);
+		jtfName.setBounds(140, 240, 220, 25);
+		jtfPhone.setBounds(205, 320, 180, 25);
+		jtfPwAnswer.setBounds(140, 480, 250, 25);
 
-		cbMan.setBounds(160, 260, 100, 20);
-		cbWomen.setBounds(260, 260, 100, 20);
+		cbMan.setBounds(160, 280, 100, 20);
+		cbWomen.setBounds(260, 280, 100, 20);
 
-		jcbLoc.setBounds(140, 360, 150, 25);
-		jcbPwHint.setBounds(140, 410, 250, 25);
-		jcbPhoneNum.setBounds(140, 310, 60, 25);
+		jcbLoc.setBounds(140, 370, 150, 25);
+		jcbPwHint.setBounds(140, 420, 250, 25);
+		jcbPhoneNum.setBounds(140, 320, 60, 25);
 		
 		jbtIdCheck.setBounds(350, 100, 100, 30);
 		jbtRegister.setBounds(230, 580, 100, 30);
@@ -108,15 +111,17 @@ public class SignUp extends JFrame {
 		// 배치
 		add(jlId);
 		add(jlPw);
+		add(jlRePw);
 		add(jlName);
 		add(jlGender);
 		add(jlLoc);
 		add(jlPhone);
 		add(jlPwHint);
 		add(jlPwAnswer);
-
+		
 		add(jtfId);
 		add(jtfPass);
+		add(jtfRePass);
 		add(jtfName);
 		add(jtfPhone);
 		add(jtfPwAnswer);
