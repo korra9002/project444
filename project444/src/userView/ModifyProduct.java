@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -12,7 +13,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
-public class ModifyProduct extends JFrame {
+public class ModifyProduct extends JPanel {
 
 	private JLabel jlbProductImg;
 	private JButton jbtSelectImg, jbtOkey, jbtCancle ;
@@ -22,7 +23,7 @@ public class ModifyProduct extends JFrame {
 	private DefaultComboBoxModel<String> dcbCategory;
 	
 	public ModifyProduct() {
-		super("제품 입력");
+//		super("제품 입력");
 		jlbProductImg = new JLabel("제품 이미지",JLabel.CENTER);
 		jlbProductImg.setBorder(new EtchedBorder(EtchedBorder.RAISED));//이미지 라벨 테두리 설정
 		
@@ -66,12 +67,12 @@ public class ModifyProduct extends JFrame {
 		
 		setBounds(100, 100, 420, 600);
 		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}//InsertProduct
 	
 	public static void main(String[] args) {
-		new ModifyProduct();
+	new ModifyProduct();
 	}//main
 
 }//class

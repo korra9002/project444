@@ -15,7 +15,7 @@ package userView;
 
 //import javafx.scene.control.RadioButton;
 
-	public class MarketMain extends JFrame {
+	public class MarketMain extends JPanel {
 		
 		private JTabbedPane jtp;
 		
@@ -42,12 +42,14 @@ package userView;
 //		홈, 카테고리, 글쓰기, 채팅, MyPage
 		jtp=new JTabbedPane();
 		
+		ModifyProduct mp=new ModifyProduct();
+//		jtp.add(mp);
+		
 		JPanel jpMarket1=new JPanel();
 		JPanel jpMarket2=new JPanel();
 		JPanel jpMarket3=new JPanel();
 		JPanel jpMarket4=new JPanel();
-
-		
+//jpMarket2.add(mp);
 		
 		jtp.addTab("홈", jpMarket1);
 		jtp.addTab("글쓰기",jpMarket2);
@@ -117,7 +119,7 @@ package userView;
 		jtProductList.getColumnModel().getColumn(3).setPreferredWidth(30);
 		jtProductList.getColumnModel().getColumn(3).setPreferredWidth(50);
 		
-		setResizable(false);
+//		setResizable(false);
 		
 		
 		// 컴포넌트 배치 
@@ -139,7 +141,7 @@ package userView;
 		
 		setVisible(true);
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			
 		}//MarketMain
 		
