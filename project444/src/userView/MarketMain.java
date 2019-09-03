@@ -28,7 +28,7 @@ import javafx.scene.control.RadioButton;
 		private DefaultTableModel dtmProductList;
 		private JTable jtProductList;
 		
-		
+		 
 		
 		
 		public MarketMain() {
