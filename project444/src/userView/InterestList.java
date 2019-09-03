@@ -65,13 +65,13 @@ public class InterestList extends JFrame {
 		jtInterest.getColumnModel().getColumn(0).setResizable(false);;//테이블 컬럼 사이즈 변경 금지
 		jtInterest.getColumnModel().getColumn(1).setPreferredWidth(120);
 		jtInterest.getColumnModel().getColumn(1).setResizable(false);;
-		jtInterest.getColumnModel().getColumn(2).setPreferredWidth(80);
+		jtInterest.getColumnModel().getColumn(2).setPreferredWidth(75);
 		jtInterest.getColumnModel().getColumn(2).setResizable(false);;
-		jtInterest.getColumnModel().getColumn(3).setPreferredWidth(80);
+		jtInterest.getColumnModel().getColumn(3).setPreferredWidth(75);
 		jtInterest.getColumnModel().getColumn(3).setResizable(false);;
-		jtInterest.getColumnModel().getColumn(4).setPreferredWidth(80);
+		jtInterest.getColumnModel().getColumn(4).setPreferredWidth(75);
 		jtInterest.getColumnModel().getColumn(4).setResizable(false);;
-		jtInterest.getColumnModel().getColumn(5).setPreferredWidth(80);
+		jtInterest.getColumnModel().getColumn(5).setPreferredWidth(75);
 		jtInterest.getColumnModel().getColumn(5).setResizable(false);;
 		
 		jtInterest.setRowHeight(100);
@@ -79,21 +79,21 @@ public class InterestList extends JFrame {
 		////////테이블 크기설정 끝////////
 		
 		jbtDelete = new JButton("삭제");
-		JPanel jpNorth = new JPanel(new BorderLayout());
-		jpNorth.add("East",jbtDelete);
-		jpNorth.setBorder(BorderFactory.createEmptyBorder(10,10,10,30));
 		
-		JPanel jpSellList = new JPanel(new BorderLayout());
+		JPanel jpInterestList = new JPanel(null);
+		jbtDelete.setBounds(450, 15, 80, 30);
+		jspInterest.setBounds(10, 60, 540, 480);
 		
-		jpSellList.add("North",jpNorth);
-		jpSellList.add("Center",jspInterest);
+		jpInterestList.add(jbtDelete);
+		jpInterestList.add(jspInterest);
 		
 		/////////////////////////////////첫번째 탭 끝/////////////////////////////////
 		
-		add(jpSellList);
+		add(jpInterestList);
 		
-		setBounds(100, 100, 560, 600);
+		setBounds(100, 100, 565, 600);
 		setVisible(true);
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}//SaleList

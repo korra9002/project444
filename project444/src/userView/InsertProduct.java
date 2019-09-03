@@ -33,10 +33,9 @@ public class InsertProduct extends JFrame {
 		jtp=new JTabbedPane();
 		
 		JPanel jpMarket1=new JPanel();
-		JPanel jpMarket2=new JPanel();
+		JPanel jpMarket2=new JPanel(null);
 		JPanel jpMarket3=new JPanel();
 		JPanel jpMarket4=new JPanel();
-
 		
 		
 		jtp.addTab("홈", jpMarket1);
@@ -65,30 +64,32 @@ public class InsertProduct extends JFrame {
 		jbtOkey = new JButton("완료");
 		jbtCancle = new JButton("취소");
 		
-		setLayout(null);
+//		setLayout(null);
 		
-		jtp.setBounds(0, 10, 400, 30);
-		jlbProductImg.setBounds(10, 50, 120, 100);//이미지 사이즈 120x100
-		jbtSelectImg.setBounds(150, 95, 100, 30);
-		jcbCategory.setBounds(270, 83, 120, 50);
-		jtfSubject.setBounds(10, 200, 385, 30);
-		jtfPrice.setBounds(10, 240, 385, 30);
-		jspExplain.setBounds(10, 280, 385, 240);
-		jbtOkey.setBounds(100, 540, 80, 30);
-		jbtCancle.setBounds(230, 540, 80, 30);
+//		jtp.setBounds(0, 10, 400, 30);
+		jlbProductImg.setBounds(10, 20, 120, 100);//이미지 사이즈 120x100
+		jbtSelectImg.setBounds(150, 65, 100, 30);
+		jcbCategory.setBounds(270, 53, 120, 50);
+		jtfSubject.setBounds(10, 170, 385, 30);
+		jtfPrice.setBounds(10, 210, 385, 30);
+		jspExplain.setBounds(10, 250, 385, 240);
+		jbtOkey.setBounds(100, 510, 80, 30);
+		jbtCancle.setBounds(230, 510, 80, 30);
+		
+		jpMarket2.add(jlbProductImg);
+		jpMarket2.add(jbtSelectImg);
+		jpMarket2.add(jcbCategory);
+		jpMarket2.add(jtfSubject);
+		jpMarket2.add(jtfPrice);
+		jpMarket2.add(jspExplain);
+		jpMarket2.add(jbtOkey);
+		jpMarket2.add(jbtCancle);
 		
 		add(jtp);
-		add(jlbProductImg);
-		add(jbtSelectImg);
-		add(jcbCategory);
-		add(jtfSubject);
-		add(jtfPrice);
-		add(jspExplain);
-		add(jbtOkey);
-		add(jbtCancle);
 		
 		setBounds(100, 100, 420, 640);
 		setVisible(true);
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}//InsertProduct

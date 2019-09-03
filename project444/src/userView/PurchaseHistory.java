@@ -66,35 +66,33 @@ public class PurchaseHistory extends JFrame {
 		jtPurchaseList.getColumnModel().getColumn(0).setResizable(false);;//테이블 컬럼 사이즈 변경 금지
 		jtPurchaseList.getColumnModel().getColumn(1).setPreferredWidth(120);
 		jtPurchaseList.getColumnModel().getColumn(1).setResizable(false);;
-		jtPurchaseList.getColumnModel().getColumn(2).setPreferredWidth(80);
+		jtPurchaseList.getColumnModel().getColumn(2).setPreferredWidth(75);
 		jtPurchaseList.getColumnModel().getColumn(2).setResizable(false);;
-		jtPurchaseList.getColumnModel().getColumn(3).setPreferredWidth(80);
+		jtPurchaseList.getColumnModel().getColumn(3).setPreferredWidth(75);
 		jtPurchaseList.getColumnModel().getColumn(3).setResizable(false);;
-		jtPurchaseList.getColumnModel().getColumn(4).setPreferredWidth(80);
+		jtPurchaseList.getColumnModel().getColumn(4).setPreferredWidth(75);
 		jtPurchaseList.getColumnModel().getColumn(4).setResizable(false);;
-		jtPurchaseList.getColumnModel().getColumn(5).setPreferredWidth(80);
+		jtPurchaseList.getColumnModel().getColumn(5).setPreferredWidth(75);
 		jtPurchaseList.getColumnModel().getColumn(5).setResizable(false);;
 		
 		jtPurchaseList.setRowHeight(100);
 		
 		////////테이블 크기설정 끝////////
 		
-		jbtDelete = new JButton("삭제");
-		JPanel jpNorth = new JPanel(new BorderLayout());
-		jpNorth.add("East",jbtDelete);
-		jpNorth.setBorder(BorderFactory.createEmptyBorder(10,10,10,30));//여백넣기
+//		jbtDelete = new JButton("삭제");
 		
-		JPanel jpList = new JPanel(new BorderLayout());
+		JPanel jpHistory = new JPanel(null);
 		
-		jpList.add("North", jpNorth);
-		jpList.add("Center", jspPurchase);
+		jspPurchase.setBounds(10, 60, 540, 480);
+		jpHistory.add(jspPurchase);
 		
 		/////////////////////////////////첫번째 탭 끝/////////////////////////////////
 		
-		add(jpList);
+		add(jpHistory);
 		
-		setBounds(100, 100, 560, 600);
+		setBounds(100, 100, 565, 600);
 		setVisible(true);
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}//SaleList
