@@ -67,6 +67,7 @@ public class Login extends JFrame implements ActionListener {
 		jbtSignUp.addActionListener(this);
 		jbtForgotId.addActionListener(this);
 		jbtForgotPw.addActionListener(this);
+		jbtLogin.addActionListener(this);
 		// 가시화
 		setVisible(true);
 		// 윈도우 종료처리
@@ -84,7 +85,9 @@ public class Login extends JFrame implements ActionListener {
 		if (ae.getSource() == jbtForgotPw) {
 			new ForgotPw();
 		} // end if
-
+		if(ae.getSource()==jbtLogin) {
+			new MarketMain();
+		}
 	}// actionPerformed //단위테스트용
 
 	public static void main(String[] args) {
