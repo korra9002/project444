@@ -35,7 +35,7 @@ public class UserInfo extends JFrame{
 	  jbtBuy.setBounds(200, 200, 90, 30);
 	  jbtLike.setBounds(350, 200, 90, 30);
 	  jtaAd.setBounds(50, 250, 450, 180);
-	  
+	   
 	  
 //	  add(jlLevelImg);
 	  add(jTfId);
