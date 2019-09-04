@@ -3,6 +3,7 @@ package adminView;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -28,6 +29,7 @@ public class adminView extends JFrame {
 	private DefaultComboBoxModel<String> dcbCategory1, dcbCategory2, dcbCategory3;
 	private JTextField jtfSearch1, jtfSearch2, jtfSearch3;
 	private JRadioButton jrbID1, jrbSubject1, jrbID2, jrbSubject2;
+	private JCheckBox onSale, deleteNComplete ;
 	
 	public adminView() {
 		super("관리자");
@@ -139,6 +141,8 @@ public class adminView extends JFrame {
 		dcbCategory2 = new DefaultComboBoxModel<String>(categoryList2);
 		jcbCategory2 = new JComboBox<String>(dcbCategory2);
 		
+		onSale = new JCheckBox("판매중");
+		deleteNComplete = new JCheckBox("<html>판매완료/<br>삭제");
 		
 		jtfSearch2 = new JTextField();
 		
@@ -216,13 +220,15 @@ public class adminView extends JFrame {
 		JPanel jpProductList = new JPanel(null);
 		
 		jspProductList.setBounds(10, 10, 600, 500);
-		jbtRefresh2.setBounds(500, 550, 90, 30);
+		jbtRefresh2.setBounds(500, 590, 90, 30);
 		jbtRecent2.setBounds(50, 580, 90, 30);
 		jcbCategory2.setBounds(50, 530, 120, 30);
 		jtfSearch2.setBounds(200, 530, 150, 30);
 		jbtSearch2.setBounds(380, 530, 90, 30);
 		jrbSubject2.setBounds(200, 580, 70, 30);
 		jrbID2.setBounds(270, 580, 70, 30);
+		onSale.setBounds(500, 510, 90, 30);
+		deleteNComplete.setBounds(500, 540, 90, 40);
 		
 		jpProductList.add(jspProductList);
 		jpProductList.add(jbtRecent2);
@@ -232,6 +238,8 @@ public class adminView extends JFrame {
 		jpProductList.add(jbtSearch2);
 		jpProductList.add(jrbSubject2);
 		jpProductList.add(jrbID2);
+		jpProductList.add(onSale);
+		jpProductList.add(deleteNComplete);
 		/////////////////////////////////두번째 탭 끝/////////////////////////////////
 		
 		
