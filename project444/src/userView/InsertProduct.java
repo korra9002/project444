@@ -14,9 +14,8 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
-public class InsertProduct extends JFrame {
+public class InsertProduct extends JPanel {
 
-	private JTabbedPane jtp;
 	private JLabel jlbProductImg;
 	private JButton jbtSelectImg, jbtOkey, jbtCancle ;
 	private JTextField jtfSubject, jtfPrice;
@@ -25,23 +24,9 @@ public class InsertProduct extends JFrame {
 	private DefaultComboBoxModel<String> dcbCategory; 
 	
 	public InsertProduct() {
-		super("제품 입력");
+//		super("제품 입력");
 		
 		
-		//JTabbedPane
-		
-		jtp=new JTabbedPane();
-		
-		JPanel jpMarket1=new JPanel();
-		JPanel jpMarket2=new JPanel(null);
-		JPanel jpMarket3=new JPanel();
-		JPanel jpMarket4=new JPanel();
-		
-		
-		jtp.addTab("홈", jpMarket1);
-		jtp.addTab("글쓰기",jpMarket2);
-		jtp.addTab("채팅", jpMarket3);
-		jtp.addTab("MyPage", jpMarket4);
 		
 		jlbProductImg = new JLabel("제품 이미지",JLabel.CENTER);
 		jlbProductImg.setBorder(new EtchedBorder(EtchedBorder.RAISED));//이미지 라벨 테두리 설정
@@ -64,33 +49,33 @@ public class InsertProduct extends JFrame {
 		jbtOkey = new JButton("완료");
 		jbtCancle = new JButton("취소");
 		
-//		setLayout(null);
+		setLayout(null);
 		
 //		jtp.setBounds(0, 10, 400, 30);
-		jlbProductImg.setBounds(10, 20, 120, 100);//이미지 사이즈 120x100
-		jbtSelectImg.setBounds(150, 65, 100, 30);
-		jcbCategory.setBounds(270, 53, 120, 50);
-		jtfSubject.setBounds(10, 170, 385, 30);
-		jtfPrice.setBounds(10, 210, 385, 30);
-		jspExplain.setBounds(10, 250, 385, 240);
-		jbtOkey.setBounds(100, 510, 80, 30);
-		jbtCancle.setBounds(230, 510, 80, 30);
+		jlbProductImg.setBounds(40, 20, 120, 100);//이미지 사이즈 120x100
+		jbtSelectImg.setBounds(180, 65, 100, 30);
+		jcbCategory.setBounds(300, 53, 120, 50);
+		jtfSubject.setBounds(40, 170, 385, 30);
+		jtfPrice.setBounds(40, 210, 385, 30);
+		jspExplain.setBounds(40, 250, 385, 240);
+		jbtOkey.setBounds(130, 510, 80, 30);
+		jbtCancle.setBounds(260, 510, 80, 30);
 		
-		jpMarket2.add(jlbProductImg);
-		jpMarket2.add(jbtSelectImg);
-		jpMarket2.add(jcbCategory);
-		jpMarket2.add(jtfSubject);
-		jpMarket2.add(jtfPrice);
-		jpMarket2.add(jspExplain);
-		jpMarket2.add(jbtOkey);
-		jpMarket2.add(jbtCancle);
+		add(jlbProductImg);
+		add(jbtSelectImg);
+		add(jcbCategory);
+		add(jtfSubject);
+		add(jtfPrice);
+		add(jspExplain);
+		add(jbtOkey);
+		add(jbtCancle);
 		
-		add(jtp);
+
 		
 		setBounds(100, 100, 420, 640);
 		setVisible(true);
-		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setResizable(false);
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}//InsertProduct
 	

@@ -16,9 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 
-public class Chat extends JFrame {
+public class Chat extends JPanel {
 		
-		private JTabbedPane jtp;
 		private JButton jbRefresh;
 		
 		private DefaultTableModel dtmProductList;
@@ -33,19 +32,7 @@ public class Chat extends JFrame {
 		//////////////////////// 채팅 화면 //////////////////////////////
 		
 //		홈, 글쓰기, 채팅, MyPage
-		jtp=new JTabbedPane();
-		
-		JPanel jpMarket1=new JPanel();
-		JPanel jpMarket2=new JPanel();
-		JPanel jpMarket3=new JPanel();
-		JPanel jpMarket4=new JPanel();
 
-		
-		
-		jtp.addTab("홈", jpMarket1);
-		jtp.addTab("글쓰기",jpMarket2);
-		jtp.addTab("채팅", jpMarket3);
-		jtp.addTab("MyPage", jpMarket4);
 		
 		
 		//JButton
@@ -76,17 +63,15 @@ public class Chat extends JFrame {
 		
 		
 		
-		setResizable(false);
+//		setResizable(false);
 		
 		
 		// 컴포넌트 배치 
 		setLayout(null);
 		
-		jtp.setBounds(30, 30, 400, 30);
 		jspProductList.setBounds(30, 180, 400, 200);
 		jbRefresh.setBounds(30, 400, 90, 30);
 		
-		add(jtp);
 		add(jspProductList);
 		add(jbRefresh);
 		
@@ -95,7 +80,7 @@ public class Chat extends JFrame {
 		
 		setVisible(true);
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			
 		}//Chat
 

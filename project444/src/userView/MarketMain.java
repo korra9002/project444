@@ -13,16 +13,14 @@ package userView;
 	import javax.swing.JTextField;
 	import javax.swing.table.DefaultTableModel;
 
-//import javafx.scene.control.RadioButton;
 
 	public class MarketMain extends JPanel {
 		
-		private JTabbedPane jtp;
 		
 		private DefaultComboBoxModel<String> dcbm, dcbm1;
 		private JComboBox<String> jcbArea, jcbCategory;
 		private JTextField jtfSearch;
-		private JButton jbSearch, jbRecent, jbPrice;
+		private JButton jbSearch, jbRecent, jbPrice, jbRefresh;
 		private JRadioButton jrbSubject, jrbId;
 		
 		private DefaultTableModel dtmProductList;
@@ -32,7 +30,7 @@ package userView;
 		
 		
 		public MarketMain() {
-			
+//			super("글쓰기");
 
 			
 			
@@ -40,32 +38,17 @@ package userView;
 		//////////////////////// 홈 화면 //////////////////////////////
 		
 //		홈, 카테고리, 글쓰기, 채팅, MyPage
-		jtp=new JTabbedPane();
-		
-		ModifyProduct mp=new ModifyProduct();
-//		jtp.add(mp);
-		
-		JPanel jpMarket1=new JPanel();
-		JPanel jpMarket2=new JPanel();
-		JPanel jpMarket3=new JPanel();
-		JPanel jpMarket4=new JPanel();
-//jpMarket2.add(mp);
-		
-		jtp.addTab("홈", jpMarket1);
-		jtp.addTab("글쓰기",jpMarket2);
-		jtp.addTab("채팅", jpMarket3);
-		jtp.addTab("MyPage", jpMarket4);
-		
+				
 		
 		//JComboBox
-		String[] dataArea= {"전체","강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구",
+		String[] dataArea= {"지역전체","강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구",
 				"노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구",
 				"송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구"};
 		
 		dcbm = new DefaultComboBoxModel<String>(dataArea);	
 		jcbArea=new JComboBox<String>(dcbm);
 		
-		String[] dataCategory= {"디지털/가전", "가구/인테리어", 	"유아동/유아도서",
+		String[] dataCategory= {"카테고리전체", "디지털/가전", "가구/인테리어", 	"유아동/유아도서",
 				"생활/가공식품", 	"여성의류", "여성잡화", "뷰티/미용", "남성패션/잡화",
 				"스포츠/레저", "게임/취미", "도서/티켓/음반", "반려동물용품", "기타 중고물품"};
 		
@@ -93,10 +76,13 @@ package userView;
 		//JButton 
 		jbRecent=new JButton("최신순");
 		jbPrice=new JButton("가격순");
+		jbRefresh=new JButton("새로고침");
 		
 		JPanel panel3=new JPanel();
 		panel3.add(jbRecent);
 		panel3.add(jbPrice);
+		panel3.add(jbRefresh);
+		
 		
 		//JTable
 		
@@ -125,13 +111,11 @@ package userView;
 		// 컴포넌트 배치 
 		setLayout(null);
 		
-		jtp.setBounds(30, 30, 400, 30);
-		panel1.setBounds(30, 60, 400, 40);
-		panel2.setBounds(40, 100, 400, 40);
-		panel3.setBounds(30, 140, 400, 40);
-		jspProductList.setBounds(30, 180, 400, 200);
+		panel1.setBounds(30, 30, 400, 40);
+		panel2.setBounds(40, 70, 400, 40);
+		panel3.setBounds(30, 110, 400, 40);
+		jspProductList.setBounds(40, 190, 400, 200);
 		
-		add(jtp);
 		add(panel1);
 		add(panel2);
 		add(panel3);

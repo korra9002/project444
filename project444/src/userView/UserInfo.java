@@ -11,7 +11,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-public class UserInfo extends JFrame{
+public class UserInfo extends JPanel{
    private JLabel jlLevelImg;
    private JTextField jTfId;
    private JButton jbtPersonalData, jbtSell, jbtBuy, jbtLike;
@@ -46,7 +46,7 @@ public class UserInfo extends JFrame{
 	  add(jtaAd);
 
       setLayout(null);
-      setResizable(false);
+//      setResizable(false);
       setBounds(100, 100, 540, 470);
       setVisible(true);
 
