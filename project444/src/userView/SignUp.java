@@ -19,7 +19,7 @@ public class SignUp extends JFrame {
 	private JButton jbtIdCheck, jbtRegister, jbtCancle;
 	private CheckboxGroup cbgGender;
 	private Checkbox cbWomen, cbMan;
-	static JComboBox<String> jcbPhoneNum,jcbLoc, jcbPwHint;
+	private JComboBox<String> jcbPhoneNum,jcbLoc, jcbPwHint;
 	private String[] PwHint;
 
 	public SignUp() {
@@ -152,9 +152,6 @@ public class SignUp extends JFrame {
 		});
 	}// SineUp
 
-	public JComboBox<String> getJcbPwHint() {
-		return jcbPwHint;
-	}//getJcbPwHint
 
 //	public static void main(String[] args) {
 //		new SignUp();
