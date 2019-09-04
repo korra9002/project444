@@ -11,13 +11,13 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-public class UserMy extends JFrame{
+public class UserInfo extends JFrame{
    private JLabel jlLevelImg;
    private JTextField jTfId;
    private JButton jbtPersonalData, jbtSell, jbtBuy, jbtLike;
    private JTextArea jtaAd;
    
-   public UserMy() {
+   public UserInfo() {
 //	  jlLevelImg=new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/imges/c1_c1.png/"));
 
 	  jTfId=new JTextField("¾ÆÀÌµð");
@@ -53,7 +53,7 @@ public class UserMy extends JFrame{
    }//UserMy
 
    public static void main(String[] args) {
-      new UserMy();
+      new UserInfo();
    }//main
 
 }//class
