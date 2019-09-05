@@ -83,6 +83,7 @@ public class FileHelper extends Thread {
 					sendCnt--;
 				} // end while
 				dos.flush();
+				fis.close();
 				System.out.println(dis.readUTF()+"颇老傈价 场");// 颇老 傈价 场 犬牢
 				/////// 
 			} // end for
