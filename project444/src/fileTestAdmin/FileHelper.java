@@ -71,7 +71,7 @@ public class FileHelper extends Thread {
 				// 9.전송할 횟수를 클라이언트에게 보낸다.
 				dos.writeInt(sendCnt);
 				dos.flush();
-				// 11.전송할 파일명을 보낸다.
+				// 11.전송할 파일명을 보낸다. 
 				dos.writeUTF(listSendFile.get(i));
 				dos.flush();
 				// 12.파일에서 읽어들인 횟수만큼 클라이언트에 보낸다.
