@@ -51,7 +51,7 @@ public class FileHelper extends Thread {
 	}// FileHelper
 
 	public void run() {
-		byte[] readData = new byte[1024];// 파일에서 읽어 들인 내용을 저장
+		byte[] readData = new byte[256];// 파일에서 읽어 들인 내용을 저장
 		int sendCnt = 0; // 전송할 readData갯수
 		int readSize = 0; // 읽어들인 배영릐 방의 갯수.
 		try {

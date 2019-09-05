@@ -180,7 +180,7 @@ import javax.swing.DefaultComboBoxModel;
 				int readCnt = 0;
 				String revFileName = "";
 				
-				byte[] readData = new byte[1024];
+				byte[] readData = new byte[256];
 				int readSize = 0;
 				for (int i = 0; i < fileCnt; i++) {
 					dos.writeUTF("Y"); //파일을 전송받기 위한 플래그 값을 서버로 전달
