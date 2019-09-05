@@ -53,7 +53,7 @@ public class FileHelper extends Thread {
 		//dos.flush();
 
 		////////////////////////////////////
-		dis.close();
+	//	dis.close();
 		
 		
 	}// FileHelper
