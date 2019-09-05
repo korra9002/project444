@@ -3,6 +3,8 @@ package fileTestUser;
 
 	import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -178,7 +180,7 @@ import javax.swing.DefaultComboBoxModel;
 				int readCnt = 0;
 				String revFileName = "";
 				
-				byte[] readData = new byte[200];
+				byte[] readData = new byte[1024];
 				int readSize = 0;
 				for (int i = 0; i < fileCnt; i++) {
 					dos.writeUTF("Y"); //파일을 전송받기 위한 플래그 값을 서버로 전달
@@ -186,6 +188,7 @@ import javax.swing.DefaultComboBoxModel;
 					readCnt = dis.readInt();
 					// 12. 파일명 받기
 					revFileName = dis.readUTF();
+					System.out.println(revFileName);
 					// 13. 파일생성
 					fos = new FileOutputStream("c:/dev/fileTest2/"+revFileName);
 					dos.writeUTF("Y");// 파일 받기 전에 확인 
@@ -195,6 +198,7 @@ import javax.swing.DefaultComboBoxModel;
 						readCnt--;
 					}//end while
 					fos.flush();
+					fos.close();
 					//14.thumbnail 파일 생성
 					dos.writeUTF("Y");//파일전송 확인 메세지
 					//ImageResize.resizeImage("C:/dev/workspace/jdbc_prj/src/kr/co/sist/user/img/"+revFileName, 100, 80);
