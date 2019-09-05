@@ -197,7 +197,7 @@ import javax.swing.DefaultComboBoxModel;
 						fos.write(readData, 0,readSize);
 						readCnt--;
 					}//end while
-					fos.flush();
+//					fos.flush();
 					fos.close();
 					//14.thumbnail 파일 생성
 					dos.writeUTF("Y");//파일전송 확인 메세지
