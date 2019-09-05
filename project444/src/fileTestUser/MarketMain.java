@@ -203,8 +203,8 @@ import javax.swing.DefaultComboBoxModel;
 					dos.writeUTF("Y");//파일전송 확인 메세지
 					
 					//////////////////////////
-					dis.close();
-					dis = new DataInputStream(client.getInputStream());
+				//	dis.close();
+				//	dis = new DataInputStream(client.getInputStream());
 					
 					//ImageResize.resizeImage("C:/dev/workspace/jdbc_prj/src/kr/co/sist/user/img/"+revFileName, 100, 80);
 				} // end for

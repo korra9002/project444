@@ -95,13 +95,13 @@ public class FileHelper extends Thread {
 				} // end while
 				dos.flush();
 				//////////////
-				dos.close();
+			//	dos.close();
 				////////////
 				fis.close();
 				System.out.println(dis.readUTF()+"颇老傈价 场");// 颇老 傈价 场 犬牢
 				
 				////////////
-				dos = new DataOutputStream(client.getOutputStream());
+			//	dos = new DataOutputStream(client.getOutputStream());
 				/////// 
 			} // end for
 		} catch (IOException ie) {
