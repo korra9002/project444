@@ -1,5 +1,6 @@
 package fileTestAdmin;
 
+import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -16,6 +17,9 @@ public class FileHelper extends Thread {
 	private FileInputStream fis;
 	private List<String> listSendFile; // 접속자에게 보낼 리스트
 	private File temp1 = null;
+	
+	////////////////
+	private BufferedInputStream bis;
 
 	public FileHelper(Socket client) throws IOException {
 		this.client = client;
@@ -46,12 +50,18 @@ public class FileHelper extends Thread {
 
 		// 7. 전송할 파일의 갯수 보내기 (클라이언트는 이 횟수로 반복시켜 읽는다.)
 		dos.writeInt(listSendFile.size());
-		dos.flush();
+		//dos.flush();
 
+		////////////////////////////////////
+		
+		
+		
+		
+		
 	}// FileHelper
 
 	public void run() {
-		byte[] readData = new byte[1];// 파일에서 읽어 들인 내용을 저장
+		byte[] readData = new byte[512];// 파일에서 읽어 들인 내용을 저장
 		int sendCnt = 0; // 전송할 readData갯수
 		int readSize = 0; // 읽어들인 배영릐 방의 갯수.
 		try {
@@ -84,8 +94,14 @@ public class FileHelper extends Thread {
 					sendCnt--;
 				} // end while
 				dos.flush();
+				//////////////
+				dos.close();
+				////////////
 				fis.close();
 				System.out.println(dis.readUTF()+"파일전송 끝");// 파일 전송 끝 확인
+				
+				////////////
+				dos = new DataOutputStream(client.getOutputStream());
 				/////// 
 			} // end for
 		} catch (IOException ie) {

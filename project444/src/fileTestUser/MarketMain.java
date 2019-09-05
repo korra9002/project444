@@ -173,14 +173,14 @@ import javax.swing.DefaultComboBoxModel;
 
 				// 5. 서버로 파일리스트 CSV Data 보내기
 				dos.writeUTF(csvFile.toString()); // 문자열을 스트림에 기록
-				dos.flush();// 스트림의 내용을 목적지로 분출
+		//		dos.flush();// 스트림의 내용을 목적지로 분출
 
 				// 9. 서버에서 없는 파일의 갯수를 보낸 것을 받아 그 횟수만큼 반복시킨다.
 				int fileCnt = dis.readInt();
 				int readCnt = 0;
 				String revFileName = "";
 				
-				byte[] readData = new byte[1];
+				byte[] readData = new byte[512];
 				int readSize = 0;
 				for (int i = 0; i < fileCnt; i++) {
 					dos.writeUTF("Y"); //파일을 전송받기 위한 플래그 값을 서버로 전달
@@ -201,6 +201,11 @@ import javax.swing.DefaultComboBoxModel;
 					fos.close();
 					//14.thumbnail 파일 생성
 					dos.writeUTF("Y");//파일전송 확인 메세지
+					
+					//////////////////////////
+					dis.close();
+					dis = new DataInputStream(client.getInputStream());
+					
 					//ImageResize.resizeImage("C:/dev/workspace/jdbc_prj/src/kr/co/sist/user/img/"+revFileName, 100, 80);
 				} // end for
 //			System.out.println(csvFile);
