@@ -354,10 +354,131 @@ public class adminView extends JFrame {
 		add(jtp);
 		
 		setBounds(100, 100, 720, 700);
+		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}//SaleList
+	
+	public JTabbedPane getJtp() {
+		return jtp;
+	}
+
+	public JButton getJbtSearch1() {
+		return jbtSearch1;
+	}
+
+	public JButton getJbtRefresh1() {
+		return jbtRefresh1;
+	}
+
+	public JButton getJbtRecent1() {
+		return jbtRecent1;
+	}
+
+	public JButton getJbtSearch2() {
+		return jbtSearch2;
+	}
+
+	public JButton getJbtRefresh2() {
+		return jbtRefresh2;
+	}
+
+	public JButton getJbtRecent2() {
+		return jbtRecent2;
+	}
+
+	public JButton getJbtSearch3() {
+		return jbtSearch3;
+	}
+
+	public JButton getJbtRefresh3() {
+		return jbtRefresh3;
+	}
+
+	public JTable getJtCheckList() {
+		return jtCheckList;
+	}
+
+	public JTable getJtProductList() {
+		return jtProductList;
+	}
+
+	public JTable getJtUserList() {
+		return jtUserList;
+	}
+
+	public DefaultTableModel getDtmCheckList() {
+		return dtmCheckList;
+	}
+
+	public DefaultTableModel getDtmProductList() {
+		return dtmProductList;
+	}
+
+	public DefaultTableModel getDtmUserList() {
+		return dtmUserList;
+	}
+
+	public JComboBox<String> getJcbCategory1() {
+		return jcbCategory1;
+	}
+
+	public JComboBox<String> getJcbCategory2() {
+		return jcbCategory2;
+	}
+
+	public JComboBox<String> getJcbCategory3() {
+		return jcbCategory3;
+	}
+
+	public DefaultComboBoxModel<String> getDcbCategory1() {
+		return dcbCategory1;
+	}
+
+	public DefaultComboBoxModel<String> getDcbCategory2() {
+		return dcbCategory2;
+	}
+
+	public DefaultComboBoxModel<String> getDcbCategory3() {
+		return dcbCategory3;
+	}
+
+	public JTextField getJtfSearch1() {
+		return jtfSearch1;
+	}
+
+	public JTextField getJtfSearch2() {
+		return jtfSearch2;
+	}
+
+	public JTextField getJtfSearch3() {
+		return jtfSearch3;
+	}
+
+	public JRadioButton getJrbID1() {
+		return jrbID1;
+	}
+
+	public JRadioButton getJrbSubject1() {
+		return jrbSubject1;
+	}
+
+	public JRadioButton getJrbID2() {
+		return jrbID2;
+	}
+
+	public JRadioButton getJrbSubject2() {
+		return jrbSubject2;
+	}
+
+	public JCheckBox getOnSale() {
+		return onSale;
+	}
+
+	public JCheckBox getDeleteNComplete() {
+		return deleteNComplete;
+	}
 
 	public static void main(String[] args) {
 		new adminView();
