@@ -53,9 +53,7 @@ public class FileHelper extends Thread {
 		//dos.flush();
 
 		////////////////////////////////////
-		
-		
-		
+		dis.close();
 		
 		
 	}// FileHelper
@@ -64,41 +62,50 @@ public class FileHelper extends Thread {
 		byte[] readData = new byte[512];// 파일에서 읽어 들인 내용을 저장
 		int sendCnt = 0; // 전송할 readData갯수
 		int readSize = 0; // 읽어들인 배영릐 방의 갯수.
+	
 		try {
 			// 8. 전송할 파일 정보 얻기
 
 			for (int i = 0; i < listSendFile.size(); i++) {
-				sendCnt = 0;
+			//	sendCnt = 0;
 				// System.out.println();
 				fis = new FileInputStream(new File(temp1.getAbsolutePath() + "/" + listSendFile.get(i)));
-
-				while ((readSize = fis.read(readData)) != -1) {
-					sendCnt++;// 전송할 횟수
-				} // end while
-				fis.close();
-				fis = new FileInputStream(new File(temp1.getAbsolutePath() + "/" + listSendFile.get(i)));
-				System.out.println(sendCnt+"전송횟수");
-				System.out.println(dis.readUTF()+"시작신호");
+				bis = new BufferedInputStream(fis);
+//				while ((readSize = fis.read(readData)) != -1) {
+//					sendCnt++;// 전송할 횟수
+//				} // end while
+//				fis.close();
+//				fis = new FileInputStream(new File(temp1.getAbsolutePath() + "/" + listSendFile.get(i)));
+//				System.out.println(sendCnt+"전송횟수");
+//				System.out.println(dis.readUTF()+"시작신호");
 				// 9.전송할 횟수를 클라이언트에게 보낸다.
-				dos.writeInt(sendCnt);
+//			dos.writeInt(sendCnt);
 			//	dos.flush();
 				// 11.전송할 파일명을 보낸다. 
 				dos.writeUTF(listSendFile.get(i));
 			//	dos.flush();
 				// 12.파일에서 읽어들인 횟수만큼 클라이언트에 보낸다.
-				System.out.println(dis.readUTF()+"카운트랑 파일명 받음");// 확인 받으면 파일 보낸다.
-				while (sendCnt > 0) {
-					readSize = fis.read(readData);
-//				System.out.println(readSize+" / ");
-					dos.write(readData, 0, readSize);
-					sendCnt--;
-				} // end while
+//				System.out.println(dis.readUTF()+"카운트랑 파일명 받음");// 확인 받으면 파일 보낸다.
+//				while (sendCnt > 0) {
+//					readSize = fis.read(readData);
+////				System.out.println(readSize+" / ");
+//					dos.write(readData, 0, readSize);
+//					sendCnt--;
+//				} // end while
+				//////////////////////////////////////////////////
+				int len = 0;
+				while((len = bis.read(readData))!=-1) {
+					dos.write(readData,0,len);
+				}
+				
+				//////////////////////////////
+				
 				dos.flush();
 				//////////////
 			//	dos.close();
 				////////////
 				fis.close();
-				System.out.println(dis.readUTF()+"파일전송 끝");// 파일 전송 끝 확인
+//				System.out.println(dis.readUTF()+"파일전송 끝");// 파일 전송 끝 확인
 				
 				////////////
 			//	dos = new DataOutputStream(client.getOutputStream());

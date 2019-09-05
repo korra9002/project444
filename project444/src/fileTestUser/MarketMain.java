@@ -150,6 +150,9 @@ import javax.swing.DefaultComboBoxModel;
 			DataOutputStream dos = null;
 			DataInputStream dis = null;
 			FileOutputStream fos = null;
+			////////////////////////
+			BufferedOutputStream bos = null;
+			
 			
 			try {
 				// 2. 소켓생성 : 서버로 연결
@@ -183,24 +186,30 @@ import javax.swing.DefaultComboBoxModel;
 				byte[] readData = new byte[512];
 				int readSize = 0;
 				for (int i = 0; i < fileCnt; i++) {
-					dos.writeUTF("Y"); //파일을 전송받기 위한 플래그 값을 서버로 전달
+					//dos.writeUTF("Y"); //파일을 전송받기 위한 플래그 값을 서버로 전달
 					// 10.읽어들일파일의 횟수 받기
-					readCnt = dis.readInt();
+				//	readCnt = dis.readInt();
 					// 12. 파일명 받기
 					revFileName = dis.readUTF();
 					System.out.println(revFileName);
 					// 13. 파일생성
 					fos = new FileOutputStream("c:/dev/fileTest2/"+revFileName);
-					dos.writeUTF("Y");// 파일 받기 전에 확인 
-					while(readCnt > 0) {
-						readSize = dis.read(readData);
-						fos.write(readData, 0,readSize);
-						readCnt--;
-					}//end while
+					bos = new BufferedOutputStream(fos);
+					//dos.writeUTF("Y");// 파일 받기 전에 확인 
+//					while(readCnt > 0) {
+//						readSize = dis.read(readData);
+//						fos.write(readData, 0,readSize);
+//						readCnt--;
+//					}//end while
+					int len =0;
+					while((len = dis.read(readData)) !=-1) {
+						bos.write(readData,0,len);
+					}
+					
 //					fos.flush();
 					fos.close();
 					//14.thumbnail 파일 생성
-					dos.writeUTF("Y");//파일전송 확인 메세지
+					//dos.writeUTF("Y");//파일전송 확인 메세지
 					
 					//////////////////////////
 				//	dis.close();
