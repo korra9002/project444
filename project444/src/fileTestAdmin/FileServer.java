@@ -92,8 +92,8 @@ public class FileServer  extends JFrame implements ActionListener, Runnable {
 				dis = new DataInputStream(client.getInputStream());
 				dos = new DataOutputStream(client.getOutputStream());
 				dos.writeUTF("전송시작"); // 전송시작 알림
-				revCnt= dis.readInt();//클라이언트가 writeInt()로 데이터를 전송
-				System.out.println(revCnt);
+			System.out.println((revCnt= dis.readInt())+"전송횟수 받음");//클라이언트가 writeInt()로 데이터를 전송
+				//System.out.println(revCnt);
 				//8.파일명 받기 
 				fileName = dis.readUTF();
 				System.out.println(fileName);

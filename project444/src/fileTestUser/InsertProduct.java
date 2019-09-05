@@ -179,7 +179,8 @@ public class InsertProduct extends JFrame implements ActionListener {
 				DataOutputStream dos = null;
 				DataInputStream dis = null;
 				try {
-					fileClient = new Socket("211.63.89.149", 1025);
+					fileClient = new Socket("211.63.89.159", 1025);
+					System.out.println("접속 성공");
 					// 4.선택한 파일을 전송하기 위해 전처리(일의 조각을 몇번 전송할 것 인지 전송 갯수 계산)
 					int sendCnt = 0;
 //					File file = new File(path + name);
@@ -190,14 +191,14 @@ public class InsertProduct extends JFrame implements ActionListener {
 					while ((len = fis.read(readData)) != -1) {
 						sendCnt++;// 읽어들인 데이터가 존재하면 전송해야할 횟수를 증가
 					} // end while
-					System.out.println(sendCnt);
+					System.out.println(sendCnt+"횟수");
 					// 5.전송 횟수를 전송
 					dis = new DataInputStream(fileClient.getInputStream());
 					dos = new DataOutputStream(fileClient.getOutputStream());
 					System.out.println(dis.readUTF());// 전송시작 메세지 받기
 					
 					
-					dos.write(sendCnt);// 전송횟수 보냄
+					dos.writeInt(sendCnt);// 전송횟수 보냄
 
 					// 7.파일명 전송
 					dos.writeUTF(file.getName());
