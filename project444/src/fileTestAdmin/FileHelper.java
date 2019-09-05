@@ -69,6 +69,7 @@ public class FileHelper extends Thread {
 				fis = new FileInputStream(new File(temp1.getAbsolutePath() + "/" + listSendFile.get(i)));
 				System.out.println(dis.readUTF()+"시작신호");
 				// 9.전송할 횟수를 클라이언트에게 보낸다.
+				System.out.println(sendCnt+"전송횟수");
 				dos.writeInt(sendCnt);
 				dos.flush();
 				// 11.전송할 파일명을 보낸다. 
