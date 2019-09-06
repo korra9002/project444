@@ -63,9 +63,9 @@ public class ForgotId extends JFrame {
 		});
 	}// ForgotIdPw
 
-//	public static void main(String[] args) {
-//		new ForgotId();
-//
-//	}// main
+	public static void main(String[] args) {
+		new ForgotId();
+
+	}// main
 
 }// class
