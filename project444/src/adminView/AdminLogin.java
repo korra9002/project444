@@ -1,8 +1,6 @@
 package adminView;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,18 +10,18 @@ import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class AdminLogin extends JFrame {
-	private JLabel jlId, jlPw, jlLoginFail;
+	private JLabel jlLoginFail;
 	private JTextField jtfId;
 	private JPasswordField jpfPw;
-	private JButton jbtLogin, jbtSignUp, jbtForgotId, jbtForgotPw;
+	private JButton jbtLogin;
 
 	public AdminLogin() {
 		super("관리자 로그인");
 		
 		// JLabel
-		jlId = new JLabel("ID");
-		jlPw = new JLabel("PW");
-		jlLoginFail = new JLabel("아이디 또는 비밀번호를 확인해주세요.");
+		JLabel jlId = new JLabel("ID");
+		JLabel jlPw = new JLabel("PW");
+		jlLoginFail = new JLabel("");
 		
 		// JTextField
 		jtfId = new JTextField();
@@ -31,9 +29,6 @@ public class AdminLogin extends JFrame {
 		
 		// Jbutton
 		jbtLogin = new JButton("로그인");
-//		jbtSignUp = new JButton("회원가입");
-		jbtForgotId = new JButton("ID찾기");
-		jbtForgotPw = new JButton("Pw찾기");
 
 		// 수동배치
 		setLayout(null);
@@ -49,9 +44,6 @@ public class AdminLogin extends JFrame {
 		
 		// jbutton
 		jbtLogin.setBounds(320, 160, 100, 55);
-//		jbtSignUp.setBounds(320, 220, 100, 25);
-		jbtForgotId.setBounds(270, 250, 78, 25);
-		jbtForgotPw.setBounds(360, 250, 78, 25);
 		
 		// 배치
 		add(jlId);
@@ -62,46 +54,39 @@ public class AdminLogin extends JFrame {
 		add(jpfPw);
 
 		add(jbtLogin);
-//		add(jbtSignUp);
-		add(jbtForgotId);
-		add(jbtForgotPw);
 		
 		jlLoginFail.setForeground(Color.RED);
+		
+		AdminLoginEvt ale = new AdminLoginEvt(this);
+		jbtLogin.addActionListener(ale);
+		
 		
 		// 윈도우 사이즈
 		setBounds(100, 100, 480, 330);
 
-//		// 임시 테스트용 이벤트처리
-//		jbtSignUp.addActionListener(this);
-//		jbtForgotId.addActionListener(this);
-//		jbtForgotPw.addActionListener(this);
-//		jbtLogin.addActionListener(this);
 		// 가시화
 		setVisible(true);
+		
 		// 윈도우 종료처리
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		
 	}// Login
+	
+	public JLabel getJlLoginFail() {
+		return jlLoginFail;
+	}
 
-//	@Override
-//	public void actionPerformed(ActionEvent ae) {
-//		if (ae.getSource() == jbtSignUp) {
-//			new SignUp();
-//		} // end if
-//		if (ae.getSource() == jbtForgotId) {
-//			new ForgotId();
-//		} // end if
-//		if (ae.getSource() == jbtForgotPw) {
-//			new ForgotPw();
-//		} // end if
-//		if(ae.getSource()==jbtLogin) {
-//			new MarketMain();
-//		}
-//	}// actionPerformed //단위테스트용
+	public JTextField getJtfId() {
+		return jtfId;
+	}
 
-	public static void main(String[] args) {
-		new AdminLogin();
-	}// main
+	public JPasswordField getJpfPw() {
+		return jpfPw;
+	}
+
+	public JButton getJbtLogin() {
+		return jbtLogin;
+	}
 
 }// class
