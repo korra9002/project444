@@ -23,6 +23,7 @@ package userView;
 		private JButton jbSearch, jbRecent, jbPrice, jbRefresh;
 		private JRadioButton jrbSubject, jrbId;
 		
+		
 		private DefaultTableModel dtmProductList;
 		private JTable jtProductList;
 		  
@@ -107,6 +108,20 @@ package userView;
 		
 //		setResizable(false);
 		
+		//이벤트 처리
+		
+		MarketMainEvt mme=new MarketMainEvt(this);
+		
+		jcbArea.addActionListener(mme);
+		jcbCategory.addActionListener(mme);
+		jtfSearch.addActionListener(mme);
+		jbSearch.addActionListener(mme);
+		jbRecent.addActionListener(mme);
+		jbPrice.addActionListener(mme);
+		jbRefresh.addActionListener(mme);
+		jrbSubject.addActionListener(mme);
+		jrbId.addActionListener(mme);			
+	
 		
 		// 컴포넌트 배치 
 		setLayout(null);
@@ -128,6 +143,58 @@ package userView;
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			
 		}//MarketMain
+
+		public DefaultComboBoxModel<String> getDcbm() {
+			return dcbm;
+		}
+
+		public DefaultComboBoxModel<String> getDcbm1() {
+			return dcbm1;
+		}
+
+		public JComboBox<String> getJcbArea() {
+			return jcbArea;
+		}
+
+		public JComboBox<String> getJcbCategory() {
+			return jcbCategory;
+		}
+
+		public JTextField getJtfSearch() {
+			return jtfSearch;
+		}
+
+		public JButton getJbSearch() {
+			return jbSearch;
+		}
+
+		public JButton getJbRecent() {
+			return jbRecent;
+		}
+
+		public JButton getJbPrice() {
+			return jbPrice;
+		}
+
+		public JButton getJbRefresh() {
+			return jbRefresh;
+		}
+
+		public JRadioButton getJrbSubject() {
+			return jrbSubject;
+		}
+
+		public JRadioButton getJrbId() {
+			return jrbId;
+		}
+
+		public DefaultTableModel getDtmProductList() {
+			return dtmProductList;
+		}
+
+		public JTable getJtProductList() {
+			return jtProductList;
+		}
 		
 		
 		
