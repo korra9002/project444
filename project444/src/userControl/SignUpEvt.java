@@ -34,6 +34,7 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
+	try {
 		if (ae.getSource() == su.getJbtIdCheck()) {
 			if (!su.getJtfId().getText().isEmpty()) {
 				JOptionPane.showMessageDialog(su, "중복확인 완료");
@@ -61,7 +62,6 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 				// 이름 저장
 			name = su.getJtfName().getText().trim();
 			// 연락처 저장
-			try {
 				if (phone1.isEmpty()) {
 					phone1 = "010";
 					DecimalFormat df = new DecimalFormat("0000");
@@ -71,9 +71,6 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 					System.out.println(phone);
 				} // end if
 
-			} catch (NumberFormatException nfe) {
-				JOptionPane.showMessageDialog(su, "연락처는 숫자형식만 가능합니다.");
-			} // end catch
 			// 비밀번호 힌트
 			pwHint = su.getJcbPwHint().getSelectedIndex();
 			pwAnswer =su.getJtfPwAnswer().getText().trim();
@@ -109,6 +106,12 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 		if (ae.getSource() == su.getJbtCancle()) {
 			su.dispose();
 		}//end if
+	} catch (NumberFormatException nfe) {
+		JOptionPane.showMessageDialog(su, "연락처는 숫자형식만 가능합니다.");
+	} catch(NullPointerException npe) {
+		JOptionPane.showMessageDialog(su, "형식을 모두 입력해주세요.");
+		// end catch
+	}
 
 	}// actionPerformed
 }// class
