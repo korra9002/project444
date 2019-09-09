@@ -151,6 +151,7 @@ public class ChattingView extends JFrame implements ActionListener{
 	private void sendMsg() throws IOException {
 		// 스트림이 연결되어 있다면
 		String msg = jtaChatField.getText().trim();
+		
 		if(!msg.isEmpty()) {
 		jtaChatView.append(me+": "+msg+"\n");
 		System.out.println(msg);
@@ -210,3 +211,4 @@ public class ChattingView extends JFrame implements ActionListener{
 //	}
 
 }// class
+
