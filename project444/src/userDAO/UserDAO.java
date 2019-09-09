@@ -92,50 +92,63 @@ public class UserDAO {
 		
 	}//selectAllList
 	
+	
+	
+	public List<AllListVO> selectAreaList(int jcbindex) throws SQLException {
+		List<AllListVO> list=new ArrayList<AllListVO>();
+		
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		try {
+			//커넥션 얻기
+			con=getConn();
+			
+			
+			
+			//3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
+			StringBuilder selectArea = new StringBuilder();
+			selectArea			
+			.append(" select p.PRODUCT_CODE PRODUCT_CODE, p.IMG_FILE IMG_FILE, p.PRODUCT_NAME PRODUCT_NAME, l.LOC_CODE LOC_CODE, to_char(p.UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate, p.PRICE ")
+			.append(" from PRODUCT p, LOCATION_LIST l")
+			.append(" where p.all_flag='P' and l.loc_code='"+0+jcbindex+"'");  
+			
+/*			 select user_id,product_name
+			  from product
+			  where    user_id =    ( select user_id from id_info where loc_code ='12') and all_flag ='P';  */
+			
+		//	select user_id from product, id_info i where all_flag ='p' and i.loc_code =0+jcbindex
+//			System.out.println(selectArea);
+			
+//        .append(" order by input_date desc ");
+			
+			pstmt=con.prepareStatement(selectArea.toString());
+			
+			//4. 바인드변수에 값 넣기
+			//5. 쿼리 수행 후 결과 얻기
+			rs=pstmt.executeQuery();
+			AllListVO alv=null;
+			
+			while(rs.next()) {
+				alv=new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
+						rs.getString("PRODUCT_NAME"), rs.getString("LOC_CODE"), rs.getString("inputDate"), rs.getInt("PRICE"));
+				list.add(alv);
+			}//end while
+		} finally {
+			//6. 연결끊기
+			if (rs !=null) { rs.close(); }//end if
+			if (pstmt !=null) { pstmt.close(); }//end if
+			if (con !=null) { con.close(); }//end if
+			
+		}//end finally
+		return list;
+		
+	}//selectAllList
+	
 
 	
-//	public List<AllListVO> selList() {
-//		List<AllListVO> list=new ArrayList<AllListVO>();
-//		
-//		Connection con=null;
-//		PreparedStatement pstmt=null;
-//		ResultSet rs=null;
-//		
-//		try {
-//			//커넥션 얻기
-//			con=getConn();
-//			
-//			
-//			//3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
-//			StringBuilder selectAll = new StringBuilder();
-//			selectAll
-//			.append(" select lunch_code, img, name, price, to_char(input_date,'yyyy-mm-dd hh24:mi') input_date ")
-//			.append(" from lunch ")
-//			.append(" where product_flag='N' ");
-////        .append(" order by input_date desc ");
-//			
-//			pstmt=con.prepareStatement(selectAll.toString());
-//			
-//			//4. 바인드변수에 값 넣기
-//			//5. 쿼리 수행 후 결과 얻기
-//			rs=pstmt.executeQuery();
-//			AllListVO alv=null;
-//			
-//			while(rs.next()) {
-//				alv=new AllListVO(rs.getString("lunch_Code"), rs.getString("img"),
-//						rs.getString("Name"), rs.getInt("price"));
-//				list.add(alv);
-//			}//end while
-//		} finally {
-//			//6. 연결끊기
-//			if (rs !=null) { rs.close(); }//end if
-//			if (pstmt !=null) { pstmt.close(); }//end if
-//			if (con !=null) { con.close(); }//end if
-//			
-//		}//end finally
-//		return list;
-//		
-//	}//selectAllList
+
 
 	public static void main(String[] args) {
 
