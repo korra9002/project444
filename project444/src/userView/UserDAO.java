@@ -55,13 +55,14 @@ public class UserDAO {
 		//커넥션 얻기
 		con=getConn();
 		
+		
 
 	     //3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
         StringBuilder selectAll = new StringBuilder();
         selectAll
-        .append(" select lunch_code, img, name, price, to_char(input_date,'yyyy-mm-dd hh24:mi') input_date ")
-        .append(" from lunch ")
-        .append(" where product_flag='N' ");
+        .append(" select img, productName, productCode, area, category, ID, to_char(input_date,'yyyy-mm-dd hh24:mi') inputDate, price")
+        .append(" from marketUser ")
+        .append(" where product_flag='P' ");
 //        .append(" order by input_date desc ");
 		
 		pstmt=con.prepareStatement(selectAll.toString());
