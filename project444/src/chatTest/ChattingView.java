@@ -91,7 +91,7 @@ public class ChattingView extends JFrame implements ActionListener{
 		
 		aDAO = AdminDAO.getInstance();
 		me = "shin";
-		you = "baek";
+		you = "baek"; 
 		
 		
 		
