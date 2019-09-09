@@ -77,7 +77,7 @@ public class SimpleChatClient extends JFrame implements ActionListener {
 		me = "백승규";
 		you = "신수연";
 		
-		OrderThread ot = new OrderThread(jtaDisplay, me, you);
+		OrderThread ot = new OrderThread(jtaDisplay, me, you, jsp);
 		ot.start();
 		
 		jtfTalk.addActionListener(this);

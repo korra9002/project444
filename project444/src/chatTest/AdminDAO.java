@@ -45,9 +45,9 @@ public class AdminDAO {
 			e.printStackTrace();
 		} // end catch
 			// 2. Connection 얻기
-		String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-		String id = "lunch";
-		String pass = "tiger";
+		String url = "jdbc:oracle:thin:@211.63.89.159:1521:orcl";
+		String id = "junggo";
+		String pass = "1234";
 
 		con = DriverManager.getConnection(url, id, pass);
 
@@ -63,10 +63,10 @@ public class AdminDAO {
 			// 2.
 			con = getConnection();
 			// 3.
-			StringBuilder sendChat = new StringBuilder();
-			sendChat.append("insert into chat_test(sender,reciever,chat) values(?,?,?)");
+			String sendChat = "";
+			sendChat ="insert into chatting(sender,reciever,chat) values(?,?,?)";
 
-			pstmt = con.prepareStatement(sendChat.toString());
+			pstmt = con.prepareStatement(sendChat);
 			// 4.
 			pstmt.setString(1, me);
 			pstmt.setString(2, you);
@@ -97,8 +97,8 @@ public class AdminDAO {
 
 			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
 			// 것부터 조회
-			String selectLunch = " select chat,sender,input_date from chat_test "
-					+ "where chat_flag ='N'and sender = ? and reciever = ? order by input_date desc";
+			String selectLunch = " select chat,sender,input_date from chatting "
+					+ "where read_flag ='N'and sender = ? and reciever = ? order by input_date desc";
 			pstmt = con.prepareStatement(selectLunch);
 			pstmt.setString(1, you);
 			pstmt.setString(2, me);
@@ -112,7 +112,7 @@ public class AdminDAO {
 			
 			pstmt.close();
 			
-			String setFlag = "update chat_test set  chat_flag = 'Y'	where chat_flag ='N'and sender = ? and reciever = ?";
+			String setFlag = "update chatting set  read_flag = 'Y'	where read_flag ='N'and sender = ? and reciever = ?";
 			pstmt = con.prepareStatement(setFlag);
 			pstmt.setString(1, you);
 			pstmt.setString(2, me);
