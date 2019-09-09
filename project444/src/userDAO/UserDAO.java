@@ -114,6 +114,12 @@ public class UserDAO {
 			.append(" from PRODUCT p, LOCATION_LIST l")
 			.append(" where p.all_flag='P' and l.loc_code='"+0+jcbindex+"'");  
 			
+			/*
+			 * select user_id,product_name from product where ( user_id in ( select user_id
+			 * from id_info where loc_code ='12')) and all_flag ='P';
+			 ¿Ã∞≈¿”*/ 
+			
+			
 /*			 select user_id,product_name
 			  from product
 			  where    user_id =    ( select user_id from id_info where loc_code ='12') and all_flag ='P';  */
