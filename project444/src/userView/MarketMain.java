@@ -15,6 +15,8 @@ import javax.swing.DefaultComboBoxModel;
 	import javax.swing.JTextField;
 	import javax.swing.table.DefaultTableModel;
 
+import userControl.MarketMainEvt;
+
 
 	public class MarketMain extends JPanel {
 		
@@ -140,6 +142,7 @@ import javax.swing.DefaultComboBoxModel;
 		
 		setBounds(100, 100, 500, 600);
 		
+		//윈도우 가시화
 		setVisible(true);
 		
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

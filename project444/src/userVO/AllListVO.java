@@ -1,4 +1,4 @@
-package userView;
+package userVO;
 
 public class AllListVO {
 	private String productCode, image, productName, loc_code ,upload_date;
