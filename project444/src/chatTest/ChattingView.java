@@ -92,7 +92,7 @@ public class ChattingView extends JFrame implements ActionListener{
 		aDAO = AdminDAO.getInstance();
 		me = "baek";
 		you = "shin";
-		
+		 
 		
 		
 		OrderThread ot = new OrderThread(jtaChatView, me, you,jsp);
