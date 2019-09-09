@@ -3,7 +3,6 @@ package userView;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,7 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class Login extends JFrame implements ActionListener {
+import userControl.LoginEvt;;
+
+public class Login extends JFrame {
 	private JLabel jlId, jlPw, jlLoginFail;
 	private JTextField jtfId;
 	private JPasswordField jpfPw;
@@ -22,7 +23,7 @@ public class Login extends JFrame implements ActionListener {
 		// JLabel
 		jlId = new JLabel("ID");
 		jlPw = new JLabel("PW");
-		jlLoginFail = new JLabel("아이디 또는 비밀번호를 확인해주세요.");
+		jlLoginFail = new JLabel();
 		// JTextField
 		jtfId = new JTextField();
 		jpfPw = new JPasswordField();
@@ -65,39 +66,44 @@ public class Login extends JFrame implements ActionListener {
 		setBounds(100, 100, 480, 330);
 
 		// 임시 테스트용 이벤트처리
-		jbtSignUp.addActionListener(this);
-		jbtForgotId.addActionListener(this);
-		jbtForgotPw.addActionListener(this);
-		jbtLogin.addActionListener(this);
+		LoginEvt le = new LoginEvt(this);
+		jbtSignUp.addActionListener(le);
+		jbtForgotId.addActionListener(le);
+		jbtForgotPw.addActionListener(le);
+		jbtLogin.addActionListener(le);
 		// 가시화
 		setVisible(true);
 		// 윈도우 종료처리
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}// Login
 
-	@Override
-	public void actionPerformed(ActionEvent ae) {
-		if (ae.getSource() == jbtSignUp) {
-			new SignUp();
-		} // end if
-		if (ae.getSource() == jbtForgotId) {
-			new ForgotId();
-		} // end if
-		if (ae.getSource() == jbtForgotPw) {
-			new ForgotPw();
-		} // end if
-		if(ae.getSource()==jbtLogin) {
-			try {
-				new MarketMain();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}// actionPerformed //단위테스트용
+	public JButton getJbtLogin() {
+		return jbtLogin;
+	}//getJbtLogin
 
-	public static void main(String[] args) {
-		new Login();
-	}// main
+	public JButton getJbtSignUp() {
+		return jbtSignUp;
+	}//getJbtSignUp
+
+	public JButton getJbtForgotId() {
+		return jbtForgotId;
+	}//getJbtForgotId
+
+	public JButton getJbtForgotPw() {
+		return jbtForgotPw;
+	}//getJbtForgotPw
+
+	public JTextField getJtfId() {
+		return jtfId;
+	}//getJtfId
+
+	public JPasswordField getJpfPw() {
+		return jpfPw;
+	}//getJpfPw
+
+	public JLabel getJlLoginFail() {
+		return jlLoginFail;
+	}//getJlLoginFail
+
 
 }// class
