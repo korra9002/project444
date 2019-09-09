@@ -1,5 +1,7 @@
 package userView;
 
+import java.sql.SQLException;
+
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
@@ -7,7 +9,7 @@ import javax.swing.JTabbedPane;
 
 public class RunMarketMain extends JFrame{
 
-	public RunMarketMain() {
+	public RunMarketMain() throws SQLException {
 		setLayout(null);
 		JTabbedPane jtp = new JTabbedPane();
 		jtp.add("Ȩ", new MarketMain());
@@ -16,6 +18,7 @@ public class RunMarketMain extends JFrame{
 		jtp.add("MyPage", new UserInfo());
 		
 		jtp.setBounds(10, 10, 500, 600);
+		
 	
 		add(jtp);
 		setVisible(true);
@@ -23,7 +26,8 @@ public class RunMarketMain extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}
-	public static void main(String[] args) {
+	
+	public static void main(String[] args) throws SQLException {
 //		new MarketMain();
 		new RunMarketMain();
 	}//main

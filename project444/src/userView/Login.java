@@ -3,6 +3,7 @@ package userView;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -86,7 +87,12 @@ public class Login extends JFrame implements ActionListener {
 			new ForgotPw();
 		} // end if
 		if(ae.getSource()==jbtLogin) {
-			new MarketMain();
+			try {
+				new MarketMain();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}// actionPerformed //단위테스트용
 

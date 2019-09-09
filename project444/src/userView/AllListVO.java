@@ -1,33 +1,20 @@
 package userView;
 
 public class AllListVO {
-	private String image, productName, productCode, area, inputDate;
+	private String productCode, image, productName, loc_code ,upload_date;
 	int price;
-	 
-	public AllListVO(String image, String productName, String area, int price, String inputDate) {
+	public AllListVO(String productCode, String image, String productName, String loc_code, String upload_date,
+			int price) {
 		super();
+		this.productCode = productCode;
 		this.image = image;
 		this.productName = productName;
-		this.area = area;
+		this.loc_code = loc_code;
+		this.upload_date = upload_date;
 		this.price = price;
-		this.inputDate = inputDate;
-	}
-	public String getImage() {
-		return image;
-	}
-	public String getProductName() {
-		return productName;
-	}
-	public String getArea() {
-		return area;
-	}
-	public String getInputDate() {
-		return inputDate;
-	}
-	public int getPrice() {
-		return price;
 	}
 	
 	
+
 	
 }

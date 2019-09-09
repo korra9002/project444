@@ -2,6 +2,7 @@ package userView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
@@ -9,12 +10,12 @@ import javax.swing.table.DefaultTableModel;
 public class MarketMainEvt implements ActionListener{
 	private MarketMain mm;
 	
-	public MarketMainEvt(MarketMain mm) {
+	public MarketMainEvt(MarketMain mm) throws SQLException {
 		this.mm=mm;		
 		setAllList();
 	}//MarketMainEvt
 	
-	public void setAllList() {
+	public void setAllList() throws SQLException {
 		DefaultTableModel dtm=mm.getDtmProductList();
 		
 		//JTable의 레코드 초기화

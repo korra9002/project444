@@ -1,7 +1,9 @@
 package userView;
 
 
-	import javax.swing.DefaultComboBoxModel;
+	import java.sql.SQLException;
+
+import javax.swing.DefaultComboBoxModel;
 	import javax.swing.JButton;
 	import javax.swing.JComboBox;
 	import javax.swing.JFrame;
@@ -30,7 +32,7 @@ package userView;
 		  // 수정
 		
 		
-		public MarketMain() {
+		public MarketMain() throws SQLException {
 //			super("글쓰기");
 
 			
