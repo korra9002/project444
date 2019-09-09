@@ -42,7 +42,8 @@ public class LoginEvt implements ActionListener {
 			System.out.println("id : "+id+ "pw : "+pw);
 		if(!id.isEmpty()&&!pw.isEmpty()) {
 			try {
-				new MarketMain();
+				new RunMarketMain();
+				lg.dispose();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
