@@ -34,7 +34,7 @@ public class RunMarketMain extends JFrame{
 	
 	public static void main(String[] args) throws SQLException {
 //		new MarketMain();
-		new RunMarketMain();
+//		new RunMarketMain();
 	}//main
 
 }//class
