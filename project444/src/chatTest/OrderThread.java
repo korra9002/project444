@@ -51,6 +51,7 @@ public class OrderThread extends Thread {
 
 				for (int i = 0; i < list.size(); i++) {
 					cv = list.get(i);
+
 					jtaChatView.append(cv.getYou() + " : " + cv.getChat() + "\n");
 
 				} // end for

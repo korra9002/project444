@@ -64,7 +64,7 @@ public class AdminDAO {
 			con = getConnection();
 			// 3.
 			String sendChat = "";
-			sendChat ="insert into chatting(sender,reciever,chat) values(?,?,?)";
+			sendChat ="insert into chatting(sender,reciever,chat,deal_code) values(?,?,?,99)";
 
 			pstmt = con.prepareStatement(sendChat);
 			// 4.

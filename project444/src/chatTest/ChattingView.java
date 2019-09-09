@@ -90,8 +90,8 @@ public class ChattingView extends JFrame implements ActionListener{
 		
 		
 		aDAO = AdminDAO.getInstance();
-		me = "baek";
-		you = "shin";
+		me = "shin";
+		you = "baek";
 		
 		
 		
@@ -101,6 +101,7 @@ public class ChattingView extends JFrame implements ActionListener{
 		
 		
 		jbtSend.addActionListener(this);
+		jtaChatField.addActionListener(this);
 		addWindowListener(new WindowAdapter() {
 
 			@Override
@@ -116,7 +117,7 @@ public class ChattingView extends JFrame implements ActionListener{
 
 		});// addWindowListener
 		
-		
+
 	
 		
 
@@ -150,7 +151,9 @@ public class ChattingView extends JFrame implements ActionListener{
 	private void sendMsg() throws IOException {
 		// 스트림이 연결되어 있다면
 		String msg = jtaChatField.getText().trim();
-		jtaChatView.append("나 : "+msg+"\n");
+		if(!msg.isEmpty()) {
+		jtaChatView.append(me+": "+msg+"\n");
+		System.out.println(msg);
 		try {
 			aDAO.sendChat(me, you, msg);
 		} catch (SQLException e) {
@@ -158,6 +161,8 @@ public class ChattingView extends JFrame implements ActionListener{
 		}
 		jtaChatField.setText("");
 		scrollPosition();
+		System.out.println(msg);
+		}
 		
 		
 	}// sendMsg
@@ -176,6 +181,11 @@ public class ChattingView extends JFrame implements ActionListener{
 
 	
 	public void actionPerformed(ActionEvent e) {
+		
+		
+		
+		
+		if(e.getSource() == jbtSend || e.getSource() ==jtaChatField) {
 		try {
 			sendMsg();
 		} catch (IOException e1) {
@@ -183,6 +193,7 @@ public class ChattingView extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(this,"대화상대가 접속을 종료하엿습니다.");
 			e1.printStackTrace();
 		} // end catch
+		}
 
 	}// actionPerformed
 	
