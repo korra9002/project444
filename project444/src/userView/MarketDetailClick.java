@@ -1,4 +1,4 @@
-package project2;
+package userView;
 
 import java.awt.Checkbox;
 

@@ -62,8 +62,8 @@ public class UserDAO {
         selectAll
         .append(" select img, productName, productCode, area, category, ID, to_char(input_date,'yyyy-mm-dd hh24:mi') inputDate, price")
         .append(" from marketUser ")
-        .append(" where product_flag='P' ");
-//        .append(" order by input_date desc ");
+        .append(" where product_flag='P' "); 
+        .append(" order by input_date desc ");
 		
 		pstmt=con.prepareStatement(selectAll.toString());
 				

@@ -1,7 +1,7 @@
 package userView;
 
 public class AllListVO {
-	private String image, productName, area, inputDate;
+	private String image, productName, productCode, area, inputDate;
 	int price;
 	 
 	public AllListVO(String image, String productName, String area, int price, String inputDate) {
