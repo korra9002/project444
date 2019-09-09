@@ -69,8 +69,8 @@ public class ForgotPw extends JFrame {
 
 	}// ForgetPw
 
-//	public static void main(String[] args) {
-//		new ForgotPw();
-//	}// main
+	public static void main(String[] args) {
+		new ForgotPw();
+	}// main
 
 }// class
