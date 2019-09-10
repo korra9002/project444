@@ -90,6 +90,65 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 		
 	}//setLunchList
 
+	private void setRecentList1() {
+		DefaultTableModel dtm = amv.getDtmCheckList();
+		String value = null;
+		String col_name = null;
+		String category = null;
+		
+		category = (String) amv.getJcbCategory1().getSelectedItem();
+		value = amv.getJtfSearch1().getText().trim();
+		
+		if (amv.getJrbSubject1().isSelected()) {
+			col_name = amv.getJrbSubject1().getText();
+		}else {
+			col_name = amv.getJrbID1().getText();
+		}//end else
+		
+		CheckVO cv = new CheckVO(category, col_name, value);
+		//JTable의 레코드 초기화
+		dtm.setRowCount(0);
+		Object[] rowData = null;//JTable에 넣을 데이터
+		
+		//DBMS에서 조회
+		AdminDAO aDAO = AdminDAO.getInstance();
+		try {
+			List<CheckListVO> list = aDAO.selectOrderbyList(cv);
+			
+			if(list.isEmpty()) {//제품이 없는 경우
+				JOptionPane.showMessageDialog(amv, "검수할 제품이 없습니다.");
+			}//end if
+			
+			CheckListVO clv = null;
+			
+			for(int i = 0 ; i < list.size() ; i++) {
+				clv = list.get(i);
+				
+				//조회결과로 JTable 레코드에 들어갈 데이터를 생성하고, dtm에 추가
+				rowData = new Object[7];
+				
+				//배열에 값을 할당
+				rowData[0] = clv.getProduct_code();
+				rowData[1] = clv.getImg_file();
+				rowData[2] = clv.getUser_id();
+				rowData[3] = clv.getCategory();
+				rowData[4] = clv.getProduct_name();
+				rowData[5] = new Integer(clv.getPrice());
+				rowData[6] = clv.getUpload_date();
+				
+				//dtm에 추가
+				dtm.addRow(rowData);
+				
+			}//end for
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(amv, "관리자님, 서비스가 원활하지 못한 점 죄송합니다.");
+			e.printStackTrace();
+		}//end catch
+		
+	}
+	
+	
 	private void openDetail() {
 		
 	}
@@ -517,10 +576,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 			JComboBox jcb = (JComboBox) ae.getSource();
 			
 			index = jcb.getSelectedIndex();
-//			categoryTemp = amv.getCategoryList1();
 			
-//			System.out.println(index);
-//			System.out.println(temp[index]);
 			if (index != 0) {
 				setCheckList();
 			}//end if
@@ -535,28 +591,19 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				
 			}else {
 				setCheckList();
-			}
-			
+			}//end else
 			
 		}//end if
 		
-//		
-//		if(ae.getSource() == lm.getJmStatus()) {
-//			orderStatus();
-//		}//end if
-//		
-//		if(ae.getSource() == lm.getJmIpView()) {
-//			ipView();
-//		}//end if
-//		
-//		if(ae.getSource() == lm.getJmDelete()) {
-//			removeOrder();
-//		}//end if
-//		
-//		if (ae.getSource() == lm.getJbtCalc()) {
-//			viewCalc();
-//		}//end if
-//		
+		
+		if(ae.getSource() == amv.getJbtRecent1()) {
+			setRecentList1();
+		}//end if
+		
+		if(ae.getSource() == amv.getJbtRefresh1()) {
+			setCheckList();
+		}//end if
+		
 	}//actionPerformed
 //	
 //	/**
