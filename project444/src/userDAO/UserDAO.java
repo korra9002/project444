@@ -134,7 +134,7 @@ public class UserDAO {
 			
 			//4. 바인드변수에 값 넣기
 			//5. 쿼리 수행 후 결과 얻기
-			rs=pstmt.executeQuery();
+			rs=pstmt.executeQuery(); 
 			AllListVO alv=null;
 			
 			while(rs.next()) {
