@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,6 +99,8 @@ public class UserDAO {
 	public List<AllListVO> selectAreaList(int jcbindex) throws SQLException {
 		List<AllListVO> list=new ArrayList<AllListVO>();
 		
+		DecimalFormat df=new DecimalFormat("00");
+		
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -111,9 +114,11 @@ public class UserDAO {
 			//3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
 			StringBuilder selectArea = new StringBuilder();
 			selectArea			
-			.append(" select p.PRODUCT_CODE PRODUCT_CODE, p.IMG_FILE IMG_FILE, p.PRODUCT_NAME PRODUCT_NAME, l.LOC_CODE LOC_CODE, to_char(p.UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate, p.PRICE ")
-			.append(" from PRODUCT p, LOCATION_LIST l")
-			.append(" where p.all_flag='P' and l.loc_code='"+0+jcbindex+"'");  
+			.append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate, PRICE ")
+			.append(" from PRODUCT")
+			.append(" where user_id in ( select user_id  from id_info where loc_code ='"+df.format(jcbindex)+"')"+ "and all_flag ='P' ")							
+	        .append(" order by inputDate desc "); 
+//				all_flag='P' and l.loc_code='"+0+jcbindex+"'")
 			
 			/*
 			 * select user_id,product_name from product where ( user_id in ( select user_id
@@ -131,15 +136,15 @@ public class UserDAO {
 //        .append(" order by input_date desc ");
 			
 			pstmt=con.prepareStatement(selectArea.toString());
-			
+			 
 			//4. 바인드변수에 값 넣기
 			//5. 쿼리 수행 후 결과 얻기
-			rs=pstmt.executeQuery();
-			AllListVO alv=null;
+			rs=pstmt.executeQuery(); 
+			AllListVO alv=null; 
 			
 			while(rs.next()) {
 				alv=new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
-						rs.getString("PRODUCT_NAME"), rs.getString("LOC_CODE"), rs.getString("inputDate"), rs.getInt("PRICE"));
+						rs.getString("PRODUCT_NAME"), df.format(jcbindex), rs.getString("inputDate"), rs.getInt("PRICE"));
 				list.add(alv);
 			}//end while
 		} finally {
