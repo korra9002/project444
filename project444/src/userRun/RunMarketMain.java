@@ -22,17 +22,14 @@ public class RunMarketMain extends JFrame{
 		jtp.add("상품입력", new InsertProduct());
 		jtp.add("채팅", new Chat());
 		jtp.add("MyPage", new UserInfo());
-		 
+		  
 		jtp.setBounds(10, 10, 500, 600);
-<<<<<<< HEAD
 		 
 	 
 		add(jtp); 
-=======
 		
 	 
 		add(jtp);
->>>>>>> refs/heads/SSY
 		setVisible(true);
 		setBounds(10, 10, 550, 670);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
