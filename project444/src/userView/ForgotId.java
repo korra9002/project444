@@ -6,16 +6,17 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class ForgotId extends JFrame {
+public class ForgotId extends JDialog {
 	private JTextField jtfPhone, jtfName;
 	private JButton jbtSearch, jbtCancle;
 	private JComboBox<String> jcbPhoneNum;
-	public ForgotId() {
-		super("아이디찾기");
+	public ForgotId(Login lo) {
+		super(lo,"아이디찾기");
 		JLabel jlPhone = new JLabel("전화번호");
 		JLabel jlName = new JLabel("이름");
 		jtfPhone = new JTextField();
@@ -63,9 +64,6 @@ public class ForgotId extends JFrame {
 		});
 	}// ForgotIdPw
 
-	public static void main(String[] args) {
-		new ForgotId();
-
-	}// main
+	
 
 }// class

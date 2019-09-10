@@ -5,17 +5,18 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class ForgotPw extends JFrame {
+public class ForgotPw extends JDialog {
 	private JTextField jtfId, jtfPwAnswer;
 	private JComboBox<String> jcbPwHint;
 	private JButton jbtSearch, jbtCancle;
 
-	public ForgotPw() {
-		super("비밀번호 찾기");
+	public ForgotPw(Login lo) {
+		super(lo,"비밀번호 찾기");
 		JLabel jlId = new JLabel("아이디");
 		JLabel  jlPwHint= new JLabel("비밀번호 힌트");
 		JLabel jlPwAnswer= new JLabel("내용");
@@ -69,8 +70,6 @@ public class ForgotPw extends JFrame {
 
 	}// ForgetPw
 
-	public static void main(String[] args) {
-		new ForgotPw();
-	}// main
+	
 
 }// class

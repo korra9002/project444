@@ -13,16 +13,15 @@ import javax.swing.JTextField;
 import userControl.LoginEvt;;
 
 public class Login extends JFrame {
-	private JLabel jlId, jlPw, jlLoginFail;
+	private JLabel jlLoginFail;
 	private JTextField jtfId;
 	private JPasswordField jpfPw;
 	private JButton jbtLogin, jbtSignUp, jbtForgotId, jbtForgotPw;
-
 	public Login() {
 		super("·Î±×ÀÎ");
 		// JLabel
-		jlId = new JLabel("ID");
-		jlPw = new JLabel("PW");
+		JLabel jlId = new JLabel("ID");
+		JLabel jlPw = new JLabel("PW");
 		jlLoginFail = new JLabel();
 		// JTextField
 		jtfId = new JTextField();
