@@ -8,9 +8,6 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import kr.co.sist.user.view.LunchUser;
-import kr.co.sist.util.img.ImageResize;
-
 public class RunLunchUser2 {
 
 	public RunLunchUser2() {
@@ -72,7 +69,7 @@ public class RunLunchUser2 {
 				fos.flush();
 				//14.thumbnail 파일 생성
 				dos.writeUTF("Y");//파일전송 확인 메세지
-				ImageResize.resizeImage("C:/dev/workspace/jdbc_prj/src/kr/co/sist/user/img/"+revFileName, 100, 80);
+//				ImageResize.resizeImage("C:/dev/workspace/jdbc_prj/src/kr/co/sist/user/img/"+revFileName, 100, 80);
 			} // end for
 //		System.out.println(csvFile);
 
@@ -97,7 +94,7 @@ public class RunLunchUser2 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		new LunchUser();
+//		new LunchUser();
 	}// main
 
 }// class
