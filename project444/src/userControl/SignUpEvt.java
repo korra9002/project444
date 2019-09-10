@@ -20,8 +20,10 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 	private String name = "";
 	private String phone = "";
 	private String phone1 = "";
-	private int phone2;
-	private int phone3;
+//	private int phone2;
+//	private int phone3;
+	private String stPhone;
+	private String stPhone2;
 	private int loc = 0;
 	private int pwHint = 0;
 	private String pwAnswer = "";
@@ -89,20 +91,32 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 								JOptionPane.showMessageDialog(su, "성별을 선택해주세요.");
 
 							} else {
+								
 								DecimalFormat df = new DecimalFormat("0000");
 								if (su.getJtfPhone().getText().isEmpty() || su.getJtfPhone2().getText().isEmpty()) {
 									JOptionPane.showMessageDialog(su, "연락처 형식을 입력해주세요.");
 								} else {
+									int phone2 =0;
+									int phone3 =0;
 									try {
-										phone2 = Integer.valueOf(su.getJtfPhone().getText().trim());
-										phone3 = Integer.valueOf(su.getJtfPhone2().getText().trim());
+									stPhone=su.getJtfPhone().getText().trim();
+									stPhone2=su.getJtfPhone2().getText().trim();
+								
+									phone2 = Integer.valueOf(stPhone);
+									phone3 = Integer.valueOf(stPhone2);
 
 									} catch (NumberFormatException nfe) {
 										JOptionPane.showMessageDialog(su, "연락처는 숫자형식만 가능합니다.");
 										return;
 									} // end catch
-									phone = phone1 + "-" + df.format(phone2) + "-" + df.format(phone3);
-
+									 
+									if((stPhone.length()<3||stPhone.length()>4)||stPhone2.length()!=4) {
+										JOptionPane.showMessageDialog(su, "연락처를 정확히 기입해주세요.");
+										return;
+									}else {
+										phone = phone1+"-"+stPhone+"-"+stPhone2;
+										
+									
 									if (su.getJcbLoc().getSelectedIndex() == 0) {
 										JOptionPane.showMessageDialog(su, "거주지역을 선택해주세요.");
 									} else {
@@ -129,8 +143,10 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 					} // end else
 				} // end else
 			} // end else
-
+		}//end else
+			
 		} // end if
+		
 		if (ae.getSource() == su.getJbtCancle()) {
 			su.dispose();
 		} // end if
