@@ -23,8 +23,6 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 	private String name = "";
 	private String phone = "";
 	private String phone1 = "";
-//	private int phone2;
-//	private int phone3;
 	private String stPhone;
 	private String stPhone2;
 	private String loc = "";
