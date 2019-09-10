@@ -31,7 +31,6 @@ public class LoginEvt implements ActionListener {
 		for(int i=0; i<cPw.length;i++) {
 			pw = String.valueOf(cPw);
 		}//end for
-		System.out.println("id : "+id+ "pw : "+pw);
 	if(!id.isEmpty()&&!pw.isEmpty()) {
 		try {
 			
