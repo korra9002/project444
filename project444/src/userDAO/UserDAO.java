@@ -11,6 +11,7 @@ import java.util.List;
 
 import userVO.AllListVO;
 import userVO.LoginVO;
+import userVO.SignUpVO;
 
 public class UserDAO {
 	public static UserDAO uDAO;
@@ -193,7 +194,75 @@ public class UserDAO {
 			}//end finally
 			return loginInfo;
 		}//loginRun
-	
+
+		public int IdCheck(String id) throws SQLException {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs =null;
+		int CheckFlag =0;
+			try {
+				con=getConn();
+				StringBuilder selectID = new StringBuilder();
+				selectID
+				.append(" select count(user_id) ")
+				.append(" from id_info ")
+				.append("where user_id =?");
+			
+				pstmt=con.prepareStatement(selectID.toString());
+				
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					CheckFlag= rs.getInt(1);
+				}//end while
+			}finally {
+				if(con!=null) {con.close();}//end if
+				if(pstmt!=null) {pstmt.close();}//end if
+				if(rs!=null) {rs.close();}//end if
+			}//end finally
+			
+			return CheckFlag;
+		}//IdCheck		
+		
+		
+//회원가입
+public int insertLogin(SignUpVO suVO) throws SQLException {
+int insertflag =0;
+
+Connection con= null;
+PreparedStatement pstmt=null;
+try {
+con=getConn();
+StringBuilder insertResigter = new StringBuilder();
+insertResigter
+.append("insert into id_info(user_id,password, user_name, gender, phone, answer,  loc_code, hint_code)values(?,?,?,?,?,?,?,?)");
+
+pstmt=con.prepareStatement(insertResigter.toString());
+pstmt.setString(1,suVO.getId());
+pstmt.setString(2,suVO.getPw());
+pstmt.setString(3,suVO.getName());
+pstmt.setString(4,suVO.getGender());
+pstmt.setString(5,suVO.getPhone());
+pstmt.setString(6,suVO.getPwAnswer());
+pstmt.setString(7,suVO.getLoc());
+pstmt.setString(8,suVO.getPwHint());
+
+insertflag = pstmt.executeUpdate();
+
+
+}finally{
+if(con!=null) {con.close();}//end if
+if(pstmt!=null) {pstmt.close();}//end if
+}//end finally
+
+
+
+return insertflag;
+
+}//updateRegister
+
+
+
 
 
 	public static void main(String[] args) {
