@@ -28,7 +28,7 @@ public class PwUpdate extends JDialog {
 		// JButton
 		jbtOk = new JButton("변경");
 		jbtCancle = new JButton("취소");
-		
+		System.out.println("d");
 		//수동배치
 		setLayout(null);
 		jlCurrentPw.setBounds(20, 30, 100, 25);
