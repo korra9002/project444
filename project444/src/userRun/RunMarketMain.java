@@ -16,6 +16,7 @@ public class RunMarketMain extends JFrame{
 
 	public RunMarketMain() throws SQLException {
 		
+		
 		setLayout(null);
 		JTabbedPane jtp = new JTabbedPane();
 		jtp.add("È¨", new MarketMain());
@@ -23,7 +24,7 @@ public class RunMarketMain extends JFrame{
 		jtp.add("Ã¤ÆÃ", new Chat());
 		jtp.add("MyPage", new UserInfo());
 		  
-		jtp.setBounds(10, 10, 500, 600);
+		jtp.setBounds(10, 10, 660, 700);
 		 
 	 
 		add(jtp); 
@@ -31,7 +32,7 @@ public class RunMarketMain extends JFrame{
 	 
 		add(jtp);
 		setVisible(true);
-		setBounds(10, 10, 550, 670);
+		setBounds(10, 10, 700, 780);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}
