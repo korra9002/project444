@@ -31,7 +31,6 @@ public class LoginEvt implements ActionListener {
 		for(int i=0; i<cPw.length;i++) {
 			pw = String.valueOf(cPw);
 		}//end for
-		System.out.println("id : "+id+ "pw : "+pw);
 	if(!id.isEmpty()&&!pw.isEmpty()) {
 		try {
 			
@@ -44,7 +43,7 @@ public class LoginEvt implements ActionListener {
 		if(!Login_name.isEmpty()) {
 			JOptionPane.showMessageDialog(lg, Login_name+"´Ô ¾È³çÇÏ¼¼¿ä!");
 			
-			new RunMarketMain();
+			new RunMarketMain(id);
 			lg.dispose();
 		
 		}//end else
@@ -66,13 +65,13 @@ public class LoginEvt implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 
 		if (ae.getSource() == lg.getJbtSignUp()) {
-			new SignUp();
+			new SignUp(lg);
 		} // end if
 		if (ae.getSource() == lg.getJbtForgotId()) {
-			new ForgotId();
+			new ForgotId(lg);
 		} // end if
 		if (ae.getSource() == lg.getJbtForgotPw()) {
-			new ForgotPw();
+			new ForgotPw(lg);
 		} // end if
 		if(ae.getSource()==lg.getJbtLogin()||ae.getSource()==lg.getJtfId()||ae.getSource()==lg.getJpfPw()) {
 			loginRun();

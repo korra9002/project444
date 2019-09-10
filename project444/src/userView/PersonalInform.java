@@ -8,26 +8,34 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-public class PersonalInform extends JFrame implements ActionListener{
+import userControl.PersonalInformEvt;
+import userRun.RunMarketMain;
+
+public class PersonalInform extends JDialog {
 		private JLabel jlId, jlPw, jlName, jlGender, jlPhone, jlLoc, jlPwHint, jlPwAnswer;
 		private JTextField jtfId, jtfPass, jtfName, jtfPhone, jtfPwAnswer;
 		private JPasswordField jpfPw;
 		private JButton jbtRegister, jbtCancle ,jbtPwUpdate;
-		private CheckboxGroup cbgGender;
-		private Checkbox cbWomen, cbMan;
-		static JComboBox<String> jcbPhoneNum,jcbLoc, jcbPwHint;
+		private ButtonGroup bgGender;
+		private JRadioButton jrbWomen, jrbMan;
+		private DefaultComboBoxModel<String> dcbPhoneNum,dcbLoc, dcbPwHint;
+		private JComboBox<String> jcbPhoneNum,jcbLoc, jcbPwHint;
 		private String[] PwHint;
 
-		public PersonalInform() {
-			super("개인정보 수정");
+		public PersonalInform(String id, RunMarketMain rmm) {
+			super(rmm,"개인정보 수정");
 			// JLabel
 			jlId = new JLabel("아이디  ");
 			jlPw = new JLabel("비밀번호  ");
@@ -39,7 +47,7 @@ public class PersonalInform extends JFrame implements ActionListener{
 			jlPwAnswer = new JLabel("힌트 정답");
 
 			// JTextField
-			jtfId = new JTextField();
+			jtfId = new JTextField(id);
 			jtfPass = new JTextField();
 			jtfName = new JTextField();
 			jtfPhone = new JTextField();
@@ -54,11 +62,14 @@ public class PersonalInform extends JFrame implements ActionListener{
 			jbtPwUpdate = new JButton("비밀번호 변경");
 
 			// CheckBoxGroup
-			cbgGender = new CheckboxGroup();
+			bgGender = new ButtonGroup();
 			// CheckBox
-			cbWomen = new Checkbox("여자", cbgGender, false);
-			cbMan = new Checkbox("남자", cbgGender, false);
-
+			jrbWomen = new JRadioButton("여자");
+			jrbMan = new JRadioButton("남자");
+			
+			bgGender.add(jrbMan);
+			bgGender.add(jrbWomen);
+			
 			// JComboBox
 			jcbLoc = new JComboBox<String>();
 			jcbPwHint = new JComboBox<String>();
@@ -97,8 +108,8 @@ public class PersonalInform extends JFrame implements ActionListener{
 			jtfPhone.setBounds(205, 310, 180, 25);
 			jtfPwAnswer.setBounds(140, 470, 250, 25);
 
-			cbMan.setBounds(160, 260, 100, 20);
-			cbWomen.setBounds(260, 260, 100, 20);
+			jrbMan.setBounds(160, 260, 100, 20);
+			jrbWomen.setBounds(260, 260, 100, 20);
 
 			jcbLoc.setBounds(140, 360, 150, 25);
 			jcbPwHint.setBounds(140, 410, 250, 25);
@@ -123,8 +134,8 @@ public class PersonalInform extends JFrame implements ActionListener{
 			add(jtfPhone);
 			add(jtfPwAnswer);
 
-			add(cbMan);
-			add(cbWomen);
+			add(jrbMan);
+			add(jrbWomen);
 
 			add(jcbLoc);
 			add(jcbPwHint);
@@ -134,7 +145,8 @@ public class PersonalInform extends JFrame implements ActionListener{
 			add(jbtCancle);
 			add(jbtPwUpdate);
 			//이벤트처리
-			jbtPwUpdate.addActionListener(this);
+			PersonalInformEvt psie = new PersonalInformEvt(this,rmm); 
+			jbtPwUpdate.addActionListener(psie);
 			//편집불가
 			jtfId.setEditable(false);
 			//배경색 변경
@@ -153,18 +165,72 @@ public class PersonalInform extends JFrame implements ActionListener{
 				
 			});
 		}// SineUp
-	
-		@Override
-		public void actionPerformed(ActionEvent ae) {
-			if(ae.getSource()==jbtPwUpdate) {
-				JOptionPane.showInputDialog(jbtPwUpdate, "비밀번호 입력");
-				new PwUpdate();
-			}//end if
-		}//actionPerformed
-	
-	public static void main(String[] args) {
-		new PersonalInform();
-	}//main
+
+		public JTextField getJtfId() {
+			return jtfId;
+		}
+
+		public JTextField getJtfPass() {
+			return jtfPass;
+		}
+
+		public JTextField getJtfName() {
+			return jtfName;
+		}
+
+		public JTextField getJtfPhone() {
+			return jtfPhone;
+		}
+
+		public JTextField getJtfPwAnswer() {
+			return jtfPwAnswer;
+		}
+
+		public JPasswordField getJpfPw() {
+			return jpfPw;
+		}
+
+		public JButton getJbtRegister() {
+			return jbtRegister;
+		}
+
+		public JButton getJbtCancle() {
+			return jbtCancle;
+		}
+
+		public JButton getJbtPwUpdate() {
+			return jbtPwUpdate;
+		}
+
+		public ButtonGroup getBgGender() {
+			return bgGender;
+		}
+
+		public JRadioButton getJrbWomen() {
+			return jrbWomen;
+		}
+
+		public JRadioButton getJrbMan() {
+			return jrbMan;
+		}
+
+		public JComboBox<String> getJcbPhoneNum() {
+			return jcbPhoneNum;
+		}
+
+		public JComboBox<String> getJcbLoc() {
+			return jcbLoc;
+		}
+
+		public JComboBox<String> getJcbPwHint() {
+			return jcbPwHint;
+		}
+
+		public String[] getPwHint() {
+			return PwHint;
+		}
+
+		
 
 
 

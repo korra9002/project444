@@ -7,29 +7,34 @@ import java.awt.CheckboxGroup;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import userControl.SignUpEvt;
 
-public class SignUp extends JFrame {
+public class SignUp extends JDialog {
 	private JLabel jlId, jlPw,jlRePw, jlName, jlGender, jlPhone,pHyphen,pHyphen2, jlLoc, jlPwHint, jlPwAnswer;
 	private JTextField jtfId, jtfName, jtfPhone,jtfPhone2, jtfPwAnswer;
 	private JPasswordField jpfPw, jpfRePass;
 	private JButton jbtIdCheck, jbtRegister, jbtCancle;
-	private CheckboxGroup cbgGender;
-	private Checkbox cbWomen, cbMan;
-	static JComboBox<String> jcbPhoneNum,jcbLoc, jcbPwHint;
+	private JRadioButton jrbWomen, jrbMan;
+	private ButtonGroup bgGender;
+	private JComboBox<String> jcbPhoneNum,jcbLoc, jcbPwHint;
+	private DefaultComboBoxModel<String> dcbLoc, dcbPwHint,dcbPhone;
 	private String[] PwHint;
 
-	public SignUp() {
-		super("회원가입");
+	public SignUp(Login lo) {
+		super(lo, "회원가입");
 		// JLabel
 		jlId = new JLabel("아이디  ");
 		jlPw = new JLabel("비밀번호  ");
@@ -59,33 +64,29 @@ public class SignUp extends JFrame {
 		jbtRegister = new JButton("등록");
 		jbtCancle = new JButton("취소");
 
-		// CheckBoxGroup
-		cbgGender = new CheckboxGroup();
 		// CheckBox
-		cbWomen = new Checkbox("여자", cbgGender, false);
-		cbMan = new Checkbox("남자", cbgGender, false);
-
-		// JComboBox
-		jcbLoc = new JComboBox<String>();
-		jcbPwHint = new JComboBox<String>();
-		jcbPhoneNum = new JComboBox<String>();
+		jrbWomen = new JRadioButton("여자");
+		jrbMan = new JRadioButton("남자"); 
+		// ButtonGroup
+		bgGender = new ButtonGroup();
+		bgGender.add(jrbWomen);
+		bgGender.add(jrbMan);
 		// Loc ComboBox
-		String[] Loc = { "-지역선택-","강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구",
+		String[] loc = { "-지역선택-","강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구",
 				"서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
-		for (int i = 0; i < Loc.length; i++) {
-			jcbLoc.addItem(Loc[i]);
-		} // end for
-
+		dcbLoc = new DefaultComboBoxModel<String>(loc);
 		// Password Hint ComboBox
 		String[] PwHint = { "-비밀번호 힌트 선택-","나의 좌우명은?", "나의 보물 제 1호는?", "나의 휴대폰 번호 끝 네자리는?", "가장 기억에 남거나 좋아하는 장소는?", "가장 친한 친구 이름은?",
 				"가장 받고 싶은 선물은?", "가장 좋아하는 노래 제목은?", "가장 좋아하는 연예인은?", "가장 좋아하는 음식은?", "가장 좋아하는 숫자는?", "가장 좋아하는 색깔은?" };
-		for (int i = 0; i < PwHint.length; i++) {
-			jcbPwHint.addItem(PwHint[i]);
-		} // end for
+		dcbPwHint = new DefaultComboBoxModel<String>(PwHint);
+		// PhoneNum ComboBox
 		String[] phoneNum = {"010","011","012","016","017","018"};
-		for (int i = 0; i < phoneNum.length; i++) {
-			jcbPhoneNum.addItem(phoneNum[i]);
-		} // end for
+		dcbPhone = new DefaultComboBoxModel<String>(phoneNum);
+		// JComboBox
+		jcbLoc = new JComboBox<String>(dcbLoc);
+		jcbPwHint = new JComboBox<String>(dcbPwHint);
+		jcbPhoneNum = new JComboBox<String>(dcbPhone);
+		
 		// 수동배치
 		setLayout(null);
 
@@ -107,8 +108,8 @@ public class SignUp extends JFrame {
 //		jtfPhone2.setBounds(320, 320,85, 25);
 		jtfPwAnswer.setBounds(140, 480, 250, 25);
 
-		cbMan.setBounds(160, 280, 100, 20);
-		cbWomen.setBounds(260, 280, 100, 20);
+		jrbMan.setBounds(160, 280, 100, 20);
+		jrbWomen.setBounds(260, 280, 100, 20);
 
 		jcbLoc.setBounds(140, 370, 150, 25);
 		jcbPwHint.setBounds(140, 420, 250, 25);
@@ -154,8 +155,8 @@ public class SignUp extends JFrame {
 //		add(jtfPhone2);
 		add(jtfPwAnswer);
 
-		add(cbMan);
-		add(cbWomen);
+		add(jrbMan);
+		add(jrbWomen);
 
 		add(jcbLoc);
 		add(jcbPwHint);
@@ -171,8 +172,8 @@ public class SignUp extends JFrame {
 		jpfPw.addActionListener(sue);
 		jpfRePass.addActionListener(sue);
 		jtfName.addActionListener(sue);
-		cbMan.addMouseListener(sue);
-		cbWomen.addMouseListener(sue);
+		jrbMan.addMouseListener(sue);
+		jrbWomen.addMouseListener(sue);
 		jcbPhoneNum.addActionListener(sue);
 		jtfPhone.addActionListener(sue);
 		jcbLoc.addActionListener(sue);
@@ -189,80 +190,81 @@ public class SignUp extends JFrame {
 
 	public JLabel getpHyphen() {
 		return pHyphen;
-	}//getpHyphen
+	}
 
 	public JLabel getpHyphen2() {
 		return pHyphen2;
-	}//getpHyphen2
+	}
 
 	public JTextField getJtfId() {
 		return jtfId;
-	}//getJtfId
+	}
 
 	public JTextField getJtfName() {
 		return jtfName;
-	}//getJtfName
+	}
 
 	public JTextField getJtfPhone() {
 		return jtfPhone;
-	}//getJtfPhone
+	}
 
 	public JTextField getJtfPhone2() {
 		return jtfPhone2;
-	}//getJtfPhone2
+	}
 
 	public JTextField getJtfPwAnswer() {
 		return jtfPwAnswer;
-	}//getJtfPwAnswer
+	}
 
 	public JPasswordField getJpfPw() {
 		return jpfPw;
-	}//getJpfPw
+	}
 
 	public JPasswordField getJpfRePass() {
 		return jpfRePass;
-	}//getJpfRePass
+	}
 
 	public JButton getJbtIdCheck() {
 		return jbtIdCheck;
-	}//getJbtIdCheck
+	}
 
 	public JButton getJbtRegister() {
 		return jbtRegister;
-	}//getJbtRegister
+	}
 
 	public JButton getJbtCancle() {
 		return jbtCancle;
-	}//getJbtCancle
+	}
 
-	public CheckboxGroup getCbgGender() {
-		return cbgGender;
-	}//getCbgGender
+	public JRadioButton getJrbWomen() {
+		return jrbWomen;
+	}
 
-	public Checkbox getCbWomen() {
-		return cbWomen;
-	}//getCbWomen
+	public JRadioButton getJrbMan() {
+		return jrbMan;
+	}
 
-	public Checkbox getCbMan() {
-		return cbMan;
-	}//getCbMan
+	public ButtonGroup getBgGender() {
+		return bgGender;
+	}
 
-	public static JComboBox<String> getJcbPhoneNum() {
+	public JComboBox<String> getJcbPhoneNum() {
 		return jcbPhoneNum;
-	}//getJcbPhoneNum
+	}
 
-	public static JComboBox<String> getJcbLoc() {
+	public  JComboBox<String> getJcbLoc() {
 		return jcbLoc;
-	}//getJcbLoc
+	}
 
-	public static JComboBox<String> getJcbPwHint() {
+	public  JComboBox<String> getJcbPwHint() {
 		return jcbPwHint;
-	}//getJcbPwHint
+	}
 
 	public String[] getPwHint() {
 		return PwHint;
-	}//getPwHint
+	}
 
+	
 
 
 	

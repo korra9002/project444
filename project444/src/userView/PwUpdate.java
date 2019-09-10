@@ -4,16 +4,19 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class PwUpdate extends JFrame {
+import userRun.RunMarketMain;
+
+public class PwUpdate extends JDialog {
 	private JTextField jtfCurrentPw, jtfUpdatePw, jtfReUpdatePw;
 	private JButton jbtOk, jbtCancle;
 
-	public PwUpdate() {
-		super("비밀번호 변경");
+	public PwUpdate(RunMarketMain rmm) {
+		super(rmm,"비밀번호 변경");
 		// JLabel
 		JLabel jlCurrentPw = new JLabel("현재 비밀번호");
 		JLabel jlUpdatePw = new JLabel("변경할 비밀번호");
@@ -64,8 +67,8 @@ public class PwUpdate extends JFrame {
 		});//addWindowListener
 	}// PwUpdate
 
-	public static void main(String[] args) {
-		new PwUpdate();
-	}// main
+//	public static void main(String[] args) {
+//		new PwUpdate();
+//	}// main
 
 }// class
