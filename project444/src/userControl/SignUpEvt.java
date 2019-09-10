@@ -18,17 +18,6 @@ import userView.SignUp;
 public class SignUpEvt extends MouseAdapter implements ActionListener {
 	private SignUp su;
 	private String id = "";
-	private String gender = "";
-	private String pw = "";
-	private String repw = "";
-	private String name = "";
-	private String phone = "";
-	private String phone1 = "";
-	private String stPhone;
-	private String stPhone2;
-	private String loc = "";
-	private String pwHint = "";
-	private String pwAnswer = "";
 
 	public SignUpEvt(SignUp su) {
 		this.su = su;
@@ -36,13 +25,22 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 	}// SignUpEvt
 
 	public void register() {
+		
+		String gender = "";
+		String pw = "";
+		String repw = "";
+		String name = "";
+		String phone = "";
+		String phone1 = "";
+		String stPhone;
+		String stPhone2;
+		String loc = "";
+		String pwHint = "";
+		String pwAnswer = "";
 		DecimalFormat dfNum = new DecimalFormat("00");
 		// phone 콤보박스
 		phone1 = (String) su.getJcbPhoneNum().getSelectedItem();
-		if (phone1.isEmpty()) {
-			phone1 = "010";
-		} // end if
-			// 비밀번호 1
+		// 비밀번호 1
 		char[] cPw = su.getJpfPw().getPassword();
 		for (int i = 0; i < cPw.length; i++) {
 			pw = String.valueOf(cPw);

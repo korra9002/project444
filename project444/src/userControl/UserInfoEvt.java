@@ -2,6 +2,7 @@ package userControl;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import userRun.RunMarketMain;
 import userView.PersonalInform;
@@ -21,7 +22,11 @@ public class UserInfoEvt implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource()==uif.getJbtPersonalData()) {
 			String id = uif.getjlaId().getText();
-			new PersonalInform(id,rmm);
+			try {
+				new PersonalInform(id,rmm);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}//end if
 		
 	}//actionPerformed

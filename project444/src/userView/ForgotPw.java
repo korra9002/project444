@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import userControl.ForgotPwEvt;
+
 public class ForgotPw extends JDialog {
 	private JTextField jtfId, jtfPwAnswer;
 	private DefaultComboBoxModel<String> dcbPwHint;
@@ -23,8 +25,8 @@ public class ForgotPw extends JDialog {
 		JLabel  jlPwHint= new JLabel("비밀번호 힌트");
 		JLabel jlPwAnswer= new JLabel("내용");
 		
-		jtfId = new JTextField("아이디를 입력");
-		jtfPwAnswer = new JTextField("힌트에 대한 답변을 작성");
+		jtfId = new JTextField();
+		jtfPwAnswer = new JTextField();
 
 		jbtSearch = new JButton("찾기");
 		jbtCancle = new JButton("취소");
@@ -56,19 +58,43 @@ public class ForgotPw extends JDialog {
 		add(jbtCancle);
 		add(jcbPwHint);
 		setBounds(100, 100, 500, 350);
+		
+		ForgotPwEvt fpe = new ForgotPwEvt(this);
+		jtfId.addActionListener(fpe);
+		jtfPwAnswer.addActionListener(fpe);
+		jcbPwHint.addActionListener(fpe);
+		jbtCancle.addActionListener(fpe);
+		jbtSearch.addActionListener(fpe);
 		setVisible(true);
 
-		// 패스워드 찾기 창 종료 처리
-		addWindowListener(new WindowAdapter() {
-
-			@Override
-			public void windowClosed(WindowEvent e) {
-				dispose();
-			}
-
-		});
+		
+	
 
 	}// ForgetPw
+
+	public JTextField getJtfId() {
+		return jtfId;
+	}//getJtfId
+
+	public JTextField getJtfPwAnswer() {
+		return jtfPwAnswer;
+	}//getJtfPwAnswer
+
+	public DefaultComboBoxModel<String> getDcbPwHint() {
+		return dcbPwHint;
+	}//getDcbPwHint
+
+	public JComboBox<String> getJcbPwHint() {
+		return jcbPwHint;
+	}//getJcbPwHint
+
+	public JButton getJbtSearch() {
+		return jbtSearch;
+	}//getJbtSearch
+
+	public JButton getJbtCancle() {
+		return jbtCancle;
+	}//getJbtCancle
 
 	
 

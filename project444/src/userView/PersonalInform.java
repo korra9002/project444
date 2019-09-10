@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -21,20 +22,20 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import userControl.PersonalInformEvt;
+import userDAO.UserDAO;
 import userRun.RunMarketMain;
 
 public class PersonalInform extends JDialog {
 		private JLabel jlId, jlPw, jlName, jlGender, jlPhone, jlLoc, jlPwHint, jlPwAnswer;
-		private JTextField jtfId, jtfPass, jtfName, jtfPhone, jtfPwAnswer;
-		private JPasswordField jpfPw;
+		private JTextField jtfId, jtfName, jtfPhone, jtfPwAnswer;
 		private JButton jbtRegister, jbtCancle ,jbtPwUpdate;
 		private ButtonGroup bgGender;
 		private JRadioButton jrbWomen, jrbMan;
 		private DefaultComboBoxModel<String> dcbPhoneNum,dcbLoc, dcbPwHint;
 		private JComboBox<String> jcbPhoneNum,jcbLoc, jcbPwHint;
 		private String[] PwHint;
-
-		public PersonalInform(String id, RunMarketMain rmm) {
+		
+		public PersonalInform(String id, RunMarketMain rmm) throws SQLException {
 			super(rmm,"개인정보 수정");
 			// JLabel
 			jlId = new JLabel("아이디  ");
@@ -45,16 +46,14 @@ public class PersonalInform extends JDialog {
 			jlLoc = new JLabel("지역");
 			jlPwHint = new JLabel("비밀번호 힌트");
 			jlPwAnswer = new JLabel("힌트 정답");
-
+			//회원 정보 가져오기
+			UserDAO uDAO = UserDAO.getInstance();
 			// JTextField
 			jtfId = new JTextField(id);
-			jtfPass = new JTextField();
-			jtfName = new JTextField();
-			jtfPhone = new JTextField();
+			jtfName = new JTextField(uDAO.selectPersonalInfom(id)[0]);
+			jtfPhone = new JTextField(uDAO.selectPersonalInfom(id)[2]);
 			jtfPwAnswer = new JTextField();
 
-			// JPasswordField
-			jpfPw = new JPasswordField();
 
 			// JButton
 			jbtRegister = new JButton("등록");
@@ -164,10 +163,6 @@ public class PersonalInform extends JDialog {
 			return jtfId;
 		}
 
-		public JTextField getJtfPass() {
-			return jtfPass;
-		}
-
 		public JTextField getJtfName() {
 			return jtfName;
 		}
@@ -180,9 +175,7 @@ public class PersonalInform extends JDialog {
 			return jtfPwAnswer;
 		}
 
-		public JPasswordField getJpfPw() {
-			return jpfPw;
-		}
+	
 
 		public JButton getJbtRegister() {
 			return jbtRegister;

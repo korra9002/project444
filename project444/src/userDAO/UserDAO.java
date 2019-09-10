@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import userVO.AllListVO;
+import userVO.ForgotIdVO;
+import userVO.ForgotPwVO;
 import userVO.LoginVO;
 import userVO.SignUpVO;
 
@@ -342,11 +344,95 @@ return insertflag;
 }//updateRegister
 
 
+//분실 아이디찾기
+public String selectId(ForgotIdVO fiVO) throws SQLException {
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	String id="";
+	try {
+		con = getConn();
+		StringBuilder forgotId = new StringBuilder();
+		forgotId
+		.append("select user_id from id_info where user_name=? and phone=?");
+		
+		pstmt=con.prepareStatement(forgotId.toString());
+		
+		pstmt.setString(1, fiVO.getName());
+		pstmt.setString(2, fiVO.getPhone());
+		
+		rs= pstmt.executeQuery();
+		
+		while(rs.next()) {
+			id=rs.getString(1);
+		}
+		
+	}finally {
+		if(con!=null) {con.close();}//end if
+		if(pstmt!=null) {pstmt.close();}//end if
+		if(rs!=null) {rs.close();}//end if
+		
+	}
+	return id;
+}//selectId
+public boolean updateForgetPw(ForgotPwVO fpVO,String uuid) throws SQLException {
+	boolean updateFlag = false;
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	try {
+		con = getConn();
+		StringBuilder updatePw = new StringBuilder();
+		updatePw
+		.append("Update id_info set password='")
+		.append(uuid)
+		.append("' where user_id =? and answer=? and hint_code=?");
+		
+		pstmt=con.prepareStatement(updatePw.toString());
+		
+		pstmt.setString(1, fpVO.getId());
+		pstmt.setString(2, fpVO.getPwAnswer());
+		pstmt.setString(3, fpVO.getPwHint());
+		
+		updateFlag=pstmt.executeUpdate()==1;
+		
+	}finally {
+		if(con!=null) {con.close();}//end if
+		if(pstmt!=null) {pstmt.close();}//end if
+	}//end finally
+	
+	return updateFlag;
+}//updateForgetPw
+	public String[] selectPersonalInfom(String id) throws SQLException {
+		Connection con =null;
+		PreparedStatement pstmt = null;
+		ResultSet rs =null;
+		String[] setInfo = new String[4];
+		try {
+			con =getConn();
+			StringBuilder selectAllInfo = new StringBuilder();
+			selectAllInfo
+			.append("select user_name,gender,phone,loc_code from id_info where user_id=?");
+			pstmt= con.prepareStatement(selectAllInfo.toString());
+			
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				setInfo[0]=rs.getString(1);
+				setInfo[1]=rs.getString(2);
+				setInfo[2]=rs.getString(3);
+				setInfo[3]=rs.getString(4);
+			}//end while
+		}finally {
+			if(con!=null) {con.close();}//end if
+			if(pstmt!=null) {pstmt.close();}//end if
+			if(rs!=null) {rs.close();}//end if
+		}//end finally
+		return setInfo;
+	}//selectPersonalInfom
 
 
-
-	public static void main(String[] args) {
-
-	}//main
+//	public static void main(String[] args) {
+//
+//	}//main
 
 }//class
