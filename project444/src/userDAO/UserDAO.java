@@ -131,11 +131,11 @@ public class UserDAO {
 //        .append(" order by input_date desc ");
 			
 			pstmt=con.prepareStatement(selectArea.toString());
-			
+			 
 			//4. 바인드변수에 값 넣기
 			//5. 쿼리 수행 후 결과 얻기
 			rs=pstmt.executeQuery(); 
-			AllListVO alv=null;
+			AllListVO alv=null; 
 			
 			while(rs.next()) {
 				alv=new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
