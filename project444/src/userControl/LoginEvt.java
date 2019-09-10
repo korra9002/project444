@@ -65,7 +65,7 @@ public class LoginEvt implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 
 		if (ae.getSource() == lg.getJbtSignUp()) {
-			new SignUp();
+			new SignUp(lg);
 		} // end if
 		if (ae.getSource() == lg.getJbtForgotId()) {
 			new ForgotId();

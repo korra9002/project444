@@ -9,16 +9,18 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import userControl.SignUpEvt;
 
-public class SignUp extends JFrame {
+public class SignUp extends JDialog {
 	private JLabel jlId, jlPw,jlRePw, jlName, jlGender, jlPhone,pHyphen,pHyphen2, jlLoc, jlPwHint, jlPwAnswer;
 	private JTextField jtfId, jtfName, jtfPhone,jtfPhone2, jtfPwAnswer;
 	private JPasswordField jpfPw, jpfRePass;
@@ -28,8 +30,8 @@ public class SignUp extends JFrame {
 	static JComboBox<String> jcbPhoneNum,jcbLoc, jcbPwHint;
 	private String[] PwHint;
 
-	public SignUp() {
-		super("회원가입");
+	public SignUp(Login lo) {
+		super(lo, "회원가입");
 		// JLabel
 		jlId = new JLabel("아이디  ");
 		jlPw = new JLabel("비밀번호  ");

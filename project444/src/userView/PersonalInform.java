@@ -26,7 +26,7 @@ public class PersonalInform extends JFrame implements ActionListener{
 		static JComboBox<String> jcbPhoneNum,jcbLoc, jcbPwHint;
 		private String[] PwHint;
 
-		public PersonalInform() {
+		public PersonalInform(String id) {
 			super("개인정보 수정");
 			// JLabel
 			jlId = new JLabel("아이디  ");
@@ -39,7 +39,7 @@ public class PersonalInform extends JFrame implements ActionListener{
 			jlPwAnswer = new JLabel("힌트 정답");
 
 			// JTextField
-			jtfId = new JTextField();
+			jtfId = new JTextField(id);
 			jtfPass = new JTextField();
 			jtfName = new JTextField();
 			jtfPhone = new JTextField();
@@ -162,9 +162,9 @@ public class PersonalInform extends JFrame implements ActionListener{
 			}//end if
 		}//actionPerformed
 	
-	public static void main(String[] args) {
-		new PersonalInform();
-	}//main
+//	public static void main(String[] args) {
+//		new PersonalInform();
+//	}//main
 
 
 
