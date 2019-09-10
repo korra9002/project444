@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import userVO.AllListVO;
+import userVO.LoginVO;
 
 public class UserDAO {
 	public static UserDAO uDAO;
@@ -152,7 +153,41 @@ public class UserDAO {
 		
 	}//selectAllList
 	
-
+	// 로그인 시 이름 출력!!
+		public String[] loginRun(LoginVO lVO) throws SQLException {
+			String[] loginInfo = new String[2];
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs= null;
+			try {
+				//연결
+				con =getConn();
+				//쿼리문 생성
+				StringBuilder selectLogin = new StringBuilder();
+				selectLogin.append("select user_name , suspend_flag ")
+				.append(" from id_info ")
+				.append(" where user_id=? ")
+				.append(" and password= ?");
+				
+				
+				pstmt = con.prepareStatement(selectLogin.toString());
+				//바인드 값 변수 얻기
+				pstmt.setString(1, lVO.getId());
+				pstmt.setString(2, lVO.getPass());
+				//쿼리 실행
+				rs= pstmt.executeQuery();
+				if(rs.next()){
+					loginInfo[0] = rs.getString("user_name");
+					loginInfo[1] =rs.getString("suspend_flag");
+				}//end while
+				
+			}finally {
+				if(con!=null) {con.close();}//end if
+				if(pstmt!=null) {pstmt.close();}//end if
+				if(rs!=null) {rs.close();}//end if
+			}//end finally
+			return loginInfo;
+		}//loginRun
 	
 
 
