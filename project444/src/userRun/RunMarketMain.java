@@ -21,7 +21,7 @@ public class RunMarketMain extends JFrame{
 		jtp.add("홈", new MarketMain());
 		jtp.add("상품입력", new InsertProduct());
 		jtp.add("채팅", new ChatList());
-		jtp.add("MyPage", new UserInfo(id));
+		jtp.add("MyPage", new UserInfo(id,this));
 		  
 		jtp.setBounds(10, 10, 500, 600);
 		 

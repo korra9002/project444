@@ -17,9 +17,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import userControl.PersonalInformEvt;
 import userRun.RunMarketMain;
 
-public class PersonalInform extends JDialog implements ActionListener{
+public class PersonalInform extends JDialog {
 		private JLabel jlId, jlPw, jlName, jlGender, jlPhone, jlLoc, jlPwHint, jlPwAnswer;
 		private JTextField jtfId, jtfPass, jtfName, jtfPhone, jtfPwAnswer;
 		private JPasswordField jpfPw;
@@ -137,7 +138,8 @@ public class PersonalInform extends JDialog implements ActionListener{
 			add(jbtCancle);
 			add(jbtPwUpdate);
 			//이벤트처리
-			jbtPwUpdate.addActionListener(this);
+			PersonalInformEvt psie = new PersonalInformEvt(this,rmm); 
+			jbtPwUpdate.addActionListener(psie);
 			//편집불가
 			jtfId.setEditable(false);
 			//배경색 변경
@@ -156,18 +158,71 @@ public class PersonalInform extends JDialog implements ActionListener{
 				
 			});
 		}// SineUp
-	
-		@Override
-		public void actionPerformed(ActionEvent ae) {
-			if(ae.getSource()==jbtPwUpdate) {
-				JOptionPane.showInputDialog(jbtPwUpdate, "비밀번호 입력");
-				new PwUpdate();
-			}//end if
-		}//actionPerformed
-	
-//	public static void main(String[] args) {
-//		new PersonalInform();
-//	}//main
+
+		public JTextField getJtfId() {
+			return jtfId;
+		}
+
+		public JTextField getJtfPass() {
+			return jtfPass;
+		}
+
+		public JTextField getJtfName() {
+			return jtfName;
+		}
+
+		public JTextField getJtfPhone() {
+			return jtfPhone;
+		}
+
+		public JTextField getJtfPwAnswer() {
+			return jtfPwAnswer;
+		}
+
+		public JPasswordField getJpfPw() {
+			return jpfPw;
+		}
+
+		public JButton getJbtRegister() {
+			return jbtRegister;
+		}
+
+		public JButton getJbtCancle() {
+			return jbtCancle;
+		}
+
+		public JButton getJbtPwUpdate() {
+			return jbtPwUpdate;
+		}
+
+		public CheckboxGroup getCbgGender() {
+			return cbgGender;
+		}
+
+		public Checkbox getCbWomen() {
+			return cbWomen;
+		}
+
+		public Checkbox getCbMan() {
+			return cbMan;
+		}
+
+		public static JComboBox<String> getJcbPhoneNum() {
+			return jcbPhoneNum;
+		}
+
+		public static JComboBox<String> getJcbLoc() {
+			return jcbLoc;
+		}
+
+		public static JComboBox<String> getJcbPwHint() {
+			return jcbPwHint;
+		}
+
+		public String[] getPwHint() {
+			return PwHint;
+		}
+
 
 
 

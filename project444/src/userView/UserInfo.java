@@ -12,13 +12,14 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import userControl.UserInfoEvt;
+import userRun.RunMarketMain;
 
 public class UserInfo extends JPanel {
 	private JLabel jlLevelImg, jlaId;
 	private JButton jbtPersonalData, jbtSell, jbtBuy, jbtLike;
 	private JTextArea jtaAd;
 
-	public UserInfo(String id) {
+	public UserInfo(String id,RunMarketMain rmm) {
 //	  jlLevelImg=new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/imges/c1_c1.png/"));
 
 		jlaId = new JLabel(id);
