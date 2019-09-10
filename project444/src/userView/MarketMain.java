@@ -1,7 +1,9 @@
 package userView;
 
 
-	import java.sql.SQLException;
+	import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -21,6 +23,8 @@ import userControl.MarketMainEvt;
 
 	public class MarketMain extends JPanel {
 		
+		public static final int DOUBLE_CLICK=2;
+		
 		
 		private DefaultComboBoxModel<String> dcbm, dcbm1;
 		private JComboBox<String> jcbArea, jcbCategory;
@@ -35,6 +39,7 @@ import userControl.MarketMainEvt;
 		  // 수정
 		
 		
+		@SuppressWarnings("serial")
 		public MarketMain() throws SQLException {
 //			super("글쓰기");
 
@@ -98,11 +103,39 @@ import userControl.MarketMainEvt;
 		
 		String[] productColumn= {"이미지", "제품명", "지역", "가격", "시간", "카테고리", "판매자 ID" };
 		
-		dtmProductList=new DefaultTableModel(productColumn, 7);
+		dtmProductList=new DefaultTableModel(productColumn, 7) {
+
+				@Override
+				public boolean isCellEditable(int row, int column) {
+					return false;
+				};
+		
+		};
 		
 		jtProductList=new JTable(dtmProductList);
+				
+				
 		
 		JScrollPane jspProductList=new JScrollPane(jtProductList);
+
+		
+//		
+//		@Override
+//		public boolean isCellEditable(String row, int column) {
+//			return false;
+//		}//isCellEditable
+//	};
+//	jtProductList = new JTable(dtmProductList) {
+//		@Override
+//		public Class<?> getColumnClass(int column) {
+//			return getValueAt(0, column).getClass();
+//		}//getColumnClass
+//	};
+		
+		
+		
+		
+		
 		//리스트 크기, 이동, 편집 불가능하게 설정
 		
 		
@@ -139,6 +172,9 @@ import userControl.MarketMainEvt;
 		//윈도우 가시화
 		setVisible(true);
 		
+		
+		
+		
 	//이벤트 처리
 		
 		MarketMainEvt mme=new MarketMainEvt(this);
@@ -151,7 +187,28 @@ import userControl.MarketMainEvt;
 		jbPrice.addActionListener(mme);
 		jbRefresh.addActionListener(mme);
 		jrbSubject.addActionListener(mme);
-		jrbId.addActionListener(mme);			
+		jrbId.addActionListener(mme);	
+		
+		
+		
+//		jtProductList.addMouseListener(new MouseAdapter() {
+//			//테이블 더블클릭되었을 때 
+//			@Override
+//			public void mouseClicked(MouseEvent me) {
+//				switch(me.getClickCount()) {
+//				case DOUBLE_CLICK : 
+//					
+//				int selectedRow=jtProductList.getSelectedRow();
+//				
+//				new MarketDetailBuyer();
+//					
+//				}
+//			
+//			
+//			}//mouseClicked
+//			
+//			
+//		});
 	
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			

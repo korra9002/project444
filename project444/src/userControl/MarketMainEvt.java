@@ -2,25 +2,28 @@ package userControl;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
+ 
 import userDAO.UserDAO;
 import userVO.AllListVO;
+import userView.MarketDetailBuyer;
 import userView.MarketMain;
-import userView.SignUp;
 
-public class MarketMainEvt implements ActionListener{
+public class MarketMainEvt extends MouseAdapter implements ActionListener{
 	private MarketMain mm;
-//	private JTable jtProductList;
+	private JTable jtProductList;
+	public static final int DOUBLE_CLICK=2;
 	
 	public MarketMainEvt(MarketMain mm) throws SQLException {
 		this.mm=mm;	
-//		this.jtProductList=mm.getJtProductList();
+		this.jtProductList=mm.getJtProductList();
 		setAllList();
 	}//MarketMainEvt
 	
@@ -121,40 +124,34 @@ public class MarketMainEvt implements ActionListener{
 			}//end for		
 		}//setArea
 		
-		
-//		public void setCategory(int jcbAreaIndex, int jcbCateIndex ) throws SQLException {
-//			
-//			DefaultTableModel dtm=mm.getDtmProductList();
-//			
-//			//JTable의 레코드 초기화
-//			dtm.setRowCount(0);
-//			
-//			Object[] rowData= null;
-//			//JTable 넣을 데이터 // object는 자바의 모든 값을 다 담을 수 있다.
-//			
-//			//DBMS에서 조회
-//			UserDAO uDAO =UserDAO.getInstance();
-//			List<AllListVO> list=uDAO.selectCategoryList( jcbAreaIndex, jcbCateIndex);
-//			if(list.isEmpty()) { 
-//				JOptionPane.showMessageDialog(mm, "검색조건에 맞는 상품이 없습니다.");
-//			}
-//			AllListVO alv=null;
-//			for(int i=0; i<list.size(); i++) {
-//				alv=list.get(i);
-//				//조회 결과로 JTable 레코드에 들어갈 데이터를 생성하고
-//				rowData=new Object[5];
-//				//배열에 값 할당
-//				rowData[0]=alv.getImage();
-//				rowData[1]=alv.getProductName()+"("+alv.getProductCode()+")";
-//				rowData[2]=alv.getLoc_code();
-//				rowData[3]=alv.getPrice();
-//				rowData[4]=alv.getUpload_date();
-//				//dtm에 추가
-//				dtm.addRow(rowData);		
-//			}//end for		
-//		}//setCategory
+		public void productDetail() {
 	
-//	jtProductList.addMouseL
+//			//선택한 행의 도시락 코드를 가져와서 상세 정보를 조회
+//			
+//			JTable jtLunch=lu.getJtLunch();
+//			String temp=(String)jtLunch.getValueAt(jtLunch.getSelectedRow(), 2);
+//			String code=temp.substring(temp.lastIndexOf("(")+1, temp.lastIndexOf(")"));
+//			
+//			LunchUserDAO luDAO=LunchUserDAO.getInstance();
+//			
+//			try {
+//				LunchDetailVO ldVO=luDAO.selectLunchDetail(code);
+//				new LunchDetail(lu, ldVO); 
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			} //try catch해줘야함.
+//			
+//			System.out.println( code );
+//			
+////			내가 잘못했었던 것.		
+////			String lunchCode=lu.getJtLunch().getSelectedRow()
+////			System.out.println(loVO.getLunchCode());
+			
+			
+		}//end if
+		
+	
+
 	
 	
 	@Override
@@ -169,7 +166,7 @@ public class MarketMainEvt implements ActionListener{
 		}//end if
 
 		if (ae.getSource() == mm.getJbRecent()) {
-			new SignUp();
+//			new SignUp();
 		}//end if
 //		if (ae.getSource() == mm.getJbPrice()) {
 //			new SignUp();
@@ -183,5 +180,24 @@ public class MarketMainEvt implements ActionListener{
 		}//end if
 		
 	}//actionPerformed
+
+	@Override
+	public void mouseClicked(MouseEvent me) {
+		if(me.getClickCount() == 2) {//더블클릭
+			if(me.getSource() == mm.getJtProductList()) {
+				productDetail();
+			}//end if			
+		}//end if
+		
+//		switch(me.getClickCount()) {
+//		case DOUBLE_CLICK : 
+//			
+////		int selectedRow=jtProductList.getSelectedRow();
+//		
+//		new MarketDetailBuyer(mm);
+//			
+//		}	
+	
+	}
 
 }//class

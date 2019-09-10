@@ -14,6 +14,9 @@ import javax.swing.JTextField;
 
 public class MarketDetailBuyer extends JFrame {
 	
+	private MarketMain mm;
+	
+	
 	private JLabel jlDetailImg;
 	private JTextField jtfName, jtfPrice, jtfId,jtfInputDate,jtfCategory;
 	private JButton jbtChat;
@@ -21,7 +24,7 @@ public class MarketDetailBuyer extends JFrame {
 	private Checkbox ckLike;
 
 	
-	public MarketDetailBuyer() {
+	public MarketDetailBuyer(MarketMain mm) {
 		
 		jlDetailImg = new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/img/무민.jpg/"));//썸네일X / 원본 이미지
 //		jlDetailImg.setHorizontalAlignment(JLabel.CENTER);
@@ -103,9 +106,9 @@ public class MarketDetailBuyer extends JFrame {
 		
 	}//MarketDetail
 
-	public static void main(String[] args) {
-		new MarketDetailBuyer();
-	}// main
-	
+//	public static void main(String[] args) {
+//		new MarketDetailBuyer();
+//	}// main
+//	
 
 }//class
