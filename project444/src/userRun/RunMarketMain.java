@@ -15,6 +15,7 @@ import userView.UserInfo;
 public class RunMarketMain extends JFrame{
 
 	public RunMarketMain() throws SQLException {
+		
 		setLayout(null);
 		JTabbedPane jtp = new JTabbedPane();
 		jtp.add("Ȩ", new MarketMain());
@@ -24,7 +25,7 @@ public class RunMarketMain extends JFrame{
 		 
 		jtp.setBounds(10, 10, 500, 600);
 		
-	
+	 
 		add(jtp);
 		setVisible(true);
 		setBounds(10, 10, 550, 670);
@@ -34,7 +35,7 @@ public class RunMarketMain extends JFrame{
 	
 	public static void main(String[] args) throws SQLException {
 //		new MarketMain();
-//		new RunMarketMain();
+		new RunMarketMain();
 	}//main
 
 }//class

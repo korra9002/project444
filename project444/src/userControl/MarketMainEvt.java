@@ -107,9 +107,9 @@ public class MarketMainEvt implements ActionListener{
 		if (ae.getSource() == mm.getJbRecent()) {
 			new SignUp();
 		}//end if
-		if (ae.getSource() == mm.getJbPrice()) {
-			new SignUp();
-		}//end if
+//		if (ae.getSource() == mm.getJbPrice()) {
+//			new SignUp();
+//		}//end if
 		if (ae.getSource() == mm.getJbRefresh()) {
 			try {
 				setAllList();
