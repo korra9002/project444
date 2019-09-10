@@ -18,7 +18,8 @@ public class UserInfoEvt implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource()==uif.getJbtPersonalData()) {
-			new PersonalInform(uif.getjlaId().getText());
+			String id = uif.getjlaId().getText();
+			new PersonalInform(id);
 		}//end if
 		
 	}//actionPerformed
