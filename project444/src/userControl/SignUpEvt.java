@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 
+import javax.swing.ButtonModel;
 import javax.swing.JOptionPane;
 
 import userDAO.UserDAO;
@@ -53,10 +54,11 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 			repw = String.valueOf(cPw2);
 		} // end for
 		try {
-			if (su.getCbgGender().getSelectedCheckbox().getLabel().toString().equals("食切")) {
-
+			if (su.getJrbWomen().isSelected()) {
+				System.out.println("食切");
 				gender = "F";
 			} else {
+				System.out.println("害切");
 				gender = "M";
 			}
 

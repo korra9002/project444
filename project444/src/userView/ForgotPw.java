@@ -3,6 +3,7 @@ package userView;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -12,6 +13,7 @@ import javax.swing.JTextField;
 
 public class ForgotPw extends JDialog {
 	private JTextField jtfId, jtfPwAnswer;
+	private DefaultComboBoxModel<String> dcbPwHint;
 	private JComboBox<String> jcbPwHint;
 	private JButton jbtSearch, jbtCancle;
 
@@ -27,13 +29,11 @@ public class ForgotPw extends JDialog {
 		jbtSearch = new JButton("찾기");
 		jbtCancle = new JButton("취소");
 
-		jcbPwHint = new JComboBox<String>();
 		// Password Hint ComboBox
 		String[] PwHint = { "- 비밀번호 힌트 선택 -","나의 좌우명은?", "나의 보물 제 1호는?", "나의 휴대폰 번호 끝 네자리는?", "가장 기억에 남거나 좋아하는 장소는?", "가장 친한 친구 이름은?",
 				"가장 받고 싶은 선물은?", "가장 좋아하는 노래 제목은?", "가장 좋아하는 연예인은?", "가장 좋아하는 음식은?", "가장 좋아하는 숫자는?", "가장 좋아하는 색깔은?" };
-		for (int i = 0; i < PwHint.length; i++) {
-			jcbPwHint.addItem(PwHint[i]);
-		} // end for
+		dcbPwHint = new DefaultComboBoxModel<String>(PwHint);
+		jcbPwHint = new JComboBox<String>(dcbPwHint);
 		
 		setLayout(null);
 		jlId.setBounds(40, 50, 60, 25);

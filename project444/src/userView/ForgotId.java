@@ -4,6 +4,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -14,6 +15,7 @@ import javax.swing.JTextField;
 public class ForgotId extends JDialog {
 	private JTextField jtfPhone, jtfName;
 	private JButton jbtSearch, jbtCancle;
+	private DefaultComboBoxModel<String> dcbPhoneNum;
 	private JComboBox<String> jcbPhoneNum;
 	public ForgotId(Login lo) {
 		super(lo,"아이디찾기");
@@ -25,12 +27,10 @@ public class ForgotId extends JDialog {
 		jbtSearch = new JButton("찾기");
 		jbtCancle = new JButton("취소");
 		
-		jcbPhoneNum = new JComboBox<String>();
-		
 		String[] phoneNum = {"010","011","012","016","017","018"};
-		for (int i = 0; i < phoneNum.length; i++) {
-			jcbPhoneNum.addItem(phoneNum[i]);
-		} // end for
+		dcbPhoneNum = new DefaultComboBoxModel<String>(phoneNum);
+		jcbPhoneNum = new JComboBox<String>(dcbPhoneNum);
+		
 		
 		setLayout(null);
 
