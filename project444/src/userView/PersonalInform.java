@@ -70,27 +70,21 @@ public class PersonalInform extends JDialog {
 			bgGender.add(jrbMan);
 			bgGender.add(jrbWomen);
 			
-			// JComboBox
-			jcbLoc = new JComboBox<String>();
-			jcbPwHint = new JComboBox<String>();
-			jcbPhoneNum = new JComboBox<String>();
 			// Loc ComboBox
-			String[] Loc = { "-지역선택-","강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구",
+			String[] loc = { "-지역선택-","강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구",
 					"서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
-			for (int i = 0; i < Loc.length; i++) {
-				jcbLoc.addItem(Loc[i]);
-			} // end for
-
+			dcbLoc = new DefaultComboBoxModel<String>(loc);
 			// Password Hint ComboBox
 			String[] PwHint = { "-비밀번호 힌트 선택-","나의 좌우명은?", "나의 보물 제 1호는?", "나의 휴대폰 번호 끝 네자리는?", "가장 기억에 남거나 좋아하는 장소는?", "가장 친한 친구 이름은?",
 					"가장 받고 싶은 선물은?", "가장 좋아하는 노래 제목은?", "가장 좋아하는 연예인은?", "가장 좋아하는 음식은?", "가장 좋아하는 숫자는?", "가장 좋아하는 색깔은?" };
-			for (int i = 0; i < PwHint.length; i++) {
-				jcbPwHint.addItem(PwHint[i]);
-			} // end for
+			dcbPwHint = new DefaultComboBoxModel<String>(PwHint);
+			// PhoneNum ComboBox
 			String[] phoneNum = {"010","011","012","016","017","018"};
-			for (int i = 0; i < phoneNum.length; i++) {
-				jcbPhoneNum.addItem(phoneNum[i]);
-			} // end for
+			dcbPhoneNum = new DefaultComboBoxModel<String>(phoneNum);
+			// JComboBox
+			jcbLoc = new JComboBox<String>(dcbLoc);
+			jcbPwHint = new JComboBox<String>(dcbPwHint);
+			jcbPhoneNum = new JComboBox<String>(dcbPhoneNum);
 			// 수동배치
 			setLayout(null);
 
