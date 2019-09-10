@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 
 import adminControl.AdminLoginEvt;
 
+
 @SuppressWarnings("serial")
 public class AdminLoginView extends JFrame {
 	private JLabel jlLoginFail;

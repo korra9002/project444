@@ -21,6 +21,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 
+import adminControl.AdminMainEvt;
+
 @SuppressWarnings("serial")
 public class AdminMainView extends JFrame {
 	
@@ -34,11 +36,12 @@ public class AdminMainView extends JFrame {
 	private JTextField jtfSearch1, jtfSearch2, jtfSearch3;
 	private JRadioButton jrbID1, jrbSubject1, jrbID2, jrbSubject2;
 	private JCheckBox onSale, deleteNComplete ;
+	private String[] categoryList1, categoryList2;
 	
 	public AdminMainView() {
 		super("관리자");
 		////////////////////////////////첫번째 탭 시작////////////////////////////////
-		String[] categoryList1= {"카테고리 선택","디지털/가전","가구/인테리어","유아동/유아도서","생활/가공식품","여성의류","여성잡화",
+		categoryList1= new String[]{"카테고리 선택","디지털/가전","가구/인테리어","유아동/유아도서","생활/가공식품","여성의류","여성잡화",
 				"뷰티/미용","남성패션/잡화","스포츠/레저","게임/취미","도서/티켓/음반","반려동물용품","기타 중고물품"};
 
 		dcbCategory1 = new DefaultComboBoxModel<String>(categoryList1);
@@ -46,7 +49,7 @@ public class AdminMainView extends JFrame {
 		
 		jtfSearch1 = new JTextField();
 		
-		jrbSubject1 = new JRadioButton("제목", true);
+		jrbSubject1 = new JRadioButton("제품명", true);
 		jrbID1 = new JRadioButton("아이디");
 		ButtonGroup bg = new ButtonGroup();//두개 다 선택되는 것을 방지
 		bg.add(jrbSubject1);
@@ -138,11 +141,11 @@ public class AdminMainView extends JFrame {
 		jpCheckList.add(jrbSubject1);
 		jpCheckList.add(jrbID1);
 		
-		/////////////////////////////////첫번째 탭 끝/////////////////////////////////
+		/////////////////////////////////첫번째 탭 끝////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		
-		////////////////////////////////두번째 탭 시작////////////////////////////////
-		String[] categoryList2= {"카테고리 선택","디지털/가전","가구/인테리어","유아동/유아도서","생활/가공식품","여성의류","여성잡화",
+		////////////////////////////////두번째 탭 시작//////////////////////////////////////////////////////////////////////////////////////////////////////
+		categoryList2= new String[]{"카테고리 선택","디지털/가전","가구/인테리어","유아동/유아도서","생활/가공식품","여성의류","여성잡화",
 				"뷰티/미용","남성패션/잡화","스포츠/레저","게임/취미","도서/티켓/음반","반려동물용품","기타 중고물품"};
 
 		dcbCategory2 = new DefaultComboBoxModel<String>(categoryList2);
@@ -153,7 +156,7 @@ public class AdminMainView extends JFrame {
 		
 		jtfSearch2 = new JTextField();
 		
-		jrbSubject2 = new JRadioButton("제목", true);
+		jrbSubject2 = new JRadioButton("제품명", true);
 		jrbID2 = new JRadioButton("아이디");
 		ButtonGroup bg2 = new ButtonGroup();//두개 다 선택되는 것을 방지
 		bg2.add(jrbSubject2);
@@ -251,10 +254,10 @@ public class AdminMainView extends JFrame {
 		jpProductList.add(jrbID2);
 		jpProductList.add(onSale);
 		jpProductList.add(deleteNComplete);
-		/////////////////////////////////두번째 탭 끝/////////////////////////////////
+		/////////////////////////////////두번째 탭 끝//////////////////////////////////////////////////////////////////////////////////////////////
 		
 		
-		////////////////////////////////세번째 탭 시작////////////////////////////////
+		////////////////////////////////세번째 탭 시작//////////////////////////////////////////////////////////////////////////////////////////////
 		String[] searchList= {"전체","아이디","이름","전화번호","이메일"};
 
 		dcbCategory3 = new DefaultComboBoxModel<String>(searchList);
@@ -352,6 +355,30 @@ public class AdminMainView extends JFrame {
 		jtp.add("제품목록",jpProductList);
 		jtp.add("아이디목록",jpUserList);
 		add(jtp);
+		
+		///////////////////////////////이벤트처리 시작////////////////////////////////
+		AdminMainEvt ame = new AdminMainEvt(this);
+		jtp.addMouseListener(ame);
+		jtCheckList.addMouseListener(ame);
+		jtProductList.addMouseListener(ame);
+		jtUserList.addMouseListener(ame);
+		
+		jbtRecent1.addActionListener(ame);
+		jbtRecent2.addActionListener(ame);
+		jbtRefresh1.addActionListener(ame);
+		jbtRefresh2.addActionListener(ame);
+		jbtRefresh3.addActionListener(ame);
+		jbtSearch1.addActionListener(ame);
+		jbtSearch2.addActionListener(ame);
+		jbtSearch3.addActionListener(ame);
+		
+		jcbCategory1.addActionListener(ame);
+		jcbCategory2.addActionListener(ame);
+		jcbCategory3.addActionListener(ame);
+		
+		///////////////////////////////이벤트처리 끝////////////////////////////////
+		
+		
 		
 		setBounds(100, 100, 720, 700);
 		setResizable(false);
@@ -480,8 +507,16 @@ public class AdminMainView extends JFrame {
 		return deleteNComplete;
 	}
 
-	public static void main(String[] args) {
-		new AdminMainView();
-	}//main
+	public String[] getCategoryList1() {
+		return categoryList1;
+	}
+
+	public String[] getCategoryList2() {
+		return categoryList2;
+	}
+	
+//	public static void main(String[] args) {
+//		new AdminMainView();
+//	}//main
 
 }//class
