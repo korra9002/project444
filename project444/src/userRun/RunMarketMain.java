@@ -23,9 +23,9 @@ public class RunMarketMain extends JFrame{
 		jtp.add("MyPage", new UserInfo());
 		 
 		jtp.setBounds(10, 10, 500, 600);
-		
-	
-		add(jtp);
+		 
+	 
+		add(jtp); 
 		setVisible(true);
 		setBounds(10, 10, 550, 670);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
