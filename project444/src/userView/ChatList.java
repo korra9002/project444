@@ -12,14 +12,14 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class Chat extends JPanel {
+public class ChatList extends JPanel {
 
 	private JButton jbRefresh;
 
 	private DefaultTableModel dtmProductList;
 	private JTable jtProductList;
 
-	public Chat() {
+	public ChatList() {
 
 		//////////////////////// 채팅 화면 //////////////////////////////
 
@@ -68,7 +68,7 @@ public class Chat extends JPanel {
 	}// Chat
 
 	public static void main(String[] args) {
-		new Chat();
+		new ChatList();
 
 	}// main
 
