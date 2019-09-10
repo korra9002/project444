@@ -73,6 +73,7 @@ public class Login extends JFrame {
 
 		jtfId.addActionListener(le);
 		jpfPw.addActionListener(le);
+		
 
 		// ∞°Ω√»≠
 		setVisible(true);

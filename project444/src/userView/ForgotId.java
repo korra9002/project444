@@ -12,8 +12,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import userControl.ForgotIdEvt;
+
 public class ForgotId extends JDialog {
-	private JTextField jtfPhone, jtfName;
+	private JTextField jtfPhone,jtfPhone2, jtfName;
 	private JButton jbtSearch, jbtCancle;
 	private DefaultComboBoxModel<String> dcbPhoneNum;
 	private JComboBox<String> jcbPhoneNum;
@@ -21,7 +23,10 @@ public class ForgotId extends JDialog {
 		super(lo,"아이디찾기");
 		JLabel jlPhone = new JLabel("전화번호");
 		JLabel jlName = new JLabel("이름");
+		JLabel jlHyphen = new JLabel("-");
+		JLabel jlHyphen2 = new JLabel("-");
 		jtfPhone = new JTextField();
+		jtfPhone2 = new JTextField();
 		jtfName = new JTextField();
 
 		jbtSearch = new JButton("찾기");
@@ -33,10 +38,13 @@ public class ForgotId extends JDialog {
 		
 		
 		setLayout(null);
-
+		
 		jlPhone.setBounds(30, 50, 60, 25);
+		jlHyphen.setBounds(160, 50, 10, 25);
+		jlHyphen2.setBounds(252, 50, 10, 25);
 		jlName.setBounds(30, 100, 60, 25);
-		jtfPhone.setBounds(160, 50,160, 25);
+		jtfPhone.setBounds(170, 50,80, 25);
+		jtfPhone2.setBounds(260, 50,80, 25);
 		jtfName.setBounds(100, 100, 220, 25);
 		jbtSearch.setBounds(110, 150, 70, 28);
 		jbtCancle.setBounds(200, 150, 70, 28);
@@ -45,24 +53,42 @@ public class ForgotId extends JDialog {
 		setBounds(100, 100, 380, 250);
 
 		add(jlPhone);
+		add(jlHyphen);
+		add(jlHyphen2);
 		add(jlName);
 		add(jtfPhone);
+		add(jtfPhone2);
 		add(jtfName);
 		add(jbtSearch);
 		add(jbtCancle);
 		add(jcbPhoneNum);
+		//이벤트 처리
+		ForgotIdEvt fie = new ForgotIdEvt(this);
+		jcbPhoneNum.addActionListener(fie);
+		jbtCancle.addActionListener(fie);
+		jbtSearch.addActionListener(fie);
 		setVisible(true);
 
-		//아이디 찾기 창 종료처리
-		addWindowListener(new WindowAdapter() {
-
-			@Override
-			public void windowClosed(WindowEvent e) {
-				dispose();
-			}
-
-		});
+		
 	}// ForgotIdPw
+	public JTextField getJtfPhone() {
+		return jtfPhone;
+	}//getJtfPhone
+	public JTextField getJtfPhone2() {
+		return jtfPhone2;
+	}//getJtfPhone2
+	public JTextField getJtfName() {
+		return jtfName;
+	}//getJtfName
+	public JButton getJbtSearch() {
+		return jbtSearch;
+	}//getJbtSearch
+	public JButton getJbtCancle() {
+		return jbtCancle;
+	}//getJbtCancle
+	public JComboBox<String> getJcbPhoneNum() {
+		return jcbPhoneNum;
+	}//getJcbPhoneNum
 
 	
 
