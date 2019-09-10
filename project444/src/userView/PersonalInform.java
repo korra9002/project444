@@ -10,13 +10,16 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class PersonalInform extends JFrame implements ActionListener{
+import userRun.RunMarketMain;
+
+public class PersonalInform extends JDialog implements ActionListener{
 		private JLabel jlId, jlPw, jlName, jlGender, jlPhone, jlLoc, jlPwHint, jlPwAnswer;
 		private JTextField jtfId, jtfPass, jtfName, jtfPhone, jtfPwAnswer;
 		private JPasswordField jpfPw;
@@ -26,8 +29,8 @@ public class PersonalInform extends JFrame implements ActionListener{
 		static JComboBox<String> jcbPhoneNum,jcbLoc, jcbPwHint;
 		private String[] PwHint;
 
-		public PersonalInform(String id) {
-			super("개인정보 수정");
+		public PersonalInform(String id, RunMarketMain rmm) {
+			super(rmm,"개인정보 수정");
 			// JLabel
 			jlId = new JLabel("아이디  ");
 			jlPw = new JLabel("비밀번호  ");
