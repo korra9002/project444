@@ -99,6 +99,7 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 
 									} catch (NumberFormatException nfe) {
 										JOptionPane.showMessageDialog(su, "연락처는 숫자형식만 가능합니다.");
+										return;
 									} // end catch
 									phone = phone1 + "-" + df.format(phone2) + "-" + df.format(phone3);
 
