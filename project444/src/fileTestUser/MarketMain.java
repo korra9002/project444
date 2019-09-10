@@ -183,9 +183,10 @@ import javax.swing.DefaultComboBoxModel;
 				int readCnt = 0;
 				String revFileName = "";
 				
-				byte[] readData = new byte[512];
+//				byte[] readData = new byte[512];
 				int readSize = 0;
 				for (int i = 0; i < fileCnt; i++) {
+					byte[] readData = new byte[512];
 					//dos.writeUTF("Y"); //파일을 전송받기 위한 플래그 값을 서버로 전달
 					// 10.읽어들일파일의 횟수 받기
 				//	readCnt = dis.readInt();
@@ -204,13 +205,14 @@ import javax.swing.DefaultComboBoxModel;
 					int len =0;
 					while((len = dis.read(readData)) !=-1) {
 						bos.write(readData,0,len);
+						System.out.println(len+"유저");
 					}
-					
+					bos.close();
 //					fos.flush();
 					fos.close();
 					//14.thumbnail 파일 생성
 					//dos.writeUTF("Y");//파일전송 확인 메세지
-					
+					System.out.println("유저 끝났다");
 					//////////////////////////
 				//	dis.close();
 				//	dis = new DataInputStream(client.getInputStream());

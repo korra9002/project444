@@ -59,7 +59,7 @@ public class FileHelper extends Thread {
 	}// FileHelper
 
 	public void run() {
-		byte[] readData = new byte[512];// 파일에서 읽어 들인 내용을 저장
+//		byte[] readData = new byte[512];// 파일에서 읽어 들인 내용을 저장
 		int sendCnt = 0; // 전송할 readData갯수
 		int readSize = 0; // 읽어들인 배영릐 방의 갯수.
 	
@@ -67,6 +67,7 @@ public class FileHelper extends Thread {
 			// 8. 전송할 파일 정보 얻기
 
 			for (int i = 0; i < listSendFile.size(); i++) {
+				byte[] readData = new byte[512];
 			//	sendCnt = 0;
 				// System.out.println();
 				fis = new FileInputStream(new File(temp1.getAbsolutePath() + "/" + listSendFile.get(i)));
@@ -96,16 +97,19 @@ public class FileHelper extends Thread {
 				int len = 0;
 				while((len = bis.read(readData))!=-1) {
 					dos.write(readData,0,len);
+					System.out.println(len+"헬퍼");
 				}
 				
 				//////////////////////////////
 				
 				dos.flush();
+				dos.write(-1);
 				//////////////
 			//	dos.close();
 				////////////
 				fis.close();
 //				System.out.println(dis.readUTF()+"파일전송 끝");// 파일 전송 끝 확인
+				System.out.println("서버끝났다");
 				
 				////////////
 			//	dos = new DataOutputStream(client.getOutputStream());
