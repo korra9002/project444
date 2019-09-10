@@ -71,8 +71,11 @@ public class Login extends JFrame {
 		jbtForgotId.addActionListener(le);
 		jbtForgotPw.addActionListener(le);
 		jbtLogin.addActionListener(le);
+<<<<<<< HEAD
 		jtfId.addActionListener(le);
 		jpfPw.addActionListener(le);
+=======
+>>>>>>> branch 'master' of https://github.com/korra9002/project444.git
 		// 가시화
 		setVisible(true);
 		// 윈도우 종료처리

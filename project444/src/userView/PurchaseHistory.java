@@ -20,7 +20,7 @@ public class PurchaseHistory extends JFrame {
 	private JTable jtPurchaseList;
 	private DefaultTableModel dtmPurchaseList;
 	public static final int CENTER = 0;
-	
+	 
 	public PurchaseHistory() {
 		super("구매내역");
 		String[] sellCol= {"이미지","제품명","가격","아이디","지역","구매시간"};

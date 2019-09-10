@@ -1,7 +1,9 @@
 package userView;
 
 
-	import javax.swing.DefaultComboBoxModel;
+	import java.sql.SQLException;
+
+import javax.swing.DefaultComboBoxModel;
 	import javax.swing.JButton;
 	import javax.swing.JComboBox;
 	import javax.swing.JFrame;
@@ -13,6 +15,8 @@ package userView;
 	import javax.swing.JTextField;
 	import javax.swing.table.DefaultTableModel;
 
+import userControl.MarketMainEvt;
+
 
 	public class MarketMain extends JPanel {
 		
@@ -23,13 +27,14 @@ package userView;
 		private JButton jbSearch, jbRecent, jbPrice, jbRefresh;
 		private JRadioButton jrbSubject, jrbId;
 		
+		
 		private DefaultTableModel dtmProductList;
 		private JTable jtProductList;
 		  
 		  // 수정
 		
 		
-		public MarketMain() {
+		public MarketMain() throws SQLException {
 //			super("글쓰기");
 
 			
@@ -107,6 +112,20 @@ package userView;
 		
 //		setResizable(false);
 		
+		//이벤트 처리
+		
+		MarketMainEvt mme=new MarketMainEvt(this);
+		
+		jcbArea.addActionListener(mme);
+		jcbCategory.addActionListener(mme);
+		jtfSearch.addActionListener(mme);
+		jbSearch.addActionListener(mme);
+		jbRecent.addActionListener(mme);
+		jbPrice.addActionListener(mme);
+		jbRefresh.addActionListener(mme);
+		jrbSubject.addActionListener(mme);
+		jrbId.addActionListener(mme);			
+	
 		
 		// 컴포넌트 배치 
 		setLayout(null);
@@ -123,11 +142,64 @@ package userView;
 		
 		setBounds(100, 100, 500, 600);
 		
+		//윈도우 가시화
 		setVisible(true);
 		
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			
 		}//MarketMain
+
+		public DefaultComboBoxModel<String> getDcbm() {
+			return dcbm;
+		}
+
+		public DefaultComboBoxModel<String> getDcbm1() {
+			return dcbm1;
+		}
+
+		public JComboBox<String> getJcbArea() {
+			return jcbArea;
+		}
+
+		public JComboBox<String> getJcbCategory() {
+			return jcbCategory;
+		}
+
+		public JTextField getJtfSearch() {
+			return jtfSearch;
+		}
+
+		public JButton getJbSearch() {
+			return jbSearch;
+		}
+
+		public JButton getJbRecent() {
+			return jbRecent;
+		}
+
+		public JButton getJbPrice() {
+			return jbPrice;
+		}
+
+		public JButton getJbRefresh() {
+			return jbRefresh;
+		}
+
+		public JRadioButton getJrbSubject() {
+			return jrbSubject;
+		}
+
+		public JRadioButton getJrbId() {
+			return jrbId;
+		}
+
+		public DefaultTableModel getDtmProductList() {
+			return dtmProductList;
+		}
+
+		public JTable getJtProductList() {
+			return jtProductList;
+		}
 		
 		
 		
