@@ -17,7 +17,7 @@ public class UserInfo extends JPanel{
    private JButton jbtPersonalData, jbtSell, jbtBuy, jbtLike;
    private JTextArea jtaAd;
    
-   public UserInfo() {
+   public UserInfo(String id) {
 //	  jlLevelImg=new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/imges/c1_c1.png/"));
 
 	  jTfId=new JTextField("¾ÆÀÌµð");
@@ -52,9 +52,9 @@ public class UserInfo extends JPanel{
 
    }//UserMy
 
-   public static void main(String[] args) {
-      new UserInfo();
-   }//main
+//   public static void main(String[] args) {
+//      new UserInfo();
+//   }//main
 
 }//class
 

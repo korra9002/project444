@@ -43,7 +43,7 @@ public class LoginEvt implements ActionListener {
 		if(!Login_name.isEmpty()) {
 			JOptionPane.showMessageDialog(lg, Login_name+"¥‘ æ»≥Á«œººø‰!");
 			
-			new RunMarketMain();
+			new RunMarketMain(id);
 			lg.dispose();
 		
 		}//end else

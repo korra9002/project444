@@ -14,14 +14,14 @@ import userView.UserInfo;
  
 public class RunMarketMain extends JFrame{
 
-	public RunMarketMain() throws SQLException {
+	public RunMarketMain(String id) throws SQLException {
 		
 		setLayout(null);
 		JTabbedPane jtp = new JTabbedPane();
 		jtp.add("홈", new MarketMain());
 		jtp.add("상품입력", new InsertProduct());
 		jtp.add("채팅", new ChatList());
-		jtp.add("MyPage", new UserInfo());
+		jtp.add("MyPage", new UserInfo(id));
 		  
 		jtp.setBounds(10, 10, 500, 600);
 		 
@@ -36,9 +36,9 @@ public class RunMarketMain extends JFrame{
 		
 	}
 	
-	public static void main(String[] args) throws SQLException {
+//	public static void main(String[] args) throws SQLException {
 //		new MarketMain();
-		new RunMarketMain();
-	}//main
+//		new RunMarketMain();
+//	}//main
 
 }//class
