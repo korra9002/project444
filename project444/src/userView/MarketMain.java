@@ -3,6 +3,7 @@ package userView;
 
 	import java.sql.SQLException;
 
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 	import javax.swing.JButton;
 	import javax.swing.JComboBox;
@@ -69,9 +70,13 @@ import userControl.MarketMainEvt;
 		panel1.add(jbSearch);
 		
 		
-		//JRadioButton (+ 기능 추가 해야함 : 둘 중 한개만 선택할 수 있도록 -> 이거 안되면 checkboxgroup으로 묶기)
-		jrbSubject=new JRadioButton("제목");
+		//JRadioButton
+		jrbSubject=new JRadioButton("제목", true);
 		jrbId=new JRadioButton("아이디");
+		ButtonGroup bg=new ButtonGroup(); //두개 동시에 선택할 수 없도록
+		
+		bg.add(jrbSubject);
+		bg.add(jrbId);
 		
 		JPanel panel2=new JPanel();
 		panel2.add(jcbCategory);
@@ -91,9 +96,9 @@ import userControl.MarketMainEvt;
 		
 		//JTable
 		
-		String[] productColumn= {"이미지", "제품명", "지역", "가격", "시간" };
+		String[] productColumn= {"이미지", "제품명", "지역", "가격", "시간", "카테고리", "판매자 ID" };
 		
-		dtmProductList=new DefaultTableModel(productColumn, 5);
+		dtmProductList=new DefaultTableModel(productColumn, 7);
 		
 		jtProductList=new JTable(dtmProductList);
 		
@@ -108,11 +113,33 @@ import userControl.MarketMainEvt;
 		jtProductList.getColumnModel().getColumn(1).setPreferredWidth(30);
 		jtProductList.getColumnModel().getColumn(2).setPreferredWidth(30);
 		jtProductList.getColumnModel().getColumn(3).setPreferredWidth(30);
-		jtProductList.getColumnModel().getColumn(3).setPreferredWidth(50);
+		jtProductList.getColumnModel().getColumn(4).setPreferredWidth(50);
+		jtProductList.getColumnModel().getColumn(5).setPreferredWidth(50);
+		jtProductList.getColumnModel().getColumn(6).setPreferredWidth(30);
 		
 //		setResizable(false);
 		
-		//이벤트 처리
+	
+		
+		// 컴포넌트 배치 
+		setLayout(null);
+		
+		panel1.setBounds(30, 30, 400, 40);
+		panel2.setBounds(40, 70, 400, 40);
+		panel3.setBounds(30, 110, 400, 40);
+		jspProductList.setBounds(30, 190, 600, 450);
+		
+		add(panel1);
+		add(panel2);
+		add(panel3);
+		add(jspProductList);
+		
+		setBounds(100, 100, 750, 750);
+		
+		//윈도우 가시화
+		setVisible(true);
+		
+	//이벤트 처리
 		
 		MarketMainEvt mme=new MarketMainEvt(this);
 		
@@ -126,25 +153,6 @@ import userControl.MarketMainEvt;
 		jrbSubject.addActionListener(mme);
 		jrbId.addActionListener(mme);			
 	
-		
-		// 컴포넌트 배치 
-		setLayout(null);
-		
-		panel1.setBounds(30, 30, 400, 40);
-		panel2.setBounds(40, 70, 400, 40);
-		panel3.setBounds(30, 110, 400, 40);
-		jspProductList.setBounds(40, 190, 400, 200);
-		
-		add(panel1);
-		add(panel2);
-		add(panel3);
-		add(jspProductList);
-		
-		setBounds(100, 100, 500, 600);
-		
-		//윈도우 가시화
-		setVisible(true);
-		
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			
 		}//MarketMain
