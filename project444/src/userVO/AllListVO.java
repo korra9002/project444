@@ -4,7 +4,7 @@ public class AllListVO {
 	private String productCode, image, productName, loc_code ,upload_date;
 	int price;
 	public AllListVO(String productCode, String image, String productName, String loc_code, String upload_date,
-			int price) {
+			int price) {    
 		super();
 		this.productCode = productCode;
 		this.image = image;
@@ -16,7 +16,7 @@ public class AllListVO {
 	public String getProductCode() {
 		return productCode;
 	}
-	public String getImage() {
+	public String getImage() {  
 		return image;
 	}
 	public String getProductName() {
