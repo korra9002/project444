@@ -274,17 +274,17 @@ public class UserDAO {
 			}//end finally
 			return loginInfo;
 		}//loginRun
-
-		public int IdCheck(String id) throws SQLException {
+//중복된 아이디 체크 
+		public String IdCheck(String id) throws SQLException {
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs =null;
-		int CheckFlag =0;
+			String checkId ="";
 			try {
 				con=getConn();
 				StringBuilder selectID = new StringBuilder();
 				selectID
-				.append(" select count(user_id) ")
+				.append(" select user_id ")
 				.append(" from id_info ")
 				.append("where user_id =?");
 			
@@ -293,7 +293,7 @@ public class UserDAO {
 				pstmt.setString(1, id);
 				rs = pstmt.executeQuery();
 				while(rs.next()) {
-					CheckFlag= rs.getInt(1);
+					checkId=rs.getString(1);
 				}//end while
 			}finally {
 				if(con!=null) {con.close();}//end if
@@ -301,7 +301,7 @@ public class UserDAO {
 				if(rs!=null) {rs.close();}//end if
 			}//end finally
 			
-			return CheckFlag;
+			return checkId;
 		}//IdCheck		
 		
 		

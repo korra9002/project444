@@ -7,12 +7,13 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import userRun.RunMarketMain;
 
 public class PwUpdate extends JDialog {
-	private JTextField jtfCurrentPw, jtfUpdatePw, jtfReUpdatePw;
+	private JPasswordField jpfCurrentPw, jpfUpdatePw, jpfReUpdatePw;
 	private JButton jbtOk, jbtCancle;
 
 	public PwUpdate(RunMarketMain rmm) {
@@ -22,9 +23,9 @@ public class PwUpdate extends JDialog {
 		JLabel jlUpdatePw = new JLabel("변경할 비밀번호");
 		JLabel jlReUdatePw = new JLabel("변경할 비밀번호 확인");
 		// JTextField
-		jtfCurrentPw = new JTextField();
-		jtfUpdatePw = new JTextField();
-		jtfReUpdatePw = new JTextField();
+		jpfCurrentPw = new JPasswordField();
+		jpfUpdatePw = new JPasswordField();
+		jpfReUpdatePw = new JPasswordField();
 		// JButton
 		jbtOk = new JButton("변경");
 		jbtCancle = new JButton("취소");
@@ -34,9 +35,9 @@ public class PwUpdate extends JDialog {
 		jlUpdatePw.setBounds(20, 70, 100, 25);
 		jlReUdatePw.setBounds(20, 110, 130, 25);
 		
-		jtfCurrentPw.setBounds(180, 30, 150, 25);
-		jtfUpdatePw.setBounds(180, 70, 150, 25);
-		jtfReUpdatePw.setBounds(180, 110, 150, 25);
+		jpfCurrentPw.setBounds(180, 30, 150, 25);
+		jpfUpdatePw.setBounds(180, 70, 150, 25);
+		jpfReUpdatePw.setBounds(180, 110, 150, 25);
 		
 		jbtOk.setBounds(110, 170, 80, 25);
 		jbtCancle.setBounds(200, 170, 80, 25);
@@ -45,9 +46,9 @@ public class PwUpdate extends JDialog {
 		add(jlUpdatePw);
 		add(jlReUdatePw);
 		
-		add(jtfCurrentPw);
-		add(jtfUpdatePw);
-		add(jtfReUpdatePw);
+		add(jpfCurrentPw);
+		add(jpfUpdatePw);
+		add(jpfReUpdatePw);
 		
 		add(jbtOk);
 		add(jbtCancle);
@@ -65,9 +66,5 @@ public class PwUpdate extends JDialog {
 			
 		});//addWindowListener
 	}// PwUpdate
-
-//	public static void main(String[] args) {
-//		new PwUpdate();
-//	}// main
 
 }// class

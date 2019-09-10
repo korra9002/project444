@@ -156,20 +156,20 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 	}// register
 
 	public void idCheck() {
-		int idCheck=0;
+		String checkId ="";
 		if (su.getJtfId().getText().trim().isEmpty()) {
 			JOptionPane.showMessageDialog(su, "아이디를 입력해주세요.");
 		} else {
 			id = su.getJtfId().getText().trim();
 			UserDAO uDAO = UserDAO.getInstance();
 			try {
-				idCheck=uDAO.IdCheck(id);
+				checkId=uDAO.IdCheck(id);
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}//end catch
 
-			if(idCheck==1) {
+			if(!checkId.isEmpty()) {
 				JOptionPane.showMessageDialog(su, "이미 존재하는 아이디입니다.");
 				su.getJtfId().setText("");
 			}else {
