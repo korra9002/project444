@@ -13,7 +13,7 @@ public class AllListVO {
 		this.upload_date = upload_date;
 		this.category = category;
 		this.sellerID = sellerID;
-		this.price = price;
+		this.price = price; 
 	}
 	public String getProductCode() {
 		return productCode;
