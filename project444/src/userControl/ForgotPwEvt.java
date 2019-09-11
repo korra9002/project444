@@ -36,6 +36,7 @@ public class ForgotPwEvt implements ActionListener {
 		pwAnswer = fp.getJtfPwAnswer().getText().trim();
 		if(id.isEmpty()) {
 			JOptionPane.showMessageDialog(fp, "아이디를 입력해주세요.");
+			
 		}else if(pwHint==0) {
 			JOptionPane.showMessageDialog(fp, "비밀번호 힌트를 선택해주세요.");
 		}else if(pwAnswer.isEmpty()) {
@@ -56,7 +57,7 @@ public class ForgotPwEvt implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		if(ae.getSource()==fp.getJbtSearch()) {
+		if(ae.getSource()==fp.getJbtSearch()||ae.getSource()==fp.getJtfPwAnswer()) {
 			try {
 				searchPw();
 			} catch (SQLException e) {

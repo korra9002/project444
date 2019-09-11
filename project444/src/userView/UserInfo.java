@@ -53,6 +53,9 @@ public class UserInfo extends JPanel {
 		// 이벤트처리
 		UserInfoEvt uife = new UserInfoEvt(this);
 		jbtPersonalData.addActionListener(uife);
+		jbtBuy.addActionListener(uife);
+		jbtLike.addActionListener(uife);
+		jbtSell.addActionListener(uife);
 		// 가시화
 		setVisible(true);
 

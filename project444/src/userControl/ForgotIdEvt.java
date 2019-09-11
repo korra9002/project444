@@ -30,6 +30,7 @@ public class ForgotIdEvt implements ActionListener {
 		String id = "";
 		if(fi.getJtfName().getText().isEmpty()) {
 			JOptionPane.showMessageDialog(fi, "이름을 입력해주세요.");
+			return;
 		}else {
 			
 			DecimalFormat df = new DecimalFormat("0000");
@@ -78,12 +79,13 @@ public class ForgotIdEvt implements ActionListener {
 		if(ae.getSource()==fi.getJbtCancle()) {
 			ForgotIdClose();
 		}//end if
-		if(ae.getSource()==fi.getJbtSearch()) {
+		if(ae.getSource()==fi.getJbtSearch()||ae.getSource()==fi.getJtfName()) {
 			try {
 				searchId();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}			
+			}//end catch
+		
 		}//end if
 	}//actionPerformed
 
