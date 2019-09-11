@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
+import com.sun.pisces.PiscesRenderer;
+
 import userDAO.UserDAO;
 import userRun.RunMarketMain;
 import userVO.PersonalInformVO;
@@ -70,6 +72,7 @@ public class PersonalInformEvt implements ActionListener{
 		
 		if(mfPhone2.isEmpty()||mfPhone3.isEmpty()) {
 			JOptionPane.showMessageDialog(psi, "변경할 연락처 정보를 입력해주세요.");
+			return;
 		}else {
 			int phone2 = 0;
 			int phone3 = 0;
@@ -89,6 +92,7 @@ public class PersonalInformEvt implements ActionListener{
 			}//end else
 			
 		}//end else
+		
 		
 	}//modifyRegister
 	public void PersonalInformClose() {
