@@ -2,6 +2,7 @@ package userControl;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,7 +22,7 @@ public class PersonalInformEvt implements ActionListener{
 		this.rmm = rmm;
 	}//PersonalInformEvt
 	
-	public void modifyPw() {
+	public void modifyPw() throws SQLException {
 		String pw = "";
 		String curpw = "";
 		JPanel panel = new JPanel();
@@ -35,8 +36,14 @@ public class PersonalInformEvt implements ActionListener{
 		    char[] password = jpfPw.getPassword();
 		    pw= new String(password);
 		    System.out.println("비밀번호 : " + pw);
-		  
-		    new PwUpdate(rmm);
+		  UserDAO uDAO = UserDAO.getInstance();
+		  curpw= uDAO.selectPw(pw);
+		    if(curpw.isEmpty()) {
+		    	JOptionPane.showMessageDialog(psi, "비밀번호가 정확하지 않습니다.");
+		    }else {
+		    	JOptionPane.showMessageDialog(psi, "비밀번호 확인 완료");
+		    	new PwUpdate(rmm);
+		    }//end else
 		    
 		    
 		}//end if
@@ -49,7 +56,11 @@ public class PersonalInformEvt implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource()==psi.getJbtPwUpdate()) {
-			modifyPw();
+			try {
+				modifyPw();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}//end catch
 		}//end if
 		if(ae.getSource()==psi.getJbtCancle()) {
 			PersonalInformClose();
