@@ -107,8 +107,6 @@ public class UserDAO {
 	public List<AllListVO> selectAllList( int jcbAreaIndex, int jcbCateIndex, String jtfText) throws SQLException {
 		List<AllListVO> list=new ArrayList<AllListVO>();
 		
-		
-		
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -117,34 +115,33 @@ public class UserDAO {
 		String category ="";
 		String productName ="";
 		
-		if(jcbAreaIndex != 0) {
-			area = " and user_id in ( select user_id  from id_info where loc_code ='"+df.format(jcbAreaIndex)+"') ";
-		}
-		if(jcbCateIndex != 0) {
-			category = " and category_code ='"+df.format(jcbCateIndex)+"' ";
-		}
-		if(!jtfText.isEmpty()) {
-			productName = " and product_name like '%"+jtfText+"%' ";
-		}
-		
-		
 		
 		try {
 			//커넥션 얻기
 			con=getConn();
 			
-
-			
 			
 			//3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
 			StringBuilder selectArea = new StringBuilder();
 			selectArea			
-			.append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,"
-					+ "CATEGORY_CODE, USER_ID, PRICE ")
-			.append(" from PRODUCT ")
-			.append(" where all_flag ='P' "+area+category+productName )					
-	        .append(" order by inputDate desc "); 
+			.append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code ")
+			.append(" from PRODUCT, id_info ")
+			.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' ");
 			
+			
+			
+			if(jcbAreaIndex != 0) {
+				selectArea.append( " and user_id in ( select user_id  from id_info where loc_code ='"+df.format(jcbAreaIndex)+"') ");
+			}
+			if(jcbCateIndex != 0) {
+				selectArea.append( " and category_code ='"+df.format(jcbCateIndex)+"' ");
+			}
+			if(!jtfText.isEmpty()) {
+				selectArea.append(" and product_name like '%"+jtfText+"%' ");
+			}
+			
+//					+ ""+area+category+productName )					
+			selectArea.append(" order by inputDate desc "); 
 			
 //			select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, USER_ID, PRICE
 //			from PRODUCT
@@ -167,7 +164,7 @@ public class UserDAO {
 			
 			while(rs.next()) {
 				alv=new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
-						rs.getString("PRODUCT_NAME"), df.format(jcbAreaIndex), rs.getString("inputDate"),  
+						rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),  
 						rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"),rs.getInt("PRICE"));
 				list.add(alv);
 			}//end while
@@ -240,7 +237,7 @@ public class UserDAO {
 	}//selectProDetail
 	
 
-	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	// 로그인 시 이름 출력!!
 		public String[] loginRun(LoginVO lVO) throws SQLException {
 			String[] loginInfo = new String[2];
