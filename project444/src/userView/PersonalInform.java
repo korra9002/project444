@@ -29,8 +29,6 @@ public class PersonalInform extends JDialog {
 		
 		private JTextField jtfId, jtfName, jtfPhone1,jtfPhone2,jtfGender, jtfPwAnswer;
 		private JButton jbtRegister, jbtCancle ,jbtPwUpdate;
-//		private ButtonGroup bgGender;
-//		private JRadioButton jrbWomen, jrbMan;
 		private DefaultComboBoxModel<String> dcbPhoneNum,dcbLoc, dcbPwHint;
 		private JComboBox<String> jcbPhoneNum,jcbLoc, jcbPwHint;
 		
@@ -51,6 +49,7 @@ public class PersonalInform extends JDialog {
 			String phone1 = phone.substring(phone.indexOf("-")+1,phone.lastIndexOf("-"));
 			String phone2 = phone.substring(phone.lastIndexOf("-")+1);
 			String gender = uDAO.selectPersonalInfom(id)[1];
+			int locCode = Integer.valueOf(uDAO.selectPersonalInfom(id)[3]);
 			if(gender.equals("M")) {
 				gender="남자";
 			}else {
@@ -70,15 +69,7 @@ public class PersonalInform extends JDialog {
 			jbtCancle = new JButton("취소");
 			jbtPwUpdate = new JButton("비밀번호 변경");
 
-			// CheckBoxGroup
-//			bgGender = new ButtonGroup();
-			// CheckBox
-//			jrbWomen = new JRadioButton("여자");
-//			jrbMan = new JRadioButton("남자");
-			
-//			bgGender.add(jrbMan);
-//			bgGender.add(jrbWomen);
-			
+		
 			// Loc ComboBox
 			String[] loc = { "-지역선택-","강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구",
 					"서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
@@ -92,6 +83,7 @@ public class PersonalInform extends JDialog {
 			dcbPhoneNum = new DefaultComboBoxModel<String>(phoneNum);
 			// JComboBox
 			jcbLoc = new JComboBox<String>(dcbLoc);
+			jcbLoc.setSelectedIndex(locCode);
 			jcbPwHint = new JComboBox<String>(dcbPwHint);
 			jcbPhoneNum = new JComboBox<String>(dcbPhoneNum);
 			// 수동배치
@@ -112,8 +104,6 @@ public class PersonalInform extends JDialog {
 			jtfPhone2.setBounds(285, 310, 60, 25);
 			jtfPwAnswer.setBounds(140, 470, 250, 25);
 
-//			jrbMan.setBounds(160, 260, 100, 20);
-//			jrbWomen.setBounds(260, 260, 100, 20);
 			jtfGender.setBounds(160, 260, 100, 20);
 
 			jcbLoc.setBounds(140, 360, 150, 25);
@@ -141,9 +131,6 @@ public class PersonalInform extends JDialog {
 			add(jtfPwAnswer);
 			add(jtfGender);
 			
-//			add(jrbMan);
-//			add(jrbWomen);
-
 			add(jcbLoc);
 			add(jcbPwHint);
 			add(jcbPhoneNum);
@@ -154,24 +141,19 @@ public class PersonalInform extends JDialog {
 			//이벤트처리
 			PersonalInformEvt psie = new PersonalInformEvt(this,rmm); 
 			jbtPwUpdate.addActionListener(psie);
+			jbtCancle.addActionListener(psie);
 			//편집불가
 			jtfId.setEditable(false);
 			jtfGender.setEditable(false);
 			//배경색 변경
 			jtfId.setBackground(Color.white);
+			jtfGender.setBackground(Color.WHITE);
 			// WindowSizing
 			setBounds(100, 100, 550, 700);
 			// visible
 			setVisible(true);
-			// close
-			addWindowListener(new WindowAdapter() {
-
-				@Override
-				public void windowClosed(WindowEvent e) {
-				dispose();
-				}
-				
-			});
+		
+		
 		}// SineUp
 
 		public JTextField getJtfId() {
