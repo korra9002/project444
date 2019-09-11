@@ -10,6 +10,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import userControl.MarketDetailBuyerEvt;
+import userControl.MarketDetailSellerEvt;
+import userVO.MarketDetailVO;
+
 
 public class MarketDetailSeller extends JDialog {
 	
@@ -20,7 +24,7 @@ public class MarketDetailSeller extends JDialog {
 	private JTextArea jtaStrongPoint;
 
 	
-	public MarketDetailSeller() {
+	public MarketDetailSeller(MarketMain mm, MarketDetailVO mdVO, String id) {
 		
 		
 		jlDetailImg = new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/img/¹«¹Î.jpg/"));//½æ³×ÀÏX / ¿øº» ÀÌ¹ÌÁö
@@ -102,12 +106,19 @@ public class MarketDetailSeller extends JDialog {
 		
 		//setBounds
 		
+		MarketDetailSellerEvt mdse=new MarketDetailSellerEvt(mm, this);
+		
+			
+		jbtComplete.addActionListener(mdse);
+		jbtDelete.addActionListener(mdse);
+		jbtChange.addActionListener(mdse);
+		
 		
 	}//MarketDetail
 
-	public static void main(String[] args) {
-		new MarketDetailSeller();
-	}// main
+//	public static void main(String[] args) {
+//		new MarketDetailSeller();
+//	}// main
 	
 
 }//class

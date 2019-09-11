@@ -15,14 +15,20 @@ import userDAO.UserDAO;
 import userVO.AllListVO;
 import userVO.MarketDetailVO;
 import userView.MarketDetailBuyer;
+import userView.MarketDetailSeller;
 import userView.MarketMain;
 
 public class MarketMainEvt extends MouseAdapter implements ActionListener{
-	private MarketMain mm;
 	public static final int DOUBLE_CLICK=2;
 	
-	public MarketMainEvt(MarketMain mm) throws SQLException {
+	private MarketMain mm;
+	private String id;
+	
+	
+	
+	public MarketMainEvt(MarketMain mm, String id) throws SQLException {
 		this.mm=mm;	
+		this.id=id;
 		setAllList();
 	}//MarketMainEvt
 	
@@ -140,8 +146,15 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 
 			try {
 				MarketDetailVO mdVO=uDAO.selectProDetail(productCode, loc_code);
-				new MarketDetailBuyer(mm, mdVO);
 				
+				
+				//현재 접속한 아이디와 포스팅 판매자 아이디와 같으면 MarketDetailBuyer
+				//다르다면 MarketDetailSeller
+				if (mdVO.getSellerID()==id) {
+					new MarketDetailSeller(mm, mdVO, id);
+				} else {
+					new MarketDetailBuyer(mm, mdVO, id);
+				}//end else
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}//end catch

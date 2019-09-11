@@ -27,7 +27,7 @@ public class MarketDetailBuyer extends JDialog{
 	private MarketMain mm;
 	private String productCode;
 	
-	public MarketDetailBuyer(MarketMain mm, MarketDetailVO mdVO) {
+	public MarketDetailBuyer(MarketMain mm, MarketDetailVO mdVO, String id) {
 		
 		jlDetailImg = new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/img/무민.jpg/"));//썸네일X / 원본 이미지
 //		jlDetailImg.setHorizontalAlignment(JLabel.CENTER);
@@ -109,7 +109,7 @@ public class MarketDetailBuyer extends JDialog{
 		setBounds(100, 100, 670, 440);
 		setVisible(true);
 		
-		MarketDetailBuyerEvt mdbe=new MarketDetailBuyerEvt(this);
+		MarketDetailBuyerEvt mdbe=new MarketDetailBuyerEvt(mm, this);
 		
 		jbtChat.addActionListener(mdbe);
 		ckLike.addMouseListener(mdbe);

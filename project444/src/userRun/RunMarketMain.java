@@ -19,7 +19,7 @@ public class RunMarketMain extends JFrame{
 		
 		setLayout(null);
 		JTabbedPane jtp = new JTabbedPane();
-		jtp.add("홈", new MarketMain());
+		jtp.add("홈", new MarketMain(id));
 		jtp.add("상품입력", new InsertProduct());
 		jtp.add("채팅", new ChatList());
 		jtp.add("MyPage", new UserInfo(id,this));
