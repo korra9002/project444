@@ -11,6 +11,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import userVO.MarketDetailVO;
+
 
 public class MarketDetailBuyer extends JFrame {
 	
@@ -24,7 +26,7 @@ public class MarketDetailBuyer extends JFrame {
 	private Checkbox ckLike;
 
 	
-	public MarketDetailBuyer(MarketMain mm) {
+	public MarketDetailBuyer(MarketMain mm, MarketDetailVO mdVO) {
 		
 		jlDetailImg = new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/img/무민.jpg/"));//썸네일X / 원본 이미지
 //		jlDetailImg.setHorizontalAlignment(JLabel.CENTER);

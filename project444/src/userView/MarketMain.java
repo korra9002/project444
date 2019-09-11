@@ -188,6 +188,7 @@ import userControl.MarketMainEvt;
 		jbRefresh.addActionListener(mme);
 		jrbSubject.addActionListener(mme);
 		jrbId.addActionListener(mme);	
+		jtProductList.addMouseListener(mme);
 		
 		
 		

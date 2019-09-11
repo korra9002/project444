@@ -129,14 +129,23 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 			  
 			 
 			JTable jtProductList=mm.getJtProductList();
-			String id=(String) jtProductList.getValueAt(jtProductList.getSelectedRow(), 6);
+			String temp=(String) jtProductList.getValueAt(jtProductList.getSelectedRow(), 1);
+			String loc_code=(String) jtProductList.getValueAt(jtProductList.getSelectedRow(), 2);
+			String productCode=temp.substring(temp.lastIndexOf("(")+1, temp.lastIndexOf(")"));
+			
+			
 			
 			//DBMS에서 조회
 			UserDAO uDAO =UserDAO.getInstance();
+
+			try {
+				MarketDetailVO mdVO=uDAO.selectProDetail(productCode, loc_code);
+				new MarketDetailBuyer(mm, mdVO);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}//end catch
 			
-//			List<MarketDetailVO> list=uDAO.selectProList();
-			
-//			MarketDetailBuyer mdb=uDAO.selectProDetail(id);
 			
 //			jtProductList.addMouseListener(new MouseAdapter() {
 //			//테이블 더블클릭되었을 때 
