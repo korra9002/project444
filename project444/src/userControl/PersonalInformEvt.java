@@ -141,6 +141,7 @@ public class PersonalInformEvt implements ActionListener{
 		}//end if
 		if(flag ==true) {
 			JOptionPane.showMessageDialog(psi, "정보가 변경되었습니다.");
+			PersonalInformClose();
 		}else {
 			JOptionPane.showMessageDialog(psi, "변경할 정보를 입력해주세요.");
 		}
