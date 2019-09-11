@@ -5,7 +5,6 @@ public class CheckVO {
 	private String category, col_name, value;
 
 	public CheckVO(String category, String col_name, String value) {
-		super();
 		this.category = category;
 		this.col_name = col_name;
 		this.value = value;

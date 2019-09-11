@@ -6,29 +6,35 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import adminControl.AdminMainEvt;
+import adminVO.UserIdDetailVO;
+
 @SuppressWarnings("serial")
 public class AdminIdDetailView extends JDialog {
-	private AdminMainView av;
-	private JTextField jtfId, jtfName, jtfGender, jtfLoc, jtfPwHint, jtfHintAnswer;
+	private JTextField jtfId, jtfName, jtfGender, jtfPhone, jtfLoc, jtfJoinDate, jtfSuspendFlag;
 	private JButton jbtOkey, jbtStop;
 	
-	public AdminIdDetailView(AdminMainView av) {
-		super(av,"아이디 상세 정보",true);
-		this.av = av;
+	private AdminMainView amv;
+	
+	public AdminIdDetailView(AdminMainView amv, AdminMainEvt ame, UserIdDetailVO uidVO) {
+		super(amv,"아이디 상세 정보",true);
+		this.amv = amv;
 		
 		jtfId = new JTextField();
 		jtfName = new JTextField();
 		jtfGender = new JTextField();
+		jtfPhone = new JTextField();
 		jtfLoc = new JTextField();
-		jtfPwHint = new JTextField();
-		jtfHintAnswer = new JTextField();
+		jtfJoinDate = new JTextField();
+		jtfSuspendFlag = new JTextField();
 		
 		jtfId.setEditable(false);
 		jtfName.setEditable(false);
 		jtfGender.setEditable(false);
+		jtfPhone.setEditable(false);
 		jtfLoc.setEditable(false);
-		jtfPwHint.setEditable(false);
-		jtfHintAnswer.setEditable(false);
+		jtfJoinDate.setEditable(false);
+		jtfSuspendFlag.setEditable(false);
 		
 		jbtOkey = new JButton("확인");
 		jbtStop = new JButton("정지");
@@ -36,26 +42,38 @@ public class AdminIdDetailView extends JDialog {
 		JLabel jlbID = new JLabel("ID"); 
 		JLabel jlbName = new JLabel("이름");
 		JLabel jlbGender = new JLabel("성별"); 
+		JLabel jlbPhone = new JLabel("전화번호"); 
 		JLabel jlbLoc = new JLabel("지역"); 
-		JLabel jlbPwHint = new JLabel("비밀번호 힌트"); 
-		JLabel jlbHintAnswer = new JLabel("힌트 정답"); 
+		JLabel jlbJoinDate = new JLabel("가입일자"); 
+		JLabel jlbSuspendFlag = new JLabel("정지여부"); 
+		
+		//settext
+		jtfId.setText(uidVO.getUser_id());
+		jtfName.setText(uidVO.getUser_name());
+		jtfGender.setText(uidVO.getGender());
+		jtfPhone.setText(uidVO.getPhone());
+		jtfLoc.setText(uidVO.getLoc());
+		jtfJoinDate.setText(uidVO.getJoin_date());
+		jtfSuspendFlag.setText(uidVO.getSuspend_flag());
 		
 		jlbID.setBounds(10, 10, 100, 30);
 		jlbName.setBounds(10, 50, 100, 30);
 		jlbGender.setBounds(10, 90, 100, 30);
-		jlbLoc.setBounds(10, 130, 100, 30);
-		jlbPwHint.setBounds(10, 170, 100, 30);
-		jlbHintAnswer.setBounds(10, 210, 100, 30);
+		jlbPhone.setBounds(10, 130, 100, 30);
+		jlbLoc.setBounds(10, 170, 100, 30);
+		jlbJoinDate.setBounds(10, 210, 100, 30);
+		jlbSuspendFlag.setBounds(10, 250, 100, 30);
 		
 		jtfId.setBounds(125, 10, 120, 30);
 		jtfName.setBounds(125, 50, 120, 30);
 		jtfGender.setBounds(125, 90, 120, 30);
-		jtfLoc.setBounds(125, 130, 120, 30);
-		jtfPwHint.setBounds(125, 170, 120, 30);
-		jtfHintAnswer.setBounds(125, 210, 120, 30);
+		jtfPhone.setBounds(125, 130, 120, 30);
+		jtfLoc.setBounds(125, 170, 120, 30);
+		jtfJoinDate.setBounds(125, 210, 120, 30);
+		jtfSuspendFlag.setBounds(125, 250, 120, 30);
 		
-		jbtOkey.setBounds(40, 260, 80, 30);
-		jbtStop.setBounds(150, 260, 80, 30);
+		jbtOkey.setBounds(40, 300, 80, 30);
+		jbtStop.setBounds(150, 300, 80, 30);
 		
 		setLayout(null);
 		add(jlbID);
@@ -64,25 +82,23 @@ public class AdminIdDetailView extends JDialog {
 		add(jtfName);
 		add(jlbGender);
 		add(jtfGender);
+		add(jlbPhone);
+		add(jtfPhone);
 		add(jlbLoc);
 		add(jtfLoc);
-		add(jlbPwHint);
-		add(jtfPwHint);
-		add(jlbHintAnswer);
-		add(jtfHintAnswer);
+		add(jlbJoinDate);
+		add(jtfJoinDate);
+		add(jlbSuspendFlag);
+		add(jtfSuspendFlag);
 		add(jbtOkey);
 		add(jbtStop);
 		
-		setBounds(300, 100, 270, 340);
+		setBounds(amv.getX()+900, amv.getY()+50, 270, 380);
 		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}//AdminDetailView
-
-	public AdminMainView getAv() {
-		return av;
-	}
 
 	public JTextField getJtfId() {
 		return jtfId;
@@ -96,16 +112,20 @@ public class AdminIdDetailView extends JDialog {
 		return jtfGender;
 	}
 
+	public JTextField getJtfPhone() {
+		return jtfPhone;
+	}
+
 	public JTextField getJtfLoc() {
-		return jtfLoc; 
+		return jtfLoc;
 	}
 
-	public JTextField getJtfPwHint() {
-		return jtfPwHint;
+	public JTextField getJtfJoinDate() {
+		return jtfJoinDate;
 	}
 
-	public JTextField getJtfHintAnswer() {
-		return jtfHintAnswer;
+	public JTextField getJtfSuspendFlag() {
+		return jtfSuspendFlag;
 	}
 
 	public JButton getJbtOkey() {
@@ -115,8 +135,11 @@ public class AdminIdDetailView extends JDialog {
 	public JButton getJbtStop() {
 		return jbtStop;
 	}
-	
-	
+
+	public AdminMainView getAmv() {
+		return amv;
+	}
+
 //	public static void main(String[] args) {
 //		new AdminDetailView();
 //	}
