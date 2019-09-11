@@ -129,7 +129,7 @@ public class PersonalInformEvt implements ActionListener{
 			}//end else
 		
 		}//end if
-		if(!mfPwAnswer.isEmpty()&&mfPwAnswer.equals(piVO.getPwAnswer())) {
+		if(!mfPwAnswer.isEmpty()&&!mfPwAnswer.equals(piVO.getPwAnswer())) {
 			flag = false;
 			modifyInformVO miVO = new modifyInformVO(id, "answer", mfPwAnswer);
 			if(flag==uDAO.updateThing(miVO)) {
@@ -140,8 +140,10 @@ public class PersonalInformEvt implements ActionListener{
 			}//end else
 		}//end if
 		if(flag ==true) {
-			JOptionPane.showMessageDialog(psi, "값 변경 성공");
-		}//end if
+			JOptionPane.showMessageDialog(psi, "정보가 변경되었습니다.");
+		}else {
+			JOptionPane.showMessageDialog(psi, "변경할 정보를 입력해주세요.");
+		}
 	}//modifyRegister
 	public void PersonalInformClose() {
 		psi.dispose();

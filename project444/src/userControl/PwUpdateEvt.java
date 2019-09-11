@@ -35,7 +35,7 @@ public class PwUpdateEvt implements ActionListener {
 					
 				}else {
 					JOptionPane.showMessageDialog(pu,"비밀번호 변경이 올바르게 되었습니다.");
-					
+					PwUpdateClose();
 				}
 			}//end else
 			
