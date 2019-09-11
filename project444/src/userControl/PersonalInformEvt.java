@@ -37,16 +37,21 @@ public class PersonalInformEvt implements ActionListener{
 		    new PwUpdate(rmm);
 		    
 		    
-		}
+		}//end if
 		
-		
-	}
+	}//PersonalInformEvt
+	
+	public void PersonalInformClose() {
+		psi.dispose();
+	}//PersonalInform
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource()==psi.getJbtPwUpdate()) {
 			modifyPw();
 		}//end if
-		
+		if(ae.getSource()==psi.getJbtCancle()) {
+			PersonalInformClose();
+		}
 	}//actionPerformed
 	
 	
