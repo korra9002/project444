@@ -46,7 +46,8 @@ public class UserDAO {
 		
 		//2. Connection 얻기
 		
-		String url="jdbc:oracle:thin:@211.63.89.159:1521:orcl";
+		String url="jdbc:oracle:thin:@localhost:1521:orcl";
+//		String url="jdbc:oracle:thin:@211.63.89.159:1521:orcl";
 		String id="junggo";
 		String pass="1234";
 		
@@ -131,7 +132,8 @@ public class UserDAO {
 			
 			
 			if(jcbAreaIndex != 0) {
-				selectArea.append( " and user_id in ( select user_id  from id_info where loc_code ='"+df.format(jcbAreaIndex)+"') ");
+//				selectArea.append( " and user_id in ( select user_id  from id_info where loc_code ='"+df.format(jcbAreaIndex)+"') ");
+				selectArea.append( " and loc_code ="+df.format(jcbAreaIndex)+" ");
 			}
 			if(jcbCateIndex != 0) {
 				selectArea.append( " and category_code ='"+df.format(jcbCateIndex)+"' ");
@@ -140,7 +142,6 @@ public class UserDAO {
 				selectArea.append(" and product_name like '%"+jtfText+"%' ");
 			}
 			
-//					+ ""+area+category+productName )					
 			selectArea.append(" order by inputDate desc "); 
 			
 //			select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, USER_ID, PRICE
@@ -204,10 +205,10 @@ public class UserDAO {
 				
 				//3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
 				StringBuilder selectDetail = new StringBuilder();
-				selectDetail			
-				.append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate, PRICE, INFO ")
-				.append(" from PRODUCT ")
-				.append(" where all_flag ='P' and PRODUCT_CODE=? and user_id in ( select user_id  from id_info where LOC_CODE =?) ")	//물음표랑 ''랑 같이쓰면 안됨.						
+				selectDetail		
+				.append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code, info ")
+				.append(" from PRODUCT, id_info ")
+				.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' and PRODUCT_CODE=? ")//물음표랑 ''랑 같이쓰면 안됨.					
 				.append(" order by inputDate desc "); 
 				
 								
@@ -217,13 +218,12 @@ public class UserDAO {
 				
 				//4. 바인드변수에 값 넣기
 				pstmt.setString(1, productCode);
-				pstmt.setString(2, loc_code);
 				//5. 쿼리 수행 후 결과 얻기
 				rs=pstmt.executeQuery(); 
 				
 				if(rs.next()) {
 					mdVO=new MarketDetailVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
-							rs.getString("PRODUCT_NAME"), df.format(loc_code), rs.getString("inputDate"),  
+							rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),  
 							rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"),rs.getString("INFO"),rs.getInt("PRICE"));
 				}//end if
 			} finally {
