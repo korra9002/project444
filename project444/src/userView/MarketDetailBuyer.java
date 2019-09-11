@@ -10,12 +10,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import userControl.MarketDetailBuyerEvt;
 import userVO.MarketDetailVO;
 
 
-public class MarketDetailBuyer extends JDialog {
+public class MarketDetailBuyer extends JDialog{
 	
-	private MarketMain mm;
 	
 	
 	private JLabel jlDetailImg;
@@ -24,11 +24,17 @@ public class MarketDetailBuyer extends JDialog {
 	private JTextArea jtaStrongPoint;
 	private Checkbox ckLike;
 
+	private MarketMain mm;
+	private String productCode;
 	
 	public MarketDetailBuyer(MarketMain mm, MarketDetailVO mdVO) {
 		
 		jlDetailImg = new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/img/무민.jpg/"));//썸네일X / 원본 이미지
 //		jlDetailImg.setHorizontalAlignment(JLabel.CENTER);
+		
+		this.mm=mm;
+		productCode=mdVO.getProductCode();
+		
 		
 		JLabel jlId=new JLabel("판매자");
 		JLabel jlName=new JLabel("제품이름");
@@ -40,11 +46,11 @@ public class MarketDetailBuyer extends JDialog {
 
 		
 		//JTextField
-		jtfName=new JTextField();
-		jtfPrice=new JTextField();
-		jtfId=new JTextField();
-		jtfInputDate=new JTextField();
-		jtfCategory=new JTextField();
+		jtfName=new JTextField(mdVO.getProductName());
+		jtfPrice=new JTextField(mdVO.getPrice());
+		jtfId=new JTextField(mdVO.getSellerID());
+		jtfInputDate=new JTextField(mdVO.getUpload_date());
+		jtfCategory=new JTextField(mdVO.getCategory());
 		
 		//바꾸지 못하게
 		jtfName.setEditable(false);
@@ -54,8 +60,9 @@ public class MarketDetailBuyer extends JDialog {
 		jtfCategory.setEditable(false);
 		
 		//JTextArea
-		jtaStrongPoint=new JTextArea();
+		jtaStrongPoint=new JTextArea(mdVO.getpDetail());
 		JScrollPane jsp=new JScrollPane(jtaStrongPoint);
+		
 		
 		jbtChat=new JButton("채팅으로 거래하기");
 		
@@ -102,10 +109,59 @@ public class MarketDetailBuyer extends JDialog {
 		setBounds(100, 100, 670, 440);
 		setVisible(true);
 		
-		//setBounds
+		MarketDetailBuyerEvt mdbe=new MarketDetailBuyerEvt(this);
 		
+		jbtChat.addActionListener(mdbe);
+		ckLike.addMouseListener(mdbe);
+			
 		
 	}//MarketDetail
+
+	public JLabel getJlDetailImg() {
+		return jlDetailImg;
+	}
+
+	public JTextField getJtfName() {
+		return jtfName;
+	}
+
+	public JTextField getJtfPrice() {
+		return jtfPrice;
+	}
+
+	public JTextField getJtfId() {
+		return jtfId;
+	}
+
+	public JTextField getJtfInputDate() {
+		return jtfInputDate;
+	}
+
+	public JTextField getJtfCategory() {
+		return jtfCategory;
+	}
+
+	public JButton getJbtChat() {
+		return jbtChat;
+	}
+
+	public JTextArea getJtaStrongPoint() {
+		return jtaStrongPoint;
+	}
+
+	public Checkbox getCkLike() {
+		return ckLike;
+	}
+
+	public MarketMain getMm() {
+		return mm;
+	}
+
+	public String getProductCode() {
+		return productCode;
+	}
+	
+	
 
 //	public static void main(String[] args) {
 //		new MarketDetailBuyer();
