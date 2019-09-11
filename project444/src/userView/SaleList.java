@@ -3,6 +3,7 @@ package userView;
 import java.awt.BorderLayout;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -13,16 +14,18 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import userRun.RunMarketMain;
+
 @SuppressWarnings("serial")
-public class SaleList extends JFrame {
+public class SaleList extends JDialog {
 	
 	private JTabbedPane jtp;
 	private JButton jbtDelete, jbtModify;
 	private JTable jtSell, jtComplete;
 	private DefaultTableModel dtmSell, dtmComp;
 	
-	public SaleList() {
-		super("판매내역");
+	public SaleList(RunMarketMain rmm) {
+		super(rmm,"판매내역");
 		////////////////////////////////첫번째 탭 시작////////////////////////////////
 		String[] sellCol= {"이미지","제품명","가격","지역","등록시간","검수여부"};
 		Object[][] sellRow = {
@@ -157,12 +160,8 @@ public class SaleList extends JFrame {
 		
 		setBounds(100, 100, 560, 700);
 		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}//SaleList
 
-	public static void main(String[] args) {
-		new SaleList();
-	}//main
 
 }//class

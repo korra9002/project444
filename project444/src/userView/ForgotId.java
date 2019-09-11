@@ -67,6 +67,7 @@ public class ForgotId extends JDialog {
 		jcbPhoneNum.addActionListener(fie);
 		jbtCancle.addActionListener(fie);
 		jbtSearch.addActionListener(fie);
+		jtfName.addActionListener(fie);
 		setVisible(true);
 
 		

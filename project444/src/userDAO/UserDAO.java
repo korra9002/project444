@@ -429,6 +429,27 @@ public boolean updateForgetPw(ForgotPwVO fpVO,String uuid) throws SQLException {
 		return setInfo;
 	}//selectPersonalInfom
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public boolean updatePw() throws SQLException {
+boolean updateFlag = false;
+
+Connection con =null;
+PreparedStatement pstmt = null;
+try {
+
+	con=getConn();
+
+}finally {
+if(con!=null) {con.close();}//end if
+if(pstmt!=null) {pstmt.close();}//end if
+}//end finally
+
+return updateFlag;
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //	public static void main(String[] args) {
 //

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -13,16 +14,18 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import userRun.RunMarketMain;
+
 @SuppressWarnings("serial")
-public class PurchaseHistory extends JFrame {
+public class PurchaseHistory extends JDialog {
 	
 	private JButton jbtDelete;
 	private JTable jtPurchaseList;
 	private DefaultTableModel dtmPurchaseList;
 	public static final int CENTER = 0;
 	 
-	public PurchaseHistory() {
-		super("구매내역");
+	public PurchaseHistory(RunMarketMain rmm) {
+		super(rmm,"구매내역");
 		String[] sellCol= {"이미지","제품명","가격","아이디","지역","구매시간"};
 		Object[][] sellRow = { 
 				{1,2,3,4,5,6},
@@ -93,12 +96,10 @@ public class PurchaseHistory extends JFrame {
 		setBounds(100, 100, 565, 600);
 		setVisible(true);
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		
 	}//SaleList
 
-	public static void main(String[] args) {
-		new PurchaseHistory();
-	}//main
+	
 
 }//class
