@@ -67,7 +67,7 @@ public class PersonalInformEvt implements ActionListener{
 		UserDAO uDAO = UserDAO.getInstance();
 		PersonalInformVO piVO = uDAO.selectPersonalInfom(psi.getJtfId().getText());
 		System.out.println(piVO.getPhone()+" "+piVO.getLoc()+" "+piVO.getPwHint()+" "+piVO.getPwAnswer());
-
+		
 		if(mfPhone2.isEmpty()||mfPhone3.isEmpty()) {
 			JOptionPane.showMessageDialog(psi, "변경할 연락처 정보를 입력해주세요.");
 		}else {
@@ -82,11 +82,12 @@ public class PersonalInformEvt implements ActionListener{
 			} // end catch
 			if ((mfPhone2.length() < 3 || mfPhone2.length() > 4) || mfPhone3.length() != 4) {
 				JOptionPane.showMessageDialog(psi, "연락처를 정확히 기입해주세요.");
-				return;
+			
 			} else {
 				mfPhone = mfPhone1 + "-" + mfPhone2 + "-" + mfPhone3;
 			
 			}//end else
+			
 		}//end else
 		
 	}//modifyRegister
