@@ -456,27 +456,33 @@ if(rs!=null) {rs.close();}//end if
 return curPw;
 }//selectPw
 
-//public boolean updatePw() throws SQLException {
-//boolean updateFlag = false;
-//
-//Connection con =null;
-//PreparedStatement pstmt = null;
-//try {
-//con=getConn();
-//StringBuilder updatePw = new StringBuilder();
-//updatePw
-//.append("update");
-//
-//}finally {
-//if(con!=null) {con.close();}//end if
-//if(pstmt!=null) {pstmt.close();}//end if
-//}//end finally
-//return updateFlag;
-//}//updatePw
+	public boolean updatePw(String id,String pw) throws SQLException {
+		boolean updateFlag = false;
+		
+		Connection con =null;
+		PreparedStatement pstmt = null;
+		try {
+		con=getConn();
+		StringBuilder updatePw = new StringBuilder();
+		updatePw
+		.append("update id_info ")
+		.append(" set password =? ")
+		.append(" where user_id =? ");
+		pstmt = con.prepareStatement(updatePw.toString());
+		pstmt.setString(1, pw);
+		pstmt.setString(2, id);
+		
+		updateFlag =pstmt.executeUpdate()==1;
+		
+		}finally {
+		if(con!=null) {con.close();}//end if
+		if(pstmt!=null) {pstmt.close();}//end if
+		}//end finally
+		return updateFlag;
+	}//updatePw
 
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 

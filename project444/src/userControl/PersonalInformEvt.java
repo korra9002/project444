@@ -25,6 +25,7 @@ public class PersonalInformEvt implements ActionListener{
 	public void modifyPw() throws SQLException {
 		String pw = "";
 		String curpw = "";
+		String id = psi.getJtfId().getText().trim();
 		JPanel panel = new JPanel();
 		JLabel label = new JLabel("현재 비밀번호 입력:");
 		JPasswordField jpfPw = new JPasswordField(10);
@@ -35,14 +36,13 @@ public class PersonalInformEvt implements ActionListener{
 		if(option == 0){
 		    char[] password = jpfPw.getPassword();
 		    pw= new String(password);
-		    System.out.println("비밀번호 : " + pw);
 		  UserDAO uDAO = UserDAO.getInstance();
 		  curpw= uDAO.selectPw(pw);
 		    if(curpw.isEmpty()) {
 		    	JOptionPane.showMessageDialog(psi, "비밀번호가 정확하지 않습니다.");
 		    }else {
 		    	JOptionPane.showMessageDialog(psi, "비밀번호 확인 완료");
-		    	new PwUpdate(rmm);
+		    	new PwUpdate(rmm,id);
 		    }//end else
 		    
 		    

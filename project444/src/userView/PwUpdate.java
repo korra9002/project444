@@ -16,9 +16,11 @@ import userRun.RunMarketMain;
 public class PwUpdate extends JDialog {
 	private JPasswordField jpfCurrentPw, jpfUpdatePw, jpfReUpdatePw;
 	private JButton jbtOk, jbtCancle;
+	private String id="";
 
-	public PwUpdate(RunMarketMain rmm) {
+	public PwUpdate(RunMarketMain rmm,String userId) {
 		super(rmm,"비밀번호 변경");
+		id = userId;
 		// JLabel
 		JLabel jlCurrentPw = new JLabel("현재 비밀번호");
 		JLabel jlUpdatePw = new JLabel("변경할 비밀번호");
@@ -87,5 +89,7 @@ public class PwUpdate extends JDialog {
 	public JButton getJbtCancle() {
 		return jbtCancle;
 	}//jbtCancle
-
+	public String getId() {
+		return id;
+	}//getId
 }// class
