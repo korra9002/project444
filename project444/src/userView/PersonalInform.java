@@ -26,32 +26,42 @@ import userDAO.UserDAO;
 import userRun.RunMarketMain;
 
 public class PersonalInform extends JDialog {
-		private JLabel jlId, jlPw, jlName, jlGender, jlPhone, jlLoc, jlPwHint, jlPwAnswer;
-		private JTextField jtfId, jtfName, jtfPhone, jtfPwAnswer;
+		
+		private JTextField jtfId, jtfName, jtfPhone1,jtfPhone2,jtfGender, jtfPwAnswer;
 		private JButton jbtRegister, jbtCancle ,jbtPwUpdate;
-		private ButtonGroup bgGender;
-		private JRadioButton jrbWomen, jrbMan;
+//		private ButtonGroup bgGender;
+//		private JRadioButton jrbWomen, jrbMan;
 		private DefaultComboBoxModel<String> dcbPhoneNum,dcbLoc, dcbPwHint;
 		private JComboBox<String> jcbPhoneNum,jcbLoc, jcbPwHint;
-		private String[] PwHint;
 		
 		public PersonalInform(String id, RunMarketMain rmm) throws SQLException {
 			super(rmm,"개인정보 수정");
 			// JLabel
-			jlId = new JLabel("아이디  ");
-			jlPw = new JLabel("비밀번호  ");
-			jlName = new JLabel("이름  ");
-			jlGender = new JLabel("성별");
-			jlPhone = new JLabel("연락처");
-			jlLoc = new JLabel("지역");
-			jlPwHint = new JLabel("비밀번호 힌트");
-			jlPwAnswer = new JLabel("힌트 정답");
+			JLabel jlId = new JLabel("아이디  ");
+			JLabel jlPw = new JLabel("비밀번호  ");
+			JLabel jlName = new JLabel("이름  ");
+			JLabel jlGender = new JLabel("성별");
+			JLabel jlPhone = new JLabel("연락처");
+			JLabel jlLoc = new JLabel("지역");
+			JLabel jlPwHint = new JLabel("비밀번호 힌트");
+			JLabel jlPwAnswer = new JLabel("힌트 정답");
 			//회원 정보 가져오기
 			UserDAO uDAO = UserDAO.getInstance();
+			String phone=uDAO.selectPersonalInfom(id)[2];
+			String phone1 = phone.substring(phone.indexOf("-")+1,phone.lastIndexOf("-"));
+			String phone2 = phone.substring(phone.lastIndexOf("-")+1);
+			String gender = uDAO.selectPersonalInfom(id)[1];
+			if(gender.equals("M")) {
+				gender="남자";
+			}else {
+				gender ="여자";
+			}
 			// JTextField
 			jtfId = new JTextField(id);
 			jtfName = new JTextField(uDAO.selectPersonalInfom(id)[0]);
-			jtfPhone = new JTextField(uDAO.selectPersonalInfom(id)[2]);
+			jtfPhone1 = new JTextField(phone1);
+			jtfPhone2 = new JTextField(phone2);
+			jtfGender = new JTextField(gender);
 			jtfPwAnswer = new JTextField();
 
 
@@ -61,13 +71,13 @@ public class PersonalInform extends JDialog {
 			jbtPwUpdate = new JButton("비밀번호 변경");
 
 			// CheckBoxGroup
-			bgGender = new ButtonGroup();
+//			bgGender = new ButtonGroup();
 			// CheckBox
-			jrbWomen = new JRadioButton("여자");
-			jrbMan = new JRadioButton("남자");
+//			jrbWomen = new JRadioButton("여자");
+//			jrbMan = new JRadioButton("남자");
 			
-			bgGender.add(jrbMan);
-			bgGender.add(jrbWomen);
+//			bgGender.add(jrbMan);
+//			bgGender.add(jrbWomen);
 			
 			// Loc ComboBox
 			String[] loc = { "-지역선택-","강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구",
@@ -98,11 +108,13 @@ public class PersonalInform extends JDialog {
 
 			jtfId.setBounds(140, 100, 180, 25);
 			jtfName.setBounds(140, 200, 220, 25);
-			jtfPhone.setBounds(205, 310, 180, 25);
+			jtfPhone1.setBounds(215, 310, 60, 25);
+			jtfPhone2.setBounds(285, 310, 60, 25);
 			jtfPwAnswer.setBounds(140, 470, 250, 25);
 
-			jrbMan.setBounds(160, 260, 100, 20);
-			jrbWomen.setBounds(260, 260, 100, 20);
+//			jrbMan.setBounds(160, 260, 100, 20);
+//			jrbWomen.setBounds(260, 260, 100, 20);
+			jtfGender.setBounds(160, 260, 100, 20);
 
 			jcbLoc.setBounds(140, 360, 150, 25);
 			jcbPwHint.setBounds(140, 410, 250, 25);
@@ -124,11 +136,13 @@ public class PersonalInform extends JDialog {
 
 			add(jtfId);
 			add(jtfName);
-			add(jtfPhone);
+			add(jtfPhone1);
+			add(jtfPhone2);
 			add(jtfPwAnswer);
-
-			add(jrbMan);
-			add(jrbWomen);
+			add(jtfGender);
+			
+//			add(jrbMan);
+//			add(jrbWomen);
 
 			add(jcbLoc);
 			add(jcbPwHint);
@@ -142,6 +156,7 @@ public class PersonalInform extends JDialog {
 			jbtPwUpdate.addActionListener(psie);
 			//편집불가
 			jtfId.setEditable(false);
+			jtfGender.setEditable(false);
 			//배경색 변경
 			jtfId.setBackground(Color.white);
 			// WindowSizing
@@ -161,62 +176,65 @@ public class PersonalInform extends JDialog {
 
 		public JTextField getJtfId() {
 			return jtfId;
-		}
+		}//getJtfId
 
 		public JTextField getJtfName() {
 			return jtfName;
-		}
+		}//getJtfName
 
-		public JTextField getJtfPhone() {
-			return jtfPhone;
-		}
+		public JTextField getJtfPhone1() {
+			return jtfPhone1;
+		}//getJtfPhone1
+
+		public JTextField getJtfPhone2() {
+			return jtfPhone2;
+		}//getJtfPhone2
+
+		public JTextField getJtfGender() {
+			return jtfGender;
+		}//getJtfGender
 
 		public JTextField getJtfPwAnswer() {
 			return jtfPwAnswer;
-		}
-
-	
+		}//getJtfPwAnswer
 
 		public JButton getJbtRegister() {
 			return jbtRegister;
-		}
+		}//getJbtRegister
 
 		public JButton getJbtCancle() {
 			return jbtCancle;
-		}
+		}//getJbtCancle
 
 		public JButton getJbtPwUpdate() {
 			return jbtPwUpdate;
-		}
+		}//getJbtPwUpdate
 
-		public ButtonGroup getBgGender() {
-			return bgGender;
-		}
+		public DefaultComboBoxModel<String> getDcbPhoneNum() {
+			return dcbPhoneNum;
+		}//getDcbPhoneNum
 
-		public JRadioButton getJrbWomen() {
-			return jrbWomen;
-		}
+		public DefaultComboBoxModel<String> getDcbLoc() {
+			return dcbLoc;
+		}//getDcbLoc
 
-		public JRadioButton getJrbMan() {
-			return jrbMan;
-		}
+		public DefaultComboBoxModel<String> getDcbPwHint() {
+			return dcbPwHint;
+		}//getDcbPwHint
 
 		public JComboBox<String> getJcbPhoneNum() {
 			return jcbPhoneNum;
-		}
+		}//getJcbPhoneNum
 
 		public JComboBox<String> getJcbLoc() {
 			return jcbLoc;
-		}
+		}//getJcbLoc
 
 		public JComboBox<String> getJcbPwHint() {
 			return jcbPwHint;
-		}
+		}//getJcbPwHint
 
-		public String[] getPwHint() {
-			return PwHint;
-		}
-
+	
 		
 
 
