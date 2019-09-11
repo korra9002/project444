@@ -43,6 +43,12 @@ public class MarketDetailVO {
 	public int getPrice() {
 		return price;
 	}
+	@Override
+	public String toString() {
+		return "MarketDetailVO [productCode=" + productCode + ", image=" + image + ", productName=" + productName
+				+ ", loc_code=" + loc_code + ", upload_date=" + upload_date + ", category=" + category + ", sellerID="
+				+ sellerID + ", pDetail=" + pDetail + ", price=" + price + "]";
+	}
 	
 	
 

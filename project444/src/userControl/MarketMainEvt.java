@@ -73,7 +73,8 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 			
 			Object[] rowData= null;
 			//JTable 넣을 데이터 // object는 자바의 모든 값을 다 담을 수 있다.
-		
+
+// nullpointerexception 때문에 만들었으나 지금 필요X
 //			int area =0;
 //			try {
 //			area =  mm.getJcbArea().getSelectedIndex();
@@ -133,54 +134,21 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 			String loc_code=(String) jtProductList.getValueAt(jtProductList.getSelectedRow(), 2);
 			String productCode=temp.substring(temp.lastIndexOf("(")+1, temp.lastIndexOf(")"));
 			
-			
+//			System.out.println(productCode);
 			
 			//DBMS에서 조회
 			UserDAO uDAO =UserDAO.getInstance();
 
 			try {
 				MarketDetailVO mdVO=uDAO.selectProDetail(productCode, loc_code);
-				new MarketDetailBuyer(mm, mdVO);
-				
+//				System.out.println(productCode + "/ "+loc_code);
+				System.out.println(mdVO);
+//				new MarketDetailBuyer(mm, mdVO);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}//end catch
-			
-			
-//			jtProductList.addMouseListener(new MouseAdapter() {
-//			//테이블 더블클릭되었을 때 
-//			@Override
-//			public void mouseClicked(MouseEvent me) {
-//				switch(me.getClickCount()) {
-//				case DOUBLE_CLICK : 
-//					
-//				int selectedRow=jtProductList.getSelectedRow();
-//				
-//				new MarketDetailBuyer();
-//					
-//				}
-			
-			
-//			JTable jtLunch=lu.getJtLunch();
-//			String temp=(String)jtLunch.getValueAt(jtLunch.getSelectedRow(), 2);
-//			String code=temp.substring(temp.lastIndexOf("(")+1, temp.lastIndexOf(")"));
-//			
-//			LunchUserDAO luDAO=LunchUserDAO.getInstance();
-//			
-//			try {
-//				LunchDetailVO ldVO=luDAO.selectLunchDetail(code);
-//				new LunchDetail(lu, ldVO); 
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			} //try catch해줘야함.
-//			
-//			System.out.println( code );
-//			
-////			내가 잘못했었던 것.		
-////			String lunchCode=lu.getJtLunch().getSelectedRow()
-////			System.out.println(loVO.getLunchCode());
-			
-			
+						
+
 		}//end if
 		
 	

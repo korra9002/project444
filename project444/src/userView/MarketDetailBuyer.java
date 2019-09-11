@@ -13,9 +13,9 @@ import javax.swing.JTextField;
 import userVO.MarketDetailVO;
 
 
+@SuppressWarnings("serial")
 public class MarketDetailBuyer extends JDialog {
 	
-	private MarketMain mm;
 	
 	
 	private JLabel jlDetailImg;
@@ -24,8 +24,15 @@ public class MarketDetailBuyer extends JDialog {
 	private JTextArea jtaStrongPoint;
 	private Checkbox ckLike;
 
+	private MarketMain mm;
+	private String sellerID;
+	private String productCode;
 	
 	public MarketDetailBuyer(MarketMain mm, MarketDetailVO mdVO) {
+		
+		this.mm=mm;
+		productCode=mdVO.getProductCode(); //상품코드
+//		sellerID=mdVO.getSellerID();
 		
 		jlDetailImg = new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/img/무민.jpg/"));//썸네일X / 원본 이미지
 //		jlDetailImg.setHorizontalAlignment(JLabel.CENTER);
@@ -40,8 +47,8 @@ public class MarketDetailBuyer extends JDialog {
 
 		
 		//JTextField
-		jtfName=new JTextField();
-		jtfPrice=new JTextField();
+		jtfName = new JTextField(/* mdVO.getSellerID() */);
+		jtfPrice = new JTextField(/* mdVO.getProductName()+( mdVO.getProductCode()) */ );
 		jtfId=new JTextField();
 		jtfInputDate=new JTextField();
 		jtfCategory=new JTextField();
