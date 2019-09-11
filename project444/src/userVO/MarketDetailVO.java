@@ -1,18 +1,19 @@
 package userVO;
 
-public class AllListVO {
-	private String productCode, image, productName, loc_code ,upload_date, category, sellerID;
+public class MarketDetailVO {
+	private String productCode, image, productName, loc_code ,upload_date, category, sellerID, pDetail;
 	int price;
-	public AllListVO(String productCode, String image, String productName, String loc_code, String upload_date,
-			String category, String sellerID, int price) {
+	public MarketDetailVO(String productCode, String image, String productName, String loc_code, String upload_date,
+			String category, String sellerID, String pDetail, int price) {
 		super();
 		this.productCode = productCode;
-		this.image = image; 
+		this.image = image;
 		this.productName = productName;
 		this.loc_code = loc_code;
 		this.upload_date = upload_date;
 		this.category = category;
 		this.sellerID = sellerID;
+		this.pDetail = pDetail;
 		this.price = price;
 	}
 	public String getProductCode() {
@@ -36,9 +37,13 @@ public class AllListVO {
 	public String getSellerID() {
 		return sellerID;
 	}
+	public String getpDetail() {
+		return pDetail;
+	}
 	public int getPrice() {
 		return price;
 	}
-
 	
+	
+
 }

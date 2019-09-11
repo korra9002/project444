@@ -20,7 +20,7 @@ public class UserDAO {
 	
 	DecimalFormat df=new DecimalFormat("00");
 	
-	private UserDAO() { 
+	private UserDAO() {  
 		
 	}//userDAO 
 	
@@ -53,52 +53,52 @@ public class UserDAO {
 		return con;			
 	}//getConn
 	
-	public List<AllListVO> selectAllList() throws SQLException {
-		List<AllListVO> list=new ArrayList<AllListVO>();
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		
-		try {
-		//커넥션 얻기
-		con=getConn();
-		
-		
-
-	     //3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
-        StringBuilder selectAll = new StringBuilder();
-        selectAll
-        
-
-        .append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, PRODUCT_CODE, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate, "
-        		+"CATEGORY_CODE, USER_ID, PRICE")
-        .append(" from PRODUCT ")
-        .append(" where all_flag='P' ");  
-//        .append(" order by input_date desc ");
-		 
-		pstmt=con.prepareStatement(selectAll.toString());
-				 
-		//4. 바인드변수에 값 넣기
-		//5. 쿼리 수행 후 결과 얻기
-		rs=pstmt.executeQuery();
-		AllListVO alv=null;
-		
-			while(rs.next()) {
-				alv=new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
-						rs.getString("PRODUCT_NAME"), rs.getString("PRODUCT_CODE"), rs.getString("inputDate"),  
-						rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"),rs.getInt("PRICE"));
-				list.add(alv);
-			}//end while
-		} finally {
-		//6. 연결끊기
-		if (rs !=null) { rs.close(); }//end if
-		if (pstmt !=null) { pstmt.close(); }//end if
-		if (con !=null) { con.close(); }//end if
-		
-		}//end finally
-		return list;
-		
-	}//selectAllList
+//	public List<AllListVO> selectAllList() throws SQLException {
+//		List<AllListVO> list=new ArrayList<AllListVO>();
+//		Connection con=null;
+//		PreparedStatement pstmt=null;
+//		ResultSet rs=null;
+//		
+//		try {
+//		//커넥션 얻기
+//		con=getConn();
+//		
+//		
+//
+//	     //3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
+//        StringBuilder selectAll = new StringBuilder();
+//        selectAll
+//        
+//
+//        .append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, PRODUCT_CODE, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate, "
+//        		+"CATEGORY_CODE, USER_ID, PRICE")
+//        .append(" from PRODUCT ")
+//        .append(" where all_flag='P' ");  
+////        .append(" order by input_date desc ");
+//		 
+//		pstmt=con.prepareStatement(selectAll.toString());
+//				 
+//		//4. 바인드변수에 값 넣기
+//		//5. 쿼리 수행 후 결과 얻기
+//		rs=pstmt.executeQuery();
+//		AllListVO alv=null;
+//		
+//			while(rs.next()) {
+//				alv=new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
+//						rs.getString("PRODUCT_NAME"), rs.getString("PRODUCT_CODE"), rs.getString("inputDate"),  
+//						rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"),rs.getInt("PRICE"));
+//				list.add(alv);
+//			}//end while
+//		} finally {
+//		//6. 연결끊기
+//		if (rs !=null) { rs.close(); }//end if
+//		if (pstmt !=null) { pstmt.close(); }//end if
+//		if (con !=null) { con.close(); }//end if
+//		
+//		}//end finally
+//		return list;
+//		
+//	}//selectAllList
 	
 	
 	
@@ -131,9 +131,7 @@ public class UserDAO {
 			//커넥션 얻기
 			con=getConn();
 			
-			if(jcbAreaIndex==0) {
-				selectAllList();
-			}
+
 			
 			
 			//3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
@@ -167,7 +165,7 @@ public class UserDAO {
 			
 			while(rs.next()) {
 				alv=new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
-						rs.getString("PRODUCT_NAME"), rs.getString("PRODUCT_CODE"), rs.getString("inputDate"),  
+						rs.getString("PRODUCT_NAME"), df.format(jcbAreaIndex), rs.getString("inputDate"),  
 						rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"),rs.getInt("PRICE"));
 				list.add(alv);
 			}//end while

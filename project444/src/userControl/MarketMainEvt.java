@@ -13,17 +13,16 @@ import javax.swing.table.DefaultTableModel;
  
 import userDAO.UserDAO;
 import userVO.AllListVO;
+import userVO.MarketDetailVO;
 import userView.MarketDetailBuyer;
 import userView.MarketMain;
 
 public class MarketMainEvt extends MouseAdapter implements ActionListener{
 	private MarketMain mm;
-	private JTable jtProductList;
 	public static final int DOUBLE_CLICK=2;
 	
 	public MarketMainEvt(MarketMain mm) throws SQLException {
 		this.mm=mm;	
-		this.jtProductList=mm.getJtProductList();
 		setAllList();
 	}//MarketMainEvt
 	
@@ -124,10 +123,35 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 			}//end for		
 		}//setArea
 		
-		public void productDetail() {
-	
-//			//선택한 행의 도시락 코드를 가져와서 상세 정보를 조회
-//			
+		public void productDetail() {		
+			
+			//선택한 행의 코드를 가져와서 상세 정보를 조회
+			  
+			 
+			JTable jtProductList=mm.getJtProductList();
+			String id=(String) jtProductList.getValueAt(jtProductList.getSelectedRow(), 6);
+			
+			//DBMS에서 조회
+			UserDAO uDAO =UserDAO.getInstance();
+			
+//			List<MarketDetailVO> list=uDAO.selectProList();
+			
+//			MarketDetailBuyer mdb=uDAO.selectProDetail(id);
+			
+//			jtProductList.addMouseListener(new MouseAdapter() {
+//			//테이블 더블클릭되었을 때 
+//			@Override
+//			public void mouseClicked(MouseEvent me) {
+//				switch(me.getClickCount()) {
+//				case DOUBLE_CLICK : 
+//					
+//				int selectedRow=jtProductList.getSelectedRow();
+//				
+//				new MarketDetailBuyer();
+//					
+//				}
+			
+			
 //			JTable jtLunch=lu.getJtLunch();
 //			String temp=(String)jtLunch.getValueAt(jtLunch.getSelectedRow(), 2);
 //			String code=temp.substring(temp.lastIndexOf("(")+1, temp.lastIndexOf(")"));
