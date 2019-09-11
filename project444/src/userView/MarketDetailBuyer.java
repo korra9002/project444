@@ -5,7 +5,6 @@ import java.awt.Checkbox;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -14,7 +13,7 @@ import javax.swing.JTextField;
 import userVO.MarketDetailVO;
 
 
-public class MarketDetailBuyer extends JFrame {
+public class MarketDetailBuyer extends JDialog {
 	
 	private MarketMain mm;
 	

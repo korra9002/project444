@@ -183,7 +183,15 @@ public class UserDAO {
 	
 	
 	
+	/**
+	 * 상품 디테일창으로 정보 넘기는 method
+	 * @param productCode
+	 * @param loc_code
+	 * @return
+	 * @throws SQLException
+	 */
 	public MarketDetailVO selectProDetail(String productCode, String loc_code) throws SQLException {
+		
 		MarketDetailVO mdVO=null;
 
 		
@@ -194,26 +202,18 @@ public class UserDAO {
 		try { 
 			//커넥션 얻기
 			con=getConn();		
-				 
+				  
 				
 				//3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
 				StringBuilder selectDetail = new StringBuilder();
 				selectDetail			
 				.append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate, PRICE, INFO ")
 				.append(" from PRODUCT ")
-				.append(" where all_flag ='P' and PRODUCT_CODE='?' and user_id in ( select user_id  from id_info where LOC_CODE ='?') ")							
+				.append(" where all_flag ='P' and PRODUCT_CODE=? and user_id in ( select user_id  from id_info where LOC_CODE =?) ")	//물음표랑 ''랑 같이쓰면 안됨.						
 				.append(" order by inputDate desc "); 
 				
-				
-				
-
-
-				
-				/*
-				 * select user_id,product_name from product where ( user_id in ( select user_id
-				 * from id_info where loc_code ='12')) and all_flag ='P';
-				 이거임*/ 			
-				
+								
+	
 				
 				pstmt=con.prepareStatement(selectDetail.toString());
 				
