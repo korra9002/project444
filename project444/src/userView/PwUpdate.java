@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import userControl.PwUpdateEvt;
 import userRun.RunMarketMain;
 
 public class PwUpdate extends JDialog {
@@ -54,17 +55,37 @@ public class PwUpdate extends JDialog {
 		add(jbtCancle);
 		//window sizing
 		setBounds(100, 100, 400, 250);
+		
+		PwUpdateEvt pue = new PwUpdateEvt(this);
+		jbtOk.addActionListener(pue);
+		jbtCancle.addActionListener(pue);
+		jpfCurrentPw.addActionListener(pue);
+		jpfReUpdatePw.addActionListener(pue);
+		jpfUpdatePw.addActionListener(pue);
+		
 		//visible
 		setVisible(true);
-		//window closing 
-		addWindowListener(new WindowAdapter() {
-
-			@Override
-			public void windowClosed(WindowEvent e) {
-				dispose();
-			}
-			
-		});//addWindowListener
+		
 	}// PwUpdate
+
+	public JPasswordField getJpfCurrentPw() {
+		return jpfCurrentPw;
+	}//jpfCurrentPw
+
+	public JPasswordField getJpfUpdatePw() {
+		return jpfUpdatePw;
+	}//jpfUpdatePw
+
+	public JPasswordField getJpfReUpdatePw() {
+		return jpfReUpdatePw;
+	}//jpfReUpdatePw
+
+	public JButton getJbtOk() {
+		return jbtOk;
+	}//jbtOk
+
+	public JButton getJbtCancle() {
+		return jbtCancle;
+	}//jbtCancle
 
 }// class

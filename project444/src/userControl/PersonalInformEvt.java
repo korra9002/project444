@@ -34,6 +34,7 @@ public class PersonalInformEvt implements ActionListener{
 		    char[] password = jpfPw.getPassword();
 		    pw= new String(password);
 		    System.out.println("비밀번호 : " + pw);
+		   
 		    new PwUpdate(rmm);
 		    
 		    

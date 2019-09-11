@@ -288,7 +288,9 @@ public class AdminDAO {
 		
 		
 		return list;
-	}
+	}//selectAllProductList
+	
+	
 }//class
 
 
