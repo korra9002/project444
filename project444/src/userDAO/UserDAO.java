@@ -429,23 +429,55 @@ public boolean updateForgetPw(ForgotPwVO fpVO,String uuid) throws SQLException {
 		return setInfo;
 	}//selectPersonalInfom
 
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-public boolean updatePw() throws SQLException {
-boolean updateFlag = false;
-
-Connection con =null;
-PreparedStatement pstmt = null;
+public String selectPw(String pw) throws SQLException {
+String curPw ="";
+Connection con = null;
+PreparedStatement pstmt =null;
+ResultSet rs = null;
 try {
+con=getConn();
+StringBuilder selectPw = new StringBuilder();
+selectPw
+.append("select password from id_info where password=?");
 
-	con=getConn();
-
+pstmt = con.prepareStatement(selectPw.toString());
+pstmt.setString(1, pw);
+rs = pstmt.executeQuery();
+while(rs.next()) {
+curPw=rs.getString(1);
+}//end while
 }finally {
 if(con!=null) {con.close();}//end if
 if(pstmt!=null) {pstmt.close();}//end if
+if(rs!=null) {rs.close();}//end if
 }//end finally
+return curPw;
+}//selectPw
 
-return updateFlag;
-}
+//public boolean updatePw() throws SQLException {
+//boolean updateFlag = false;
+//
+//Connection con =null;
+//PreparedStatement pstmt = null;
+//try {
+//con=getConn();
+//StringBuilder updatePw = new StringBuilder();
+//updatePw
+//.append("update");
+//
+//}finally {
+//if(con!=null) {con.close();}//end if
+//if(pstmt!=null) {pstmt.close();}//end if
+//}//end finally
+//return updateFlag;
+//}//updatePw
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 
