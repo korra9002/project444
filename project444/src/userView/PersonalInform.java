@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -24,6 +25,7 @@ import javax.swing.JTextField;
 import userControl.PersonalInformEvt;
 import userDAO.UserDAO;
 import userRun.RunMarketMain;
+import userVO.PersonalInformVO;
 
 public class PersonalInform extends JDialog {
 		
@@ -45,11 +47,14 @@ public class PersonalInform extends JDialog {
 			JLabel jlPwAnswer = new JLabel("힌트 정답");
 			//회원 정보 가져오기
 			UserDAO uDAO = UserDAO.getInstance();
-			String phone=uDAO.selectPersonalInfom(id)[2];
+			PersonalInformVO piVO = uDAO.selectPersonalInfom(id);
+			 
+			
+			String phone= piVO.getPhone();
 			String phone1 = phone.substring(phone.indexOf("-")+1,phone.lastIndexOf("-"));
 			String phone2 = phone.substring(phone.lastIndexOf("-")+1);
-			String gender = uDAO.selectPersonalInfom(id)[1];
-			int locCode = Integer.valueOf(uDAO.selectPersonalInfom(id)[3]);
+			String gender = piVO.getGender();
+			int locCode = Integer.valueOf(piVO.getLoc());
 			if(gender.equals("M")) {
 				gender="남자";
 			}else {
@@ -57,7 +62,7 @@ public class PersonalInform extends JDialog {
 			}
 			// JTextField
 			jtfId = new JTextField(id);
-			jtfName = new JTextField(uDAO.selectPersonalInfom(id)[0]);
+			jtfName = new JTextField(piVO.getName());
 			jtfPhone1 = new JTextField(phone1);
 			jtfPhone2 = new JTextField(phone2);
 			jtfGender = new JTextField(gender);
@@ -142,9 +147,12 @@ public class PersonalInform extends JDialog {
 			PersonalInformEvt psie = new PersonalInformEvt(this,rmm); 
 			jbtPwUpdate.addActionListener(psie);
 			jbtCancle.addActionListener(psie);
+			jbtRegister.addActionListener(psie);
+			
 			//편집불가
 			jtfId.setEditable(false);
 			jtfGender.setEditable(false);
+			jtfName.setEditable(false);
 			//배경색 변경
 			jtfId.setBackground(Color.white);
 			jtfGender.setBackground(Color.WHITE);

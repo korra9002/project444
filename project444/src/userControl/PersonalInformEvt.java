@@ -3,6 +3,7 @@ package userControl;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -11,12 +12,14 @@ import javax.swing.JPasswordField;
 
 import userDAO.UserDAO;
 import userRun.RunMarketMain;
+import userVO.PersonalInformVO;
 import userView.PersonalInform;
 import userView.PwUpdate;
 
 public class PersonalInformEvt implements ActionListener{
 	private PersonalInform psi;
 	private RunMarketMain rmm;
+	
 	public PersonalInformEvt(PersonalInform psi, RunMarketMain rmm) {
 		this.psi=psi;
 		this.rmm = rmm;
@@ -49,7 +52,44 @@ public class PersonalInformEvt implements ActionListener{
 		}//end if
 		
 	}//PersonalInformEvt
-	
+	public void modifyRegister() throws SQLException {
+		DecimalFormat df = new DecimalFormat("00");
+		//텍스트필드의 현재(변경할) 값 가져오기
+		String mfPhone1 = (String) psi.getJcbPhoneNum().getSelectedItem();
+		String mfPhone2 = psi.getJtfPhone1().getText().trim();
+		String mfPhone3 = psi.getJtfPhone2().getText().trim();
+		String mfPhone =mfPhone1+"-"+mfPhone2+"-"+mfPhone3;
+		String mfLoc = df.format(psi.getJcbLoc().getSelectedIndex());
+		String mfPwHint = df.format(psi.getJcbPwHint().getSelectedIndex());
+		String mfPwAnswer = (String)psi.getJtfPwAnswer().getText().trim();
+		System.out.println(mfPhone + " " + mfLoc+" "+mfPwHint+" "+mfPwAnswer);
+		//회원 정보 가져오기
+		UserDAO uDAO = UserDAO.getInstance();
+		PersonalInformVO piVO = uDAO.selectPersonalInfom(psi.getJtfId().getText());
+		System.out.println(piVO.getPhone()+" "+piVO.getLoc()+" "+piVO.getPwHint()+" "+piVO.getPwAnswer());
+
+		if(mfPhone2.isEmpty()||mfPhone3.isEmpty()) {
+			JOptionPane.showMessageDialog(psi, "변경할 연락처 정보를 입력해주세요.");
+		}else {
+			int phone2 = 0;
+			int phone3 = 0;
+			try {
+				phone2 = Integer.valueOf(mfPhone2);
+				phone3 = Integer.valueOf(mfPhone3);
+			} catch (NumberFormatException nfe) {
+				JOptionPane.showMessageDialog(psi, "연락처는 숫자형식만 가능합니다.");
+				return;
+			} // end catch
+			if ((mfPhone2.length() < 3 || mfPhone2.length() > 4) || mfPhone3.length() != 4) {
+				JOptionPane.showMessageDialog(psi, "연락처를 정확히 기입해주세요.");
+				return;
+			} else {
+				mfPhone = mfPhone1 + "-" + mfPhone2 + "-" + mfPhone3;
+			
+			}//end else
+		}//end else
+		
+	}//modifyRegister
 	public void PersonalInformClose() {
 		psi.dispose();
 	}//PersonalInform
@@ -64,7 +104,14 @@ public class PersonalInformEvt implements ActionListener{
 		}//end if
 		if(ae.getSource()==psi.getJbtCancle()) {
 			PersonalInformClose();
-		}
+		}//end if
+		if(ae.getSource()==psi.getJbtRegister()) {
+			try {
+				modifyRegister();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}//end catch
+		}//end if
 	}//actionPerformed
 	
 	

@@ -14,6 +14,7 @@ import userVO.ForgotIdVO;
 import userVO.ForgotPwVO;
 import userVO.LoginVO;
 import userVO.MarketDetailVO;
+import userVO.PersonalInformVO;
 import userVO.SignUpVO;
 
 public class UserDAO {
@@ -401,36 +402,35 @@ public boolean updateForgetPw(ForgotPwVO fpVO,String uuid) throws SQLException {
 	
 	return updateFlag;
 }//updateForgetPw
-	public String[] selectPersonalInfom(String id) throws SQLException {
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public PersonalInformVO selectPersonalInfom(String id) throws SQLException {
 		Connection con =null;
 		PreparedStatement pstmt = null;
 		ResultSet rs =null;
-		String[] setInfo = new String[4];
+		PersonalInformVO piVO=null ;
 		try {
 			con =getConn();
 			StringBuilder selectAllInfo = new StringBuilder();
 			selectAllInfo
-			.append("select user_name,gender,phone,loc_code from id_info where user_id=?");
+			.append("select user_id,password,user_name,gender,phone,answer,loc_code,hint_code from id_info where user_id=?");
 			pstmt= con.prepareStatement(selectAllInfo.toString());
 			
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
-				setInfo[0]=rs.getString(1);
-				setInfo[1]=rs.getString(2);
-				setInfo[2]=rs.getString(3);
-				setInfo[3]=rs.getString(4);
+		piVO = new PersonalInformVO(rs.getString("user_id"),rs.getString("password"),rs.getString("user_name"),
+				rs.getString("gender"),rs.getString("phone"),rs.getString("answer"),rs.getString("loc_code"),rs.getString("hint_code"));
 			}//end while
 		}finally {
 			if(con!=null) {con.close();}//end if
 			if(pstmt!=null) {pstmt.close();}//end if
 			if(rs!=null) {rs.close();}//end if
 		}//end finally
-		return setInfo;
+		return piVO;
 	}//selectPersonalInfom
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 public String selectPw(String pw) throws SQLException {
 String curPw ="";
 Connection con = null;
