@@ -15,6 +15,7 @@ import com.sun.pisces.PiscesRenderer;
 import userDAO.UserDAO;
 import userRun.RunMarketMain;
 import userVO.PersonalInformVO;
+import userVO.modifyInformVO;
 import userView.PersonalInform;
 import userView.PwUpdate;
 
@@ -55,7 +56,9 @@ public class PersonalInformEvt implements ActionListener{
 		
 	}//PersonalInformEvt
 	public void modifyRegister() throws SQLException {
+		boolean flag = false;
 		DecimalFormat df = new DecimalFormat("00");
+		String id = psi.getJtfId().getText().trim();
 		//텍스트필드의 현재(변경할) 값 가져오기
 		String mfPhone1 = (String) psi.getJcbPhoneNum().getSelectedItem();
 		String mfPhone2 = psi.getJtfPhone1().getText().trim();
@@ -67,7 +70,7 @@ public class PersonalInformEvt implements ActionListener{
 		System.out.println(mfPhone + " " + mfLoc+" "+mfPwHint+" "+mfPwAnswer);
 		//회원 정보 가져오기
 		UserDAO uDAO = UserDAO.getInstance();
-		PersonalInformVO piVO = uDAO.selectPersonalInfom(psi.getJtfId().getText());
+		PersonalInformVO piVO = uDAO.selectPersonalInfom(id);
 		System.out.println(piVO.getPhone()+" "+piVO.getLoc()+" "+piVO.getPwHint()+" "+piVO.getPwAnswer());
 		
 		if(mfPhone2.isEmpty()||mfPhone3.isEmpty()) {
@@ -85,15 +88,60 @@ public class PersonalInformEvt implements ActionListener{
 			} // end catch
 			if ((mfPhone2.length() < 3 || mfPhone2.length() > 4) || mfPhone3.length() != 4) {
 				JOptionPane.showMessageDialog(psi, "연락처를 정확히 기입해주세요.");
-			
+				return;
 			} else {
 				mfPhone = mfPhone1 + "-" + mfPhone2 + "-" + mfPhone3;
-			
-			}//end else
+				
+				if(!mfPhone.equals(piVO.getPhone())) {
+					flag = false;
+					modifyInformVO miVO = new modifyInformVO(id,"phone",mfPhone);
+					 if(flag==uDAO.updateThing(miVO)) {
+						 JOptionPane.showMessageDialog(psi, "값 변경 실패");
+							return;
+					}else {
+						 flag =true;
+					}//end else
+			 }//end if
 			
 		}//end else
 		
+		 
+		}//end if
+		if(!mfLoc.equals("00")&&!mfLoc.equals(piVO.getLoc())){
+			flag = false;
+			modifyInformVO miVO = new modifyInformVO(id, "loc_code", mfLoc);
+			if(flag==uDAO.updateThing(miVO)) {
+				JOptionPane.showMessageDialog(psi, "값 변경 실패");
+				return;
+			}else {
+				flag =true;
+			}//end else
+		}//end if
+			
+		if(!mfPwHint.equals("00")&&!mfPwHint.equals(piVO.getPwHint())) {
+			flag = false;
+			modifyInformVO miVO = new modifyInformVO(id, "hint_code", mfPwHint);
+			if(flag==uDAO.updateThing(miVO)) {
+				JOptionPane.showMessageDialog(psi, "값 변경 실패");
+				return;
+			}else {
+				flag =true;
+			}//end else
 		
+		}//end if
+		if(!mfPwAnswer.isEmpty()&&mfPwAnswer.equals(piVO.getPwAnswer())) {
+			flag = false;
+			modifyInformVO miVO = new modifyInformVO(id, "answer", mfPwAnswer);
+			if(flag==uDAO.updateThing(miVO)) {
+				JOptionPane.showMessageDialog(psi, "값 변경 실패");
+				return;
+			}else {
+				flag =true;
+			}//end else
+		}//end if
+		if(flag ==true) {
+			JOptionPane.showMessageDialog(psi, "값 변경 성공");
+		}//end if
 	}//modifyRegister
 	public void PersonalInformClose() {
 		psi.dispose();

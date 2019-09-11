@@ -16,6 +16,7 @@ import userVO.LoginVO;
 import userVO.MarketDetailVO;
 import userVO.PersonalInformVO;
 import userVO.SignUpVO;
+import userVO.modifyInformVO;
 
 public class UserDAO {
 	public static UserDAO uDAO;
@@ -478,6 +479,33 @@ return curPw;
 		return updateFlag;
 	}//updatePw
 
+	public boolean updateThing(modifyInformVO miVO) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		boolean flag =false;
+		try {
+			con = getConn();
+			StringBuilder udThing=new StringBuilder();
+			udThing
+			.append(" update id_info ")
+			.append("set ")
+			.append(miVO.getThing())
+			.append("=? where user_id=?");
+			
+			pstmt = con.prepareStatement(udThing.toString());
+			pstmt.setString(1, miVO.getValue());
+			pstmt.setString(2, miVO.getId());
+			
+			flag = pstmt.executeUpdate()==1;
+			
+		}finally {
+			if(con!=null) {con.close();}//end if
+			if(pstmt!=null) {pstmt.close();}//end if
+			
+		}//end finally
+		
+		return flag;
+		}//selectThing
 
 
 
