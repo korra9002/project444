@@ -86,10 +86,10 @@ public class UserDAO {
 		rs=pstmt.executeQuery();
 		AllListVO alv=null;
 		
-			while(rs.next()) {
-				alv=new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
-						rs.getString("PRODUCT_NAME"), rs.getString("PRODUCT_CODE"), rs.getString("inputDate"),  
-						rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"),rs.getInt("PRICE"));
+		while(rs.next()) {
+			alv=new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
+					rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),  
+					rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"),rs.getInt("PRICE"));
 
 				list.add(alv);
 			}//end while
