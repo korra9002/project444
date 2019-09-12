@@ -43,11 +43,11 @@ public class MarketDetailBuyer extends JDialog{
 		JLabel jlCategory=new JLabel("카테고리");
 		
 		ckLike = new Checkbox("관심목록에 추가");
-
 		
+
 		//JTextField
 		jtfName=new JTextField(mdVO.getProductName());
-		jtfPrice=new JTextField(mdVO.getPrice());
+		jtfPrice=new JTextField(Integer.toString(mdVO.getPrice()));
 		jtfId=new JTextField(mdVO.getSellerID());
 		jtfInputDate=new JTextField(mdVO.getUpload_date());
 		jtfCategory=new JTextField(mdVO.getCategory());
@@ -62,6 +62,7 @@ public class MarketDetailBuyer extends JDialog{
 		//JTextArea
 		jtaStrongPoint=new JTextArea(mdVO.getpDetail());
 		JScrollPane jsp=new JScrollPane(jtaStrongPoint);
+		jtaStrongPoint.setEditable(false);
 		
 		
 		jbtChat=new JButton("채팅으로 거래하기");
