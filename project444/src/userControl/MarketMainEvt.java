@@ -110,6 +110,9 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 	//		List<AllListVO> list=uDAO.selectAllList(0, 0,"");
 			if(list.isEmpty()) { 
 				JOptionPane.showMessageDialog(mm, "검색조건에 맞는 상품이 없습니다. ");
+				mm.getJtfSearch().setText("");
+				mm.getJtfSearch().requestFocus();
+				
 			}
 			AllListVO alv=null;
 			for(int i=0; i<list.size(); i++) {
@@ -146,6 +149,8 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 			List<AllListVO> list=uDAO.selectListByID( mm.getJcbArea().getSelectedIndex(), mm.getJcbCategory().getSelectedIndex(),mm.getJtfSearch().getText().trim());
 			if(list.isEmpty()) { 
 				JOptionPane.showMessageDialog(mm, "검색조건에 맞는 상품이 없습니다.");
+				mm.getJtfSearch().setText("");
+				mm.getJtfSearch().requestFocus();
 			}
 			AllListVO alv=null;
 			for(int i=0; i<list.size(); i++) {
@@ -183,6 +188,8 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 			List<AllListVO> list=uDAO.selectRefresh();
 			if(list.isEmpty()) { 
 				JOptionPane.showMessageDialog(mm, "검색조건에 맞는 상품이 없습니다.");
+				mm.getJtfSearch().setText("");
+				mm.getJtfSearch().requestFocus();
 			}
 			AllListVO alv=null;
 			for(int i=0; i<list.size(); i++) {
@@ -220,6 +227,8 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 			List<AllListVO> list=uDAO.selectListRecent( mm.getJcbArea().getSelectedIndex(), mm.getJcbCategory().getSelectedIndex(),mm.getJtfSearch().getText().trim());
 			if(list.isEmpty()) { 
 				JOptionPane.showMessageDialog(mm, "검색조건에 맞는 상품이 없습니다.");
+				mm.getJtfSearch().setText("");
+				mm.getJtfSearch().requestFocus();
 			}
 			AllListVO alv=null;
 			for(int i=0; i<list.size(); i++) {
@@ -257,6 +266,8 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 			List<AllListVO> list=uDAO.selectListPrice( mm.getJcbArea().getSelectedIndex(), mm.getJcbCategory().getSelectedIndex(),mm.getJtfSearch().getText().trim());
 			if(list.isEmpty()) { 
 				JOptionPane.showMessageDialog(mm, "검색조건에 맞는 상품이 없습니다.");
+				mm.getJtfSearch().setText("");
+				mm.getJtfSearch().requestFocus();
 			}
 			AllListVO alv=null;
 			for(int i=0; i<list.size(); i++) {
