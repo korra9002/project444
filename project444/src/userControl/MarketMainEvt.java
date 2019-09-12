@@ -109,7 +109,7 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 		//ばばばばばばばばばばばgetselectedText焼艦壱 getText()脊艦陥ばばばばばばば袴軒拭 隔西獣陥ば
 	//		List<AllListVO> list=uDAO.selectAllList(0, 0,"");
 			if(list.isEmpty()) { 
-				JOptionPane.showMessageDialog(mm, "伊事繕闇拭 限澗 雌念戚 蒸柔艦陥.");
+				JOptionPane.showMessageDialog(mm, "伊事繕闇拭 限澗 雌念戚 蒸柔艦陥. ");
 			}
 			AllListVO alv=null;
 			for(int i=0; i<list.size(); i++) {
@@ -130,11 +130,8 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 		}//setAllList
 		
 		
-		public void setRefresh() throws SQLException {
+		public void setListByID() throws SQLException {
 			
-//			if (jcbAreaIndex==0 && jcbCateIndex==0 && jtfText==null) {
-//				setAllList();
-//			}//end if
 			DefaultTableModel dtm=mm.getDtmProductList();
 			
 			//JTable税 傾坪球 段奄鉢
@@ -143,34 +140,47 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 			Object[] rowData= null;
 			//JTable 隔聖 汽戚斗 // object澗 切郊税 乞窮 葵聖 陥 眼聖 呪 赤陥.
 			
-//			int area =0;
-//			try {
-//			area =  mm.getJcbArea().getSelectedIndex();
-//			}catch (Exception e) {
-//           e.printStackTrace();
-// 	 	
-//			}	
-//			int category =0;
-//			try {
-//				category =  mm.getJcbCategory().getSelectedIndex();
-//			}catch (Exception e) {
-//				e.printStackTrace();
-//				
-//			}	
-//			
-//			String proName ="";
-//			try {
-//				proName =  mm.getJtfSearch().getText().trim();
-//			}catch (Exception e) {
-//				e.printStackTrace();
-//				
-//			}	
+			
+			//DBMS拭辞 繕噺
+			UserDAO uDAO =UserDAO.getInstance();
+			List<AllListVO> list=uDAO.selectListByID( mm.getJcbArea().getSelectedIndex(), mm.getJcbCategory().getSelectedIndex(),mm.getJtfSearch().getText().trim());
+			if(list.isEmpty()) { 
+				JOptionPane.showMessageDialog(mm, "伊事繕闇拭 限澗 雌念戚 蒸柔艦陥.");
+			}
+			AllListVO alv=null;
+			for(int i=0; i<list.size(); i++) {
+				alv=list.get(i);
+				//繕噺 衣引稽 JTable 傾坪球拭 級嬢哀 汽戚斗研 持失馬壱
+				rowData=new Object[7];
+				//壕伸拭 葵 拝雁
+				rowData[0]=alv.getImage();
+				rowData[1]=alv.getProductName()+"("+alv.getProductCode()+")";
+				rowData[2]=alv.getLoc_code();
+				rowData[3]=alv.getPrice();
+				rowData[4]=alv.getUpload_date();
+				rowData[5]=alv.getCategory();
+				rowData[6]=alv.getSellerID();
+				//dtm拭 蓄亜
+				dtm.addRow(rowData);		
+			}//end for		
+		}//setListByID 
+		
+		
+		public void setRefresh() throws SQLException {
+			
+
+			DefaultTableModel dtm=mm.getDtmProductList();
+			
+			//JTable税 傾坪球 段奄鉢
+			dtm.setRowCount(0);
+			
+			Object[] rowData= null;
+			//JTable 隔聖 汽戚斗 // object澗 切郊税 乞窮 葵聖 陥 眼聖 呪 赤陥.
+	
 			
 			//DBMS拭辞 繕噺
 			UserDAO uDAO =UserDAO.getInstance();
 			List<AllListVO> list=uDAO.selectRefresh();
-			//ばばばばばばばばばばばgetselectedText焼艦壱 getText()脊艦陥ばばばばばばば袴軒拭 隔西獣陥ば
-			//		List<AllListVO> list=uDAO.selectAllList(0, 0,"");
 			if(list.isEmpty()) { 
 				JOptionPane.showMessageDialog(mm, "伊事繕闇拭 限澗 雌念戚 蒸柔艦陥.");
 			}
@@ -191,6 +201,80 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 				dtm.addRow(rowData);		
 			}//end for		
 		}//setRefresh 
+		
+		
+		public void setListRecent() throws SQLException {
+			
+			
+			DefaultTableModel dtm=mm.getDtmProductList();
+			
+			//JTable税 傾坪球 段奄鉢
+			dtm.setRowCount(0);
+			
+			Object[] rowData= null;
+			//JTable 隔聖 汽戚斗 // object澗 切郊税 乞窮 葵聖 陥 眼聖 呪 赤陥.
+			
+			
+			//DBMS拭辞 繕噺
+			UserDAO uDAO =UserDAO.getInstance();
+			List<AllListVO> list=uDAO.selectListRecent( mm.getJcbArea().getSelectedIndex(), mm.getJcbCategory().getSelectedIndex(),mm.getJtfSearch().getText().trim());
+			if(list.isEmpty()) { 
+				JOptionPane.showMessageDialog(mm, "伊事繕闇拭 限澗 雌念戚 蒸柔艦陥.");
+			}
+			AllListVO alv=null;
+			for(int i=0; i<list.size(); i++) {
+				alv=list.get(i);
+				//繕噺 衣引稽 JTable 傾坪球拭 級嬢哀 汽戚斗研 持失馬壱
+				rowData=new Object[7];
+				//壕伸拭 葵 拝雁
+				rowData[0]=alv.getImage();
+				rowData[1]=alv.getProductName()+"("+alv.getProductCode()+")";
+				rowData[2]=alv.getLoc_code();
+				rowData[3]=alv.getPrice();
+				rowData[4]=alv.getUpload_date();
+				rowData[5]=alv.getCategory();
+				rowData[6]=alv.getSellerID();
+				//dtm拭 蓄亜
+				dtm.addRow(rowData);		
+			}//end for		
+		}//setListRecent 
+		
+		
+		public void setListPrice() throws SQLException {
+			
+			
+			DefaultTableModel dtm=mm.getDtmProductList();
+			
+			//JTable税 傾坪球 段奄鉢
+			dtm.setRowCount(0);
+			
+			Object[] rowData= null;
+			//JTable 隔聖 汽戚斗 // object澗 切郊税 乞窮 葵聖 陥 眼聖 呪 赤陥.
+			
+			
+			//DBMS拭辞 繕噺
+			UserDAO uDAO =UserDAO.getInstance();
+			List<AllListVO> list=uDAO.selectListPrice( mm.getJcbArea().getSelectedIndex(), mm.getJcbCategory().getSelectedIndex(),mm.getJtfSearch().getText().trim());
+			if(list.isEmpty()) { 
+				JOptionPane.showMessageDialog(mm, "伊事繕闇拭 限澗 雌念戚 蒸柔艦陥.");
+			}
+			AllListVO alv=null;
+			for(int i=0; i<list.size(); i++) {
+				alv=list.get(i);
+				//繕噺 衣引稽 JTable 傾坪球拭 級嬢哀 汽戚斗研 持失馬壱
+				rowData=new Object[7];
+				//壕伸拭 葵 拝雁
+				rowData[0]=alv.getImage();
+				rowData[1]=alv.getProductName()+"("+alv.getProductCode()+")";
+				rowData[2]=alv.getLoc_code();
+				rowData[3]=alv.getPrice();
+				rowData[4]=alv.getUpload_date();
+				rowData[5]=alv.getCategory();
+				rowData[6]=alv.getSellerID();
+				//dtm拭 蓄亜
+				dtm.addRow(rowData);		
+			}//end for		
+		}//setListPrice 
 		
 		
 		
@@ -224,43 +308,8 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}//end catch
-			
-			
-//			jtProductList.addMouseListener(new MouseAdapter() {
-//			//砺戚鷺 希鷺適遣鞠醸聖 凶 
-//			@Override
-//			public void mouseClicked(MouseEvent me) {
-//				switch(me.getClickCount()) {
-//				case DOUBLE_CLICK : 
-//					
-//				int selectedRow=jtProductList.getSelectedRow();
-//				
-//				new MarketDetailBuyer();
-//					
-//				}
-			
-			
-//			JTable jtLunch=lu.getJtLunch();
-//			String temp=(String)jtLunch.getValueAt(jtLunch.getSelectedRow(), 2);
-//			String code=temp.substring(temp.lastIndexOf("(")+1, temp.lastIndexOf(")"));
-//			
-//			LunchUserDAO luDAO=LunchUserDAO.getInstance();
-//			
-//			try {
-//				LunchDetailVO ldVO=luDAO.selectLunchDetail(code);
-//				new LunchDetail(lu, ldVO); 
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			} //try catch背操醤敗.
-//			
-//			System.out.println( code );
-//			
-////			鎧亜 設公梅醸揮 依.		
-////			String lunchCode=lu.getJtLunch().getSelectedRow()
-////			System.out.println(loVO.getLunchCode());
-			
-			
-		}//end if
+	
+		}//productDetail
 		
 	
 
@@ -268,27 +317,48 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		if (ae.getSource() == mm.getJcbArea() || ae.getSource() == mm.getJcbCategory() || ae.getSource() == mm.getJbSearch()) {
+		if (ae.getSource() == mm.getJcbArea() || ae.getSource() == mm.getJcbCategory() ) {
 			try {
 				setAllList();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-		}//end if
+			}//end catch
+		}//end if				
 
-		if (ae.getSource() == mm.getJbRecent()) {
-//			new SignUp();
+		if (mm.getJrbId().isSelected() && ae.getSource() == mm.getJbSearch()) {
+			try {
+				setListByID();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}//end catch
+		} else if(mm.getJrbSubject().isSelected() && ae.getSource() == mm.getJbSearch()) {
+			try { 
+				setAllList();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}//end catch
 		}//end if
-//		if (ae.getSource() == mm.getJbPrice()) {
-//			new SignUp();
-//		}//end if
+		
+		if (ae.getSource() == mm.getJbRecent()) {
+				try {
+					setListRecent();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}//end catch
+		}//end if
+		if (ae.getSource() == mm.getJbPrice()) {
+				try {
+					setListPrice();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}//end catch
+		}//end if
 		if (ae.getSource() == mm.getJbRefresh()) {			
 			try {
 				setRefresh();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}
+			}//end catch
 		}//end if
 		
 	}//actionPerformed
@@ -301,14 +371,7 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 			}//end if			
 		}//end if
 		
-//		switch(me.getClickCount()) {
-//		case DOUBLE_CLICK : 
-//			
-////		int selectedRow=jtProductList.getSelectedRow();
-//		
-//		new MarketDetailBuyer(mm);
-//			
-//		}	
+
 	
 	}
 

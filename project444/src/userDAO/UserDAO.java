@@ -75,9 +75,9 @@ public class UserDAO {
         
 		.append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code ")
 		.append(" from PRODUCT, id_info ")
-		.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' ")
+		.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' ");
 
-        .append(" order by inputDate desc ");
+//        .append(" order by inputDate desc ");
 		 
 		pstmt=con.prepareStatement(selectAll.toString());
 				 
@@ -143,7 +143,7 @@ public class UserDAO {
 				selectArea.append(" and product_name like '%"+jtfText+"%' ");
 			}
 			
-			selectArea.append(" order by inputDate desc "); 
+//			selectArea.append(" order by inputDate desc "); 
 			
 //			select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, USER_ID, PRICE
 //			from PRODUCT
@@ -182,6 +182,217 @@ public class UserDAO {
 	}//selectAreaList
 	
 	
+	public List<AllListVO> selectListByID( int jcbAreaIndex, int jcbCateIndex, String jtfText) throws SQLException {
+		
+		List<AllListVO> list=new ArrayList<AllListVO>();
+		
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		
+		try {
+			//커넥션 얻기
+			con=getConn();
+			
+			
+			//3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
+			StringBuilder selectArea = new StringBuilder();
+			selectArea			
+			.append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.user_id, PRICE,loc_code ")
+			.append(" from PRODUCT, id_info ")
+			.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' ");
+			
+			
+			
+			if(jcbAreaIndex != 0) {
+//				selectArea.append( " and user_id in ( select user_id  from id_info where loc_code ='"+df.format(jcbAreaIndex)+"') ");
+				selectArea.append( " and loc_code ="+df.format(jcbAreaIndex)+" ");
+			}
+			if(jcbCateIndex != 0) {
+				selectArea.append( " and category_code ='"+df.format(jcbCateIndex)+"' ");
+			}
+			if(!jtfText.isEmpty()) {
+				selectArea.append(" and id_info.user_id like '%"+jtfText+"%' ");
+			}
+
+			
+			pstmt=con.prepareStatement(selectArea.toString());
+			
+			//4. 바인드변수에 값 넣기
+			//5. 쿼리 수행 후 결과 얻기
+			rs=pstmt.executeQuery(); 
+			AllListVO alv=null; 
+			
+			while(rs.next()) {
+				alv=new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
+						rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),  
+						rs.getString("CATEGORY_CODE"), rs.getString("user_id"),rs.getInt("PRICE"));
+				list.add(alv);
+			}//end while
+		} finally {
+			//6. 연결끊기
+			if (rs !=null) { rs.close(); }//end if
+			if (pstmt !=null) { pstmt.close(); }//end if
+			if (con !=null) { con.close(); }//end if
+			
+		}//end finally
+		return list;
+		
+	}//selectListByID
+	
+	public List<AllListVO> selectListRecent( int jcbAreaIndex, int jcbCateIndex, String jtfText) throws SQLException {
+		List<AllListVO> list=new ArrayList<AllListVO>();
+		
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		String area ="";
+		String category ="";
+		String productName ="";
+		
+		
+		try {
+			//커넥션 얻기
+			con=getConn();
+			
+			
+			//3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
+			StringBuilder selectArea = new StringBuilder();
+			selectArea			
+			.append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code ")
+			.append(" from PRODUCT, id_info ")
+			.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' ");
+			
+			
+			
+			if(jcbAreaIndex != 0) {
+//				selectArea.append( " and user_id in ( select user_id  from id_info where loc_code ='"+df.format(jcbAreaIndex)+"') ");
+				selectArea.append( " and loc_code ="+df.format(jcbAreaIndex)+" ");
+			}
+			if(jcbCateIndex != 0) {
+				selectArea.append( " and category_code ='"+df.format(jcbCateIndex)+"' ");
+			}
+			if(!jtfText.isEmpty()) {
+				selectArea.append(" and product_name like '%"+jtfText+"%' ");
+			}
+			
+			selectArea.append(" order by inputDate desc "); 
+			
+//			select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, USER_ID, PRICE
+//			from PRODUCT
+//			where all_flag ='P'  and user_id in ( select user_id  from id_info where loc_code ='07') and category_code ='04'  and product_name like '%은과%'
+//			order by inputDate desc ;
+			
+			
+			/*
+			 * select user_id,product_name from product where ( user_id in ( select user_id
+			 * from id_info where loc_code ='12')) and all_flag ='P';
+			 이거임*/ 			
+			
+			
+			pstmt=con.prepareStatement(selectArea.toString());
+			
+			//4. 바인드변수에 값 넣기
+			//5. 쿼리 수행 후 결과 얻기
+			rs=pstmt.executeQuery(); 
+			AllListVO alv=null; 
+			
+			while(rs.next()) {
+				alv=new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
+						rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),  
+						rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"),rs.getInt("PRICE"));
+				list.add(alv);
+			}//end while
+		} finally {
+			//6. 연결끊기
+			if (rs !=null) { rs.close(); }//end if
+			if (pstmt !=null) { pstmt.close(); }//end if
+			if (con !=null) { con.close(); }//end if
+			
+		}//end finally
+		return list;
+		
+	}//selectListRecent
+	
+	
+	public List<AllListVO> selectListPrice( int jcbAreaIndex, int jcbCateIndex, String jtfText) throws SQLException {
+		List<AllListVO> list=new ArrayList<AllListVO>();
+		
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		String area ="";
+		String category ="";
+		String productName ="";
+		
+		
+		try {
+			//커넥션 얻기
+			con=getConn();
+			
+			
+			//3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
+			StringBuilder selectArea = new StringBuilder();
+			selectArea			
+			.append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code ")
+			.append(" from PRODUCT, id_info ")
+			.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' ");
+			
+			
+			
+			if(jcbAreaIndex != 0) {
+//				selectArea.append( " and user_id in ( select user_id  from id_info where loc_code ='"+df.format(jcbAreaIndex)+"') ");
+				selectArea.append( " and loc_code ="+df.format(jcbAreaIndex)+" ");
+			}
+			if(jcbCateIndex != 0) {
+				selectArea.append( " and category_code ='"+df.format(jcbCateIndex)+"' ");
+			}
+			if(!jtfText.isEmpty()) {
+				selectArea.append(" and product_name like '%"+jtfText+"%' ");
+			}
+			
+			selectArea.append(" order by price desc "); 
+			
+//			select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, USER_ID, PRICE
+//			from PRODUCT
+//			where all_flag ='P'  and user_id in ( select user_id  from id_info where loc_code ='07') and category_code ='04'  and product_name like '%은과%'
+//			order by inputDate desc ;
+			
+			
+			/*
+			 * select user_id,product_name from product where ( user_id in ( select user_id
+			 * from id_info where loc_code ='12')) and all_flag ='P';
+			 이거임*/ 			
+			
+			
+			pstmt=con.prepareStatement(selectArea.toString());
+			
+			//4. 바인드변수에 값 넣기
+			//5. 쿼리 수행 후 결과 얻기
+			rs=pstmt.executeQuery(); 
+			AllListVO alv=null; 
+			
+			while(rs.next()) {
+				alv=new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
+						rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),  
+						rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"),rs.getInt("PRICE"));
+				list.add(alv);
+			}//end while
+		} finally {
+			//6. 연결끊기
+			if (rs !=null) { rs.close(); }//end if
+			if (pstmt !=null) { pstmt.close(); }//end if
+			if (con !=null) { con.close(); }//end if
+			
+		}//end finally
+		return list;
+		
+	}//selectListRecent
+	
+	
 	
 	/**
 	 * 상품 디테일창으로 정보 넘기는 method
@@ -209,8 +420,8 @@ public class UserDAO {
 				selectDetail		
 				.append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code, info ")
 				.append(" from PRODUCT, id_info ")
-				.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' and PRODUCT_CODE=? ")//물음표랑 ''랑 같이쓰면 안됨.					
-				.append(" order by inputDate desc "); 
+				.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' and PRODUCT_CODE=? ");//물음표랑 ''랑 같이쓰면 안됨.					
+//				.append(" order by inputDate desc "); 
 				
 								
 	
