@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
@@ -16,6 +17,8 @@ import javax.swing.table.DefaultTableModel;
 import adminDAO.AdminDAO;
 import adminVO.CheckListVO;
 import adminVO.CheckVO;
+import adminVO.ProductListVO;
+import adminVO.ProductVO;
 import adminVO.UserIdDetailVO;
 import adminVO.UserIdVO;
 import adminVO.CheckDetailVO;
@@ -27,7 +30,6 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 
 	private AdminMainView amv;
 	private int index;
-	private String[] categoryTemp ;
 //	private OrderThread ot;
 	
 	public AdminMainEvt(AdminMainView amv) {
@@ -60,6 +62,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 		dtm.setRowCount(0);
 		Object[] rowData = null;//JTable에 넣을 데이터
 		
+//		System.out.println(cv);
 		//DBMS에서 조회
 		AdminDAO aDAO = AdminDAO.getInstance();
 		try {
@@ -80,13 +83,12 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				
 				//배열에 값을 할당
 				rowData[0] = clv.getProduct_code();
-				rowData[1] = clv.getImg_file();
+				rowData[1] = clv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
 				rowData[2] = clv.getUser_id();
 				rowData[3] = clv.getCategory();
 				rowData[4] = clv.getProduct_name();
-				rowData[5] = new Integer(clv.getPrice());
-				rowData[6] = clv.getUpload_date();
-				
+				rowData[5] = clv.getPrice();
+				rowData[6] = "<HTML>" + clv.getUpload_date().replace(" ", "<br>");
 				//dtm에 추가
 				dtm.addRow(rowData);
 				
@@ -115,6 +117,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 		}//end else
 		
 		CheckVO cv = new CheckVO(category, col_name, value);
+		
 		//JTable의 레코드 초기화
 		dtm.setRowCount(0);
 		Object[] rowData = null;//JTable에 넣을 데이터
@@ -122,7 +125,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 		//DBMS에서 조회
 		AdminDAO aDAO = AdminDAO.getInstance();
 		try {
-			List<CheckListVO> list = aDAO.selectOrderbyList(cv);
+			List<CheckListVO> list = aDAO.selectCheckOrderbyList(cv);
 			
 			if(list.isEmpty()) {//제품이 없는 경우
 				JOptionPane.showMessageDialog(amv, "정렬할 제품이 없습니다.");
@@ -138,12 +141,12 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				
 				//배열에 값을 할당
 				rowData[0] = clv.getProduct_code();
-				rowData[1] = clv.getImg_file();
+				rowData[1] = clv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
 				rowData[2] = clv.getUser_id();
 				rowData[3] = clv.getCategory();
 				rowData[4] = clv.getProduct_name();
-				rowData[5] = new Integer(clv.getPrice());
-				rowData[6] = clv.getUpload_date();
+				rowData[5] = clv.getPrice();
+				rowData[6] = "<HTML>" + clv.getUpload_date().replace(" ", "<br>");
 				
 				//dtm에 추가
 				dtm.addRow(rowData);
@@ -182,12 +185,12 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				
 				//배열에 값을 할당
 				rowData[0] = clv.getProduct_code();
-				rowData[1] = clv.getImg_file();
+				rowData[1] = clv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
 				rowData[2] = clv.getUser_id();
 				rowData[3] = clv.getCategory();
 				rowData[4] = clv.getProduct_name();
-				rowData[5] = new Integer(clv.getPrice());
-				rowData[6] = clv.getUpload_date();
+				rowData[5] = clv.getPrice();
+				rowData[6] = "<HTML>" + clv.getUpload_date().replace(" ", "<br>");
 				
 				//dtm에 추가
 				dtm.addRow(rowData);
@@ -214,8 +217,6 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 		
 		dv.setProduct_code(product_code);
 		
-//		System.out.println(dv);
-		
 		//DBTable에서 얻을 수 있는 값
 		AdminDAO aDAO = AdminDAO.getInstance();
 		try {
@@ -224,7 +225,6 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 			//값을 가진 VO를 할당하여 상세화면을 띄워준다.
 			new AdminCheckDetailView(amv, this, dv);
 			
-//			System.out.println(dv);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}//도시락 코드에 따른 원본이미지와 특장점 조회
@@ -234,9 +234,246 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 	/////////////////////////////////////////////////////////////////////////두번째 탭/////////////////////////////////////////////////////////////////
 
 	private void setProductList() {
+		DefaultTableModel dtm = amv.getDtmProductList();
+		
+		String category = (String) amv.getJcbCategory2().getSelectedItem();
+		String value = amv.getJtfSearch2().getText().trim();
+		String col_name = null;
+		
+		if (amv.getJrbSubject2().isSelected()) {
+			col_name = amv.getJrbSubject2().getText();
+		} else if(amv.getJrbID2().isSelected()){
+			col_name = amv.getJrbID2().getText();
+		}//end else
+		
+		String query = "	(all_flag != 'N' and all_flag != 'F')	";
+		
+		if (!amv.getOnSale().isSelected() && amv.getDeleteNComplete().isSelected()) {
+			query = "	(all_flag = 'D' or all_flag = 'B')	";
+		}else if (amv.getOnSale().isSelected() && !amv.getDeleteNComplete().isSelected()) {
+			query = "	(all_flag = 'P')	";
+		}else if (!amv.getOnSale().isSelected() && !amv.getDeleteNComplete().isSelected()) {
+			query = "	(all_flag = 'F')	";
+		}
+		
+		ProductVO pVO = new ProductVO(category, col_name, value, query);
+		
+//		System.out.println(pVO);
+		
+		//JTable의 레코드 초기화
+		dtm.setRowCount(0);
+		Object[] rowData = null;
+		
+		//DBMS에서 조회
+		AdminDAO aDAO = AdminDAO.getInstance();
+		
+		try {
+			List<ProductListVO> list = aDAO.selectAllProductList(pVO);
+			
+
+			if(list.isEmpty()) {//제품이 없는 경우
+				JOptionPane.showMessageDialog(amv, "등록된 제품이 없습니다.");
+				resetProductList();
+			}//end if
+			
+			ProductListVO plv = null;
+			
+			for(int i = 0 ; i < list.size() ; i++) {
+				plv = list.get(i);
+				
+				//조회결과로 JTable 레코드에 들어갈 데이터를 생성하고, dtm에 추가
+				rowData = new Object[8];
+				
+				//배열에 값을 할당
+				rowData[0] = plv.getProduct_code();
+				rowData[1] = plv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
+				rowData[2] = plv.getUser_id();
+				rowData[3] = plv.getCategory();
+				rowData[4] = plv.getProduct_name();
+				rowData[5] = new Integer(plv.getPrice());
+				rowData[6] = plv.getUpload_date();
+				if (plv.getAll_flag().equals("P")) {
+					rowData[7] = "판매중";
+				}else if (plv.getAll_flag().equals("F")) {
+					rowData[7] = "판매거부";
+				}else if (plv.getAll_flag().equals("D")) {
+					rowData[7] = "삭제";
+				}else if(plv.getAll_flag().equals("B")){
+					rowData[7] = "판매완료";
+				}//end else
+				
+				//dtm에 추가
+				dtm.addRow(rowData);
+				
+			}//end for
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(amv, "관리자님, db서비스가 원활하지 못한 점 죄송합니다.");
+			e.printStackTrace();
+		}//end catch
+		
+		
 	}//setProductList
 	
+	private void resetProductList() {
+		DefaultTableModel dtm = amv.getDtmProductList();
+		//JTable의 레코드 초기화
+		dtm.setRowCount(0);
+		Object[] rowData = null;//JTable에 넣을 데이터
+		
+		//DBMS에서 조회
+		AdminDAO aDAO = AdminDAO.getInstance();
+		try {
+			List<ProductListVO> list = aDAO.reselectAllProductList();
+			
+			if(list.isEmpty()) {//제품이 없는 경우
+				JOptionPane.showMessageDialog(amv, "검수할 제품이 없습니다.");
+			}//end if
+			
+			ProductListVO plv = null;
+			
+			for(int i = 0 ; i < list.size() ; i++) {
+				plv = list.get(i);
+				
+				//조회결과로 JTable 레코드에 들어갈 데이터를 생성하고, dtm에 추가
+				rowData = new Object[8];
+				
+				//배열에 값을 할당
+				rowData[0] = plv.getProduct_code();
+				rowData[1] = plv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
+				rowData[2] = plv.getUser_id();
+				rowData[3] = plv.getCategory();
+				rowData[4] = plv.getProduct_name();
+				rowData[5] = new Integer(plv.getPrice());
+				rowData[6] = plv.getUpload_date();
+				if (plv.getAll_flag().equals("P")) {
+					rowData[7] = "판매중";
+				}else if (plv.getAll_flag().equals("F")) {
+					rowData[7] = "판매거부";
+				}else if (plv.getAll_flag().equals("D")) {
+					rowData[7] = "삭제";
+				}else {
+					rowData[7] = "판매완료";
+				}//end else
+				
+				//dtm에 추가
+				dtm.addRow(rowData);
+				
+			}//end for
+			
+			amv.getJtfSearch2().setText("");
+			amv.getJcbCategory2().setSelectedIndex(0);
+			amv.getJrbSubject2().setSelected(true);
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(amv, "관리자님, reset실패! 서비스가 원활하지 못한 점 죄송합니다.");
+			e.printStackTrace();
+		}//end catch
+	}
 	
+	private void setRecentList2() {
+		DefaultTableModel dtm = amv.getDtmProductList();
+		
+		String category = (String) amv.getJcbCategory2().getSelectedItem();
+		String value = amv.getJtfSearch2().getText().trim();
+		String col_name = null;
+		
+		if (amv.getJrbSubject2().isSelected()) {
+			col_name = amv.getJrbSubject2().getText();
+		} else if(amv.getJrbID2().isSelected()){
+			col_name = amv.getJrbID2().getText();
+		}//end else
+		
+		String query = "	(all_flag != 'N' or all_flag != 'F')	";
+		
+		if (!amv.getOnSale().isSelected() && amv.getDeleteNComplete().isSelected()) {
+			query = "	(all_flag = 'D' or all_flag != 'B')	";
+		}else if (amv.getOnSale().isSelected() && !amv.getDeleteNComplete().isSelected()) {
+			query = "	(all_flag = 'P')	";
+		}else if (!amv.getOnSale().isSelected() && !amv.getDeleteNComplete().isSelected()) {
+			query = "	(all_flag = 'F')	";
+		}
+		
+		ProductVO pVO = new ProductVO(category, col_name, value, query);
+		
+//		System.out.println(pVO);
+		
+		//JTable의 레코드 초기화
+		dtm.setRowCount(0);
+		Object[] rowData = null;
+		
+		//DBMS에서 조회
+		AdminDAO aDAO = AdminDAO.getInstance();
+		
+		try {
+			List<ProductListVO> list = aDAO.selectOrderByProductList(pVO);
+			
+
+			if(list.isEmpty()) {//제품이 없는 경우
+				JOptionPane.showMessageDialog(amv, "등록된 제품이 없습니다.");
+				resetProductList();
+			}//end if
+			
+			ProductListVO plv = null;
+			
+			for(int i = 0 ; i < list.size() ; i++) {
+				plv = list.get(i);
+				
+				//조회결과로 JTable 레코드에 들어갈 데이터를 생성하고, dtm에 추가
+				rowData = new Object[8];
+				
+				//배열에 값을 할당
+				rowData[0] = plv.getProduct_code();
+				rowData[1] = plv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
+				rowData[2] = plv.getUser_id();
+				rowData[3] = plv.getCategory();
+				rowData[4] = plv.getProduct_name();
+				rowData[5] = new Integer(plv.getPrice());
+				rowData[6] = plv.getUpload_date();
+				if (plv.getAll_flag().equals("P")) {
+					rowData[7] = "판매중";
+				}else if (plv.getAll_flag().equals("F")) {
+					rowData[7] = "판매거부";
+				}else if (plv.getAll_flag().equals("D")) {
+					rowData[7] = "삭제";
+				}else {
+					rowData[7] = "판매완료";
+				}//end else
+				
+				//dtm에 추가
+				dtm.addRow(rowData);
+				
+			}//end for
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(amv, "관리자님, 최신순 정렬 실패! 서비스가 원활하지 못한 점 죄송합니다.");
+			e.printStackTrace();
+		}//end catch
+		
+	}//setProductList
+	
+	private void openProductDetail(JTable temp){
+		CheckDetailVO dv = new CheckDetailVO();
+		
+		//도시락 리스트에서 얻을 수 있는 값
+		//선택한 행의 도시락 코드를 얻기
+		String product_code = (String)temp.getValueAt(temp.getSelectedRow(), 0);
+		
+		dv.setProduct_code(product_code);
+		
+		//DBTable에서 얻을 수 있는 값
+		AdminDAO aDAO = AdminDAO.getInstance();
+		try {
+			aDAO.checkDetail(dv);
+			
+			//값을 가진 VO를 할당하여 상세화면을 띄워준다.
+//			new AdminCheckDetailView(amv, this, dv);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}//도시락 코드에 따른 원본이미지와 특장점 조회
+		
+	}//openCheckDetail
 	/////////////////////////////////////////////////////////////////////////////////////////////세번째 탭////////////.//////////////////////////////////////////////
 	private void setUserIdList() {
 		DefaultTableModel dtm = amv.getDtmUserList();
@@ -372,6 +609,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 	
 	
 	/////////////////////////////////////////////////////////////actionPerformed////////////////////////////////////////////////////////////////////////////////
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		
@@ -392,7 +630,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 			index = jcb.getSelectedIndex();
 			
 			if (index != 0) {
-//				setCheckList();
+				setProductList();
 			}//end if
 			
 		}//end if
@@ -416,7 +654,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				amv.getJtfSearch2().getCursor();
 				
 			}else {
-//				setCheckList();
+				setProductList();
 			}//end else
 			
 		}//end if
@@ -429,6 +667,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				
 			}else {
 				setUserIdList();
+				
 			}//end else
 			
 		}//end if
@@ -439,7 +678,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 		}//end if
 		
 		if(ae.getSource() == amv.getJbtRecent2()) {//최신순 버튼2 클릭
-//			setRecentList1();
+			setRecentList2();
 		}//end if
 		
 		if(ae.getSource() == amv.getJbtRefresh1()) {//새로고침 버튼1 클릭
@@ -447,7 +686,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 		}//end if
 		
 		if(ae.getSource() == amv.getJbtRefresh2()) {//새로고침 버튼2 클릭
-//			setCheckList();
+			setProductList();
 		}//end if
 		
 		if(ae.getSource() == amv.getJbtRefresh3()) {//새로고침 버튼3 클릭
@@ -459,7 +698,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 		}//end if
 		
 		if(ae.getSource() == amv.getJbtReset2()) {//초기화 버튼2 클릭
-//			resetCheckList();
+			resetProductList();
 		}//end if
 		
 		if(ae.getSource() == amv.getJbtReset3()) {//초기화 버튼3 클릭
@@ -478,7 +717,6 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 			JTabbedPane jtpTemp = (JTabbedPane)me.getSource();
 			
 			if(jtpTemp.getSelectedIndex() == 1) {
-				
 				setProductList();
 //				if (ot == null) {//조회 thread가 생성되어있지 않음. 주문조회x
 //					ot = new OrderThread(lm.getJtOrderList(), lm.getDtmOrderList());
@@ -509,7 +747,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 			}//end if
 			
 			if(me.getSource() == temp2) {//도시락 리스트에서 이벤트 발생
-//				openProductDetail(temp2);
+				openProductDetail(temp2);
 			}//end if
 			
 			if(me.getSource() == temp3) {//도시락 리스트에서 이벤트 발생

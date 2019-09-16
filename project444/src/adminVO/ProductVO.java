@@ -2,13 +2,13 @@ package adminVO;
 
 public class ProductVO {
 
-	private String category, col_name, value;
+	private String category, col_name, value, query;
 
-	public ProductVO(String category, String col_name, String value) {
-		super();
+	public ProductVO(String category, String col_name, String value, String query) {
 		this.category = category;
 		this.col_name = col_name;
 		this.value = value;
+		this.query = query;
 	}
 
 	public String getCategory() {
@@ -23,14 +23,14 @@ public class ProductVO {
 		return value;
 	}
 
-	public void setCol_name(String col_name) {
-		this.col_name = col_name;
+	public String getQuery() {
+		return query;
 	}
 
 	@Override
 	public String toString() {
-		return "CheckVO [category=" + category + ", col_name=" + col_name + ", value=" + value + "]";
+		return "ProductVO [category=" + category + ", col_name=" + col_name + ", value=" + value + ", query=" + query
+				+ "]";
 	}
-	
-	
-}
+
+}//class
