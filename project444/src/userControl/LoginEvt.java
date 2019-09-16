@@ -54,6 +54,9 @@ public class LoginEvt implements ActionListener {
 			
 		}catch(NullPointerException npe) {
 			lg.getJlLoginFail().setText("아이디 또는 비밀번호를 확인해주세요.");
+			lg.getJtfId().setText("");
+			lg.getJpfPw().setText("");
+			lg.getJtfId().requestFocus();
 		}
 	
 	}//end if

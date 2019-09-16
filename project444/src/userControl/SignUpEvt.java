@@ -155,6 +155,7 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 		String checkId ="";
 		if (su.getJtfId().getText().trim().isEmpty()) {
 			JOptionPane.showMessageDialog(su, "아이디를 입력해주세요.");
+			su.getJtfId().requestFocus();
 		} else {
 			id = su.getJtfId().getText().trim();
 			UserDAO uDAO = UserDAO.getInstance();
@@ -168,6 +169,7 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 			if(!checkId.isEmpty()) {
 				JOptionPane.showMessageDialog(su, "이미 존재하는 아이디입니다.");
 				su.getJtfId().setText("");
+				su.getJtfId().requestFocus();
 			}else {
 				JOptionPane.showMessageDialog(su, "사용 가능한 아이디 입니다.");
 			}
