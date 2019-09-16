@@ -493,7 +493,7 @@ public class UserDAO {
 				
 			}//end finally
 		
-		
+		 
 	}//addDeal
 	
 	public void openChat() {
