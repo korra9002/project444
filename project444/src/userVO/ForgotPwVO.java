@@ -12,7 +12,7 @@ public class ForgotPwVO {
 
 	public String getId() {
 		return id;
-	}//getId
+	}//getId 
 
 	public String getPwHint() {
 		return pwHint;
