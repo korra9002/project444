@@ -109,18 +109,14 @@ public class AdminDAO {
 //			System.out.println(bindCnt);
 			if( bindCnt == 1 ) {
 				pstmt.setString(1, cVO.getCategory());
-				
 			} else if(bindCnt == 2){
 				pstmt.setString(1, cVO.getValue());
-
 			} else if(bindCnt == 3) {
 				pstmt.setString(1, cVO.getCategory());
 				pstmt.setString(2, cVO.getValue());
-				
-			}
+			}//end else
 			
 //			System.out.println( selectCheck );
-			
 		
 			//5. 쿼리 수행 후 결과 얻기
 			rs = pstmt.executeQuery();
@@ -193,14 +189,12 @@ public class AdminDAO {
 //			System.out.println(bindCnt);
 			if( bindCnt == 1 ) {
 				pstmt.setString(1, cVO.getCategory());
-				
 			} else if(bindCnt == 2){
 				pstmt.setString(1, cVO.getValue());
 			} else if(bindCnt == 3) {
 				pstmt.setString(1, cVO.getCategory());
 				pstmt.setString(2, cVO.getValue());
-				
-			}
+			}//end else
 		
 			//5. 쿼리 수행 후 결과 얻기
 			rs = pstmt.executeQuery();
@@ -212,7 +206,7 @@ public class AdminDAO {
 				list.add(clv);//조회된 레코드를 저장한 VO를 list에 추가
 			
 			}//end while
-		}finally {
+		} finally {
 			
 			//6. 연결 끊기
 			if(rs != null) {rs.close();}//end if
@@ -222,11 +216,10 @@ public class AdminDAO {
 		
 		return list;
 		
-	}//selectOrderbyList
-	
+	}//selectCheckOrderbyList
 	
 	/**
-	 * DMBS테이블에 존재하는 모든 검수 목록을 초기화 하여 조회
+	 * DMBS테이블에 존재하는 모든 조건을 초기화하여 검수 목록을 조회
 	 * @return 검수 목록
 	 * @throws SQLException
 	 */
@@ -271,8 +264,7 @@ public class AdminDAO {
 		
 		return list;
 		
-	}//selectOrderbyList
-	
+	}//reselectAllCheckList
 	
 	/**
 	 * 디테일 창을 열 때 필요한 값들을 VO(DTO 역할)에 넣는 작업
@@ -287,6 +279,7 @@ public class AdminDAO {
 		StringBuilder selectCheckDetail = new StringBuilder();
 		
 		try {
+			//2. 커넥션 얻기
 			con = getConnection();
 			selectCheckDetail
 			.append("	select img_file, product_name, info,  to_char(upload_date,'yyyy-mm-dd hh24:mi')upload_date, user_id, c.category, price	")
@@ -339,9 +332,8 @@ public class AdminDAO {
 			//2. 커넥션 얻기
 			con = getConnection();
 			
-			
 			selectProduct
-			.append("	select product_code, img_file, user_id, c.category, product_name, price, to_char(upload_date,'yyyy-mm-dd hh24:mi')upload_date, all_flag	")
+			.append("	select product_code, img_file, user_id, c.category, product_name, to_char(price,'9,999,999')price, to_char(upload_date,'yyyy-mm-dd hh24:mi')upload_date, all_flag	")
 			.append("	from product p, category_list c	")
 			.append("	where (p.category_code = c.category_code) and 	").append(pVO.getQuery());
 			
@@ -373,14 +365,11 @@ public class AdminDAO {
 //			System.out.println(bindCnt);
 			if( bindCnt == 1 ) {
 				pstmt.setString(1, pVO.getCategory());
-				
 			} else if(bindCnt == 2){
 				pstmt.setString(1, pVO.getValue());
-				
 			} else if(bindCnt == 3) {
 				pstmt.setString(1, pVO.getCategory());
 				pstmt.setString(2, pVO.getValue());
-				
 			}//end if
 		
 			//5. 쿼리 수행 후 결과 얻기
@@ -389,7 +378,7 @@ public class AdminDAO {
 			
 			while(rs.next()) {
 				plv = new ProductListVO(rs.getString("product_code"), rs.getString("img_file"), rs.getString("product_name"), 
-						rs.getString("upload_date"), rs.getString("user_id"),rs.getString("category"),rs.getString("all_flag"),rs.getInt("price"));
+						rs.getString("upload_date"), rs.getString("user_id"),rs.getString("category"),rs.getString("all_flag"),rs.getString("price"));
 				list.add(plv);//조회된 레코드를 저장한 VO를 list에 추가
 			
 			}//end while
@@ -406,6 +395,11 @@ public class AdminDAO {
 		
 	}//selectAllProductList
 	
+	/**
+	 * DMBS테이블에 존재하는 모든 조건을 초기화하여 검수 목록을 조회
+	 * @return 검수 목록
+	 * @throws SQLException
+	 */
 	public List<ProductListVO> reselectAllProductList() throws SQLException{
 		List<ProductListVO> list = new ArrayList<ProductListVO>();
 		
@@ -419,7 +413,7 @@ public class AdminDAO {
 			con = getConnection();
 			
 			selectCheck
-			.append("	select product_code, img_file, user_id, c.category, product_name, price, to_char(upload_date,'yyyy-mm-dd hh24:mi')upload_date, all_flag	")
+			.append("	select product_code, img_file, user_id, c.category, product_name, to_char(price,'9,999,999')price, to_char(upload_date,'yyyy-mm-dd hh24:mi')upload_date, all_flag	")
 			.append("	from product p, category_list c	")
 			.append("	where (p.category_code = c.category_code) and (all_flag != 'N' and all_flag != 'F')	");
 			
@@ -433,7 +427,7 @@ public class AdminDAO {
 			
 			while(rs.next()) {
 				plv = new ProductListVO(rs.getString("product_code"), rs.getString("img_file"), rs.getString("product_name"), 
-						rs.getString("upload_date"), rs.getString("user_id"),rs.getString("category"),rs.getString("all_flag"),rs.getInt("price"));
+						rs.getString("upload_date"), rs.getString("user_id"),rs.getString("category"),rs.getString("all_flag"),rs.getString("price"));
 				list.add(plv);//조회된 레코드를 저장한 VO를 list에 추가
 				
 			}//end while
@@ -450,7 +444,7 @@ public class AdminDAO {
 	}//reselectAllProductList
 	
 	/**
-	 * DMBS테이블에 존재하는 모든 제품 목록을 조회
+	 * DMBS테이블에 존재하는 모든 제품 목록을 최신순으로 조회
 	 * @return 제품 목록
 	 * @throws SQLException
 	 */
@@ -466,9 +460,8 @@ public class AdminDAO {
 			//2. 커넥션 얻기
 			con = getConnection();
 			
-			
 			selectProduct
-			.append("	select product_code, img_file, user_id, c.category, product_name, price, to_char(upload_date,'yyyy-mm-dd hh24:mi')upload_date, all_flag	")
+			.append("	select product_code, img_file, user_id, c.category, product_name, to_char(price,'9,999,999')price, to_char(upload_date,'yyyy-mm-dd hh24:mi')upload_date, all_flag	")
 			.append("	from product p, category_list c	")
 			.append("	where (p.category_code = c.category_code) and 	").append(pVO.getQuery());
 			
@@ -500,14 +493,11 @@ public class AdminDAO {
 //			System.out.println(bindCnt);
 			if( bindCnt == 1 ) {
 				pstmt.setString(1, pVO.getCategory());
-				
 			} else if(bindCnt == 2){
 				pstmt.setString(1, pVO.getValue());
-				
 			} else if(bindCnt == 3) {
 				pstmt.setString(1, pVO.getCategory());
 				pstmt.setString(2, pVO.getValue());
-				
 			}//end if
 		
 			//5. 쿼리 수행 후 결과 얻기
@@ -516,7 +506,7 @@ public class AdminDAO {
 			
 			while(rs.next()) {
 				plv = new ProductListVO(rs.getString("product_code"), rs.getString("img_file"), rs.getString("product_name"), 
-						rs.getString("upload_date"), rs.getString("user_id"),rs.getString("category"),rs.getString("all_flag"),rs.getInt("price"));
+						rs.getString("upload_date"), rs.getString("user_id"),rs.getString("category"),rs.getString("all_flag"),rs.getString("price"));
 				list.add(plv);//조회된 레코드를 저장한 VO를 list에 추가
 			
 			}//end while
@@ -531,13 +521,13 @@ public class AdminDAO {
 		
 		return list;
 		
-	}//selectAllProductList
+	}//selectOrderByProductList
 	
 	////////////////////////////////////////////////////////////////////////두번째 탭 end/////////////////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * DMBS테이블에 존재하는 모든 유저id 목록을 조회
-	 * @return 유저id 목록
+	 * DMBS테이블에 존재하는 모든 유저ID 목록을 조회
+	 * @return 유저ID 목록
 	 * @throws SQLException
 	 */
 	public List<UserIdVO> selectAllUserIdList(String userId) throws SQLException{
@@ -564,14 +554,13 @@ public class AdminDAO {
 				bindCnt++;
 			}//end if
 			
-			
 			pstmt= con.prepareStatement(selectUserId.toString());
 				
 			//바인드 변수에 값넣기
 //			System.out.println(bindCnt);
 			if( bindCnt == 1 ) {
 				pstmt.setString(1, userId);
-			}
+			}//end if
 		
 			//5. 쿼리 수행 후 결과 얻기
 			rs = pstmt.executeQuery();
@@ -594,9 +583,13 @@ public class AdminDAO {
 		
 		return list;
 		
-	}//selectAllCheckList
+	}//selectAllUserIdList
 	
-	
+	/**
+	 * DMBS테이블에 존재하는 모든 조건을 초기화하여 검수 목록을 조회
+	 * @return 검수 목록
+	 * @throws SQLException
+	 */
 	public List<UserIdVO> reselectAllUserIdList() throws SQLException{
 		
 		List<UserIdVO> list = new ArrayList<UserIdVO>();
@@ -642,7 +635,11 @@ public class AdminDAO {
 		
 	}//reselectAllUserIdList
 	
-
+	/**
+	 * 디테일 창을 열 때 필요한 값들을 VO(DTO 역할)에 넣는 작업
+	 * @param uidVO 디테일 창에 필요한 값을 넣을 VO
+	 * @throws SQLException
+	 */
 	public void UserIdDetail(UserIdDetailVO uidVO) throws SQLException{
 		
 		Connection con = null;
@@ -683,10 +680,3 @@ public class AdminDAO {
 	}//UserIdDetail
 	
 }//class
-
-
-
-
-
-
-

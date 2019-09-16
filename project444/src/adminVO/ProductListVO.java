@@ -3,11 +3,10 @@ package adminVO;
 public class ProductListVO {
 											
 
-	private String product_code, img_file, product_name, upload_date, user_id, category, all_flag;
-	private int price;
+	private String product_code, img_file, product_name, upload_date, user_id, category, all_flag, price;
 	
 	public ProductListVO(String product_code, String img_file, String product_name, String upload_date, String user_id,
-			String category, String all_flag, int price) {
+			String category, String all_flag, String price) {
 		this.product_code = product_code;
 		this.img_file = img_file;
 		this.product_name = product_name;
@@ -46,7 +45,7 @@ public class ProductListVO {
 		return all_flag;
 	}
 
-	public int getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
