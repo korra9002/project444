@@ -89,10 +89,10 @@ public class PersonalInformEvt implements ActionListener{
 			if ((mfPhone2.length() < 3 || mfPhone2.length() > 4) || mfPhone3.length() != 4) {
 				JOptionPane.showMessageDialog(psi, "연락처를 정확히 기입해주세요.");
 				return;
-			} else {
-				mfPhone = mfPhone1 + "-" + mfPhone2 + "-" + mfPhone3;
+			}//end if
 				
-				if(!mfPhone.equals(piVO.getPhone())) {
+			mfPhone = mfPhone1 + "-" + mfPhone2 + "-" + mfPhone3;
+					if(!mfPhone.equals(piVO.getPhone())) {
 					flag = false;
 					modifyInformVO miVO = new modifyInformVO(id,"phone",mfPhone);
 					 if(flag==uDAO.updateThing(miVO)) {
@@ -106,7 +106,7 @@ public class PersonalInformEvt implements ActionListener{
 		}//end else
 		
 		 
-		}//end if
+		
 		if(!mfLoc.equals("00")&&!mfLoc.equals(piVO.getLoc())){
 			flag = false;
 			modifyInformVO miVO = new modifyInformVO(id, "loc_code", mfLoc);

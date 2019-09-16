@@ -1,6 +1,7 @@
 package userView;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -31,12 +32,13 @@ public class UserInfo extends JPanel {
 
 		// setBounds
 //	  jlLevelImg.setBounds(50, 15, 200, 150);
-		jlaId.setBounds(260, 20, 90, 30);
+		jlaId.setBounds(280,-20, 150, 150);
 		jbtPersonalData.setBounds(400, 20, 90, 70);
 		jbtSell.setBounds(50, 200, 90, 30);
 		jbtBuy.setBounds(200, 200, 90, 30);
 		jbtLike.setBounds(350, 200, 90, 30);
 		jtaAd.setBounds(50, 250, 450, 180);
+		jlaId.setFont(new Font(Font.DIALOG,Font.BOLD, 40));
 
 //	  add(jlLevelImg);
 		add(jlaId);
@@ -49,7 +51,6 @@ public class UserInfo extends JPanel {
 		setLayout(null);
 //      setResizable(false);
 		setBounds(100, 100, 540, 470);
-
 		// 이벤트처리
 		UserInfoEvt uife = new UserInfoEvt(this);
 		jbtPersonalData.addActionListener(uife);
