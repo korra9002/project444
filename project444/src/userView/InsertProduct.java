@@ -25,9 +25,13 @@ public class InsertProduct extends JPanel {
 	private JComboBox<String> jcbCategory;
 	private DefaultComboBoxModel<String> dcbCategory; 
 	
+	
+	RunMarketMain rmm;
+	
 	public InsertProduct(RunMarketMain rmm) {
 //		super("제품 입력");
 		
+		this.rmm=rmm;
 		
 		
 		jlbProductImg = new JLabel("제품 이미지",JLabel.CENTER);
