@@ -25,7 +25,6 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 	}// SignUpEvt
 
 	public void register() {
-
 		DecimalFormat dfNum = new DecimalFormat("00");
 		DecimalFormat df = new DecimalFormat("0000");
 		String gender = "";
@@ -75,10 +74,13 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 		if (cPw.length == 0 || cPw2.length == 0) {
 			JOptionPane.showMessageDialog(su, "비밀번호를 확인해주세요.");
 			return;
+		} else if(!(pw.length()>7&&pw.length()<17)) {
+			JOptionPane.showMessageDialog(su, "비밀번호는 8 ~ 16 자입니다.");
+			return;
 		} else if (!pw.equals(repw)) {
 			JOptionPane.showMessageDialog(su, "비밀번호가 일치하지 않습니다.");
 			return;
-		} // end if
+		}// end if
 		if (su.getJtfName().getText().isEmpty()) {
 			JOptionPane.showMessageDialog(su, "이름을 입력해주세요.");
 			return;
@@ -148,7 +150,7 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 	}// register
 
 	public void idCheck() {
-		String checkId ="";
+		String checkId = "";
 		if (su.getJtfId().getText().trim().isEmpty()) {
 			JOptionPane.showMessageDialog(su, "아이디를 입력해주세요.");
 			su.getJtfId().requestFocus();
@@ -156,23 +158,23 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 			id = su.getJtfId().getText().trim();
 			UserDAO uDAO = UserDAO.getInstance();
 			try {
-				checkId=uDAO.idCheck(id);
-				
+				checkId = uDAO.idCheck(id);
+
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}//end catch
+			} // end catch
 
-			if(!checkId.isEmpty()) {
+			if (!checkId.isEmpty()) {
 				JOptionPane.showMessageDialog(su, "이미 존재하는 아이디입니다.");
 				su.getJtfId().setText("");
 				su.getJtfId().requestFocus();
-			}else {
+			} else {
 				JOptionPane.showMessageDialog(su, "사용 가능한 아이디 입니다.");
 			}
-			
-		}//end if
-	}//idCheck
-	
+
+		} // end if
+	}// idCheck
+
 	public void signUpClose() {
 		su.dispose();
 	}// signUpClose
