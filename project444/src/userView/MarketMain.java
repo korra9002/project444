@@ -35,16 +35,17 @@ import userControl.MarketMainEvt;
 		
 		private DefaultTableModel dtmProductList;
 		private JTable jtProductList;
-		  
+		private String id; 
+		
 		  // 수정
 		
 		
 		@SuppressWarnings("serial")
-		public MarketMain() throws SQLException {
+		public MarketMain(String id) throws SQLException {
 //			super("글쓰기");
 
 			
-			
+		this.id=id;
 			
 		//////////////////////// 홈 화면 //////////////////////////////
 		
@@ -177,7 +178,7 @@ import userControl.MarketMainEvt;
 		
 	//이벤트 처리
 		
-		MarketMainEvt mme=new MarketMainEvt(this);
+		MarketMainEvt mme=new MarketMainEvt(this, id);
 		
 		jcbArea.addActionListener(mme);
 		jcbCategory.addActionListener(mme);

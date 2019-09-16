@@ -10,6 +10,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import userControl.MarketDetailBuyerEvt;
+import userControl.MarketDetailSellerEvt;
+import userVO.MarketDetailVO;
+
 
 public class MarketDetailSeller extends JDialog {
 	
@@ -20,7 +24,7 @@ public class MarketDetailSeller extends JDialog {
 	private JTextArea jtaStrongPoint;
 
 	
-	public MarketDetailSeller() {
+	public MarketDetailSeller(MarketMain mm, MarketDetailVO mdVO, String id) {
 		
 		
 		jlDetailImg = new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/img/무민.jpg/"));//썸네일X / 원본 이미지
@@ -34,11 +38,11 @@ public class MarketDetailSeller extends JDialog {
 
 		
 		//JTextField
-		jtfName=new JTextField();
-		jtfPrice=new JTextField();
-		jtfId=new JTextField();
-		jtfInputDate=new JTextField();
-		jtfCategory=new JTextField();
+		jtfName=new JTextField(mdVO.getProductName());
+		jtfPrice=new JTextField(Integer.toString(mdVO.getPrice()));
+		jtfId=new JTextField(mdVO.getSellerID());
+		jtfInputDate=new JTextField(mdVO.getUpload_date());
+		jtfCategory=new JTextField(mdVO.getCategory());
 		
 		//바꾸지 못하게
 		jtfName.setEditable(false);
@@ -102,12 +106,19 @@ public class MarketDetailSeller extends JDialog {
 		
 		//setBounds
 		
+		MarketDetailSellerEvt mdse=new MarketDetailSellerEvt(mm, this);
+		
+			
+		jbtComplete.addActionListener(mdse);
+		jbtDelete.addActionListener(mdse);
+		jbtChange.addActionListener(mdse);
+		
 		
 	}//MarketDetail
 
-	public static void main(String[] args) {
-		new MarketDetailSeller();
-	}// main
+//	public static void main(String[] args) {
+//		new MarketDetailSeller();
+//	}// main
 	
 
 }//class

@@ -16,6 +16,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import userView.MarketMain;
+
 public class ChattingView extends JFrame implements ActionListener{
 	private JLabel jlNotice;
 	private JTextArea jtaChatView;
@@ -28,10 +30,14 @@ public class ChattingView extends JFrame implements ActionListener{
 	private AdminDAO aDAO;
 	private String me, you;
 	
-	
+	private MarketMain mm;
 
-	public ChattingView() {
+	public ChattingView(MarketMain mm) {
 		super("Ã¤ÆÃ");
+		
+		this.mm=mm;
+		
+		
 		jlNotice = new JLabel("------");
 		jtaChatView = new JTextArea();
 		jtaChatField = new JTextField();
@@ -176,9 +182,9 @@ public class ChattingView extends JFrame implements ActionListener{
 	
 	
 
-	public static void main(String[] args) {
-		new ChattingView();
-	}// main
+//	public static void main(String[] args) {
+//		new ChattingView();
+//	}// main
 
 	
 	public void actionPerformed(ActionEvent e) {

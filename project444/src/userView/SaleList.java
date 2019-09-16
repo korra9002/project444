@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import userControl.SaleListEvt;
 import userRun.RunMarketMain;
 
 @SuppressWarnings("serial")
@@ -128,15 +129,15 @@ public class SaleList extends JDialog {
 		jtComplete.getTableHeader().setReorderingAllowed(false);//테이블 컬럼 위치 변경 금지
 		
 		jtComplete.getColumnModel().getColumn(0).setPreferredWidth(120);
-		jtComplete.getColumnModel().getColumn(0).setResizable(false);;//테이블 컬럼 사이즈 변경 금지
+		jtComplete.getColumnModel().getColumn(0).setResizable(false);//테이블 컬럼 사이즈 변경 금지
 		jtComplete.getColumnModel().getColumn(1).setPreferredWidth(120);
-		jtComplete.getColumnModel().getColumn(1).setResizable(false);;
+		jtComplete.getColumnModel().getColumn(1).setResizable(false);
 		jtComplete.getColumnModel().getColumn(2).setPreferredWidth(80);
-		jtComplete.getColumnModel().getColumn(2).setResizable(false);;
+		jtComplete.getColumnModel().getColumn(2).setResizable(false);
 		jtComplete.getColumnModel().getColumn(3).setPreferredWidth(80);
-		jtComplete.getColumnModel().getColumn(3).setResizable(false);;
+		jtComplete.getColumnModel().getColumn(3).setResizable(false);
 		jtComplete.getColumnModel().getColumn(4).setPreferredWidth(80);
-		jtComplete.getColumnModel().getColumn(4).setResizable(false);;
+		jtComplete.getColumnModel().getColumn(4).setResizable(false);
 		
 		jtComplete.setRowHeight(100);
 		
@@ -159,9 +160,44 @@ public class SaleList extends JDialog {
 		add(jtp);
 		
 		setBounds(100, 100, 560, 700);
+		////////////////////////////////이벤트처리//////////////////////////////
+		SaleListEvt sle = new SaleListEvt(this);
+		jbtModify.addActionListener(sle);
+		jbtDelete.addActionListener(sle);
+		jtSell.addMouseListener(sle);
+		jtComplete.addMouseListener(sle);
 		setVisible(true);
 		
 	}//SaleList
 
+	public JTabbedPane getJtp() {
+		return jtp;
+	}//getJtp
+
+	public JButton getJbtDelete() {
+		return jbtDelete;
+	}//getJbtDelete
+
+	public JButton getJbtModify() {
+		return jbtModify;
+	}//getJbtModify
+
+	public JTable getJtSell() {
+		return jtSell;
+	}//getJtSell
+
+	public JTable getJtComplete() {
+		return jtComplete;
+	}//getJtComplete
+
+	public DefaultTableModel getDtmSell() {
+		return dtmSell;
+	}//getDtmSell
+
+	public DefaultTableModel getDtmComp() {
+		return dtmComp;
+	}//getDtmComp
+	
+	
 
 }//class
