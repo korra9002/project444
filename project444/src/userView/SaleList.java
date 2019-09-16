@@ -64,17 +64,17 @@ public class SaleList extends JDialog {
 		jtSell.getTableHeader().setReorderingAllowed(false);//테이블 컬럼 위치 변경 금지
 		
 		jtSell.getColumnModel().getColumn(0).setPreferredWidth(120);
-		jtSell.getColumnModel().getColumn(0).setResizable(false);;//테이블 컬럼 사이즈 변경 금지
+		jtSell.getColumnModel().getColumn(0).setResizable(false);//테이블 컬럼 사이즈 변경 금지
 		jtSell.getColumnModel().getColumn(1).setPreferredWidth(120);
-		jtSell.getColumnModel().getColumn(1).setResizable(false);;
+		jtSell.getColumnModel().getColumn(1).setResizable(false);
 		jtSell.getColumnModel().getColumn(2).setPreferredWidth(80);
-		jtSell.getColumnModel().getColumn(2).setResizable(false);;
+		jtSell.getColumnModel().getColumn(2).setResizable(false);
 		jtSell.getColumnModel().getColumn(3).setPreferredWidth(80);
-		jtSell.getColumnModel().getColumn(3).setResizable(false);;
+		jtSell.getColumnModel().getColumn(3).setResizable(false);
 		jtSell.getColumnModel().getColumn(4).setPreferredWidth(80);
-		jtSell.getColumnModel().getColumn(4).setResizable(false);;
+		jtSell.getColumnModel().getColumn(4).setResizable(false);
 		jtSell.getColumnModel().getColumn(5).setPreferredWidth(80);
-		jtSell.getColumnModel().getColumn(5).setResizable(false);;
+		jtSell.getColumnModel().getColumn(5).setResizable(false);
 		
 		jtSell.setRowHeight(100);
 		
