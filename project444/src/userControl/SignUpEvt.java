@@ -53,10 +53,8 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 		} // end for
 		try {
 			if (su.getJrbWomen().isSelected()) {
-				System.out.println("여자");
 				gender = "F";
 			} else {
-				System.out.println("남자");
 				gender = "M";
 			}
 
