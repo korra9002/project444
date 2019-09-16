@@ -457,158 +457,159 @@ public class UserDAO {
 		return mdVO;
 	}// selectProDetail
 ///////////////////////////////////// Mypage method ///////////////////////////////////////
-	
-/**
-* 마이페이지에서 본인이 판매중인 상품 리스트 보여주기
-* @return
-* @throws SQLException
-*/
-public List<SaleListVO>selectSaleList(String id) throws SQLException {
 
+	/**
+	 * 마이페이지에서 본인이 판매중인 상품 리스트 보여주기
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<SaleListVO> selectSaleList(String id) throws SQLException {
 
-List<SaleListVO> list=new ArrayList<SaleListVO>();
+		List<SaleListVO> list = new ArrayList<SaleListVO>();
 
-Connection con=null;
-PreparedStatement pstmt=null;
-ResultSet rs=null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
-
-
-try {
+		try {
 //커넥션 얻기
-con=getConn();
-
+			con = getConn();
 
 //3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
-StringBuilder selectAll = new StringBuilder();
-selectAll			
-.append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code, all_flag ")
-.append(" from PRODUCT, id_info ")
-.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' and PRODUCT.USER_ID=? ");
+			StringBuilder selectAll = new StringBuilder();
+			selectAll.append(
+					" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code, all_flag ")
+					.append(" from PRODUCT, id_info ")
+					.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' and PRODUCT.USER_ID=? ");
 
-
-
-
-pstmt=con.prepareStatement(selectAll.toString());
+			pstmt = con.prepareStatement(selectAll.toString());
 
 //4. 바인드변수에 값 넣기
-pstmt.setString(1, id);
+			pstmt.setString(1, id);
 //5. 쿼리 수행 후 결과 얻기
-rs=pstmt.executeQuery(); 
-SaleListVO slv=null; 
+			rs = pstmt.executeQuery();
+			SaleListVO slv = null;
 
-while(rs.next()) {
-slv=new SaleListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
-rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),  
-rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"),rs.getString("all_flag"),rs.getInt("PRICE"));
+			while (rs.next()) {
+				slv = new SaleListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
+						rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),
+						rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"), rs.getString("all_flag"),
+						rs.getInt("PRICE"));
 
-
-list.add(slv);
-}//end while
-} finally {
+				list.add(slv);
+			} // end while
+		} finally {
 //6. 연결끊기
-if (rs !=null) { rs.close(); }//end if
-if (pstmt !=null) { pstmt.close(); }//end if
-if (con !=null) { con.close(); }//end if
+			if (rs != null) {
+				rs.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+			if (con != null) {
+				con.close();
+			} // end if
 
-}//end finally
-return list;
+		} // end finally
+		return list;
 
+	}// selectSaleList
 
-}//selectSaleList
+	/**
+	 * 마이페이지 판매내역-판매완료탭이 눌렸을 때 처리
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<SaleListVO> selectCompList(String id) throws SQLException {
 
-/**
-* 마이페이지 판매내역-판매완료탭이 눌렸을 때 처리
-* @return
-* @throws SQLException
-*/
-public List<SaleListVO>selectCompList(String id) throws SQLException {
+		List<SaleListVO> list = new ArrayList<SaleListVO>();
 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
-List<SaleListVO> list=new ArrayList<SaleListVO>();
-
-Connection con=null;
-PreparedStatement pstmt=null;
-ResultSet rs=null;
-
-
-
-try {
+		try {
 //커넥션 얻기
-con=getConn();
-
+			con = getConn();
 
 //3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
-StringBuilder selectAll = new StringBuilder();
-selectAll			
-.append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code, all_flag ")
-.append(" from PRODUCT, id_info ")
-.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='B' and PRODUCT.USER_ID=? ");
+			StringBuilder selectAll = new StringBuilder();
+			selectAll.append(
+					" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code, all_flag ")
+					.append(" from PRODUCT, id_info ")
+					.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='B' and PRODUCT.USER_ID=? ");
 
-
-
-
-pstmt=con.prepareStatement(selectAll.toString());
+			pstmt = con.prepareStatement(selectAll.toString());
 
 //4. 바인드변수에 값 넣기
-pstmt.setString(1, id);
+			pstmt.setString(1, id);
 //5. 쿼리 수행 후 결과 얻기
-rs=pstmt.executeQuery(); 
-SaleListVO slv=null; 
+			rs = pstmt.executeQuery();
+			SaleListVO slv = null;
 
-while(rs.next()) {
-slv=new SaleListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
-rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),  
-rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"),rs.getString("all_flag"),rs.getInt("PRICE"));
+			while (rs.next()) {
+				slv = new SaleListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
+						rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),
+						rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"), rs.getString("all_flag"),
+						rs.getInt("PRICE"));
 
-
-list.add(slv);
-}//end while
-} finally {
+				list.add(slv);
+			} // end while
+		} finally {
 //6. 연결끊기
-if (rs !=null) { rs.close(); }//end if
-if (pstmt !=null) { pstmt.close(); }//end if
-if (con !=null) { con.close(); }//end if
+			if (rs != null) {
+				rs.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+			if (con != null) {
+				con.close();
+			} // end if
 
-}//end finally
-return list;
+		} // end finally
+		return list;
 
-
-}//selectCompList
-
+	}// selectCompList
 
 
 
-//////////////////////////////////// MyPage /////////////////////////////////////////////////////
+	public boolean deletePost(String product_code) throws SQLException {
+		boolean deleteFlag = false;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
-public boolean deletePost(String product_code) throws SQLException {
-boolean deleteFlag= false;
-Connection con=null;
-PreparedStatement pstmt=null;
-ResultSet rs=null;
+		try {
+			con = getConn();
 
-try {
-con=getConn();
+			StringBuilder deletePost = new StringBuilder();
+			deletePost.append("	update Product	")
+					// .append(" set img='', strong_point='', delete_flag='Y' ") // not null 걸려있어서
+					// 에러뜸
+					.append("	set all_flag='D'	").append("	where product_code=?	");
 
-StringBuilder deletePost=new StringBuilder();
-deletePost
-.append("	update Product	")
-//	  	.append("	set img='', strong_point='', delete_flag='Y'	") // not null 걸려있어서 에러뜸
-.append("	set all_flag='D'	")
-.append("	where product_code=?	");
+			pstmt = con.prepareStatement(deletePost.toString());
 
-pstmt=con.prepareStatement(deletePost.toString());
+			pstmt.setString(1, product_code);
 
-pstmt.setString(1, product_code);
-
-deleteFlag=pstmt.executeUpdate()==1;
-} finally {
-if( pstmt!=null) { pstmt.close(); }//end if
-if( con!=null) { con.close(); }//end if
-}//end finally
-return deleteFlag;
-}//deletePost
+			deleteFlag = pstmt.executeUpdate() == 1;
+		} finally {
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+			if (con != null) {
+				con.close();
+			} // end if
+		} // end finally
+		return deleteFlag;
+	}// deletePost
 	
+	
+	
+/////////////////////////////////////////////////////////////////////////////////MyPage ////////////////////////////////////////////////////////////////////////
 
 	////////////////////////////////////// 채팅관련
 	////////////////////////////////////// 메서드!!!!///////////////////////////////////
@@ -780,7 +781,7 @@ return deleteFlag;
 				CV = new ChatVO(rs.getString("chat"), rs.getString("sender"), rs.getDate("input_date"));
 				list.add(CV);// 조회된 레코드를 저장한 VO를 list에 추가
 			}
- 
+
 			pstmt.close();
 
 			String setFlag = "update chatting set  read_flag = 'Y'	where read_flag ='N'and sender = ? and reciever = ?";
