@@ -9,7 +9,9 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import chatTest.ChatVO;
 import userVO.AllListVO;
+import userVO.DCodeAndIdAO;
 import userVO.ForgotIdVO;
 import userVO.ForgotPwVO;
 import userVO.LoginVO;
@@ -447,6 +449,9 @@ public class UserDAO {
 			}//end finally
 		return mdVO;
 	}//selectProDetail
+	
+	
+	
 	////////////////////////////////////// 채팅관련 메서드!!!!///////////////////////////////////
 	
 	public int addDeal(String productCode, String id) throws SQLException {
@@ -496,21 +501,187 @@ public class UserDAO {
 		 
 	}//addDeal
 	
-	public void openChat() {
+	public DCodeAndIdAO getDCodeAndId(String productCode, String id) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
 		
-	}
+		
+		try { 
+			//커넥션 얻기
+			con=getConn();		
+				 
+			String check = 
+"select deal_code, p.user_id seller_id from deal d,product p where p.product_code = ? and  d.user_id= ? and (d.product_code = p.product_code)";
+
+				pstmt=con.prepareStatement(check);
+				
+				//4. 바인드변수에 값 넣기
+				pstmt.setString(1, productCode);
+				pstmt.setString(2, id);
+				//5. 쿼리 수행 후 결과 얻기
+				rs=pstmt.executeQuery(); 
+				
+				
+				if(rs.next()) {
+					return new DCodeAndIdAO(rs.getString("deal_code"), rs.getString("seller_id"));
+				}else {
+					System.out.println("거래가 없습니다.");
+					return new DCodeAndIdAO("","");
+				}
+				
+				
+			} finally {
+				//6. 연결끊기
+				if (rs !=null) { rs.close(); }//end if
+				if (pstmt !=null) { pstmt.close(); }//end if
+				if (con !=null) { con.close(); }//end if
+				
+			}//end finally
+	}//getDealCode
+	
+	
+	public List<ChatVO> selectAllChat(String me,String you, String dealCode) throws SQLException {
+		List<ChatVO> list = new ArrayList<ChatVO>();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			// 2.커넥션 얻기
+			con = getConn();
+
+			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
+			// 것부터 조회
+			String selectLunch = " select chat,sender,input_date from chatting "
+					+ "where sender = ? and reciever = ? order by input_date desc";
+			pstmt = con.prepareStatement(selectLunch);
+			pstmt.setString(1, you);
+			pstmt.setString(2, me);
+			rs = pstmt.executeQuery();
+
+			ChatVO CV = null;
+			while (rs.next()) {
+				CV = new ChatVO(rs.getString("chat"),rs.getString("sender"),rs.getDate("input_date"));
+				list.add(CV);// 조회된 레코드를 저장한 VO를 list에 추가
+			}
+			
+			pstmt.close();
+			
+			String setFlag = "update chatting set  read_flag = 'Y'	where read_flag ='N'and sender = ? and reciever = ?";
+			pstmt = con.prepareStatement(setFlag);
+			pstmt.setString(1, you);
+			pstmt.setString(2, me);
+			System.out.println(pstmt.executeUpdate()+"플래그 사이즈");
+			System.out.println(list.size()+"리스트 사이즈");
+			System.out.println("------------------------------");
+			
+			// 4. 바인드 변수 값 넣기
+			// 5. 쿼리 수행후 결과 얻기
+
+		} finally {
+			// 6. 연결 끊기
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (con != null)
+				con.close();
+
+		}
+		return list;
+
+	}// selectAllChat
+	
+	public List<ChatVO> selectChat(String me,String you, String dealCode) throws SQLException {
+		List<ChatVO> list = new ArrayList<ChatVO>();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			// 2.커넥션 얻기
+			con = getConn();
+
+			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
+			// 것부터 조회
+			String selectLunch = " select chat,sender,input_date from chatting "
+					+ "where read_flag ='N' sender = ? and reciever = ? order by input_date desc";
+			pstmt = con.prepareStatement(selectLunch);
+			pstmt.setString(1, you);
+			pstmt.setString(2, me);
+			rs = pstmt.executeQuery();
+
+			ChatVO CV = null;
+			while (rs.next()) {
+				CV = new ChatVO(rs.getString("chat"),rs.getString("sender"),rs.getDate("input_date"));
+				list.add(CV);// 조회된 레코드를 저장한 VO를 list에 추가
+			}
+			
+			pstmt.close();
+			
+			String setFlag = "update chatting set  read_flag = 'Y'	where read_flag ='N'and sender = ? and reciever = ?";
+			pstmt = con.prepareStatement(setFlag);
+			pstmt.setString(1, you);
+			pstmt.setString(2, me);
+			System.out.println(pstmt.executeUpdate()+"플래그 사이즈");
+			System.out.println(list.size()+"리스트 사이즈");
+			System.out.println("------------------------------");
+			
+			// 4. 바인드 변수 값 넣기
+			// 5. 쿼리 수행후 결과 얻기
+
+		} finally {
+			// 6. 연결 끊기
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (con != null)
+				con.close();
+
+		}
+		return list;
+
+	}// selectAllChat
+	
+	
+	public void sendChat(String me, String you, String chat, String dealCode) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			// 2.
+			con = getConn();
+			// 3.
+			String sendChat = "";
+			sendChat ="insert into chatting(sender,reciever,chat,deal_code) values(?,?,?,?)";
+
+			pstmt = con.prepareStatement(sendChat);
+			// 4.
+			pstmt.setString(1, me);
+			pstmt.setString(2, you);
+			pstmt.setString(3, chat);
+			pstmt.setString(4, dealCode);
+
+			// 5.
+			pstmt.executeUpdate();
+
+		} finally {
+			// 6.
+			if (pstmt != null)
+				pstmt.close();// end if
+			if (con != null)
+				con.close();// end if
+
+		} // end finally
+	}//sendChat
 	
 	
 	
 	
 	
 	
-	
-	
-	
-	
-	
-	////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
 	

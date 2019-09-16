@@ -16,26 +16,25 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import userVO.DCodeAndIdAO;
 import userView.MarketMain;
 
-public class ChattingView extends JFrame implements ActionListener{
+public class ChattingView extends JFrame {
 	private JLabel jlNotice;
 	private JTextArea jtaChatView;
 	private JTextField jtaChatField;
 	private JButton jbtProductInfo, jbtSend, jbtOk, jbtCancle;
-	
 	private JScrollPane jsp;
 	
 	
-	private AdminDAO aDAO;
-	private String me, you;
-	
-	private MarketMain mm;
+//	private AdminDAO aDAO;
+	private String id;
+//	private MarketMain mm;
 
-	public ChattingView(MarketMain mm) {
+	public ChattingView(String id,DCodeAndIdAO DIAO) {
 		super("채팅");
-		
-		this.mm=mm;
+		this.id = id;
+	//	this.mm=mm;
 		
 		
 		jlNotice = new JLabel("------");
@@ -82,7 +81,6 @@ public class ChattingView extends JFrame implements ActionListener{
 		jbtCancle.setVisible(false);
 		
 		//////////////테스트 
-		jbtSend.addActionListener(this);
 		
 		
 		//Window sizing
@@ -91,38 +89,39 @@ public class ChattingView extends JFrame implements ActionListener{
 		//visible
 		setVisible(true);
 		//window closing
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
+		ChattingViewEvt cVE = new ChattingViewEvt(this, DIAO);
+//		aDAO = AdminDAO.getInstance();
+//		me = "shin";
+//		you = "baek"; 
+//		
+//		
+//		
+//		OrderThread ot = new OrderThread(jtaChatView, me, you,jsp);
+////		ot.setDaemon(true);
+//		ot.start();
+//		
 		
-		aDAO = AdminDAO.getInstance();
-		me = "shin";
-		you = "baek"; 
-		
-		
-		
-		OrderThread ot = new OrderThread(jtaChatView, me, you,jsp);
-//		ot.setDaemon(true);
-		ot.start();
-		
-		
-		jbtSend.addActionListener(this);
-		jtaChatField.addActionListener(this);
-		addWindowListener(new WindowAdapter() {
-
-			@Override
-			public void windowClosing(WindowEvent e) {
-
-				try {
-					close();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				} // end catch
-				dispose();
-			}// windowClosing
-
-		});// addWindowListener
-		
+		jbtSend.addActionListener(cVE);
+		jbtSend.addActionListener(cVE);
+		jtaChatField.addActionListener(cVE);
+//		addWindowListener(new WindowAdapter() {
+//
+//			@Override
+//			public void windowClosing(WindowEvent e) {
+//
+//				try {
+//					close();
+//				} catch (IOException e1) {
+//					e1.printStackTrace();
+//				} // end catch
+//				dispose();
+//			}// windowClosing
+//
+//		});// addWindowListener
+//		
 
 	
 		
@@ -147,63 +146,106 @@ public class ChattingView extends JFrame implements ActionListener{
 		
 	}// Chatting
 	
-	private void scrollPosition() {
-		jsp.getVerticalScrollBar().setValue(jsp.getVerticalScrollBar().getMaximum());
+//	private void scrollPosition() {
+//		jsp.getVerticalScrollBar().setValue(jsp.getVerticalScrollBar().getMaximum());
+//	}
+//
+//	
+//	
+//	
+//	private void sendMsg() throws IOException {
+//		// 스트림이 연결되어 있다면
+//		String msg = jtaChatField.getText().trim();
+//		
+//		if(!msg.isEmpty()) {
+//		jtaChatView.append(me+": "+msg+"\n");
+//		System.out.println(msg);
+//		try {
+//			aDAO.sendChat(me, you, msg);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		jtaChatField.setText("");
+//		scrollPosition();
+//		System.out.println(msg);
+//		}
+//		
+//		
+//	}// sendMsg
+//
+//	
+//
+//	private void close() throws IOException {
+//
+//	}// close
+//	
+//	
+//
+////	public static void main(String[] args) {
+////		new ChattingView();
+////	}// main
+//
+//	
+//	public void actionPerformed(ActionEvent e) {
+//		
+//		
+//		
+//		
+//		if(e.getSource() == jbtSend || e.getSource() ==jtaChatField) {
+//		try {
+//			sendMsg();
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			JOptionPane.showMessageDialog(this,"대화상대가 접속을 종료하엿습니다.");
+//			e1.printStackTrace();
+//		} // end catch
+//		}
+//
+//	}// actionPerformed
+
+	public JLabel getJlNotice() {
+		return jlNotice;
 	}
 
-	
-	
-	
-	private void sendMsg() throws IOException {
-		// 스트림이 연결되어 있다면
-		String msg = jtaChatField.getText().trim();
-		
-		if(!msg.isEmpty()) {
-		jtaChatView.append(me+": "+msg+"\n");
-		System.out.println(msg);
-		try {
-			aDAO.sendChat(me, you, msg);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		jtaChatField.setText("");
-		scrollPosition();
-		System.out.println(msg);
-		}
-		
-		
-	}// sendMsg
+	public JTextArea getJtaChatView() {
+		return jtaChatView;
+	}
 
-	
+	public JTextField getJtaChatField() {
+		return jtaChatField;
+	}
 
-	private void close() throws IOException {
+	public JButton getJbtProductInfo() {
+		return jbtProductInfo;
+	}
 
-	}// close
-	
-	
+	public JButton getJbtSend() {
+		return jbtSend;
+	}
 
-//	public static void main(String[] args) {
-//		new ChattingView();
-//	}// main
+	public JButton getJbtOk() {
+		return jbtOk;
+	}
 
-	
-	public void actionPerformed(ActionEvent e) {
-		
-		
-		
-		
-		if(e.getSource() == jbtSend || e.getSource() ==jtaChatField) {
-		try {
-			sendMsg();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(this,"대화상대가 접속을 종료하엿습니다.");
-			e1.printStackTrace();
-		} // end catch
-		}
+	public JButton getJbtCancle() {
+		return jbtCancle;
+	}
 
-	}// actionPerformed
-	
+	public JScrollPane getJsp() {
+		return jsp;
+	}
+
+//	public AdminDAO getaDAO() {
+//		return aDAO;
+//	}
+
+	public String getId() {
+		return id;
+	}
+
+
+
+
 	
 	
 //	@Override
