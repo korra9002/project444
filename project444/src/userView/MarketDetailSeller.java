@@ -22,10 +22,10 @@ public class MarketDetailSeller extends JDialog {
 	private JTextField jtfName, jtfPrice, jtfId,jtfInputDate,jtfCategory;
 	private JButton jbtComplete, jbtDelete, jbtChange;
 	private JTextArea jtaStrongPoint;
-
+	private String id;
 	
 	public MarketDetailSeller(MarketMain mm, MarketDetailVO mdVO, String id) {
-		
+		this.id = id;
 		
 		jlDetailImg = new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/img/¹«¹Î.jpg/"));//½æ³×ÀÏX / ¿øº» ÀÌ¹ÌÁö
 //		jlDetailImg.setHorizontalAlignment(JLabel.CENTER);
@@ -115,6 +115,50 @@ public class MarketDetailSeller extends JDialog {
 		
 		
 	}//MarketDetail
+
+	public JLabel getJlDetailImg() {
+		return jlDetailImg;
+	}
+
+	public JTextField getJtfName() {
+		return jtfName;
+	}
+
+	public JTextField getJtfPrice() {
+		return jtfPrice;
+	}
+
+	public JTextField getJtfId() {
+		return jtfId;
+	}
+
+	public JTextField getJtfInputDate() {
+		return jtfInputDate;
+	}
+
+	public JTextField getJtfCategory() {
+		return jtfCategory;
+	}
+
+	public JButton getJbtComplete() {
+		return jbtComplete;
+	}
+
+	public JButton getJbtDelete() {
+		return jbtDelete;
+	}
+
+	public JButton getJbtChange() {
+		return jbtChange;
+	}
+
+	public JTextArea getJtaStrongPoint() {
+		return jtaStrongPoint;
+	}
+
+	public String getId() {
+		return id;
+	}
 
 //	public static void main(String[] args) {
 //		new MarketDetailSeller();
