@@ -64,7 +64,7 @@ public class ForgotIdEvt implements ActionListener {
 		 name = fi.getJtfName().getText().trim();
 		ForgotIdVO fiVO = new ForgotIdVO(phone, name);
 		UserDAO uDAO = UserDAO.getInstance();
-		id =uDAO.selectId(fiVO);
+		id =uDAO.selectIdCheck(fiVO);
 		}//end else
 		
 		if(id.isEmpty()) {

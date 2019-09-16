@@ -44,7 +44,7 @@ public class ForgotPwEvt implements ActionListener {
 		}else {
 			ForgotPwVO fpVO =new ForgotPwVO(id, df.format(pwHint), pwAnswer);
 			UserDAO uDAO = UserDAO.getInstance();
-			flag = uDAO.updateForgetPw(fpVO, uuid);
+			flag = uDAO.updateForgotPw(fpVO, uuid);
 			if(flag==false) {
 				JOptionPane.showMessageDialog(fp, "입력하신 정보가 올바르지 않습니다.");
 			}else {
