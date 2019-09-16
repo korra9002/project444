@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import userRun.RunMarketMain;
+
 @SuppressWarnings("serial")
 public class InsertProduct extends JPanel {
 
@@ -23,7 +25,7 @@ public class InsertProduct extends JPanel {
 	private JComboBox<String> jcbCategory;
 	private DefaultComboBoxModel<String> dcbCategory; 
 	
-	public InsertProduct() {
+	public InsertProduct(RunMarketMain rmm) {
 //		super("제품 입력");
 		
 		
@@ -78,9 +80,45 @@ public class InsertProduct extends JPanel {
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}//InsertProduct
+
+	public JLabel getJlbProductImg() {
+		return jlbProductImg;
+	}//getJlbProductImg
+
+	public JButton getJbtSelectImg() {
+		return jbtSelectImg;
+	}//getJbtSelectImg
+
+	public JButton getJbtOkey() {
+		return jbtOkey;
+	}//getJbtOkey
+
+	public JButton getJbtCancle() {
+		return jbtCancle;
+	}//getJbtCancle
+
+	public JTextField getJtfSubject() {
+		return jtfSubject;
+	}//getJtfSubject
+
+	public JTextField getJtfPrice() {
+		return jtfPrice;
+	}//getJtfPrice
+
+	public JTextArea getJtaExplain() {
+		return jtaExplain;
+	}//getJtaExplain
+
+	public JComboBox<String> getJcbCategory() {
+		return jcbCategory;
+	}//getJcbCategory
+
+	public DefaultComboBoxModel<String> getDcbCategory() {
+		return dcbCategory;
+	}//getDcbCategory
 	
-	public static void main(String[] args) {
-		new InsertProduct();
-	}//main
+//	public static void main(String[] args) {
+//		new InsertProduct();
+//	}//main
 
 }//class
