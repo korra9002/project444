@@ -21,7 +21,7 @@ public class InsertProductEvt implements ActionListener {
 	
 	public void addImg() {
 		
-		
+
 		
 	}//addImg
 	
@@ -30,17 +30,18 @@ public class InsertProductEvt implements ActionListener {
 		public void actionPerformed(ActionEvent ae) {
 			if(ae.getSource()==ip.getJbtSelectImg()) {
 //				Frame f=new Frame();
-//			RunMarketMain rm=null;
-//			try {
-//				rm = new RunMarketMain(null);
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-			FileDialog fd=new FileDialog(rmm);
-			
-			FileDialog fdOpen=new FileDialog(fd,"ぞしぞし",FileDialog.LOAD);
-			fdOpen.setVisible(true);
+//				RunMarketMain rm=null;
+//				try {
+//					rm = new RunMarketMain(null);
+//				} catch (SQLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+				FileDialog fd=new FileDialog(rmm);
+				
+				FileDialog fdOpen=new FileDialog(fd,"ぞしぞし",FileDialog.LOAD);
+				fdOpen.setVisible(true);
+
 			}
 		}
 	}

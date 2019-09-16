@@ -14,7 +14,8 @@ import userView.UserInfo;
 public class UserInfoEvt implements ActionListener {
 	private UserInfo uif ;
 	private RunMarketMain rmm;
-	public UserInfoEvt(UserInfo uif) {
+	
+	public UserInfoEvt(UserInfo uif, RunMarketMain rmm) {
 		this.uif = uif;
 		this.rmm= rmm;
 	}//UserInfoEvt
@@ -32,7 +33,12 @@ public class UserInfoEvt implements ActionListener {
 			}
 		}//end if
 		if(ae.getSource()==uif.getJbtSell()) {
-			new SaleList(rmm);
+			try {
+				new SaleList(rmm);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}//end if
 		if(ae.getSource()==uif.getJbtBuy()) {
 			new PurchaseHistory(rmm);

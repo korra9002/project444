@@ -1,6 +1,7 @@
 package userView;
 
 import java.awt.BorderLayout;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -25,16 +26,16 @@ public class SaleList extends JDialog {
 	private JTable jtSell, jtComplete;
 	private DefaultTableModel dtmSell, dtmComp;
 	
-	public SaleList(RunMarketMain rmm) {
+	public SaleList(RunMarketMain rmm) throws SQLException {
 		super(rmm,"판매내역");
 		////////////////////////////////첫번째 탭 시작////////////////////////////////
 		String[] sellCol= {"이미지","제품명","가격","지역","등록시간","검수여부"};
-		Object[][] sellRow = {
-				{1,2,3,4,5,6},
-				{1,2,3,4,5,6}
-				};
+//		Object[][] sellRow = {
+//				{1,2,3,4,5,6},
+//				{1,2,3,4,5,6}
+//				};
 		
-		dtmSell = new DefaultTableModel(sellRow, sellCol){//셀 내용 수정 금지
+		dtmSell = new DefaultTableModel(sellCol, 6){//셀 내용 수정 금지
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -94,12 +95,12 @@ public class SaleList extends JDialog {
 		/////////////////////////////////첫번째 탭 끝/////////////////////////////////
 		////////////////////////////////두번째 탭 시작////////////////////////////////
 		String[] compCol= {"이미지","제품명","가격","지역","구매자ID"};
-		Object[][] compRow = {
-				{1,2,3,4,5},
-				{1,2,3,4,5}
-				};
+//		Object[][] compRow = {
+//				{1,2,3,4,5},
+//				{1,2,3,4,5}
+//				};
 		
-		dtmComp = new DefaultTableModel(compRow, compCol) {//셀 내용 수정 금지
+		dtmComp = new DefaultTableModel(compCol, 5) {//셀 내용 수정 금지
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -160,10 +161,13 @@ public class SaleList extends JDialog {
 		add(jtp);
 		
 		setBounds(100, 100, 560, 700);
+		
 		////////////////////////////////이벤트처리//////////////////////////////
-		SaleListEvt sle = new SaleListEvt(this);
+		SaleListEvt sle = new SaleListEvt(this, rmm);
 		jbtModify.addActionListener(sle);
 		jbtDelete.addActionListener(sle);
+		
+		jtp.addMouseListener(sle);
 		jtSell.addMouseListener(sle);
 		jtComplete.addMouseListener(sle);
 		setVisible(true);
