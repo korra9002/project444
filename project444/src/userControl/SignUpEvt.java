@@ -25,21 +25,31 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 	}// SignUpEvt
 
 	public void register() {
-		
+
+		DecimalFormat dfNum = new DecimalFormat("00");
+		DecimalFormat df = new DecimalFormat("0000");
 		String gender = "";
-		String pw = "";
-		String repw = "";
-		String name = "";
-		String phone = "";
-		String phone1 = "";
+		// 성별 저장
+		try {
+			if (su.getJrbWomen().isSelected()) {
+				gender = "F";
+			} else if (su.getJrbMan().isSelected()) {
+				gender = "M";
+			} // end else
+
+		} catch (NullPointerException npe) {
+		} // end catch
+			// 회원정보 저장
+		String name = su.getJtfName().getText().trim();
+		String phone1 = (String) su.getJcbPhoneNum().getSelectedItem();
 		String stPhone;
 		String stPhone2;
-		String loc = "";
-		String pwHint = "";
-		String pwAnswer = "";
-		DecimalFormat dfNum = new DecimalFormat("00");
-		// phone 콤보박스
-		phone1 = (String) su.getJcbPhoneNum().getSelectedItem();
+		String loc = dfNum.format(su.getJcbLoc().getSelectedIndex());
+		String pwHint = dfNum.format(su.getJcbPwHint().getSelectedIndex());
+		String pwAnswer = su.getJtfPwAnswer().getText().trim();
+
+		String pw = "";
+		String repw = "";
 		// 비밀번호 1
 		char[] cPw = su.getJpfPw().getPassword();
 		for (int i = 0; i < cPw.length; i++) {
@@ -51,102 +61,88 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 		for (int i = 0; i < cPw2.length; i++) {
 			repw = String.valueOf(cPw2);
 		} // end for
-		try {
-			if (su.getJrbWomen().isSelected()) {
-				gender = "F";
-			} else {
-				gender = "M";
-			}
 
-		} catch (NullPointerException npe) {
-
-		}
-		
+		// 아이디 체크
 		if (id.isEmpty() || su.getJtfId().getText().trim().isEmpty()) {
 			JOptionPane.showMessageDialog(su, "아이디 중복체크 또는 아이디를 입력해주세요.");
-		} else if (id.isEmpty() || !su.getJtfId().getText().trim().equals(id)) {
+			return;
+		} // end if
+		if (id.isEmpty() || !su.getJtfId().getText().trim().equals(id)) {
 			JOptionPane.showMessageDialog(su, "아이디 중복체크를 해주세요.");
-		}else {
-			if (cPw.length == 0 || cPw2.length == 0) {
-				JOptionPane.showMessageDialog(su, "비밀번호를 확인해주세요.");
-			} else {
-				if (!pw.equals(repw)) {
-					JOptionPane.showMessageDialog(su, "비밀번호가 일치하지 않습니다.");
-				} else {
-					if (su.getJtfName().getText().isEmpty()) {
-						JOptionPane.showMessageDialog(su, "이름을 입력해주세요.");
-					} else {
-						name = su.getJtfName().getText().trim();
-						if (gender.isEmpty()) {
-							JOptionPane.showMessageDialog(su, "성별을 선택해주세요.");
+			return;
+		} // end if
+			// 비밀번호 체크
+		if (cPw.length == 0 || cPw2.length == 0) {
+			JOptionPane.showMessageDialog(su, "비밀번호를 확인해주세요.");
+			return;
+		} else if (!pw.equals(repw)) {
+			JOptionPane.showMessageDialog(su, "비밀번호가 일치하지 않습니다.");
+			return;
+		} // end if
+		if (su.getJtfName().getText().isEmpty()) {
+			JOptionPane.showMessageDialog(su, "이름을 입력해주세요.");
+			return;
+		} // end if
 
-						} else {
+		// 성별 체크
+		if (gender.isEmpty()) {
+			JOptionPane.showMessageDialog(su, "성별을 선택해주세요.");
+			return;
+		} // end if
+			// 연락처 체크
+		if (su.getJtfPhone().getText().isEmpty() || su.getJtfPhone2().getText().isEmpty()) {
+			JOptionPane.showMessageDialog(su, "연락처 형식을 입력해주세요.");
+			return;
+		} else {
+			int phone2 = 0;
+			int phone3 = 0;
+			try {
+				stPhone = su.getJtfPhone().getText().trim();
+				stPhone2 = su.getJtfPhone2().getText().trim();
 
-							DecimalFormat df = new DecimalFormat("0000");
-							if (su.getJtfPhone().getText().isEmpty() || su.getJtfPhone2().getText().isEmpty()) {
-								JOptionPane.showMessageDialog(su, "연락처 형식을 입력해주세요.");
-							} else {
-								int phone2 = 0;
-								int phone3 = 0;
-								try {
-									stPhone = su.getJtfPhone().getText().trim();
-									stPhone2 = su.getJtfPhone2().getText().trim();
+				phone2 = Integer.valueOf(stPhone);
+				phone3 = Integer.valueOf(stPhone2);
 
-									phone2 = Integer.valueOf(stPhone);
-									phone3 = Integer.valueOf(stPhone2);
+			} catch (NumberFormatException nfe) {
+				JOptionPane.showMessageDialog(su, "연락처는 숫자형식만 가능합니다.");
+				return;
+			} // end catch
 
-								} catch (NumberFormatException nfe) {
-									JOptionPane.showMessageDialog(su, "연락처는 숫자형식만 가능합니다.");
-									return;
-								} // end catch
+			if ((stPhone.length() < 3 || stPhone.length() > 4) || stPhone2.length() != 4) {
+				JOptionPane.showMessageDialog(su, "연락처를 정확히 기입해주세요.");
+				return;
+			} // end if
+		} // end if
+			// 거주지 체크
+		if (su.getJcbLoc().getSelectedIndex() == 0) {
+			JOptionPane.showMessageDialog(su, "거주지역을 선택해주세요.");
+			return;
+		} // end if
+			// 비밀번호 힌트 체크
+		if (su.getJcbPwHint().getSelectedIndex() == 0) {
+			JOptionPane.showMessageDialog(su, "입력하실 비밀번호 힌트를 선택해주세요.");
+			return;
+		} // end if
+			// 비밀번호 답변 체크
+		if (su.getJtfPwAnswer().getText().isEmpty()) {
+			JOptionPane.showMessageDialog(su, "비밀번호 힌트의 답변을 작성해주세요.");
+			return;
+		} // end if
+			// 연락처 저장
+		String phone = phone1 + "-" + stPhone + "-" + stPhone2;
+		int registerFlag = 0;
+		SignUpVO suVO = new SignUpVO(id, pw, name, gender, phone, loc, pwHint, pwAnswer);
+		UserDAO uDAO = UserDAO.getInstance();
+		try {
+			registerFlag = uDAO.insertLogin(suVO);
+		} catch (SQLException e) {
 
-								if ((stPhone.length() < 3 || stPhone.length() > 4) || stPhone2.length() != 4) {
-									JOptionPane.showMessageDialog(su, "연락처를 정확히 기입해주세요.");
-									return;
-								} else {
-									phone = phone1 + "-" + stPhone + "-" + stPhone2;
-
-									if (su.getJcbLoc().getSelectedIndex() == 0) {
-										
-										JOptionPane.showMessageDialog(su, "거주지역을 선택해주세요.");
-									} else {
-										
-										loc = dfNum.format(su.getJcbLoc().getSelectedIndex());
-
-										if (su.getJcbPwHint().getSelectedIndex() == 0) {
-											JOptionPane.showMessageDialog(su, "입력하실 비밀번호 힌트를 선택해주세요.");
-										} else {
-											pwHint = dfNum.format(su.getJcbPwHint().getSelectedIndex());
-											if (su.getJtfPwAnswer().getText().isEmpty()) {
-												JOptionPane.showMessageDialog(su, "비밀번호 힌트의 답변을 작성해주세요.");
-											} else {
-												int registerFlag =0;
-												pwAnswer = su.getJtfPwAnswer().getText().trim();
-												
-												
-												SignUpVO suVO = new SignUpVO(id, pw, name, gender, phone, loc, pwHint, pwAnswer);
-												UserDAO uDAO = UserDAO.getInstance();
-												try {
-													registerFlag=uDAO.insertLogin(suVO);
-												} catch (SQLException e) {
-													
-												}//end catch
-												if(registerFlag==0) {
-													JOptionPane.showMessageDialog(su, "이미 가입되어 있습니다.");
-												}else {
-													JOptionPane.showMessageDialog(su, "가입을 완료했습니다.");
-													su.dispose();
-												}//end else
-												
-											} // end else
-										} // end else
-									} // end else
-								} // end else
-							} // end else
-						} // end else
-					} // end else
-				} // end else
-			} // end else
+		} // end catch
+		if (registerFlag == 0) {
+			JOptionPane.showMessageDialog(su, "이미 가입 되어있습니다.");
+		} else {
+			JOptionPane.showMessageDialog(su, "가입을 완료했습니다.");
+			su.dispose();
 		} // end else
 
 	}// register
