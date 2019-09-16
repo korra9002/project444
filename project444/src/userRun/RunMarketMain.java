@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
+import userControl.RunMarketMainEvt;
 import userView.ChatList;
 import userView.InsertProduct;
 import userView.MarketMain;
@@ -14,12 +15,13 @@ import userView.UserInfo;
  
 public class RunMarketMain extends JFrame{
 public static String userId;
+private JTabbedPane jtp;
 
 	public RunMarketMain(String id) throws SQLException {
 		userId = id;
 		
 		setLayout(null);
-		JTabbedPane jtp = new JTabbedPane();
+		jtp = new JTabbedPane();
 		jtp.add("홈", new MarketMain(id));
 		jtp.add("상품입력", new InsertProduct(this));
 		jtp.add("채팅", new ChatList());
@@ -36,6 +38,15 @@ public static String userId;
 		setBounds(10, 10, 700, 780);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		RunMarketMainEvt rmme = new RunMarketMainEvt(this);
+		jtp.addMouseListener(rmme);
+		
+		
+	}
+
+
+	public JTabbedPane getJtp() {
+		return jtp;
 	}
 	
 //	public static void main(String[] args) throws SQLException {
