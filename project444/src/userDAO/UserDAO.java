@@ -505,7 +505,7 @@ public class UserDAO {
 			return loginInfo;
 		}//loginRun
 //중복된 아이디 체크 
-		public String IdCheck(String id) throws SQLException {
+		public String idCheck(String id) throws SQLException {
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs =null;
