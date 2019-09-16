@@ -573,7 +573,7 @@ return insertflag;
 
 
 //분실 아이디찾기
-public String selectId(ForgotIdVO fiVO) throws SQLException {
+public String selectIdCheck(ForgotIdVO fiVO) throws SQLException {
 	Connection con = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
@@ -603,7 +603,7 @@ public String selectId(ForgotIdVO fiVO) throws SQLException {
 	}
 	return id;
 }//selectId
-public boolean updateForgetPw(ForgotPwVO fpVO,String uuid) throws SQLException {
+public boolean updateForgotPw(ForgotPwVO fpVO,String uuid) throws SQLException {
 	boolean updateFlag = false;
 	Connection con = null;
 	PreparedStatement pstmt = null;
