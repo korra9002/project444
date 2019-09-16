@@ -66,7 +66,7 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 			JOptionPane.showMessageDialog(su, "아이디 중복체크 또는 아이디를 입력해주세요.");
 		} else if (id.isEmpty() || !su.getJtfId().getText().trim().equals(id)) {
 			JOptionPane.showMessageDialog(su, "아이디 중복체크를 해주세요.");
-		} else {
+		}else {
 			if (cPw.length == 0 || cPw2.length == 0) {
 				JOptionPane.showMessageDialog(su, "비밀번호를 확인해주세요.");
 			} else {
