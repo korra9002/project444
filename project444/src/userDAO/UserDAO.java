@@ -626,7 +626,7 @@ public class UserDAO {
 				CV = new ChatVO(rs.getString("chat"), rs.getString("sender"), rs.getDate("input_date"));
 				list.add(CV);// 조회된 레코드를 저장한 VO를 list에 추가
 			}
-
+ 
 			pstmt.close();
 
 			String setFlag = "update chatting set  read_flag = 'Y'	where read_flag ='N'and sender = ? and reciever = ?";
