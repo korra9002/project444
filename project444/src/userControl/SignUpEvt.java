@@ -3,14 +3,13 @@ package userControl;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 
-import javax.swing.ButtonModel;
 import javax.swing.JOptionPane;
 
+import kr.co.sist.util.cipher.DataEncrypt;
 import userDAO.UserDAO;
 import userVO.SignUpVO;
 import userView.SignUp;
@@ -49,6 +48,7 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 
 		String pw = "";
 		String repw = "";
+		String depw ="";
 		// 비밀번호 1
 		char[] cPw = su.getJpfPw().getPassword();
 		for (int i = 0; i < cPw.length; i++) {
@@ -61,6 +61,13 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 			repw = String.valueOf(cPw2);
 		} // end for
 
+		//비밀번호 암호화 처리
+		try {
+			depw = DataEncrypt.messageDigest("MD5", pw);
+		} catch (NoSuchAlgorithmException nae) {
+			nae.printStackTrace();
+		} // end catch
+		
 		// 아이디 체크
 		if (id.isEmpty() || su.getJtfId().getText().trim().isEmpty()) {
 			JOptionPane.showMessageDialog(su, "아이디 중복체크 또는 아이디를 입력해주세요.");
@@ -81,6 +88,7 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 			JOptionPane.showMessageDialog(su, "비밀번호가 일치하지 않습니다.");
 			return;
 		}// end if
+		
 		if (su.getJtfName().getText().isEmpty()) {
 			JOptionPane.showMessageDialog(su, "이름을 입력해주세요.");
 			return;
@@ -133,7 +141,8 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 			// 연락처 저장
 		String phone = phone1 + "-" + stPhone + "-" + stPhone2;
 		int registerFlag = 0;
-		SignUpVO suVO = new SignUpVO(id, pw, name, gender, phone, loc, pwHint, pwAnswer);
+			
+		SignUpVO suVO = new SignUpVO(id, depw, name, gender, phone, loc, pwHint, pwAnswer);
 		UserDAO uDAO = UserDAO.getInstance();
 		try {
 			registerFlag = uDAO.insertLogin(suVO);

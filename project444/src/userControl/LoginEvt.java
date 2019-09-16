@@ -2,10 +2,12 @@ package userControl;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import kr.co.sist.util.cipher.DataEncrypt;
 import userDAO.UserDAO;
 import userRun.RunMarketMain;
 import userVO.LoginVO;
@@ -27,14 +29,21 @@ public class LoginEvt implements ActionListener {
 	public void loginRun() {
 		String id = lg.getJtfId().getText();
 		String pw = "";
+		String dePw = "";
 		char[] cPw = lg.getJpfPw().getPassword(); 
 		for(int i=0; i<cPw.length;i++) {
 			pw = String.valueOf(cPw);
 		}//end for
+		//비밀번호 암호화
+		try {
+			dePw = DataEncrypt.messageDigest("MD5", pw);
+		} catch (NoSuchAlgorithmException nae) {
+			nae.printStackTrace();
+		} // end catch
 	if(!id.isEmpty()&&!pw.isEmpty()) {
 		try {
 			
-			LoginVO lvo = new LoginVO(id, pw);
+			LoginVO lvo = new LoginVO(id, dePw);
 			UserDAO uDAO = UserDAO.getInstance();
 			
 			String Login_name = uDAO.loginRun(lvo)[0];

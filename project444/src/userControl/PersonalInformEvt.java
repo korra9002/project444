@@ -2,6 +2,7 @@ package userControl;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 
@@ -12,6 +13,7 @@ import javax.swing.JPasswordField;
 
 import com.sun.pisces.PiscesRenderer;
 
+import kr.co.sist.util.cipher.DataEncrypt;
 import userDAO.UserDAO;
 import userRun.RunMarketMain;
 import userVO.PersonalInformVO;
@@ -31,6 +33,7 @@ public class PersonalInformEvt implements ActionListener{
 	public void modifyPw() throws SQLException {
 		String pw = "";
 		String curpw = "";
+		String dePw = "";
 		String id = psi.getJtfId().getText().trim();
 		JPanel panel = new JPanel();
 		JLabel label = new JLabel("현재 비밀번호 입력:");
@@ -42,8 +45,16 @@ public class PersonalInformEvt implements ActionListener{
 		if(option == 0){
 		    char[] password = jpfPw.getPassword();
 		    pw= new String(password);
+		    
+		  //비밀번호 암호화 처리
+			try {
+				dePw = DataEncrypt.messageDigest("MD5", pw);
+			} catch (NoSuchAlgorithmException nae) {
+				nae.printStackTrace();
+			} // end catch
+		    
 		  UserDAO uDAO = UserDAO.getInstance();
-		  curpw= uDAO.selectPw(pw);
+		  curpw= uDAO.selectPw(dePw);
 		    if(curpw.isEmpty()) {
 		    	JOptionPane.showMessageDialog(psi, "비밀번호가 정확하지 않습니다.");
 		    }else {
@@ -67,11 +78,9 @@ public class PersonalInformEvt implements ActionListener{
 		String mfLoc = df.format(psi.getJcbLoc().getSelectedIndex());
 		String mfPwHint = df.format(psi.getJcbPwHint().getSelectedIndex());
 		String mfPwAnswer = (String)psi.getJtfPwAnswer().getText().trim();
-		System.out.println(mfPhone + " " + mfLoc+" "+mfPwHint+" "+mfPwAnswer);
 		//회원 정보 가져오기
 		UserDAO uDAO = UserDAO.getInstance();
 		PersonalInformVO piVO = uDAO.selectPersonalInfom(id);
-		System.out.println(piVO.getPhone()+" "+piVO.getLoc()+" "+piVO.getPwHint()+" "+piVO.getPwAnswer());
 		
 		if(mfPhone2.isEmpty()||mfPhone3.isEmpty()) {
 			JOptionPane.showMessageDialog(psi, "변경할 연락처 정보를 입력해주세요.");
