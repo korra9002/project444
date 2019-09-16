@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import adminView.AdminLoginView;
 import adminView.AdminMainView;
-  
+
 public class AdminLoginEvt implements ActionListener {
 
 	private AdminLoginView alv;
@@ -18,6 +18,7 @@ public class AdminLoginEvt implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == alv.getJbtLogin()) {
 			new AdminMainView();
+				alv.dispose();
 //			if (alv.getJtfId().getText().equals("admin")&& alv.getJpfPw().getText().equals("1234")) {
 //				new AdminMainView();
 //				alv.dispose();

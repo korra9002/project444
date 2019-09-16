@@ -3,11 +3,10 @@ package adminVO;
 public class CheckListVO {
 											
 
-	private String product_code, img_file, product_name, upload_date, user_id, category;
-	private int price;
+	private String product_code, img_file, product_name, upload_date, user_id, category, price;
 	
 	public CheckListVO(String product_code, String img_file, String product_name, String upload_date, String user_id,
-			String category, int price) {
+			String category, String price) {
 		this.product_code = product_code;
 		this.img_file = img_file;
 		this.product_name = product_name;
@@ -42,7 +41,7 @@ public class CheckListVO {
 	}
 
 
-	public int getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
