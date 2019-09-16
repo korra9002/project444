@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 import userControl.SignUpEvt;
 
 public class SignUp extends JDialog {
-	private JLabel jlId, jlPw,jlRePw, jlName, jlGender, jlPhone,pHyphen,pHyphen2, jlLoc, jlPwHint, jlPwAnswer;
+	
 	private JTextField jtfId, jtfName, jtfPhone,jtfPhone2, jtfPwAnswer;
 	private JPasswordField jpfPw, jpfRePass;
 	private JButton jbtIdCheck, jbtRegister, jbtCancle;
@@ -36,17 +36,17 @@ public class SignUp extends JDialog {
 	public SignUp(Login lo) {
 		super(lo, "회원가입");
 		// JLabel
-		jlId = new JLabel("아이디  ");
-		jlPw = new JLabel("비밀번호  ");
-		jlRePw = new JLabel("비밀번호 확인");
-		jlName = new JLabel("이름  ");
-		jlGender = new JLabel("성별");
-		jlPhone = new JLabel("연락처");
-		pHyphen = new JLabel("-");
-		pHyphen2 = new JLabel("-");
-		jlLoc = new JLabel("지역");
-		jlPwHint = new JLabel("비밀번호 힌트");
-		jlPwAnswer = new JLabel("힌트 정답");
+		JLabel jlId = new JLabel("아이디  ");
+		JLabel jlPw = new JLabel("비밀번호  ");
+		JLabel jlRePw = new JLabel("비밀번호 확인");
+		JLabel jlName = new JLabel("이름  ");
+		JLabel jlGender = new JLabel("성별");
+		JLabel jlPhone = new JLabel("연락처");
+		JLabel pHyphen = new JLabel("-");
+		JLabel pHyphen2 = new JLabel("-");
+		JLabel jlLoc = new JLabel("지역");
+		JLabel jlPwHint = new JLabel("비밀번호 힌트");
+		JLabel jlPwAnswer = new JLabel("힌트 정답");
 		
 		
 		// JTextField
@@ -188,13 +188,6 @@ public class SignUp extends JDialog {
 		setVisible(true);
 	}// SineUp
 
-	public JLabel getpHyphen() {
-		return pHyphen;
-	}
-
-	public JLabel getpHyphen2() {
-		return pHyphen2;
-	}
 
 	public JTextField getJtfId() {
 		return jtfId;

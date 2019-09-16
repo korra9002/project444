@@ -159,7 +159,7 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 			id = su.getJtfId().getText().trim();
 			UserDAO uDAO = UserDAO.getInstance();
 			try {
-				checkId=uDAO.IdCheck(id);
+				checkId=uDAO.idCheck(id);
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
