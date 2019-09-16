@@ -11,6 +11,7 @@ import java.util.List;
 
 import chatTest.ChatVO;
 import userVO.AllListVO;
+import userVO.ChatListVO;
 import userVO.DCodeAndIdAO;
 import userVO.ForgotIdVO;
 import userVO.ForgotPwVO;
@@ -22,526 +23,534 @@ import userVO.modifyInformVO;
 
 public class UserDAO {
 	public static UserDAO uDAO;
-	
-	DecimalFormat df=new DecimalFormat("00");
-	
-	private UserDAO() {  
-		
-	}//userDAO 
-	
+
+	DecimalFormat df = new DecimalFormat("00");
+
+	private UserDAO() {
+
+	}// userDAO
+
 	public static UserDAO getInstance() {
-		if(uDAO==null) {
-			uDAO=new UserDAO();
-		}//end if
+		if (uDAO == null) {
+			uDAO = new UserDAO();
+		} // end if
 		return uDAO;
-	}//getInstance 
-	
-	public Connection getConn() throws SQLException { 
-		Connection con=null;
-		
-		//1. 드라이버 로딩
+	}// getInstance
+
+	public Connection getConn() throws SQLException {
+		Connection con = null;
+
+		// 1. 드라이버 로딩
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 		} catch (ClassNotFoundException e) {
 			System.out.println("ddddd");
 			e.printStackTrace();
-		}//end catch
-		
-		//2. Connection 얻기
-		
-//		String url="jdbc:oracle:thin:@localhost:1521:orcl";
-		String url="jdbc:oracle:thin:@211.63.89.159:1521:orcl";
-		String id="junggo";
-		String pass="1234";
-		
-		con=DriverManager.getConnection(url,id,pass);
-		
-		return con;			
-	}//getConn
-	
-	public List<AllListVO> selectRefresh() throws SQLException {
-		List<AllListVO> list=new ArrayList<AllListVO>();
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		
-		try {
-		//커넥션 얻기
-		con=getConn();
-		
-		
+		} // end catch
 
-	     //3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
-        StringBuilder selectAll = new StringBuilder();
-        selectAll
-        
-		.append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code ")
-		.append(" from PRODUCT, id_info ")
-		.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' ");
+		// 2. Connection 얻기
+
+//		String url="jdbc:oracle:thin:@localhost:1521:orcl";
+		String url = "jdbc:oracle:thin:@211.63.89.159:1521:orcl";
+		String id = "junggo";
+		String pass = "1234";
+
+		con = DriverManager.getConnection(url, id, pass);
+
+		return con;
+	}// getConn
+
+	public List<AllListVO> selectRefresh() throws SQLException {
+		List<AllListVO> list = new ArrayList<AllListVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			// 커넥션 얻기
+			con = getConn();
+
+			// 3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
+			StringBuilder selectAll = new StringBuilder();
+			selectAll
+
+					.append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code ")
+					.append(" from PRODUCT, id_info ")
+					.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' ");
 
 //        .append(" order by inputDate desc ");
-		 
-		pstmt=con.prepareStatement(selectAll.toString());
-				 
-		//4. 바인드변수에 값 넣기
-		//5. 쿼리 수행 후 결과 얻기
-		rs=pstmt.executeQuery();
-		AllListVO alv=null;
-		
-		while(rs.next()) {
-			alv=new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
-					rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),  
-					rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"),rs.getInt("PRICE"));
+
+			pstmt = con.prepareStatement(selectAll.toString());
+
+			// 4. 바인드변수에 값 넣기
+			// 5. 쿼리 수행 후 결과 얻기
+			rs = pstmt.executeQuery();
+			AllListVO alv = null;
+
+			while (rs.next()) {
+				alv = new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
+						rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),
+						rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"), rs.getInt("PRICE"));
 
 				list.add(alv);
-			}//end while
+			} // end while
 		} finally {
-		//6. 연결끊기
-		if (rs !=null) { rs.close(); }//end if
-		if (pstmt !=null) { pstmt.close(); }//end if
-		if (con !=null) { con.close(); }//end if
-		
-		}//end finally
+			// 6. 연결끊기
+			if (rs != null) {
+				rs.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+			if (con != null) {
+				con.close();
+			} // end if
+
+		} // end finally
 		return list;
-		
-	}//selectRefresh
-	
-	
-	
-	public List<AllListVO> selectAllList( int jcbAreaIndex, int jcbCateIndex, String jtfText) throws SQLException {
-		List<AllListVO> list=new ArrayList<AllListVO>();
-		
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		
-		String area ="";
-		String category ="";
-		String productName ="";
-		
-		
+
+	}// selectRefresh
+
+	public List<AllListVO> selectAllList(int jcbAreaIndex, int jcbCateIndex, String jtfText) throws SQLException {
+		List<AllListVO> list = new ArrayList<AllListVO>();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String area = "";
+		String category = "";
+		String productName = "";
+
 		try {
-			//커넥션 얻기
-			con=getConn();
-			
-			
-			//3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
+			// 커넥션 얻기
+			con = getConn();
+
+			// 3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
 			StringBuilder selectArea = new StringBuilder();
-			selectArea			
-			.append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code ")
-			.append(" from PRODUCT, id_info ")
-			.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' ");
-			
-			
-			
-			if(jcbAreaIndex != 0) {
+			selectArea.append(
+					" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code ")
+					.append(" from PRODUCT, id_info ")
+					.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' ");
+
+			if (jcbAreaIndex != 0) {
 //				selectArea.append( " and user_id in ( select user_id  from id_info where loc_code ='"+df.format(jcbAreaIndex)+"') ");
-				selectArea.append( " and loc_code ="+df.format(jcbAreaIndex)+" ");
+				selectArea.append(" and loc_code =" + df.format(jcbAreaIndex) + " ");
 			}
-			if(jcbCateIndex != 0) {
-				selectArea.append( " and category_code ='"+df.format(jcbCateIndex)+"' ");
+			if (jcbCateIndex != 0) {
+				selectArea.append(" and category_code ='" + df.format(jcbCateIndex) + "' ");
 			}
-			if(!jtfText.isEmpty()) {
-				selectArea.append(" and product_name like '%"+jtfText+"%' ");
+			if (!jtfText.isEmpty()) {
+				selectArea.append(" and product_name like '%" + jtfText + "%' ");
 			}
-			
+
 //			selectArea.append(" order by inputDate desc "); 
-			
-//			select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, USER_ID, PRICE
-//			from PRODUCT
-//			where all_flag ='P'  and user_id in ( select user_id  from id_info where loc_code ='07') and category_code ='04'  and product_name like '%은과%'
-//			order by inputDate desc ;
-			
-			
-			/*
-			 * select user_id,product_name from product where ( user_id in ( select user_id
-			 * from id_info where loc_code ='12')) and all_flag ='P';
-			 이거임*/ 			
 
-			
-			pstmt=con.prepareStatement(selectArea.toString());
-			  
-			//4. 바인드변수에 값 넣기
-			//5. 쿼리 수행 후 결과 얻기
-			rs=pstmt.executeQuery(); 
-			AllListVO alv=null; 
-			
-			while(rs.next()) {
-				alv=new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
-						rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),  
-						rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"),rs.getInt("PRICE"));
+//			select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, USER_ID, PRICE
+//			from PRODUCT
+//			where all_flag ='P'  and user_id in ( select user_id  from id_info where loc_code ='07') and category_code ='04'  and product_name like '%은과%'
+//			order by inputDate desc ;
+
+			/*
+			 * select user_id,product_name from product where ( user_id in ( select user_id
+			 * from id_info where loc_code ='12')) and all_flag ='P'; 이거임
+			 */
+
+			pstmt = con.prepareStatement(selectArea.toString());
+
+			// 4. 바인드변수에 값 넣기
+			// 5. 쿼리 수행 후 결과 얻기
+			rs = pstmt.executeQuery();
+			AllListVO alv = null;
+
+			while (rs.next()) {
+				alv = new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
+						rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),
+						rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"), rs.getInt("PRICE"));
 				list.add(alv);
-			}//end while
+			} // end while
 		} finally {
-			//6. 연결끊기
-			if (rs !=null) { rs.close(); }//end if
-			if (pstmt !=null) { pstmt.close(); }//end if
-			if (con !=null) { con.close(); }//end if
-			
-		}//end finally
+			// 6. 연결끊기
+			if (rs != null) {
+				rs.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+			if (con != null) {
+				con.close();
+			} // end if
+
+		} // end finally
 		return list;
-		
-	}//selectAreaList
-	
-	
-	public List<AllListVO> selectListByID( int jcbAreaIndex, int jcbCateIndex, String jtfText) throws SQLException {
-		
-		List<AllListVO> list=new ArrayList<AllListVO>();
-		
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		
-		
+
+	}// selectAreaList
+
+	public List<AllListVO> selectListByID(int jcbAreaIndex, int jcbCateIndex, String jtfText) throws SQLException {
+
+		List<AllListVO> list = new ArrayList<AllListVO>();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
 		try {
-			//커넥션 얻기
-			con=getConn();
-			
-			
-			//3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
+			// 커넥션 얻기
+			con = getConn();
+
+			// 3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
 			StringBuilder selectArea = new StringBuilder();
-			selectArea			
-			.append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.user_id, PRICE,loc_code ")
-			.append(" from PRODUCT, id_info ")
-			.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' ");
-			
-			
-			
-			if(jcbAreaIndex != 0) {
+			selectArea.append(
+					" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.user_id, PRICE,loc_code ")
+					.append(" from PRODUCT, id_info ")
+					.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' ");
+
+			if (jcbAreaIndex != 0) {
 //				selectArea.append( " and user_id in ( select user_id  from id_info where loc_code ='"+df.format(jcbAreaIndex)+"') ");
-				selectArea.append( " and loc_code ="+df.format(jcbAreaIndex)+" ");
+				selectArea.append(" and loc_code =" + df.format(jcbAreaIndex) + " ");
 			}
-			if(jcbCateIndex != 0) {
-				selectArea.append( " and category_code ='"+df.format(jcbCateIndex)+"' ");
+			if (jcbCateIndex != 0) {
+				selectArea.append(" and category_code ='" + df.format(jcbCateIndex) + "' ");
 			}
-			if(!jtfText.isEmpty()) {
-				selectArea.append(" and id_info.user_id like '%"+jtfText+"%' ");
+			if (!jtfText.isEmpty()) {
+				selectArea.append(" and id_info.user_id like '%" + jtfText + "%' ");
 			}
 
-			
-			pstmt=con.prepareStatement(selectArea.toString());
-			
-			//4. 바인드변수에 값 넣기
-			//5. 쿼리 수행 후 결과 얻기
-			rs=pstmt.executeQuery(); 
-			AllListVO alv=null; 
-			
-			while(rs.next()) {
-				alv=new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
-						rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),  
-						rs.getString("CATEGORY_CODE"), rs.getString("user_id"),rs.getInt("PRICE"));
+			pstmt = con.prepareStatement(selectArea.toString());
+
+			// 4. 바인드변수에 값 넣기
+			// 5. 쿼리 수행 후 결과 얻기
+			rs = pstmt.executeQuery();
+			AllListVO alv = null;
+
+			while (rs.next()) {
+				alv = new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
+						rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),
+						rs.getString("CATEGORY_CODE"), rs.getString("user_id"), rs.getInt("PRICE"));
 				list.add(alv);
-			}//end while
+			} // end while
 		} finally {
-			//6. 연결끊기
-			if (rs !=null) { rs.close(); }//end if
-			if (pstmt !=null) { pstmt.close(); }//end if
-			if (con !=null) { con.close(); }//end if
-			
-		}//end finally
+			// 6. 연결끊기
+			if (rs != null) {
+				rs.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+			if (con != null) {
+				con.close();
+			} // end if
+
+		} // end finally
 		return list;
-		
-	}//selectListByID
-	
-	public List<AllListVO> selectListRecent( int jcbAreaIndex, int jcbCateIndex, String jtfText) throws SQLException {
-		List<AllListVO> list=new ArrayList<AllListVO>();
-		
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		
-		String area ="";
-		String category ="";
-		String productName ="";
-		
-		
+
+	}// selectListByID
+
+	public List<AllListVO> selectListRecent(int jcbAreaIndex, int jcbCateIndex, String jtfText) throws SQLException {
+		List<AllListVO> list = new ArrayList<AllListVO>();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String area = "";
+		String category = "";
+		String productName = "";
+
 		try {
-			//커넥션 얻기
-			con=getConn();
-			
-			
-			//3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
+			// 커넥션 얻기
+			con = getConn();
+
+			// 3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
 			StringBuilder selectArea = new StringBuilder();
-			selectArea			
-			.append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code ")
-			.append(" from PRODUCT, id_info ")
-			.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' ");
-			
-			
-			
-			if(jcbAreaIndex != 0) {
+			selectArea.append(
+					" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code ")
+					.append(" from PRODUCT, id_info ")
+					.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' ");
+
+			if (jcbAreaIndex != 0) {
 //				selectArea.append( " and user_id in ( select user_id  from id_info where loc_code ='"+df.format(jcbAreaIndex)+"') ");
-				selectArea.append( " and loc_code ="+df.format(jcbAreaIndex)+" ");
+				selectArea.append(" and loc_code =" + df.format(jcbAreaIndex) + " ");
 			}
-			if(jcbCateIndex != 0) {
-				selectArea.append( " and category_code ='"+df.format(jcbCateIndex)+"' ");
+			if (jcbCateIndex != 0) {
+				selectArea.append(" and category_code ='" + df.format(jcbCateIndex) + "' ");
 			}
-			if(!jtfText.isEmpty()) {
-				selectArea.append(" and product_name like '%"+jtfText+"%' ");
+			if (!jtfText.isEmpty()) {
+				selectArea.append(" and product_name like '%" + jtfText + "%' ");
 			}
-			
-			selectArea.append(" order by inputDate desc "); 
-			
+
+			selectArea.append(" order by inputDate desc ");
+
 //			select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, USER_ID, PRICE
 //			from PRODUCT
 //			where all_flag ='P'  and user_id in ( select user_id  from id_info where loc_code ='07') and category_code ='04'  and product_name like '%은과%'
 //			order by inputDate desc ;
-			
-			
+
 			/*
 			 * select user_id,product_name from product where ( user_id in ( select user_id
-			 * from id_info where loc_code ='12')) and all_flag ='P';
-			 이거임*/ 			
-			
-			
-			pstmt=con.prepareStatement(selectArea.toString());
-			
-			//4. 바인드변수에 값 넣기
-			//5. 쿼리 수행 후 결과 얻기
-			rs=pstmt.executeQuery(); 
-			AllListVO alv=null; 
-			
-			while(rs.next()) {
-				alv=new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
-						rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),  
-						rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"),rs.getInt("PRICE"));
+			 * from id_info where loc_code ='12')) and all_flag ='P'; 이거임
+			 */
+
+			pstmt = con.prepareStatement(selectArea.toString());
+
+			// 4. 바인드변수에 값 넣기
+			// 5. 쿼리 수행 후 결과 얻기
+			rs = pstmt.executeQuery();
+			AllListVO alv = null;
+
+			while (rs.next()) {
+				alv = new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
+						rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),
+						rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"), rs.getInt("PRICE"));
 				list.add(alv);
-			}//end while
+			} // end while
 		} finally {
-			//6. 연결끊기
-			if (rs !=null) { rs.close(); }//end if
-			if (pstmt !=null) { pstmt.close(); }//end if
-			if (con !=null) { con.close(); }//end if
-			
-		}//end finally
+			// 6. 연결끊기
+			if (rs != null) {
+				rs.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+			if (con != null) {
+				con.close();
+			} // end if
+
+		} // end finally
 		return list;
-		
-	}//selectListRecent
-	
-	
-	public List<AllListVO> selectListPrice( int jcbAreaIndex, int jcbCateIndex, String jtfText) throws SQLException {
-		List<AllListVO> list=new ArrayList<AllListVO>();
-		
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		
-		String area ="";
-		String category ="";
-		String productName ="";
-		
-		
+
+	}// selectListRecent
+
+	public List<AllListVO> selectListPrice(int jcbAreaIndex, int jcbCateIndex, String jtfText) throws SQLException {
+		List<AllListVO> list = new ArrayList<AllListVO>();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String area = "";
+		String category = "";
+		String productName = "";
+
 		try {
-			//커넥션 얻기
-			con=getConn();
-			
-			
-			//3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
+			// 커넥션 얻기
+			con = getConn();
+
+			// 3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
 			StringBuilder selectArea = new StringBuilder();
-			selectArea			
-			.append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code ")
-			.append(" from PRODUCT, id_info ")
-			.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' ");
-			
-			
-			
-			if(jcbAreaIndex != 0) {
+			selectArea.append(
+					" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code ")
+					.append(" from PRODUCT, id_info ")
+					.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' ");
+
+			if (jcbAreaIndex != 0) {
 //				selectArea.append( " and user_id in ( select user_id  from id_info where loc_code ='"+df.format(jcbAreaIndex)+"') ");
-				selectArea.append( " and loc_code ="+df.format(jcbAreaIndex)+" ");
+				selectArea.append(" and loc_code =" + df.format(jcbAreaIndex) + " ");
 			}
-			if(jcbCateIndex != 0) {
-				selectArea.append( " and category_code ='"+df.format(jcbCateIndex)+"' ");
+			if (jcbCateIndex != 0) {
+				selectArea.append(" and category_code ='" + df.format(jcbCateIndex) + "' ");
 			}
-			if(!jtfText.isEmpty()) {
-				selectArea.append(" and product_name like '%"+jtfText+"%' ");
+			if (!jtfText.isEmpty()) {
+				selectArea.append(" and product_name like '%" + jtfText + "%' ");
 			}
-			
-			selectArea.append(" order by price desc "); 
-			
+
+			selectArea.append(" order by price desc ");
+
 //			select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, USER_ID, PRICE
 //			from PRODUCT
 //			where all_flag ='P'  and user_id in ( select user_id  from id_info where loc_code ='07') and category_code ='04'  and product_name like '%은과%'
 //			order by inputDate desc ;
-			
-			
+
 			/*
 			 * select user_id,product_name from product where ( user_id in ( select user_id
-			 * from id_info where loc_code ='12')) and all_flag ='P';
-			 이거임*/ 			
-			
-			
-			pstmt=con.prepareStatement(selectArea.toString());
-			
-			//4. 바인드변수에 값 넣기
-			//5. 쿼리 수행 후 결과 얻기
-			rs=pstmt.executeQuery(); 
-			AllListVO alv=null; 
-			
-			while(rs.next()) {
-				alv=new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
-						rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),  
-						rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"),rs.getInt("PRICE"));
+			 * from id_info where loc_code ='12')) and all_flag ='P'; 이거임
+			 */
+
+			pstmt = con.prepareStatement(selectArea.toString());
+
+			// 4. 바인드변수에 값 넣기
+			// 5. 쿼리 수행 후 결과 얻기
+			rs = pstmt.executeQuery();
+			AllListVO alv = null;
+
+			while (rs.next()) {
+				alv = new AllListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
+						rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),
+						rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"), rs.getInt("PRICE"));
 				list.add(alv);
-			}//end while
+			} // end while
 		} finally {
-			//6. 연결끊기
-			if (rs !=null) { rs.close(); }//end if
-			if (pstmt !=null) { pstmt.close(); }//end if
-			if (con !=null) { con.close(); }//end if
-			
-		}//end finally
+			// 6. 연결끊기
+			if (rs != null) {
+				rs.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+			if (con != null) {
+				con.close();
+			} // end if
+
+		} // end finally
 		return list;
-		
-	}//selectListRecent
-	
-	
-	
+
+	}// selectListRecent
+
 	/**
 	 * 상품 디테일창으로 정보 넘기는 method
+	 * 
 	 * @param productCode
 	 * @param loc_code
 	 * @return
 	 * @throws SQLException
 	 */
 	public MarketDetailVO selectProDetail(String productCode, String loc_code) throws SQLException {
-		
-		MarketDetailVO mdVO=null;
 
-		
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		
-		try { 
-			//커넥션 얻기
-			con=getConn();		
-				  
-				
-				//3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
-				StringBuilder selectDetail = new StringBuilder();
-				selectDetail		
-				.append(" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code, info ")
-				.append(" from PRODUCT, id_info ")
-				.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' and PRODUCT_CODE=? ");//물음표랑 ''랑 같이쓰면 안됨.					
+		MarketDetailVO mdVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			// 커넥션 얻기
+			con = getConn();
+
+			// 3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
+			StringBuilder selectDetail = new StringBuilder();
+			selectDetail.append(
+					" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code, info ")
+					.append(" from PRODUCT, id_info ")
+					.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' and PRODUCT_CODE=? ");// 물음표랑
+																												// ''랑
+																												// 같이쓰면
+																												// 안됨.
 //				.append(" order by inputDate desc "); 
-				
-								
-	
-				
-				pstmt=con.prepareStatement(selectDetail.toString());
-				
-				//4. 바인드변수에 값 넣기
-				pstmt.setString(1, productCode);
-				//5. 쿼리 수행 후 결과 얻기
-				rs=pstmt.executeQuery(); 
-				
-				if(rs.next()) {
-					mdVO=new MarketDetailVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
-							rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),  
-							rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"),rs.getString("INFO"),rs.getInt("PRICE"));
-				}//end if
-			} finally {
-				//6. 연결끊기
-				if (rs !=null) { rs.close(); }//end if
-				if (pstmt !=null) { pstmt.close(); }//end if
-				if (con !=null) { con.close(); }//end if
-				
-			}//end finally
+
+			pstmt = con.prepareStatement(selectDetail.toString());
+
+			// 4. 바인드변수에 값 넣기
+			pstmt.setString(1, productCode);
+			// 5. 쿼리 수행 후 결과 얻기
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				mdVO = new MarketDetailVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
+						rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),
+						rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"), rs.getString("INFO"),
+						rs.getInt("PRICE"));
+			} // end if
+		} finally {
+			// 6. 연결끊기
+			if (rs != null) {
+				rs.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+			if (con != null) {
+				con.close();
+			} // end if
+
+		} // end finally
 		return mdVO;
-	}//selectProDetail
-	
-	
-	
-	////////////////////////////////////// 채팅관련 메서드!!!!///////////////////////////////////
-	
+	}// selectProDetail
+
+	////////////////////////////////////// 채팅관련
+	////////////////////////////////////// 메서드!!!!///////////////////////////////////
+
 	public int addDeal(String productCode, String id) throws SQLException {
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		
-		try { 
-			//커넥션 얻기
-			con=getConn();		
-				 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			// 커넥션 얻기
+			con = getConn();
+
 			String check = "select deal_code from deal where product_code =? and user_id=?";
 
-				pstmt=con.prepareStatement(check);
-				
-				//4. 바인드변수에 값 넣기
-				pstmt.setString(1, productCode);
-				pstmt.setString(2, id);
-				//5. 쿼리 수행 후 결과 얻기
-				rs=pstmt.executeQuery(); 
-				
-				
-				if(rs.next()) {
-					System.out.println("거래중입니다.");
-					return -1;
-				}
-				pstmt.close(); 
-				
-				
-				String insert = "insert into deal(deal_code,product_code,user_id) values(deal_code,?,?) ";
-				pstmt=con.prepareStatement(insert);
-				pstmt.setString(1, productCode);
-				pstmt.setString(2, id);
-				int cnt = pstmt.executeUpdate();
-				
-				System.out.println(cnt);
-				return cnt;
-				
-			} finally {
-				//6. 연결끊기
-				if (rs !=null) { rs.close(); }//end if
-				if (pstmt !=null) { pstmt.close(); }//end if
-				if (con !=null) { con.close(); }//end if
-				
-			}//end finally
-		
-		 
-	}//addDeal
-	
-	public DCodeAndIdAO getDCodeAndId(String productCode, String id) throws SQLException {
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		
-		
-		try { 
-			//커넥션 얻기
-			con=getConn();		
-				 
-			String check = 
-"select deal_code, p.user_id seller_id from deal d,product p where p.product_code = ? and  d.user_id= ? and (d.product_code = p.product_code)";
+			pstmt = con.prepareStatement(check);
 
-				pstmt=con.prepareStatement(check);
-				
-				//4. 바인드변수에 값 넣기
-				pstmt.setString(1, productCode);
-				pstmt.setString(2, id);
-				//5. 쿼리 수행 후 결과 얻기
-				rs=pstmt.executeQuery(); 
-				
-				
-				if(rs.next()) {
-					return new DCodeAndIdAO(rs.getString("deal_code"), rs.getString("seller_id"));
-				}else {
-					System.out.println("거래가 없습니다.");
-					return new DCodeAndIdAO("","");
-				}
-				
-				
-			} finally {
-				//6. 연결끊기
-				if (rs !=null) { rs.close(); }//end if
-				if (pstmt !=null) { pstmt.close(); }//end if
-				if (con !=null) { con.close(); }//end if
-				
-			}//end finally
-	}//getDealCode
-	
-	
-	public List<ChatVO> selectAllChat(String me,String you, String dealCode) throws SQLException {
+			// 4. 바인드변수에 값 넣기
+			pstmt.setString(1, productCode);
+			pstmt.setString(2, id);
+			// 5. 쿼리 수행 후 결과 얻기
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				System.out.println("거래중입니다.");
+				return -1;
+			}
+			pstmt.close();
+
+			String insert = "insert into deal(deal_code,product_code,user_id) values(deal_code,?,?) ";
+			pstmt = con.prepareStatement(insert);
+			pstmt.setString(1, productCode);
+			pstmt.setString(2, id);
+			int cnt = pstmt.executeUpdate();
+
+			System.out.println(cnt);
+			return cnt;
+
+		} finally {
+			// 6. 연결끊기
+			if (rs != null) {
+				rs.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+			if (con != null) {
+				con.close();
+			} // end if
+
+		} // end finally
+
+	}// addDeal
+
+	public DCodeAndIdAO getDCodeAndId(String productCode, String id) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			// 커넥션 얻기
+			con = getConn();
+
+			String check = "select deal_code, p.user_id seller_id from deal d,product p where p.product_code = ? and  d.user_id= ? and (d.product_code = p.product_code)";
+
+			pstmt = con.prepareStatement(check);
+
+			// 4. 바인드변수에 값 넣기
+			pstmt.setString(1, productCode);
+			pstmt.setString(2, id);
+			// 5. 쿼리 수행 후 결과 얻기
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				return new DCodeAndIdAO(rs.getString("deal_code"), rs.getString("seller_id"));
+			} else {
+				System.out.println("거래가 없습니다.");
+				return new DCodeAndIdAO("", "");
+			}
+
+		} finally {
+			// 6. 연결끊기
+			if (rs != null) {
+				rs.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+			if (con != null) {
+				con.close();
+			} // end if
+
+		} // end finally
+	}// getDealCode
+
+	public List<ChatVO> selectAllChat(String me, String you, String dealCode) throws SQLException {
 		List<ChatVO> list = new ArrayList<ChatVO>();
 
 		Connection con = null;
@@ -562,20 +571,20 @@ public class UserDAO {
 
 			ChatVO CV = null;
 			while (rs.next()) {
-				CV = new ChatVO(rs.getString("chat"),rs.getString("sender"),rs.getDate("input_date"));
+				CV = new ChatVO(rs.getString("chat"), rs.getString("sender"), rs.getDate("input_date"));
 				list.add(CV);// 조회된 레코드를 저장한 VO를 list에 추가
 			}
-			
+
 			pstmt.close();
-			
+
 			String setFlag = "update chatting set  read_flag = 'Y'	where read_flag ='N'and sender = ? and reciever = ?";
 			pstmt = con.prepareStatement(setFlag);
 			pstmt.setString(1, you);
 			pstmt.setString(2, me);
-			System.out.println(pstmt.executeUpdate()+"플래그 사이즈");
-			System.out.println(list.size()+"리스트 사이즈");
+			System.out.println(pstmt.executeUpdate() + "플래그 사이즈");
+			System.out.println(list.size() + "리스트 사이즈");
 			System.out.println("------------------------------");
-			
+
 			// 4. 바인드 변수 값 넣기
 			// 5. 쿼리 수행후 결과 얻기
 
@@ -592,8 +601,8 @@ public class UserDAO {
 		return list;
 
 	}// selectAllChat
-	
-	public List<ChatVO> selectChat(String me,String you, String dealCode) throws SQLException {
+
+	public List<ChatVO> selectChat(String me, String you, String dealCode) throws SQLException {
 		List<ChatVO> list = new ArrayList<ChatVO>();
 
 		Connection con = null;
@@ -614,20 +623,20 @@ public class UserDAO {
 
 			ChatVO CV = null;
 			while (rs.next()) {
-				CV = new ChatVO(rs.getString("chat"),rs.getString("sender"),rs.getDate("input_date"));
+				CV = new ChatVO(rs.getString("chat"), rs.getString("sender"), rs.getDate("input_date"));
 				list.add(CV);// 조회된 레코드를 저장한 VO를 list에 추가
 			}
-			
+
 			pstmt.close();
-			
+
 			String setFlag = "update chatting set  read_flag = 'Y'	where read_flag ='N'and sender = ? and reciever = ?";
 			pstmt = con.prepareStatement(setFlag);
 			pstmt.setString(1, you);
 			pstmt.setString(2, me);
-			System.out.println(pstmt.executeUpdate()+"플래그 사이즈");
-			System.out.println(list.size()+"리스트 사이즈");
+			System.out.println(pstmt.executeUpdate() + "플래그 사이즈");
+			System.out.println(list.size() + "리스트 사이즈");
 			System.out.println("------------------------------");
-			
+
 			// 4. 바인드 변수 값 넣기
 			// 5. 쿼리 수행후 결과 얻기
 
@@ -644,8 +653,7 @@ public class UserDAO {
 		return list;
 
 	}// selectAllChat
-	
-	
+
 	public void sendChat(String me, String you, String chat, String dealCode) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -654,7 +662,7 @@ public class UserDAO {
 			con = getConn();
 			// 3.
 			String sendChat = "";
-			sendChat ="insert into chatting(sender,reciever,chat,deal_code) values(?,?,?,?)";
+			sendChat = "insert into chatting(sender,reciever,chat,deal_code) values(?,?,?,?)";
 
 			pstmt = con.prepareStatement(sendChat);
 			// 4.
@@ -674,294 +682,313 @@ public class UserDAO {
 				con.close();// end if
 
 		} // end finally
-	}//sendChat
-	
-	
-	
-	
-	
-	
+	}// sendChat
+///////////////////////////// 채팅리스트 메서드!!!!!!!!!!!!///////////////////////////////////
+
+//	public List<ChatListVO> setChatList() {
+//		
+//		
+//		
+//		
+//	}
+
 ////////////////////////////////////////////////////////////////////////////////////////////
-	
-	
-	
-	
-	
-	
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	// 로그인 시 이름 출력!!
-		public String[] loginRun(LoginVO lVO) throws SQLException {
-			String[] loginInfo = new String[2];
-			Connection con = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs= null;
-			try {
-				//연결
-				con =getConn();
-				//쿼리문 생성
-				StringBuilder selectLogin = new StringBuilder();
-				selectLogin.append("select user_name , suspend_flag ")
-				.append(" from id_info ")
-				.append(" where user_id=? ")
-				.append(" and password= ?");
-				
-				
-				pstmt = con.prepareStatement(selectLogin.toString());
-				//바인드 값 변수 얻기
-				pstmt.setString(1, lVO.getId());
-				pstmt.setString(2, lVO.getPass());
-				//쿼리 실행
-				rs= pstmt.executeQuery();
-				if(rs.next()){
-					loginInfo[0] = rs.getString("user_name");
-					loginInfo[1] =rs.getString("suspend_flag");
-				}//end while
-				
-			}finally {
-				if(con!=null) {con.close();}//end if
-				if(pstmt!=null) {pstmt.close();}//end if
-				if(rs!=null) {rs.close();}//end if
-			}//end finally
-			return loginInfo;
-		}//loginRun
-//중복된 아이디 체크 
-		public String idCheck(String id) throws SQLException {
-			Connection con = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs =null;
-			String checkId ="";
-			try {
-				con=getConn();
-				StringBuilder selectID = new StringBuilder();
-				selectID
-				.append(" select user_id ")
-				.append(" from id_info ")
-				.append("where user_id =?");
-			
-				pstmt=con.prepareStatement(selectID.toString());
-				
-				pstmt.setString(1, id);
-				rs = pstmt.executeQuery();
-				while(rs.next()) {
-					checkId=rs.getString(1);
-				}//end while
-			}finally {
-				if(con!=null) {con.close();}//end if
-				if(pstmt!=null) {pstmt.close();}//end if
-				if(rs!=null) {rs.close();}//end if
-			}//end finally
-			
-			return checkId;
-		}//IdCheck		
-		
-		
-//회원가입
-public int insertLogin(SignUpVO suVO) throws SQLException {
-int insertflag =0;
-
-Connection con= null;
-PreparedStatement pstmt=null;
-try {
-con=getConn();
-StringBuilder insertResigter = new StringBuilder();
-insertResigter
-.append("insert into id_info(user_id,password, user_name, gender, phone, answer,  loc_code, hint_code)values(?,?,?,?,?,?,?,?)");
-
-pstmt=con.prepareStatement(insertResigter.toString());
-pstmt.setString(1,suVO.getId());
-pstmt.setString(2,suVO.getPw());
-pstmt.setString(3,suVO.getName());
-pstmt.setString(4,suVO.getGender());
-pstmt.setString(5,suVO.getPhone());
-pstmt.setString(6,suVO.getPwAnswer());
-pstmt.setString(7,suVO.getLoc());
-pstmt.setString(8,suVO.getPwHint());
-
-insertflag = pstmt.executeUpdate();
-
-
-}finally{
-if(con!=null) {con.close();}//end if
-if(pstmt!=null) {pstmt.close();}//end if
-}//end finally
-
-
-
-return insertflag;
-
-}//updateRegister
-
-
-//분실 아이디찾기
-public String selectIdCheck(ForgotIdVO fiVO) throws SQLException {
-	Connection con = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	String id="";
-	try {
-		con = getConn();
-		StringBuilder forgotId = new StringBuilder();
-		forgotId
-		.append("select user_id from id_info where user_name=? and phone=?");
-		
-		pstmt=con.prepareStatement(forgotId.toString());
-		
-		pstmt.setString(1, fiVO.getName());
-		pstmt.setString(2, fiVO.getPhone());
-		
-		rs= pstmt.executeQuery();
-		
-		while(rs.next()) {
-			id=rs.getString(1);
-		}
-		
-	}finally {
-		if(con!=null) {con.close();}//end if
-		if(pstmt!=null) {pstmt.close();}//end if
-		if(rs!=null) {rs.close();}//end if
-		
-	}
-	return id;
-}//selectId
-public boolean updateForgotPw(ForgotPwVO fpVO,String uuid) throws SQLException {
-	boolean updateFlag = false;
-	Connection con = null;
-	PreparedStatement pstmt = null;
-	try {
-		con = getConn();
-		StringBuilder updatePw = new StringBuilder();
-		updatePw
-		.append("Update id_info set password='")
-		.append(uuid)
-		.append("' where user_id =? and answer=? and hint_code=?");
-		
-		pstmt=con.prepareStatement(updatePw.toString());
-		
-		pstmt.setString(1, fpVO.getId());
-		pstmt.setString(2, fpVO.getPwAnswer());
-		pstmt.setString(3, fpVO.getPwHint());
-		
-		updateFlag=pstmt.executeUpdate()==1;
-		
-	}finally {
-		if(con!=null) {con.close();}//end if
-		if(pstmt!=null) {pstmt.close();}//end if
-	}//end finally
-	
-	return updateFlag;
-}//updateForgetPw
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public PersonalInformVO selectPersonalInfom(String id) throws SQLException {
-		Connection con =null;
+	public String[] loginRun(LoginVO lVO) throws SQLException {
+		String[] loginInfo = new String[2];
+		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs =null;
-		PersonalInformVO piVO=null ;
+		ResultSet rs = null;
 		try {
-			con =getConn();
-			StringBuilder selectAllInfo = new StringBuilder();
-			selectAllInfo
-			.append("select user_id,password,user_name,gender,phone,answer,loc_code,hint_code from id_info where user_id=?");
-			pstmt= con.prepareStatement(selectAllInfo.toString());
-			
+			// 연결
+			con = getConn();
+			// 쿼리문 생성
+			StringBuilder selectLogin = new StringBuilder();
+			selectLogin.append("select user_name , suspend_flag ").append(" from id_info ").append(" where user_id=? ")
+					.append(" and password= ?");
+
+			pstmt = con.prepareStatement(selectLogin.toString());
+			// 바인드 값 변수 얻기
+			pstmt.setString(1, lVO.getId());
+			pstmt.setString(2, lVO.getPass());
+			// 쿼리 실행
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				loginInfo[0] = rs.getString("user_name");
+				loginInfo[1] = rs.getString("suspend_flag");
+			} // end while
+
+		} finally {
+			if (con != null) {
+				con.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+			if (rs != null) {
+				rs.close();
+			} // end if
+		} // end finally
+		return loginInfo;
+	}// loginRun
+//중복된 아이디 체크 
+
+	public String idCheck(String id) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String checkId = "";
+		try {
+			con = getConn();
+			StringBuilder selectID = new StringBuilder();
+			selectID.append(" select user_id ").append(" from id_info ").append("where user_id =?");
+
+			pstmt = con.prepareStatement(selectID.toString());
+
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-		piVO = new PersonalInformVO(rs.getString("user_id"),rs.getString("password"),rs.getString("user_name"),
-				rs.getString("gender"),rs.getString("phone"),rs.getString("answer"),rs.getString("loc_code"),rs.getString("hint_code"));
-			}//end while
-		}finally {
-			if(con!=null) {con.close();}//end if
-			if(pstmt!=null) {pstmt.close();}//end if
-			if(rs!=null) {rs.close();}//end if
-		}//end finally
-		return piVO;
-	}//selectPersonalInfom
+			while (rs.next()) {
+				checkId = rs.getString(1);
+			} // end while
+		} finally {
+			if (con != null) {
+				con.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+			if (rs != null) {
+				rs.close();
+			} // end if
+		} // end finally
 
+		return checkId;
+	}// IdCheck
 
-public String selectPw(String pw) throws SQLException {
-String curPw ="";
-Connection con = null;
-PreparedStatement pstmt =null;
-ResultSet rs = null;
-try {
-con=getConn();
-StringBuilder selectPw = new StringBuilder();
-selectPw
-.append("select password from id_info where password=?");
+//회원가입
+	public int insertLogin(SignUpVO suVO) throws SQLException {
+		int insertflag = 0;
 
-pstmt = con.prepareStatement(selectPw.toString());
-pstmt.setString(1, pw);
-rs = pstmt.executeQuery();
-while(rs.next()) {
-curPw=rs.getString(1);
-}//end while
-}finally {
-if(con!=null) {con.close();}//end if
-if(pstmt!=null) {pstmt.close();}//end if
-if(rs!=null) {rs.close();}//end if
-}//end finally
-return curPw;
-}//selectPw
-
-	public boolean updatePw(String id,String pw) throws SQLException {
-		boolean updateFlag = false;
-		
-		Connection con =null;
+		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-		con=getConn();
-		StringBuilder updatePw = new StringBuilder();
-		updatePw
-		.append("update id_info ")
-		.append(" set password =? ")
-		.append(" where user_id =? ");
-		pstmt = con.prepareStatement(updatePw.toString());
-		pstmt.setString(1, pw);
-		pstmt.setString(2, id);
-		
-		updateFlag =pstmt.executeUpdate()==1;
-		
-		}finally {
-		if(con!=null) {con.close();}//end if
-		if(pstmt!=null) {pstmt.close();}//end if
-		}//end finally
+			con = getConn();
+			StringBuilder insertResigter = new StringBuilder();
+			insertResigter.append(
+					"insert into id_info(user_id,password, user_name, gender, phone, answer,  loc_code, hint_code)values(?,?,?,?,?,?,?,?)");
+
+			pstmt = con.prepareStatement(insertResigter.toString());
+			pstmt.setString(1, suVO.getId());
+			pstmt.setString(2, suVO.getPw());
+			pstmt.setString(3, suVO.getName());
+			pstmt.setString(4, suVO.getGender());
+			pstmt.setString(5, suVO.getPhone());
+			pstmt.setString(6, suVO.getPwAnswer());
+			pstmt.setString(7, suVO.getLoc());
+			pstmt.setString(8, suVO.getPwHint());
+
+			insertflag = pstmt.executeUpdate();
+
+		} finally {
+			if (con != null) {
+				con.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+		} // end finally
+
+		return insertflag;
+
+	}// updateRegister
+
+//분실 아이디찾기
+	public String selectIdCheck(ForgotIdVO fiVO) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String id = "";
+		try {
+			con = getConn();
+			StringBuilder forgotId = new StringBuilder();
+			forgotId.append("select user_id from id_info where user_name=? and phone=?");
+
+			pstmt = con.prepareStatement(forgotId.toString());
+
+			pstmt.setString(1, fiVO.getName());
+			pstmt.setString(2, fiVO.getPhone());
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				id = rs.getString(1);
+			}
+
+		} finally {
+			if (con != null) {
+				con.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+			if (rs != null) {
+				rs.close();
+			} // end if
+
+		}
+		return id;
+	}// selectId
+
+	public boolean updateForgotPw(ForgotPwVO fpVO, String uuid) throws SQLException {
+		boolean updateFlag = false;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = getConn();
+			StringBuilder updatePw = new StringBuilder();
+			updatePw.append("Update id_info set password='").append(uuid)
+					.append("' where user_id =? and answer=? and hint_code=?");
+
+			pstmt = con.prepareStatement(updatePw.toString());
+
+			pstmt.setString(1, fpVO.getId());
+			pstmt.setString(2, fpVO.getPwAnswer());
+			pstmt.setString(3, fpVO.getPwHint());
+
+			updateFlag = pstmt.executeUpdate() == 1;
+
+		} finally {
+			if (con != null) {
+				con.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+		} // end finally
+
 		return updateFlag;
-	}//updatePw
+	}// updateForgetPw
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public PersonalInformVO selectPersonalInfom(String id) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		PersonalInformVO piVO = null;
+		try {
+			con = getConn();
+			StringBuilder selectAllInfo = new StringBuilder();
+			selectAllInfo.append(
+					"select user_id,password,user_name,gender,phone,answer,loc_code,hint_code from id_info where user_id=?");
+			pstmt = con.prepareStatement(selectAllInfo.toString());
+
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				piVO = new PersonalInformVO(rs.getString("user_id"), rs.getString("password"),
+						rs.getString("user_name"), rs.getString("gender"), rs.getString("phone"),
+						rs.getString("answer"), rs.getString("loc_code"), rs.getString("hint_code"));
+			} // end while
+		} finally {
+			if (con != null) {
+				con.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+			if (rs != null) {
+				rs.close();
+			} // end if
+		} // end finally
+		return piVO;
+	}// selectPersonalInfom
+
+	public String selectPw(String pw) throws SQLException {
+		String curPw = "";
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = getConn();
+			StringBuilder selectPw = new StringBuilder();
+			selectPw.append("select password from id_info where password=?");
+
+			pstmt = con.prepareStatement(selectPw.toString());
+			pstmt.setString(1, pw);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				curPw = rs.getString(1);
+			} // end while
+		} finally {
+			if (con != null) {
+				con.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+			if (rs != null) {
+				rs.close();
+			} // end if
+		} // end finally
+		return curPw;
+	}// selectPw
+
+	public boolean updatePw(String id, String pw) throws SQLException {
+		boolean updateFlag = false;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = getConn();
+			StringBuilder updatePw = new StringBuilder();
+			updatePw.append("update id_info ").append(" set password =? ").append(" where user_id =? ");
+			pstmt = con.prepareStatement(updatePw.toString());
+			pstmt.setString(1, pw);
+			pstmt.setString(2, id);
+
+			updateFlag = pstmt.executeUpdate() == 1;
+
+		} finally {
+			if (con != null) {
+				con.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+		} // end finally
+		return updateFlag;
+	}// updatePw
 
 	public boolean updateThing(modifyInformVO miVO) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		boolean flag =false;
+		boolean flag = false;
 		try {
 			con = getConn();
-			StringBuilder udThing=new StringBuilder();
-			udThing
-			.append(" update id_info ")
-			.append("set ")
-			.append(miVO.getThing())
-			.append("=? where user_id=?");
-			
+			StringBuilder udThing = new StringBuilder();
+			udThing.append(" update id_info ").append("set ").append(miVO.getThing()).append("=? where user_id=?");
+
 			pstmt = con.prepareStatement(udThing.toString());
 			pstmt.setString(1, miVO.getValue());
 			pstmt.setString(2, miVO.getId());
-			
-			flag = pstmt.executeUpdate()==1;
-			
-		}finally {
-			if(con!=null) {con.close();}//end if
-			if(pstmt!=null) {pstmt.close();}//end if
-			
-		}//end finally
-		
+
+			flag = pstmt.executeUpdate() == 1;
+
+		} finally {
+			if (con != null) {
+				con.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+
+		} // end finally
+
 		return flag;
-		}//selectThing
-
-
-
-
-
+	}// selectThing
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -969,4 +996,4 @@ return curPw;
 //
 //	}//main
 
-}//class
+}// class
