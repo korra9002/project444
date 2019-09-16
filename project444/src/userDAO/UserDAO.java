@@ -449,6 +449,56 @@ public class UserDAO {
 	}//selectProDetail
 	////////////////////////////////////// 채팅관련 메서드!!!!///////////////////////////////////
 	
+	public int addDeal(String productCode, String id) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		try { 
+			//커넥션 얻기
+			con=getConn();		
+				 
+			String check = "select deal_code from deal where product_code =? and user_id=?";
+
+				pstmt=con.prepareStatement(check);
+				
+				//4. 바인드변수에 값 넣기
+				pstmt.setString(1, productCode);
+				pstmt.setString(2, id);
+				//5. 쿼리 수행 후 결과 얻기
+				rs=pstmt.executeQuery(); 
+				
+				
+				if(rs.next()) {
+					System.out.println("거래중입니다.");
+					return -1;
+				}
+				pstmt.close(); 
+				
+				
+				String insert = "insert into deal(deal_code,product_code,user_id) values(deal_code,?,?) ";
+				pstmt=con.prepareStatement(insert);
+				pstmt.setString(1, productCode);
+				pstmt.setString(2, id);
+				int cnt = pstmt.executeUpdate();
+				
+				System.out.println(cnt);
+				return cnt;
+				
+			} finally {
+				//6. 연결끊기
+				if (rs !=null) { rs.close(); }//end if
+				if (pstmt !=null) { pstmt.close(); }//end if
+				if (con !=null) { con.close(); }//end if
+				
+			}//end finally
+		
+		 
+	}//addDeal
+	
+	public void openChat() {
+		
+	}
 	
 	
 	

@@ -13,9 +13,10 @@ import userView.UserInfo;
 
  
 public class RunMarketMain extends JFrame{
+public static String userId;
 
 	public RunMarketMain(String id) throws SQLException {
-		
+		userId = id;
 		
 		setLayout(null);
 		JTabbedPane jtp = new JTabbedPane();
