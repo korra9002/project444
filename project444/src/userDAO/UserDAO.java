@@ -47,8 +47,8 @@ public class UserDAO {
 		
 		//2. Connection ¾ò±â
 		
-		String url="jdbc:oracle:thin:@localhost:1521:orcl";
-//		String url="jdbc:oracle:thin:@211.63.89.159:1521:orcl";
+//		String url="jdbc:oracle:thin:@localhost:1521:orcl";
+		String url="jdbc:oracle:thin:@211.63.89.159:1521:orcl";
 		String id="junggo";
 		String pass="1234";
 		
