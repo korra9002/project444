@@ -311,7 +311,8 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 				
 				//현재 접속한 아이디와 포스팅 판매자 아이디와 같으면 MarketDetailBuyer
 				//다르다면 MarketDetailSeller
-				if (mdVO.getSellerID()==id) {
+				System.out.println(id+"/"+mdVO.getSellerID());
+				if (mdVO.getSellerID().equals(id)) {
 					new MarketDetailSeller(mm, mdVO, id);
 				} else {
 					new MarketDetailBuyer(mm, mdVO, id);
