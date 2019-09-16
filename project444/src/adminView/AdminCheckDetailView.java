@@ -1,7 +1,5 @@
 package adminView;
 
-import java.awt.event.WindowAdapter;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -9,52 +7,67 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.EtchedBorder;
 
+//import adminControl.AdminCheckDetailEvt;
+import adminControl.AdminMainEvt;
+import adminVO.CheckDetailVO;
+
+@SuppressWarnings("serial")
 public class AdminCheckDetailView extends JDialog {
 	
 	private JLabel jlDetailImg;
-	private JTextField jtfName, jtfPrice, jtfId,jtfInputDate,jtfCategory;
+	private JTextField jtfProductName, jtfPrice, jtfUserId, jtfUploadDate, jtfCategory;
 	private JButton jbtGrant, jbtReject;
-	private JTextArea jtaStrongPoint;
+	private JTextArea jtaInfo;
 	
-//	private AdminView av; 메인이랑 연결/////// 
+	private AdminMainView amv; 
 
 	
-	public AdminCheckDetailView(/* CheckDetailView cdv, CheckListVO clVO*/) {
-//		super(av,"제품상세",true);////////
-//		this.av=av;////////////
+	public AdminCheckDetailView(AdminMainView amv, AdminMainEvt ame, CheckDetailVO cdVO) {
+		super(amv,"제품상세",true);////////
+		this.amv=amv;////////////
 		
-		jlDetailImg = new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/img/무민.jpg/"));//썸네일X / 원본 이미지
-//		jlDetailImg.setHorizontalAlignment(JLabel.CENTER);
+		jlDetailImg = new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/img/무민.jpg/"), JLabel.CENTER);//썸네일X / 원본 이미지
+		jlDetailImg.setBorder(new EtchedBorder(EtchedBorder.RAISED));//이미지 라벨 테두리 설정
 		
 		JLabel jlId=new JLabel("판매자");
 		JLabel jlName=new JLabel("제품이름");
 		JLabel jlPrice=new JLabel("가격");
 		JLabel jlInputDate=new JLabel("올린일자");
 		JLabel jlCategory=new JLabel("카테고리");
-
 		
 		//JTextField
-		jtfName=new JTextField();
+		jtfProductName=new JTextField();
 		jtfPrice=new JTextField();
-		jtfId=new JTextField();
-		jtfInputDate=new JTextField();
+		jtfUserId=new JTextField();
+		jtfUploadDate=new JTextField();
 		jtfCategory=new JTextField();
 		
 		//바꾸지 못하게
-		jtfName.setEditable(false);
+		jtfProductName.setEditable(false);
 		jtfPrice.setEditable(false);
-		jtfId.setEditable(false);
-		jtfInputDate.setEditable(false);
+		jtfUserId.setEditable(false);
+		jtfUploadDate.setEditable(false);
 		jtfCategory.setEditable(false);
 		
 		
 		//JTextArea
-		jtaStrongPoint=new JTextArea();
-		JScrollPane jsp=new JScrollPane(jtaStrongPoint);
+		jtaInfo=new JTextArea();
+		JScrollPane jsp=new JScrollPane(jtaInfo);
+		jtaInfo.setEditable(false);
 		
 		jbtGrant=new JButton("판매승인");
 		jbtReject=new JButton("판매거부");
+		
+		//set text
+		jlDetailImg.setText(cdVO.getImg_file());
+		jtfProductName.setText(cdVO.getProduct_name());
+		jtfPrice.setText(String.valueOf(cdVO.getPrice()));
+		jtfUserId.setText(cdVO.getUser_id());
+		jtfUploadDate.setText(cdVO.getUpload_date());
+		jtfCategory.setText(cdVO.getCategory());
+		jtaInfo.setText(cdVO.getInfo());
 		
 		//setBounds
 		jlDetailImg.setBounds(15, 15, 320, 320);
@@ -66,10 +79,10 @@ public class AdminCheckDetailView extends JDialog {
 		jlCategory.setBounds(345, 190, 70, 40);
 		
 		
-		jtfName.setBounds(420, 50, 215, 30);
+		jtfProductName.setBounds(420, 50, 215, 30);
 		jtfPrice.setBounds(420, 85, 215, 30);
-		jtfId.setBounds(420, 120, 215, 30);
-		jtfInputDate.setBounds(420, 155, 215, 30);
+		jtfUserId.setBounds(420, 120, 215, 30);
+		jtfUploadDate.setBounds(420, 155, 215, 30);
 		jtfCategory.setBounds(420, 190, 215, 30);
 		
 		jsp.setBounds(345, 260, 295, 120);
@@ -86,40 +99,70 @@ public class AdminCheckDetailView extends JDialog {
 		add(jlId);
 		add(jlInputDate);
 		add(jlCategory);
-		add(jtfName);
+		add(jtfProductName);
 		add(jtfPrice);
-		add(jtfId);
+		add(jtfUserId);
 		add(jsp);
 		add(jbtGrant);
 		add(jbtReject);
-		add(jtfInputDate);
+		add(jtfUploadDate);
 		add(jtfCategory);
 		
 		//이벤트 등록/////////////////////////////////////
-//		CheckDetailView cdv=new CheckDetailView(/*this,cdv,clVO.getCode*/);//CheckListVO 에서 getter한 코드////
+//		AdminCheckDetailEvt acde=new AdminCheckDetailEvt(this, cdVO.getProduct_code());//CheckListVO 에서 getter한 코드////
 			
-//		jbtGrant.addActionListener(cdv);//////
-//		jbtReject.addAncestorListener(cdv);////////
-		
-//		addWindowListener(new WindowAdapter() {///////
-		
-//		@Override//////////
-		
-//		});/////////
+//		jbtGrant.addActionListener(acde);//////
+//		jbtReject.addActionListener(acde);////////
 		
 		setResizable(false);
-		setBounds(100, 100, 670, 440);
+		setBounds(amv.getX()+800, amv.getY()+50, 670, 440);
 		setVisible(true);
-		
-		//setBounds
-		
 		
 	}//MarketDetail
 
-
-	public static void main(String[] args) {//////////////////지워!!!!!!!!!!!!
-		new AdminCheckDetailView();
+	public JLabel getJlDetailImg() {
+		return jlDetailImg;
 	}
+
+	public JTextField getJtfProductName() {
+		return jtfProductName;
+	}
+
+	public JTextField getJtfPrice() {
+		return jtfPrice;
+	}
+
+	public JTextField getJtfUserId() {
+		return jtfUserId;
+	}
+
+	public JTextField getJtfUploadDate() {
+		return jtfUploadDate;
+	}
+
+	public JTextField getJtfCategory() {
+		return jtfCategory;
+	}
+
+	public JButton getJbtGrant() {
+		return jbtGrant;
+	}
+
+	public JButton getJbtReject() {
+		return jbtReject;
+	}
+
+	public JTextArea getJtaInfo() {
+		return jtaInfo;
+	}
+
+	public AdminMainView getAmv() {
+		return amv;
+	}
+
+//	public static void main(String[] args) {//////////////////지워!!!!!!!!!!!!
+//		new AdminCheckDetailView();
+//	}
 	
 	//getter/////////////////////////////////
 	

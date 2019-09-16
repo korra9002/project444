@@ -27,7 +27,7 @@ import adminControl.AdminMainEvt;
 public class AdminMainView extends JFrame {
 	
 	private JTabbedPane jtp;
-	private JButton jbtSearch1, jbtRefresh1, jbtRecent1, jbtSearch2, jbtRefresh2, jbtRecent2, 
+	private JButton jbtSearch1, jbtRefresh1, jbtRecent1, jbtReset1, jbtReset2, jbtReset3, jbtSearch2, jbtRefresh2, jbtRecent2, 
 		jbtSearch3, jbtRefresh3;
 	private JTable jtCheckList, jtProductList, jtUserList;
 	private DefaultTableModel dtmCheckList, dtmProductList, dtmUserList;
@@ -58,18 +58,11 @@ public class AdminMainView extends JFrame {
 		jbtSearch1 = new JButton("검색");
 		jbtRefresh1 = new JButton("새로고침");
 		jbtRecent1 = new JButton("최신순");
+		jbtReset1 = new JButton("초기화");
 		
-		
-		String[] checkCol= {"상품코드", "이미지", "id", "카테고리", "제품명", "가격", "올린일자"};
+		String[] checkCol= {"상품코드", "이미지", "아이디", "카테고리", "제품명", "가격", "올린일자"};
 		Object[][] checkRow = {
-				{1,2,3,4,5,6,7},
-				{1,2,3,4,5,6,7},
-				{1,2,3,4,5,6,7},
-				{1,2,3,4,5,6,7},
-				{1,2,3,4,5,6,7},
-				{1,2,3,4,5,6,7},
-				{1,2,3,4,5,6,7},
-				{1,2,3,4,5,6,7}
+				{"","","","","","",""}
 				};
 		
 		dtmCheckList = new DefaultTableModel(checkRow, checkCol){//셀 내용 수정 금지
@@ -124,7 +117,8 @@ public class AdminMainView extends JFrame {
 		JPanel jpCheckList = new JPanel(null);
 		
 		jspCheckList.setBounds(10, 10, 670, 500);
-		jbtRefresh1.setBounds(570, 550, 90, 30);
+		jbtRefresh1.setBounds(570, 540, 90, 30);
+		jbtReset1.setBounds(570, 590, 90, 30);
 		jbtRecent1.setBounds(50, 580, 90, 30);
 		jcbCategory1.setBounds(50, 530, 120, 30);
 		jtfSearch1.setBounds(230, 565, 150, 30);
@@ -134,6 +128,7 @@ public class AdminMainView extends JFrame {
 		
 		jpCheckList.add(jspCheckList);
 		jpCheckList.add(jbtRecent1);
+		jpCheckList.add(jbtReset1);
 		jpCheckList.add(jbtRefresh1);
 		jpCheckList.add(jcbCategory1);
 		jpCheckList.add(jtfSearch1);
@@ -165,18 +160,11 @@ public class AdminMainView extends JFrame {
 		jbtSearch2 = new JButton("검색");
 		jbtRefresh2 = new JButton("새로고침");
 		jbtRecent2 = new JButton("최신순");
-
+		jbtReset2 = new JButton("초기화");
 		
-		String[] productCol= {"상품코드","이미지","id","카테고리","제품명","가격","올린일자","<html>판매여부/<br/>삭제여부"};
+		String[] productCol= {"상품코드","이미지","아이디","카테고리","제품명","가격","올린일자","<html>판매여부/<br/>삭제여부"};
 		Object[][] productRow = {
-				{1,2,3,4,5,6,7,8},
-				{1,2,3,4,5,6,7,8},
-				{1,2,3,4,5,6,7,8},
-				{1,2,3,4,5,6,7,8},
-				{1,2,3,4,5,6,7,8},
-				{1,2,3,4,5,6,7,8},
-				{1,2,3,4,5,6,7,8},
-				{1,2,3,4,5,6,7,8}
+				{"","","","","","",""},
 				};
 		
 		dtmProductList = new DefaultTableModel(productRow, productCol) {//셀 내용 수정 금지
@@ -234,19 +222,21 @@ public class AdminMainView extends JFrame {
 		JPanel jpProductList = new JPanel(null);
 		
 		jspProductList.setBounds(10, 10, 670, 500);
-		jbtRefresh2.setBounds(570, 590, 90, 30);
-		jbtRecent2.setBounds(50, 580, 90, 30);
 		jcbCategory2.setBounds(50, 530, 120, 30);
-		jtfSearch2.setBounds(230, 565, 150, 30);
-		jbtSearch2.setBounds(410, 565, 90, 30);
+		jbtRecent2.setBounds(50, 580, 90, 30);
 		jrbSubject2.setBounds(230, 530, 70, 30);
 		jrbID2.setBounds(300, 530, 70, 30);
-		onSale.setBounds(570, 510, 90, 30);
-		deleteNComplete.setBounds(570, 540, 90, 40);
+		jtfSearch2.setBounds(230, 565, 150, 30);
+		jbtSearch2.setBounds(410, 565, 90, 30);
+		onSale.setBounds(520, 530, 80, 30);
+		deleteNComplete.setBounds(610, 530, 90, 40);
+		jbtRefresh2.setBounds(510, 590, 90, 30);
+		jbtReset2.setBounds(610, 590, 90, 30);
 		
 		jpProductList.add(jspProductList);
 		jpProductList.add(jbtRecent2);
 		jpProductList.add(jbtRefresh2);
+		jpProductList.add(jbtReset2);
 		jpProductList.add(jcbCategory2);
 		jpProductList.add(jtfSearch2);
 		jpProductList.add(jbtSearch2);
@@ -267,20 +257,12 @@ public class AdminMainView extends JFrame {
 		
 		jbtSearch3 = new JButton("검색");
 		jbtRefresh3 = new JButton("새로고침");
+		jbtReset3 = new JButton("초기화");
 		JLabel jlbId = new JLabel("아이디");
 		
 		String[] idCol= {"아이디","이름","성별","전화번호","지역","가입일자","정지여부"};
 		Object[][] idRow = {
-				{1,2,3,4,5,6,7},
-				{1,2,3,4,5,6,7},
-				{1,2,3,4,5,6,7},
-				{1,2,3,4,5,6,7},
-				{1,2,3,4,5,6,7},
-				{1,2,3,4,5,6,7},
-				{1,2,3,4,5,6,7},
-				{1,2,3,4,5,6,7},
-				{1,2,3,4,5,6,7},
-				{1,2,3,4,5,6,7}
+				{"","","","","","",""},
 				};
 		
 		dtmUserList = new DefaultTableModel(idRow, idCol) {//셀 내용 수정 금지
@@ -336,7 +318,8 @@ public class AdminMainView extends JFrame {
 		
 		jspUserList.setBounds(10, 10, 670, 500);
 //		jcbCategory3.setBounds(50, 550, 120, 30);
-		jbtRefresh3.setBounds(570, 550, 90, 30);
+		jbtRefresh3.setBounds(570, 530, 90, 30);
+		jbtReset3.setBounds(570, 570, 90, 30);
 		jtfSearch3.setBounds(230, 550, 150, 30);
 		jbtSearch3.setBounds(410, 550, 90, 30);
 		jlbId.setBounds(150, 550, 90, 30);
@@ -346,6 +329,7 @@ public class AdminMainView extends JFrame {
 		jpUserList.add(jbtRefresh3);
 		jpUserList.add(jtfSearch3);
 		jpUserList.add(jbtSearch3);
+		jpUserList.add(jbtReset3);
 		jpUserList.add(jlbId);
 		/////////////////////////////////세번째 탭 끝/////////////////////////////////
 		
@@ -371,6 +355,9 @@ public class AdminMainView extends JFrame {
 		jbtSearch1.addActionListener(ame);
 		jbtSearch2.addActionListener(ame);
 		jbtSearch3.addActionListener(ame);
+		jbtReset1.addActionListener(ame);
+		jbtReset2.addActionListener(ame);
+		jbtReset3.addActionListener(ame);
 		
 		jcbCategory1.addActionListener(ame);
 		jcbCategory2.addActionListener(ame);
@@ -474,7 +461,18 @@ public class AdminMainView extends JFrame {
 	public JTextField getJtfSearch1() {
 		return jtfSearch1;
 	}
+	public JButton getJbtReset1() {
+		return jbtReset1;
+	}
 
+	public JButton getJbtReset2() {
+		return jbtReset2;
+	}
+	
+	public JButton getJbtReset3() {
+		return jbtReset3;
+	}
+	
 	public JTextField getJtfSearch2() {
 		return jtfSearch2;
 	}
