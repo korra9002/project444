@@ -538,7 +538,7 @@ public class UserDAO {
 			StringBuilder selectAll = new StringBuilder();
 			selectAll.append(
 					" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code, all_flag ")
-					.append(" from PRODUCT, id_info ")
+					.append(" from PRODUCT, id_info,  ")
 					.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='B' and PRODUCT.USER_ID=? ");
 
 			pstmt = con.prepareStatement(selectAll.toString());
