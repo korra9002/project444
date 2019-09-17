@@ -89,15 +89,17 @@ public class AdminDAO {
 			
 			if( cVO != null) {// 검색결과가 입력되었을때
 				//카테고리가 선택된 경우
-				if(!cVO.getCategory().equals("카테고리 선택")&&cVO.getValue().equals("")) {
+				if(!cVO.getCategory().equals("카테고리 전체")&&cVO.getValue().equals("")) {
 					selectCheck.append(" and category=?");
 					bindCnt = 1;
-				}else if(cVO.getCategory().equals("카테고리 선택")&&!cVO.getValue().equals("")){
+				}else if(cVO.getCategory().equals("카테고리 전체")&&!cVO.getValue().equals("")){
 					selectCheck.append(" and ").append(cVO.getCol_name().equals("제품명")?"product_name":"user_id").append("	like '%'||?||'%'");
 					bindCnt = 2;
-				}else if(!cVO.getCategory().equals("카테고리 선택")&&!cVO.getValue().equals("")) {
+				}else if(!cVO.getCategory().equals("카테고리 전체")&&!cVO.getValue().equals("")) {
 					selectCheck.append(" and category=? and ").append(cVO.getCol_name().equals("제품명")?"product_name":"user_id").append("	like '%'||?||'%'");
 					bindCnt = 3;
+				}else {
+					bindCnt = 0;
 				}//end if
 				
 			}//end if
@@ -168,13 +170,13 @@ public class AdminDAO {
 			
 			if( cVO != null) {// 검색결과가 입력되었을때
 				//카테고리가 선택된 경우
-				if(!cVO.getCategory().equals("카테고리 선택")&&cVO.getValue().equals("")) {
+				if(!cVO.getCategory().equals("카테고리 전체")&&cVO.getValue().equals("")) {
 					selectCheck.append(" and category=?");
 					bindCnt = 1;
-				}else if(cVO.getCategory().equals("카테고리 선택")&&!cVO.getValue().equals("")){
+				}else if(cVO.getCategory().equals("카테고리 전체")&&!cVO.getValue().equals("")){
 					selectCheck.append(" and ").append(cVO.getCol_name().equals("제품명")?"product_name":"user_id").append("	like '%'||?||'%'");
 					bindCnt = 2;
-				}else if(!cVO.getCategory().equals("카테고리 선택")&&!cVO.getValue().equals("")) {
+				}else if(!cVO.getCategory().equals("카테고리 전체")&&!cVO.getValue().equals("")) {
 					selectCheck.append(" and category=? and ").append(cVO.getCol_name().equals("제품명")?"product_name":"user_id").append("	like '%'||?||'%'");
 					bindCnt = 3;
 				}//end if
@@ -182,7 +184,7 @@ public class AdminDAO {
 			}//end if
 			
 //			System.out.println( selectCheck );
-			selectCheck.append("	order by upload_date	");
+			selectCheck.append("	order by upload_date desc	");
 			pstmt= con.prepareStatement(selectCheck.toString());
 				
 			//바인드 변수에 값넣기
@@ -343,13 +345,13 @@ public class AdminDAO {
 			
 			if( pVO != null) {// 검색결과가 입력되었을때
 				//카테고리가 선택된 경우
-				if(!pVO.getCategory().equals("카테고리 선택")&&pVO.getValue().equals("")) {
+				if(!pVO.getCategory().equals("카테고리 전체")&&pVO.getValue().equals("")) {
 					selectProduct.append(" and category=?");
 					bindCnt = 1;
-				}else if(pVO.getCategory().equals("카테고리 선택")&&!pVO.getValue().equals("")){
+				}else if(pVO.getCategory().equals("카테고리 전체")&&!pVO.getValue().equals("")){
 					selectProduct.append(" and ").append(pVO.getCol_name().equals("제품명")?"product_name":"user_id").append("	like '%'||?||'%'");
 					bindCnt = 2;
-				}else if(!pVO.getCategory().equals("카테고리 선택")&&!pVO.getValue().equals("")) {
+				}else if(!pVO.getCategory().equals("카테고리 전체")&&!pVO.getValue().equals("")) {
 					selectProduct.append(" and category=? and ").append(pVO.getCol_name().equals("제품명")?"product_name":"user_id").append("	like '%'||?||'%'");
 					bindCnt = 3;
 				}//end if
@@ -471,13 +473,13 @@ public class AdminDAO {
 			
 			if( pVO != null) {// 검색결과가 입력되었을때
 				//카테고리가 선택된 경우
-				if(!pVO.getCategory().equals("카테고리 선택")&&pVO.getValue().equals("")) {
+				if(!pVO.getCategory().equals("카테고리 전체")&&pVO.getValue().equals("")) {
 					selectProduct.append(" and category=?");
 					bindCnt = 1;
-				}else if(pVO.getCategory().equals("카테고리 선택")&&!pVO.getValue().equals("")){
+				}else if(pVO.getCategory().equals("카테고리 전체")&&!pVO.getValue().equals("")){
 					selectProduct.append(" and ").append(pVO.getCol_name().equals("제품명")?"product_name":"user_id").append("	like '%'||?||'%'");
 					bindCnt = 2;
-				}else if(!pVO.getCategory().equals("카테고리 선택")&&!pVO.getValue().equals("")) {
+				}else if(!pVO.getCategory().equals("카테고리 전체")&&!pVO.getValue().equals("")) {
 					selectProduct.append(" and category=? and ").append(pVO.getCol_name().equals("제품명")?"product_name":"user_id").append("	like '%'||?||'%'");
 					bindCnt = 3;
 				}//end if
@@ -486,7 +488,7 @@ public class AdminDAO {
 			
 //			System.out.println( selectProduct );
 //			System.out.println( pVO );
-			selectProduct.append("	order by upload_date	");
+			selectProduct.append("	order by upload_date desc	");
 			pstmt= con.prepareStatement(selectProduct.toString());
 				
 			//바인드 변수에 값넣기

@@ -633,29 +633,28 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 	}//openCheckDetail
 	
 	/////////////////////////////////////////////////////////////actionPerformed////////////////////////////////////////////////////////////////////////////////
-	@SuppressWarnings("rawtypes")
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		
 		if(ae.getSource() == amv.getJcbCategory1()) {//카테고리1 선택 시
-			JComboBox jcb = (JComboBox) ae.getSource();
+//			JComboBox jcb = (JComboBox) ae.getSource();
 			
-			index = jcb.getSelectedIndex();
-			
-			if (index != 0) {
+//			index = jcb.getSelectedIndex();
+//			
+//			if (index != 0) {
 				setCheckList();
-			}//end if
+//			}//end if
 			
 		}//end if
 		
 		if(ae.getSource() == amv.getJcbCategory2()) {//카테고리2 선택 시
-			JComboBox jcb = (JComboBox) ae.getSource();
+//			JComboBox jcb = (JComboBox) ae.getSource();
 			
-			index = jcb.getSelectedIndex();
-			
-			if (index != 0) {
+//			index = jcb.getSelectedIndex();
+//			
+//			if (index != 0) {
 				setProductList();
-			}//end if
+//			}//end if
 			
 		}//end if
 		
