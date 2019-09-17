@@ -681,4 +681,106 @@ public class AdminDAO {
 		
 	}//UserIdDetail
 	
+	public boolean updateApproval(String code) throws SQLException {
+		boolean updateFlag=false;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=getConnection();
+			
+			StringBuilder update=new StringBuilder();
+			
+			update
+			.append("	update product 	")
+			.append("	set all_flag='P'")
+			.append("	where product_code=?	");
+			
+			pstmt= con.prepareStatement(update.toString());
+			
+			pstmt.setString(1, code);
+			
+			updateFlag=pstmt.executeUpdate()==1;
+			
+		} finally {
+			if(pstmt != null) {pstmt.close();}//end if
+			if(con != null) {con.close();}//end if
+		}
+		
+		return updateFlag;
+	}
+	
+	public boolean updateRefuse(String code, String msg) throws SQLException {
+		boolean updateFlag=false;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=getConnection();
+			
+			StringBuilder update=new StringBuilder();
+			
+			update
+			.append("	update product 	")
+			.append("	set all_flag='F', rejection_reason=? ")
+			.append("	where product_code=?	");
+			
+			pstmt= con.prepareStatement(update.toString());
+			
+			
+			pstmt.setString(1, msg);
+			pstmt.setString(2, code);
+			
+			updateFlag=pstmt.executeUpdate()==1;
+			
+		} finally {
+			if(pstmt != null) {pstmt.close();}//end if
+			if(con != null) {con.close();}//end if
+		}
+		
+		return updateFlag;
+	}
+	
+	public boolean updateSuspend(String id, String msg) throws SQLException {
+		boolean updateFlag=false;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=getConnection();
+			
+			StringBuilder update=new StringBuilder();
+			
+			update
+			.append("	update id_info 	")
+			.append("	set suspend_flag='Y'	")
+			.append("	where user_id=?	");
+			
+			pstmt= con.prepareStatement(update.toString());
+			
+			
+			pstmt.setString(1, id);
+						
+			pstmt.executeUpdate();
+			
+			pstmt.close();
+			
+			StringBuilder insert=new StringBuilder();
+			
+			insert
+			.append("	insert into suspended_user(user_id, suspend_reason) 	")
+			.append("	values(?,?)	");
+			
+			pstmt= con.prepareStatement(insert.toString());
+			
+			
+			pstmt.setString(1, id);
+			pstmt.setString(2, msg);
+			
+			updateFlag=pstmt.executeUpdate()==1;
+			
+		} finally {
+			if(pstmt != null) {pstmt.close();}//end if
+			if(con != null) {con.close();}//end if
+		}
+		
+		return updateFlag;
+	}
 }//class

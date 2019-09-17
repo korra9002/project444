@@ -9,6 +9,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 
+import adminControl.AdminCheckDetailViewEvt;
 //import adminControl.AdminCheckDetailEvt;
 import adminControl.AdminMainEvt;
 import adminVO.CheckDetailVO;
@@ -20,6 +21,7 @@ public class AdminCheckDetailView extends JDialog {
 	private JTextField jtfProductName, jtfPrice, jtfUserId, jtfUploadDate, jtfCategory;
 	private JButton jbtGrant, jbtReject;
 	private JTextArea jtaInfo;
+	private String code;
 	
 	private AdminMainView amv; 
 
@@ -68,6 +70,7 @@ public class AdminCheckDetailView extends JDialog {
 		jtfUploadDate.setText(cdVO.getUpload_date());
 		jtfCategory.setText(cdVO.getCategory());
 		jtaInfo.setText(cdVO.getInfo());
+		code=cdVO.getProduct_code();
 		
 		//setBounds
 		jlDetailImg.setBounds(15, 15, 320, 320);
@@ -108,11 +111,9 @@ public class AdminCheckDetailView extends JDialog {
 		add(jtfUploadDate);
 		add(jtfCategory);
 		
-		//이벤트 등록/////////////////////////////////////
-//		AdminCheckDetailEvt acde=new AdminCheckDetailEvt(this, cdVO.getProduct_code());//CheckListVO 에서 getter한 코드////
-			
-//		jbtGrant.addActionListener(acde);//////
-//		jbtReject.addActionListener(acde);////////
+		AdminCheckDetailViewEvt acdve=new AdminCheckDetailViewEvt(this);
+		jbtGrant.addActionListener(acdve);
+		jbtReject.addActionListener(acdve);
 		
 		setResizable(false);
 		setBounds(amv.getX()+800, amv.getY()+50, 670, 440);
@@ -120,45 +121,62 @@ public class AdminCheckDetailView extends JDialog {
 		
 	}//MarketDetail
 
+
 	public JLabel getJlDetailImg() {
 		return jlDetailImg;
 	}
+
 
 	public JTextField getJtfProductName() {
 		return jtfProductName;
 	}
 
+
 	public JTextField getJtfPrice() {
 		return jtfPrice;
 	}
+
 
 	public JTextField getJtfUserId() {
 		return jtfUserId;
 	}
 
+
 	public JTextField getJtfUploadDate() {
 		return jtfUploadDate;
 	}
+
 
 	public JTextField getJtfCategory() {
 		return jtfCategory;
 	}
 
+
 	public JButton getJbtGrant() {
 		return jbtGrant;
 	}
+
 
 	public JButton getJbtReject() {
 		return jbtReject;
 	}
 
+
 	public JTextArea getJtaInfo() {
 		return jtaInfo;
 	}
 
+
+	public String getCode() {
+		return code;
+	}
+
+
 	public AdminMainView getAmv() {
 		return amv;
 	}
+
+	
 
 //	public static void main(String[] args) {//////////////////지워!!!!!!!!!!!!
 //		new AdminCheckDetailView();

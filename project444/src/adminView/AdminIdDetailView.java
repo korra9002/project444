@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import adminControl.AdminMainEvt;
+import adminControl.AdminUserIdDetailViewEvt;
 import adminVO.UserIdDetailVO;
 
 @SuppressWarnings("serial")
@@ -92,6 +93,11 @@ public class AdminIdDetailView extends JDialog {
 		add(jtfSuspendFlag);
 		add(jbtOkey);
 		add(jbtStop);
+		
+		AdminUserIdDetailViewEvt auidve=new AdminUserIdDetailViewEvt(this);
+		jbtOkey.addActionListener(auidve);
+		jbtStop.addActionListener(auidve);
+		
 		
 		setBounds(amv.getX()+900, amv.getY()+50, 270, 380);
 		setVisible(true);
