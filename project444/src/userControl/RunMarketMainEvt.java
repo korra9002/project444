@@ -10,7 +10,7 @@ import userRun.RunMarketMain;
 
 public class RunMarketMainEvt extends MouseAdapter implements ActionListener{
 	private RunMarketMain rmm;
-
+	private ChatListEvt cle;
 	
 	
 	
@@ -27,6 +27,8 @@ public class RunMarketMainEvt extends MouseAdapter implements ActionListener{
 	if(e.getSource() == rmm.getJtp()) {
 		if(rmm.getJtp().getSelectedIndex() == 2) {
 			System.out.println("”î");
+			cle = rmm.getCl().getCle();
+			cle.refresh(cle.getFlag());
 		}
 		
 		

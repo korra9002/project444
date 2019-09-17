@@ -21,6 +21,8 @@ public class ChatList extends JPanel {
 
 	private DefaultTableModel dtmProductList;
 	private JTable jtProductList;
+	
+	private ChatListEvt cle;
 
 	public ChatList() {
 
@@ -34,9 +36,9 @@ public class ChatList extends JPanel {
 		jbSell = new JButton("판매중");
 		// JTable
 
-		String[] productColumn = { "이미지", "ID", "지역", "시간", "마지막 대화 내용" };
+		String[] productColumn = { "이미지", "ID", "지역", "시간", "마지막 대화 내용","거래코드" };
 
-		dtmProductList = new DefaultTableModel(productColumn, 5);
+		dtmProductList = new DefaultTableModel(productColumn, 6);
 
 		jtProductList = new JTable(dtmProductList);
 
@@ -50,7 +52,8 @@ public class ChatList extends JPanel {
 		jtProductList.getColumnModel().getColumn(1).setPreferredWidth(30);
 		jtProductList.getColumnModel().getColumn(2).setPreferredWidth(30);
 		jtProductList.getColumnModel().getColumn(3).setPreferredWidth(30);
-		jtProductList.getColumnModel().getColumn(3).setPreferredWidth(50);
+		jtProductList.getColumnModel().getColumn(4).setPreferredWidth(50);
+		jtProductList.getColumnModel().getColumn(5).setPreferredWidth(50);
 
 //		setResizable(false);
 
@@ -70,7 +73,7 @@ public class ChatList extends JPanel {
 		setBounds(100, 100, 500, 600);
 
 		setVisible(true);
-ChatListEvt cle = new ChatListEvt(this);
+cle = new ChatListEvt(this);
 jbRefresh.addActionListener(cle);
 jbBuy.addActionListener(cle);
 jbSell.addActionListener(cle);
@@ -79,6 +82,10 @@ jtProductList.addMouseListener(cle);
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}// Chat
+
+	public ChatListEvt getCle() {
+		return cle;
+	}
 
 	public static void main(String[] args) {
 		new ChatList();

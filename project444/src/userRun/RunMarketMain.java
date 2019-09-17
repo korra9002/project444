@@ -17,6 +17,8 @@ public class RunMarketMain extends JFrame{
 public static String userId;
 private JTabbedPane jtp;
 
+private ChatList cl;
+
 	public RunMarketMain(String id) throws SQLException {
 		userId = id;
 		
@@ -24,7 +26,7 @@ private JTabbedPane jtp;
 		jtp = new JTabbedPane();
 		jtp.add("홈", new MarketMain(id));
 		jtp.add("상품입력", new InsertProduct(this));
-		jtp.add("채팅", new ChatList());
+		jtp.add("채팅", cl =new ChatList());
 		jtp.add("MyPage", new UserInfo(id,this));
 		  
 		jtp.setBounds(10, 10, 660, 700);
@@ -42,6 +44,13 @@ private JTabbedPane jtp;
 		jtp.addMouseListener(rmme);
 		
 		
+	}
+
+
+
+
+	public ChatList getCl() {
+		return cl;
 	}
 
 

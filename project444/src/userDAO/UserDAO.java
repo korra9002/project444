@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import chatTest.ChatVO;
+import userRun.RunMarketMain;
 import userVO.AllListVO;
 import userVO.ChatListVO;
 import userVO.DCodeAndIdAO;
@@ -18,6 +19,7 @@ import userVO.ForgotPwVO;
 import userVO.LoginVO;
 import userVO.MarketDetailVO;
 import userVO.PersonalInformVO;
+import userVO.RecentChatVO;
 import userVO.SaleListVO;
 import userVO.SignUpVO;
 import userVO.modifyInformVO;
@@ -840,12 +842,104 @@ public class UserDAO {
 	}// sendChat
 ///////////////////////////// 채팅리스트 메서드!!!!!!!!!!!!///////////////////////////////////
 
-//	public List<ChatListVO> setChatList() {
-//		
-//		
-//		
-//		
-//	}
+	public List<ChatListVO> setChatList(String flag) throws SQLException {
+		List<ChatListVO> list = new ArrayList<ChatListVO>();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String dealCode ="";
+		try {
+			// 2.커넥션 얻기
+			con = getConn();
+
+			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
+			// 것부터 조회
+			String chatList ="	select p.product_name product_name ,p.user_id id ,l.loc loc,deal_code from product p, deal d,id_info i,location_list l	"
+					+ " where  d.user_id=? and p.product_code = d.product_code and p.user_id = i.user_id and l.loc_code=i.loc_code	";
+			if(flag.equals("sell")) {
+				chatList ="	select  p.product_name ,d.user_id id,l.loc loc ,deal_code from  product p, deal d,id_info i,location_list l "
+						+ "	where  p.user_id =? and p.product_code = d.product_code and p.user_id = i.user_id and l.loc_code=i.loc_code	";
+			}
+			
+			
+			pstmt = con.prepareStatement(chatList);
+			pstmt.setString(1,RunMarketMain.userId);
+		
+			rs = pstmt.executeQuery();
+
+			ChatListVO clVO = null;
+			RecentChatVO rcVO = null;
+			while (rs.next()) {
+			dealCode = rs.getString("deal_code");	
+			rcVO = recentChat(dealCode);
+				clVO = new ChatListVO(rs.getString("product_name"), rs.getString("id"), rs.getString("loc"), rcVO.getTime(), rcVO.getChat(), dealCode);
+				list.add(clVO);// 조회된 레코드를 저장한 VO를 list에 추가
+			}
+
+		
+
+		} finally {
+			// 6. 연결 끊기
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (con != null)
+				con.close();
+
+		}
+		return list;
+		
+		
+		
+	}//setChatList
+	
+	public RecentChatVO recentChat(String dealCode) throws SQLException{
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		RecentChatVO rcVO = null;
+	
+		
+		try {
+			// 2.커넥션 얻기
+			con = getConn();
+
+			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
+			// 것부터 조회
+			String RecentChat ="	select to_char(input_date,'yyyy-mm-dd hh24:mi:ss') input_date ,chat from  chatting where  (select max(input_date) from chatting where deal_code =?) = input_date	";
+			
+			
+			pstmt = con.prepareStatement(RecentChat);
+			pstmt.setString(1,dealCode);
+		
+			rs = pstmt.executeQuery();
+
+			
+			if (rs.next()) {
+			rcVO = new RecentChatVO(rs.getString("input_date"), rs.getString("chat"));
+			}else {
+				rcVO = new RecentChatVO("", "");
+			}
+
+		
+
+		} finally {
+			// 6. 연결 끊기
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (con != null)
+				con.close();
+
+		}
+		return rcVO;
+		
+	}//recentChat
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
