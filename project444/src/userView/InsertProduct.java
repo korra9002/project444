@@ -20,7 +20,7 @@ import userRun.RunMarketMain;
 public class InsertProduct extends JPanel {
 
 	private JLabel jlbProductImg;
-	private JButton jbtSelectImg, jbtOkey, jbtCancle ;
+	private JButton jbtSelectImg, jbtOkay, jbtCancel ;
 	private JTextField jtfSubject, jtfPrice;
 	private JTextArea jtaExplain;
 	private JComboBox<String> jcbCategory;
@@ -54,8 +54,8 @@ public class InsertProduct extends JPanel {
 		jtaExplain = new JTextArea("상세 설명");//이벤트처리-클릭 시 텍스트 사라지게
 		JScrollPane jspExplain = new JScrollPane(jtaExplain);
 		
-		jbtOkey = new JButton("완료");
-		jbtCancle = new JButton("취소");
+		jbtOkay = new JButton("완료");
+		jbtCancel = new JButton("취소");
 		
 		setLayout(null);
 		
@@ -66,8 +66,8 @@ public class InsertProduct extends JPanel {
 		jtfSubject.setBounds(40, 170, 385, 30);
 		jtfPrice.setBounds(40, 210, 385, 30);
 		jspExplain.setBounds(40, 250, 385, 240);
-		jbtOkey.setBounds(130, 510, 80, 30);
-		jbtCancle.setBounds(260, 510, 80, 30);
+		jbtOkay.setBounds(130, 510, 80, 30);
+		jbtCancel.setBounds(260, 510, 80, 30);
 		
 		add(jlbProductImg);
 		add(jbtSelectImg);
@@ -75,8 +75,8 @@ public class InsertProduct extends JPanel {
 		add(jtfSubject);
 		add(jtfPrice);
 		add(jspExplain);
-		add(jbtOkey);
-		add(jbtCancle);
+		add(jbtOkay);
+		add(jbtCancel);
 		
 
 		
@@ -95,12 +95,12 @@ public class InsertProduct extends JPanel {
 		return jbtSelectImg;
 	}//getJbtSelectImg
 
-	public JButton getJbtOkey() {
-		return jbtOkey;
+	public JButton getJbtOkay() {
+		return jbtOkay;
 	}//getJbtOkey
 
-	public JButton getJbtCancle() {
-		return jbtCancle;
+	public JButton getJbtCancel() {
+		return jbtCancel;
 	}//getJbtCancle
 
 	public JTextField getJtfSubject() {
