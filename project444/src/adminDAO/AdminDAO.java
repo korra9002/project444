@@ -488,11 +488,11 @@ public class AdminDAO {
 				
 			}//end if
 			
-//			System.out.println( selectProduct );
 //			System.out.println( pVO );
 			selectProduct.append("	order by upload_date desc	");
 			pstmt= con.prepareStatement(selectProduct.toString());
 				
+//			System.out.println( selectProduct );
 			//바인드 변수에 값넣기
 //			System.out.println(bindCnt);
 			if( bindCnt == 1 ) {

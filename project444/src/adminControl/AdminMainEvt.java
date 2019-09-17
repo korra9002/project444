@@ -404,7 +404,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 			col_name = amv.getJrbID2().getText();
 		}//end else
 		
-		String query = "	(all_flag != 'N' or all_flag != 'F')	";
+		String query = "	(all_flag != 'N' and all_flag != 'F')	";
 		
 		if (!amv.getOnSale().isSelected() && amv.getDeleteNComplete().isSelected()) {
 			query = "	(all_flag = 'D' or all_flag != 'B')	";
