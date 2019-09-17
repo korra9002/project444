@@ -18,12 +18,14 @@ import adminVO.CheckListVO;
 import adminVO.CheckVO;
 import adminVO.ProductListVO;
 import adminVO.ProductVO;
+import adminVO.SuspendIdVO;
 import adminVO.UserIdDetailVO;
 import adminVO.UserIdVO;
 import adminVO.CheckDetailVO;
 import adminView.AdminCheckDetailView;
 import adminView.AdminIdDetailView;
 import adminView.AdminMainView;
+import adminView.AdminSuspendReasonView;
 
 public class AdminMainEvt extends MouseAdapter implements ActionListener{
 
@@ -553,7 +555,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 	/**
 	 * DBMS테이블에서 조회한 모든 ID 리스트를 JTable에 설정 
 	 */
-	private void resetUserIdList() {
+	public void resetUserIdList() {
 		
 		DefaultTableModel dtm = amv.getDtmUserList();
 		//JTable의 레코드 초기화
@@ -631,6 +633,21 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 		}//ID에 따른 상세정보 조회
 		
 	}//openCheckDetail
+	
+	private void suspendReason() {
+		
+		//DBMS에서 조회
+		AdminDAO aDAO = AdminDAO.getInstance();
+		try {
+			List<SuspendIdVO> list = aDAO.selectSuspendList();
+			
+			new AdminSuspendReasonView(amv, list );
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(amv, "관리자님, reset실패! 서비스가 원활하지 못한 점 죄송합니다.");
+			e.printStackTrace();
+		}//end catch
+		
+	}//suspendReason
 	
 	/////////////////////////////////////////////////////////////actionPerformed////////////////////////////////////////////////////////////////////////////////
 	@Override
@@ -728,6 +745,10 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 			resetUserIdList();
 		}//end if
 		
+		if(ae.getSource() == amv.getJbtReason()) {//정지사유 버튼 클릭
+			suspendReason();
+		}//end if
+		
 	}//actionPerformed
 	
 	
@@ -782,10 +803,3 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 	}//mouseClicked
 	
 }//class
-
-
-
-
-
-
-

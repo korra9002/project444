@@ -12,6 +12,8 @@ import adminVO.CheckListVO;
 import adminVO.CheckVO;
 import adminVO.ProductListVO;
 import adminVO.ProductVO;
+import adminVO.SuspendIdVO;
+import adminVO.UserIdControlVO;
 import adminVO.UserIdDetailVO;
 import adminVO.UserIdVO;
 import adminVO.CheckDetailVO;
@@ -681,6 +683,51 @@ public class AdminDAO {
 		
 	}//UserIdDetail
 	
+	public List<SuspendIdVO> selectSuspendList() throws SQLException{
+		
+		List<SuspendIdVO> list = new ArrayList<SuspendIdVO>();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StringBuilder selectSuspend = new StringBuilder();
+		
+		try {
+			//2. 커넥션 얻기
+			con = getConnection();
+			
+			selectSuspend
+			.append("	select user_id, suspend_reason, to_char(suspend_date,'yyyy-mm-dd hh24:mi')suspend_date	")
+			.append("	from suspended_user	");
+			
+			pstmt= con.prepareStatement(selectSuspend.toString());
+				
+			//바인드 변수에 값넣기
+		
+			//5. 쿼리 수행 후 결과 얻기
+			rs = pstmt.executeQuery();
+			SuspendIdVO siVO = null;
+			
+			while(rs.next()) {
+				siVO = new SuspendIdVO(rs.getString("user_id"), rs.getString("suspend_reason"), rs.getString("suspend_date"));
+				list.add(siVO);//조회된 레코드를 저장한 VO를 list에 추가
+			
+			}//end while
+			
+		}finally {
+			
+			//6. 연결 끊기
+			if(rs != null) {rs.close();}//end if
+			if(pstmt != null) {pstmt.close();}//end if
+			if(con != null) {con.close();}//end if
+		}//end finally
+		
+		return list;
+		
+	}//selectSuspendList
+	
+	
+	
 	public boolean updateApproval(String code) throws SQLException {
 		boolean updateFlag=false;
 		Connection con=null;
@@ -739,48 +786,65 @@ public class AdminDAO {
 		return updateFlag;
 	}
 	
-	public boolean updateSuspend(String id, String msg) throws SQLException {
+	public boolean suspendControl(UserIdControlVO uicVO) throws SQLException {
 		boolean updateFlag=false;
+		int bindCnt = 0;
+		String suspendFlag = uicVO.getSuspendFlag();
+		
 		Connection con=null;
 		PreparedStatement pstmt=null;
+		
 		try {
 			con=getConnection();
 			
-			StringBuilder update=new StringBuilder();
+			StringBuilder update = new StringBuilder();
 			
 			update
 			.append("	update id_info 	")
-			.append("	set suspend_flag='Y'	")
-			.append("	where user_id=?	");
+			.append("	set suspend_flag = ?	")
+			.append("	where user_id = ?	");
+			
+			if (uicVO.getSuspendFlag().equals("N")) {
+				suspendFlag = "Y";
+				bindCnt++;
+			}else if (uicVO.getSuspendFlag().equals("Y")) {
+				suspendFlag = "N";
+			}//end else
+			
+//			System.out.println(suspendFlag + "/" + uicVO.getUserId());
 			
 			pstmt= con.prepareStatement(update.toString());
 			
-			
-			pstmt.setString(1, id);
+			pstmt.setString(1, suspendFlag);
+			pstmt.setString(2, uicVO.getUserId());
 						
-			pstmt.executeUpdate();
+			if(bindCnt == 1) {
+				pstmt.executeUpdate();
 			
-			pstmt.close();
-			
-			StringBuilder insert=new StringBuilder();
-			
-			insert
-			.append("	insert into suspended_user(user_id, suspend_reason) 	")
-			.append("	values(?,?)	");
-			
-			pstmt= con.prepareStatement(insert.toString());
-			
-			
-			pstmt.setString(1, id);
-			pstmt.setString(2, msg);
+				pstmt.close();//insert를 위한 1차 연결 끊기
+				
+				StringBuilder insert = new StringBuilder();
+				
+				insert
+				.append("	insert into suspended_user(user_id, suspend_reason) 	")
+				.append("	values(?,?)	");
+				
+				pstmt= con.prepareStatement(insert.toString());
+				
+				pstmt.setString(1, uicVO.getUserId());
+				pstmt.setString(2, uicVO.getSuspendMsg());
+				
+			}//end if
 			
 			updateFlag=pstmt.executeUpdate()==1;
 			
 		} finally {
 			if(pstmt != null) {pstmt.close();}//end if
 			if(con != null) {con.close();}//end if
-		}
+		}//end finally
 		
 		return updateFlag;
-	}
+		
+	}//updateSuspend
+	
 }//class

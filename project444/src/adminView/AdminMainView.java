@@ -28,7 +28,7 @@ public class AdminMainView extends JFrame {
 	
 	private JTabbedPane jtp;
 	private JButton jbtSearch1, jbtRefresh1, jbtRecent1, jbtReset1, jbtReset2, jbtReset3, jbtSearch2, jbtRefresh2, jbtRecent2, 
-		jbtSearch3, jbtRefresh3;
+		jbtSearch3, jbtRefresh3, jbtReason;
 	private JTable jtCheckList, jtProductList, jtUserList;
 	private DefaultTableModel dtmCheckList, dtmProductList, dtmUserList;
 	private JComboBox<String> jcbCategory1, jcbCategory2, jcbCategory3;
@@ -258,6 +258,7 @@ public class AdminMainView extends JFrame {
 		jbtSearch3 = new JButton("검색");
 		jbtRefresh3 = new JButton("새로고침");
 		jbtReset3 = new JButton("초기화");
+		jbtReason = new JButton("정지사유");
 		JLabel jlbId = new JLabel("아이디");
 		
 		String[] idCol= {"아이디","이름","성별","전화번호","지역","가입일자","정지여부"};
@@ -322,6 +323,7 @@ public class AdminMainView extends JFrame {
 		jbtReset3.setBounds(570, 570, 90, 30);
 		jtfSearch3.setBounds(230, 550, 150, 30);
 		jbtSearch3.setBounds(410, 550, 90, 30);
+		jbtReason.setBounds(25, 550, 90, 30);
 		jlbId.setBounds(150, 550, 90, 30);
 		
 		jpUserList.add(jspUserList);
@@ -330,6 +332,7 @@ public class AdminMainView extends JFrame {
 		jpUserList.add(jtfSearch3);
 		jpUserList.add(jbtSearch3);
 		jpUserList.add(jbtReset3);
+		jpUserList.add(jbtReason);
 		jpUserList.add(jlbId);
 		/////////////////////////////////세번째 탭 끝/////////////////////////////////
 		
@@ -358,6 +361,7 @@ public class AdminMainView extends JFrame {
 		jbtReset1.addActionListener(ame);
 		jbtReset2.addActionListener(ame);
 		jbtReset3.addActionListener(ame);
+		jbtReason.addActionListener(ame);
 		
 		jcbCategory1.addActionListener(ame);
 		jcbCategory2.addActionListener(ame);
@@ -471,6 +475,10 @@ public class AdminMainView extends JFrame {
 	
 	public JButton getJbtReset3() {
 		return jbtReset3;
+	}
+	
+	public JButton getJbtReason() {
+		return jbtReason;
 	}
 	
 	public JTextField getJtfSearch2() {

@@ -2,7 +2,6 @@ package adminView;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -13,7 +12,7 @@ import adminVO.UserIdDetailVO;
 @SuppressWarnings("serial")
 public class AdminIdDetailView extends JDialog {
 	private JTextField jtfId, jtfName, jtfGender, jtfPhone, jtfLoc, jtfJoinDate, jtfSuspendFlag;
-	private JButton jbtOkey, jbtStop;
+	private JButton jbtOkey, jbtSuspend, jbtRelief; 
 	
 	private AdminMainView amv;
 	
@@ -38,7 +37,8 @@ public class AdminIdDetailView extends JDialog {
 		jtfSuspendFlag.setEditable(false);
 		
 		jbtOkey = new JButton("확인");
-		jbtStop = new JButton("정지");
+		jbtSuspend = new JButton("정지");
+		jbtRelief = new JButton("복원");
 		
 		JLabel jlbID = new JLabel("ID"); 
 		JLabel jlbName = new JLabel("이름");
@@ -51,7 +51,7 @@ public class AdminIdDetailView extends JDialog {
 		//settext
 		jtfId.setText(uidVO.getUser_id());
 		jtfName.setText(uidVO.getUser_name());
-		jtfGender.setText(uidVO.getGender());
+		jtfGender.setText(uidVO.getGender().equals("M")?"남자":"여자");
 		jtfPhone.setText(uidVO.getPhone());
 		jtfLoc.setText(uidVO.getLoc());
 		jtfJoinDate.setText(uidVO.getJoin_date());
@@ -73,8 +73,9 @@ public class AdminIdDetailView extends JDialog {
 		jtfJoinDate.setBounds(125, 210, 120, 30);
 		jtfSuspendFlag.setBounds(125, 250, 120, 30);
 		
-		jbtOkey.setBounds(40, 300, 80, 30);
-		jbtStop.setBounds(150, 300, 80, 30);
+		jbtOkey.setBounds(20, 300, 60, 30);
+		jbtSuspend.setBounds(100, 300, 60, 30);
+		jbtRelief.setBounds(180, 300, 60, 30);
 		
 		setLayout(null);
 		add(jlbID);
@@ -92,11 +93,13 @@ public class AdminIdDetailView extends JDialog {
 		add(jlbSuspendFlag);
 		add(jtfSuspendFlag);
 		add(jbtOkey);
-		add(jbtStop);
+		add(jbtSuspend);
+		add(jbtRelief);
 		
-		AdminUserIdDetailViewEvt auidve=new AdminUserIdDetailViewEvt(this);
+		AdminUserIdDetailViewEvt auidve=new AdminUserIdDetailViewEvt(this, ame);
 		jbtOkey.addActionListener(auidve);
-		jbtStop.addActionListener(auidve);
+		jbtSuspend.addActionListener(auidve);
+		jbtRelief.addActionListener(auidve);
 		
 		
 		setBounds(amv.getX()+900, amv.getY()+50, 270, 380);
@@ -138,16 +141,16 @@ public class AdminIdDetailView extends JDialog {
 		return jbtOkey;
 	}
 
-	public JButton getJbtStop() {
-		return jbtStop;
+	public JButton getJbtSuspend() {
+		return jbtSuspend;
+	}
+
+	public JButton getJbtRelief() {
+		return jbtRelief;
 	}
 
 	public AdminMainView getAmv() {
 		return amv;
 	}
-
-//	public static void main(String[] args) {
-//		new AdminDetailView();
-//	}
 	
 }//class
