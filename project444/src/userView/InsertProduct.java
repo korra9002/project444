@@ -39,7 +39,7 @@ public class InsertProduct extends JPanel {
 		jlbProductImg.setBorder(new EtchedBorder(EtchedBorder.RAISED));//이미지 라벨 테두리 설정
 		
 		jbtSelectImg = new JButton("사진 등록");
-		jbtSelectImg.addActionListener(new InsertProductEvt(this,rmm));
+//		jbtSelectImg.addActionListener(new InsertProductEvt(this,rmm));
 		
 		String[] categoryList= {"디지털/가전","가구/인테리어","유아동/유아도서","생활/가공식품","여성의류","여성잡화",
 							"뷰티/미용","남성패션/잡화","스포츠/레저","게임/취미","도서/티켓/음반","반려동물용품","기타 중고물품"};
@@ -77,9 +77,15 @@ public class InsertProduct extends JPanel {
 		add(jspExplain);
 		add(jbtOkay);
 		add(jbtCancel);
+		InsertProductEvt ipe=new InsertProductEvt(this, rmm);
 		
-
+		jbtSelectImg.addActionListener(ipe);
+		jbtOkay.addActionListener(ipe);
+		jbtCancel.addActionListener(ipe);
 		
+		jtfSubject.addMouseListener(ipe);
+		jtfPrice.addMouseListener(ipe);
+		jtaExplain.addMouseListener(ipe);
 		setBounds(100, 100, 420, 640);
 		setVisible(true);
 //		setResizable(false);

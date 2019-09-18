@@ -22,9 +22,11 @@ import userView.SaleList;
 public class SaleListEvt extends MouseAdapter implements ActionListener {
 	private SaleList sl;
 	private RunMarketMain rmm;
+	String id;
 		public SaleListEvt(SaleList sl, RunMarketMain rmm) throws SQLException  {
 			this.sl = sl;
 			this.rmm=rmm;
+			id=RunMarketMain.userId;
 			setAllList();
 
 		}//SaleListEvt
@@ -44,10 +46,10 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 		dtm.setRowCount(0);
 		
 		Object[] rowData=null;
-		
+		String temp_flag="S";
 		//DBMS에서 조회
 		UserDAO uDAO =UserDAO.getInstance();
-	List<SaleListVO> list=uDAO.selectSaleList(RunMarketMain.userId);
+	List<SaleListVO> list=uDAO.selectSaleList(id, temp_flag);
 		if(list.isEmpty()) { 
 			JOptionPane.showMessageDialog(sl, "현재 판매하시는 상품이 없습니다. ");
 			

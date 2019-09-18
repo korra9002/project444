@@ -1,6 +1,7 @@
 package userView;
 
 import java.awt.BorderLayout;
+import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -14,6 +15,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import userControl.PurchaseHistoryEvt;
 import userRun.RunMarketMain;
 
 @SuppressWarnings("serial")
@@ -24,20 +26,20 @@ public class PurchaseHistory extends JDialog {
 	private DefaultTableModel dtmPurchaseList;
 	public static final int CENTER = 0;
 	 
-	public PurchaseHistory(RunMarketMain rmm) {
+	public PurchaseHistory(RunMarketMain rmm) throws SQLException {
 		super(rmm,"구매내역");
 		String[] sellCol= {"이미지","제품명","가격","아이디","지역","구매시간"};
-		Object[][] sellRow = { 
-				{1,2,3,4,5,6},
-				{1,2,3,4,5,6},
-				{1,2,3,4,5,6},
-				{1,2,3,4,5,6},
-				{1,2,3,4,5,6},
-				{1,2,3,4,5,6},
-				{1,2,3,4,5,6}
-				};
+//		Object[][] sellRow = { 
+//				{1,2,3,4,5,6},
+//				{1,2,3,4,5,6},
+//				{1,2,3,4,5,6},
+//				{1,2,3,4,5,6},
+//				{1,2,3,4,5,6},
+//				{1,2,3,4,5,6},
+//				{1,2,3,4,5,6}
+//				};
 		
-		dtmPurchaseList = new DefaultTableModel(sellRow, sellCol){//셀 내용 수정 금지
+		dtmPurchaseList = new DefaultTableModel(sellCol, 6){//셀 내용 수정 금지
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -89,6 +91,11 @@ public class PurchaseHistory extends JDialog {
 		jspPurchase.setBounds(10, 60, 540, 480);
 		jpHistory.add(jspPurchase);
 		
+		///////////////////////// 이벤트 처리 //////////////////////////////////////
+		PurchaseHistoryEvt phe=new PurchaseHistoryEvt(this, rmm);
+		
+		jtPurchaseList.addMouseListener(phe);
+		
 		/////////////////////////////////첫번째 탭 끝/////////////////////////////////
 		
 		add(jpHistory);
@@ -99,6 +106,18 @@ public class PurchaseHistory extends JDialog {
 		
 		
 	}//SaleList
+
+	public JButton getJbtDelete() {
+		return jbtDelete;
+	}
+
+	public JTable getJtPurchaseList() {
+		return jtPurchaseList;
+	}
+
+	public DefaultTableModel getDtmPurchaseList() {
+		return dtmPurchaseList;
+	}
 
 	
 

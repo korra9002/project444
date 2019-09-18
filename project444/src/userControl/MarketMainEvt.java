@@ -32,46 +32,11 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 		setAllList();
 	}//MarketMainEvt
 	
-//	public void setAllList() throws SQLException {
-//		DefaultTableModel dtm=mm.getDtmProductList();
-//		
-//		//JTable의 레코드 초기화
-//		dtm.setRowCount(0);
-//		
-//		Object[] rowData= null;
-//		//JTable 넣을 데이터 // object는 자바의 모든 값을 다 담을 수 있다.
-//		
-//		//DBMS에서 조회
-//		UserDAO uDAO =UserDAO.getInstance();
-//			List<AllListVO> list=uDAO.selectAllList();
-//				if(list.isEmpty()) { 
-//					JOptionPane.showMessageDialog(mm, "검색조건에 맞는 상품이 없습니다.");
-//				}
-//			AllListVO alv=null;
-//			for(int i=0; i<list.size(); i++) {
-//				alv=list.get(i);
-//				//조회 결과로 JTable 레코드에 들어갈 데이터를 생성하고
-//				rowData=new Object[7];
-//				//배열에 값 할당 		String[] productColumn= {"이미지", "제품명", "지역", "가격", "시간", "카테고리", "판매자 ID" };
-//				rowData[0]=alv.getImage();
-//				rowData[1]=alv.getProductName()+"("+alv.getProductCode()+")";
-//				rowData[2]=alv.getLoc_code();
-//				rowData[3]=alv.getPrice();
-//				rowData[4]=alv.getUpload_date();
-//				rowData[5]=alv.getCategory();
-//				rowData[6]=alv.getSellerID();
-//			//dtm에 추가
-//			dtm.addRow(rowData);		
-//		}//end for		
-//	}//setAllList
-	
-		
+
 		
 		public void setAllList() throws SQLException {
 			
-//			if (jcbAreaIndex==0 && jcbCateIndex==0 && jtfText==null) {
-//				setAllList();
-//			}//end if
+
 			DefaultTableModel dtm=mm.getDtmProductList();
 			
 			//JTable의 레코드 초기화
@@ -79,35 +44,13 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 			
 			Object[] rowData= null;
 			//JTable 넣을 데이터 // object는 자바의 모든 값을 다 담을 수 있다.
-		
-//			int area =0;
-//			try {
-//			area =  mm.getJcbArea().getSelectedIndex();
-//			}catch (Exception e) {
-//           e.printStackTrace();
-// 	 	
-//			}	
-//			int category =0;
-//			try {
-//				category =  mm.getJcbCategory().getSelectedIndex();
-//			}catch (Exception e) {
-//				e.printStackTrace();
-//				
-//			}	
-//			
-//			String proName ="";
-//			try {
-//				proName =  mm.getJtfSearch().getText().trim();
-//			}catch (Exception e) {
-//				e.printStackTrace();
-//				
-//			}	
+
 			
 			//DBMS에서 조회
 			UserDAO uDAO =UserDAO.getInstance();
 		List<AllListVO> list=uDAO.selectAllList( mm.getJcbArea().getSelectedIndex(), mm.getJcbCategory().getSelectedIndex(),mm.getJtfSearch().getText().trim());
-		//ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠgetselectedText아니고 getText()입니다ㅠㅠㅠㅠㅠㅠㅠ머리에 넣읍시다ㅠ
-	//		List<AllListVO> list=uDAO.selectAllList(0, 0,"");
+
+
 			if(list.isEmpty()) { 
 				JOptionPane.showMessageDialog(mm, "검색조건에 맞는 상품이 없습니다. ");
 				mm.getJtfSearch().setText("");

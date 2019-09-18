@@ -41,7 +41,11 @@ public class UserInfoEvt implements ActionListener {
 			}
 		}//end if
 		if(ae.getSource()==uif.getJbtBuy()) {
-			new PurchaseHistory(rmm);
+			try {
+				new PurchaseHistory(rmm);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}//end if
 		if(ae.getSource()==uif.getJbtLike()) {
 			new InterestList(rmm);
