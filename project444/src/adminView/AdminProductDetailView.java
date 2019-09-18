@@ -12,22 +12,24 @@ import javax.swing.border.EtchedBorder;
 import adminControl.AdminCheckDetailViewEvt;
 //import adminControl.AdminCheckDetailEvt;
 import adminControl.AdminMainEvt;
+import adminControl.AdminProductDetailViewEvt;
 import adminVO.CheckDetailVO;
+import adminVO.ProductDetailVO;
 
 @SuppressWarnings("serial")
-public class AdminCheckDetailView extends JDialog {
+public class AdminProductDetailView extends JDialog {
 	
 	private JLabel jlDetailImg;
 	private JTextField jtfProductName, jtfPrice, jtfUserId, jtfUploadDate, jtfCategory;
 	private JButton jbtGrant, jbtReject, jbtOk;
-	private JTextArea jtaInfo;
+	private JTextArea jtaReason, jtaInfo;
 	private String code;
 	
 	private AdminMainView amv; 
-	
-	public AdminCheckDetailView(AdminMainView amv, AdminMainEvt ame, CheckDetailVO cdVO) {
-		super(amv,"제품상세",true);
-		this.amv=amv;
+
+	public AdminProductDetailView(AdminMainView amv, AdminMainEvt ame, ProductDetailVO pdVO) {
+		super(amv,"제품상세",true);////////
+		this.amv=amv;////////////
 		
 		jlDetailImg = new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/img/무민.jpg/"), JLabel.CENTER);//썸네일X / 원본 이미지
 		jlDetailImg.setBorder(new EtchedBorder(EtchedBorder.RAISED));//이미지 라벨 테두리 설정
@@ -37,6 +39,7 @@ public class AdminCheckDetailView extends JDialog {
 		JLabel jlPrice=new JLabel("가격");
 		JLabel jlInputDate=new JLabel("올린일자");
 		JLabel jlCategory=new JLabel("카테고리");
+		JLabel jlReason=new JLabel("거부사유");
 		
 		//JTextField
 		jtfProductName=new JTextField();
@@ -54,42 +57,48 @@ public class AdminCheckDetailView extends JDialog {
 		
 		//JTextArea
 		jtaInfo=new JTextArea();
-		JScrollPane jsp=new JScrollPane(jtaInfo);
+		jtaReason=new JTextArea();
+		JScrollPane jspInfo=new JScrollPane(jtaInfo);
+		JScrollPane jspReason=new JScrollPane(jtaReason);
 		jtaInfo.setEditable(false);
+		jtaReason.setEditable(false);
 		
-		jbtGrant=new JButton("판매승인");
-		jbtReject=new JButton("판매거부");
+//		jbtGrant=new JButton("판매승인");
+//		jbtReject=new JButton("판매거부");
 		jbtOk=new JButton("확인");
 		
 		//set text
-		jlDetailImg.setText(cdVO.getImg_file());
-		jtfProductName.setText(cdVO.getProduct_name());
-		jtfPrice.setText(String.valueOf(cdVO.getPrice()));
-		jtfUserId.setText(cdVO.getUser_id());
-		jtfUploadDate.setText(cdVO.getUpload_date());
-		jtfCategory.setText(cdVO.getCategory());
-		jtaInfo.setText(cdVO.getInfo());
-		code=cdVO.getProduct_code();
+		jlDetailImg.setText(pdVO.getImg_file());
+		jtfProductName.setText(pdVO.getProduct_name());
+		jtfPrice.setText(pdVO.getPrice());
+		jtfUserId.setText(pdVO.getUser_id());
+		jtfUploadDate.setText(pdVO.getUpload_date());
+		jtfCategory.setText(pdVO.getCategory());
+		jtaReason.setText(pdVO.getRejectMsg());
+		jtaInfo.setText(pdVO.getInfo());
+		code=pdVO.getProduct_code();
 		
 		//setBounds
 		jlDetailImg.setBounds(15, 15, 320, 320);
 		
-		jlName.setBounds(345, 50, 70, 30);
-		jlPrice.setBounds(345, 85, 70, 30);
-		jlId.setBounds(345, 120, 70, 30);
-		jlInputDate.setBounds(345, 155, 70, 30);
-		jlCategory.setBounds(345, 190, 70, 40);
+		jlName.setBounds(345, 15, 70, 30);
+		jlPrice.setBounds(345, 50, 70, 30);
+		jlId.setBounds(345, 85, 70, 30);
+		jlInputDate.setBounds(345, 120, 70, 30);
+		jlCategory.setBounds(345, 155, 70, 30);
+		jlReason.setBounds(345, 190, 70, 30);
 		
-		jtfProductName.setBounds(420, 50, 215, 30);
-		jtfPrice.setBounds(420, 85, 215, 30);
-		jtfUserId.setBounds(420, 120, 215, 30);
-		jtfUploadDate.setBounds(420, 155, 215, 30);
-		jtfCategory.setBounds(420, 190, 215, 30);
+		jtfProductName.setBounds(420, 15, 215, 30);
+		jtfPrice.setBounds(420, 50, 215, 30);
+		jtfUserId.setBounds(420, 85, 215, 30);
+		jtfUploadDate.setBounds(420, 120, 215, 30);
+		jtfCategory.setBounds(420, 155, 215, 30);
 		
-		jsp.setBounds(345, 260, 295, 120);
+		jspReason.setBounds(420, 190, 220, 65);
+		jspInfo.setBounds(345, 260, 295, 120);
 		
-		jbtGrant.setBounds(20, 350, 88, 30);
-		jbtReject.setBounds(130, 350, 88, 30);
+//		jbtGrant.setBounds(20, 350, 88, 30);
+//		jbtReject.setBounds(130, 350, 88, 30);
 		jbtOk.setBounds(240, 350, 88, 30);
 		
 		//배치
@@ -100,20 +109,21 @@ public class AdminCheckDetailView extends JDialog {
 		add(jlId);
 		add(jlInputDate);
 		add(jlCategory);
+		add(jlReason);
 		add(jtfProductName);
 		add(jtfPrice);
 		add(jtfUserId);
-		add(jsp);
-		add(jbtGrant);
-		add(jbtReject);
+		add(jspInfo);
+		add(jspReason);
+//		add(jbtGrant);
+//		add(jbtReject);
 		add(jbtOk);
 		add(jtfUploadDate);
 		add(jtfCategory);
 		
-		AdminCheckDetailViewEvt acdve=new AdminCheckDetailViewEvt(this, ame);
-		jbtGrant.addActionListener(acdve);
-		jbtReject.addActionListener(acdve);
-		jbtOk.addActionListener(acdve);
+		//event
+		AdminProductDetailViewEvt apdve = new AdminProductDetailViewEvt(this, ame);
+		jbtOk.addActionListener(apdve);
 		
 		setResizable(false);
 		setBounds(amv.getX()+800, amv.getY()+50, 670, 440);
@@ -152,11 +162,11 @@ public class AdminCheckDetailView extends JDialog {
 	public JButton getJbtReject() {
 		return jbtReject;
 	}
-
+	
 	public JButton getJbtOk() {
 		return jbtOk;
 	}
-	
+
 	public JTextArea getJtaInfo() {
 		return jtaInfo;
 	}

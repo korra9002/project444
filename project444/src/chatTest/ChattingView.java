@@ -240,7 +240,7 @@ public class ChattingView extends JFrame {
 //	public AdminDAO getaDAO() {
 //		return aDAO;
 //	}
-
+ 
 	public String getId() {
 		return id;
 	}
