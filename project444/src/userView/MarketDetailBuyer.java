@@ -118,7 +118,7 @@ public class MarketDetailBuyer extends JDialog {
 		MarketDetailBuyerEvt mdbe = new MarketDetailBuyerEvt(mm, this);
 
 		jbtChat.addActionListener(mdbe);
-
+		jckLike.addActionListener(mdbe);
 	}// MarketDetail
 
 	public JLabel getJlDetailImg() {

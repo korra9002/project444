@@ -56,8 +56,8 @@ public class UserDAO {
 
 		// 2. Connection 얻기
 
-		String url="jdbc:oracle:thin:@localhost:1521:orcl";
-//		String url = "jdbc:oracle:thin:@211.63.89.159:1521:orcl";
+//		String url="jdbc:oracle:thin:@localhost:1521:orcl";
+		String url = "jdbc:oracle:thin:@211.63.89.159:1521:orcl";
 		String id = "junggo";
 		String pass = "1234";
 
@@ -1027,301 +1027,301 @@ public class UserDAO {
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
-	// 로그인 시 이름 출력!!
-	public String[] loginRun(LoginVO lVO) throws SQLException {
-		String[] loginInfo = new String[2];
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			// 연결
-			con = getConn();
-			// 쿼리문 생성
-			StringBuilder selectLogin = new StringBuilder();
-			selectLogin.append("select user_name , suspend_flag ").append(" from id_info ").append(" where user_id=? ")
-					.append(" and password= ?");
+// 로그인 시 이름 출력!!
+public String[] loginRun(LoginVO lVO) throws SQLException {
+String[] loginInfo = new String[2];
+Connection con = null;
+PreparedStatement pstmt = null;
+ResultSet rs = null;
+try {
+// 연결
+con = getConn();
+// 쿼리문 생성
+StringBuilder selectLogin = new StringBuilder();
+selectLogin.append("select user_name , suspend_flag ").append(" from id_info ").append(" where user_id=? ")
+.append(" and password= ?");
 
-			pstmt = con.prepareStatement(selectLogin.toString());
-			// 바인드 값 변수 얻기
-			pstmt.setString(1, lVO.getId());
-			pstmt.setString(2, lVO.getPass());
-			// 쿼리 실행
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				loginInfo[0] = rs.getString("user_name");
-				loginInfo[1] = rs.getString("suspend_flag");
-			} // end while
+pstmt = con.prepareStatement(selectLogin.toString());
+// 바인드 값 변수 얻기
+pstmt.setString(1, lVO.getId());
+pstmt.setString(2, lVO.getPass());
+// 쿼리 실행
+rs = pstmt.executeQuery();
+if (rs.next()) {
+loginInfo[0] = rs.getString("user_name");
+loginInfo[1] = rs.getString("suspend_flag");
+} // end while
 
-		} finally {
-			if (con != null) {
-				con.close();
-			} // end if
-			if (pstmt != null) {
-				pstmt.close();
-			} // end if
-			if (rs != null) {
-				rs.close();
-			} // end if
-		} // end finally
-		return loginInfo;
-	}// loginRun
+} finally {
+if (con != null) {
+con.close();
+} // end if
+if (pstmt != null) {
+pstmt.close();
+} // end if
+if (rs != null) {
+rs.close();
+} // end if
+} // end finally
+return loginInfo;
+}// loginRun
 //중복된 아이디 체크 
 
-	public String idCheck(String id) throws SQLException {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String checkId = "";
-		try {
-			con = getConn();
-			StringBuilder selectID = new StringBuilder();
-			selectID.append(" select user_id ").append(" from id_info ").append("where user_id =?");
+public String idCheck(String id) throws SQLException {
+Connection con = null;
+PreparedStatement pstmt = null;
+ResultSet rs = null;
+String checkId = "";
+try {
+con = getConn();
+StringBuilder selectID = new StringBuilder();
+selectID.append(" select user_id ").append(" from id_info ").append("where user_id =?");
 
-			pstmt = con.prepareStatement(selectID.toString());
+pstmt = con.prepareStatement(selectID.toString());
 
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				checkId = rs.getString(1);
-			} // end while
-		} finally {
-			if (con != null) {
-				con.close();
-			} // end if
-			if (pstmt != null) {
-				pstmt.close();
-			} // end if
-			if (rs != null) {
-				rs.close();
-			} // end if
-		} // end finally
+pstmt.setString(1, id);
+rs = pstmt.executeQuery();
+while (rs.next()) {
+checkId = rs.getString(1);
+} // end while
+} finally {
+if (con != null) {
+con.close();
+} // end if
+if (pstmt != null) {
+pstmt.close();
+} // end if
+if (rs != null) {
+rs.close();
+} // end if
+} // end finally
 
-		return checkId;
-	}// IdCheck
+return checkId;
+}// IdCheck
 
 //회원가입
-	public int insertLogin(SignUpVO suVO) throws SQLException {
-		int insertflag = 0;
+public int insertLogin(SignUpVO suVO) throws SQLException {
+int insertflag = 0;
 
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = getConn();
-			StringBuilder insertResigter = new StringBuilder();
-			insertResigter.append(
-					"insert into id_info(user_id,password, user_name, gender, phone, answer,  loc_code, hint_code)values(?,?,?,?,?,?,?,?)");
+Connection con = null;
+PreparedStatement pstmt = null;
+try {
+con = getConn();
+StringBuilder insertResigter = new StringBuilder();
+insertResigter.append(
+"insert into id_info(user_id,password, user_name, gender, phone, answer,  loc_code, hint_code)values(?,?,?,?,?,?,?,?)");
 
-			pstmt = con.prepareStatement(insertResigter.toString());
-			pstmt.setString(1, suVO.getId());
-			pstmt.setString(2, suVO.getPw());
-			pstmt.setString(3, suVO.getName());
-			pstmt.setString(4, suVO.getGender());
-			pstmt.setString(5, suVO.getPhone());
-			pstmt.setString(6, suVO.getPwAnswer());
-			pstmt.setString(7, suVO.getLoc());
-			pstmt.setString(8, suVO.getPwHint());
+pstmt = con.prepareStatement(insertResigter.toString());
+pstmt.setString(1, suVO.getId());
+pstmt.setString(2, suVO.getPw());
+pstmt.setString(3, suVO.getName());
+pstmt.setString(4, suVO.getGender());
+pstmt.setString(5, suVO.getPhone());
+pstmt.setString(6, suVO.getPwAnswer());
+pstmt.setString(7, suVO.getLoc());
+pstmt.setString(8, suVO.getPwHint());
 
-			insertflag = pstmt.executeUpdate();
+insertflag = pstmt.executeUpdate();
 
-		} finally {
-			if (con != null) {
-				con.close();
-			} // end if
-			if (pstmt != null) {
-				pstmt.close();
-			} // end if
-		} // end finally
+} finally {
+if (con != null) {
+con.close();
+} // end if
+if (pstmt != null) {
+pstmt.close();
+} // end if
+} // end finally
 
-		return insertflag;
+return insertflag;
 
-	}// updateRegister
+}// updateRegister
 
 //분실 아이디찾기
-	public String selectIdCheck(ForgotIdVO fiVO) throws SQLException {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String id = "";
-		try {
-			con = getConn();
-			StringBuilder forgotId = new StringBuilder();
-			forgotId.append("select user_id from id_info where user_name=? and phone=?");
+public String selectIdCheck(ForgotIdVO fiVO) throws SQLException {
+Connection con = null;
+PreparedStatement pstmt = null;
+ResultSet rs = null;
+String id = "";
+try {
+con = getConn();
+StringBuilder forgotId = new StringBuilder();
+forgotId.append("select user_id from id_info where user_name=? and phone=?");
 
-			pstmt = con.prepareStatement(forgotId.toString());
+pstmt = con.prepareStatement(forgotId.toString());
 
-			pstmt.setString(1, fiVO.getName());
-			pstmt.setString(2, fiVO.getPhone());
+pstmt.setString(1, fiVO.getName());
+pstmt.setString(2, fiVO.getPhone());
 
-			rs = pstmt.executeQuery();
+rs = pstmt.executeQuery();
 
-			while (rs.next()) {
-				id = rs.getString(1);
-			}
+while (rs.next()) {
+id = rs.getString(1);
+}
 
-		} finally {
-			if (con != null) {
-				con.close();
-			} // end if
-			if (pstmt != null) {
-				pstmt.close();
-			} // end if
-			if (rs != null) {
-				rs.close();
-			} // end if
+} finally {
+if (con != null) {
+con.close();
+} // end if
+if (pstmt != null) {
+pstmt.close();
+} // end if
+if (rs != null) {
+rs.close();
+} // end if
 
-		}
-		return id;
-	}// selectId
+}
+return id;
+}// selectId
 
-	public boolean updateForgotPw(ForgotPwVO fpVO, String uuid) throws SQLException {
-		boolean updateFlag = false;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = getConn();
-			StringBuilder updatePw = new StringBuilder();
-			updatePw.append("Update id_info set password='").append(uuid)
-					.append("' where user_id =? and answer=? and hint_code=?");
+public boolean updateForgotPw(ForgotPwVO fpVO, String uuid) throws SQLException {
+boolean updateFlag = false;
+Connection con = null;
+PreparedStatement pstmt = null;
+try {
+con = getConn();
+StringBuilder updatePw = new StringBuilder();
+updatePw.append("Update id_info set password='").append(uuid)
+.append("' where user_id =? and answer=? and hint_code=?");
 
-			pstmt = con.prepareStatement(updatePw.toString());
+pstmt = con.prepareStatement(updatePw.toString());
 
-			pstmt.setString(1, fpVO.getId());
-			pstmt.setString(2, fpVO.getPwAnswer());
-			pstmt.setString(3, fpVO.getPwHint());
+pstmt.setString(1, fpVO.getId());
+pstmt.setString(2, fpVO.getPwAnswer());
+pstmt.setString(3, fpVO.getPwHint());
 
-			updateFlag = pstmt.executeUpdate() == 1;
+updateFlag = pstmt.executeUpdate() == 1;
 
-		} finally {
-			if (con != null) {
-				con.close();
-			} // end if
-			if (pstmt != null) {
-				pstmt.close();
-			} // end if
-		} // end finally
+} finally {
+if (con != null) {
+con.close();
+} // end if
+if (pstmt != null) {
+pstmt.close();
+} // end if
+} // end finally
 
-		return updateFlag;
-	}// updateForgetPw
+return updateFlag;
+}// updateForgetPw
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public PersonalInformVO selectPersonalInfom(String id) throws SQLException {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		PersonalInformVO piVO = null;
-		try {
-			con = getConn();
-			StringBuilder selectAllInfo = new StringBuilder();
-			selectAllInfo.append(
-					"select user_id,password,user_name,gender,phone,answer,loc_code,hint_code from id_info where user_id=?");
-			pstmt = con.prepareStatement(selectAllInfo.toString());
+public PersonalInformVO selectPersonalInfom(String id) throws SQLException {
+Connection con = null;
+PreparedStatement pstmt = null;
+ResultSet rs = null;
+PersonalInformVO piVO = null;
+try {
+con = getConn();
+StringBuilder selectAllInfo = new StringBuilder();
+selectAllInfo.append(
+"select user_id,password,user_name,gender,phone,answer,loc_code,hint_code from id_info where user_id=?");
+pstmt = con.prepareStatement(selectAllInfo.toString());
 
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
+pstmt.setString(1, id);
+rs = pstmt.executeQuery();
 
-			while (rs.next()) {
-				piVO = new PersonalInformVO(rs.getString("user_id"), rs.getString("password"),
-						rs.getString("user_name"), rs.getString("gender"), rs.getString("phone"),
-						rs.getString("answer"), rs.getString("loc_code"), rs.getString("hint_code"));
-			} // end while
-		} finally {
-			if (con != null) {
-				con.close();
-			} // end if
-			if (pstmt != null) {
-				pstmt.close();
-			} // end if
-			if (rs != null) {
-				rs.close();
-			} // end if
-		} // end finally
-		return piVO;
-	}// selectPersonalInfom
+while (rs.next()) {
+piVO = new PersonalInformVO(rs.getString("user_id"), rs.getString("password"),
+rs.getString("user_name"), rs.getString("gender"), rs.getString("phone"),
+rs.getString("answer"), rs.getString("loc_code"), rs.getString("hint_code"));
+} // end while
+} finally {
+if (con != null) {
+con.close();
+} // end if
+if (pstmt != null) {
+pstmt.close();
+} // end if
+if (rs != null) {
+rs.close();
+} // end if
+} // end finally
+return piVO;
+}// selectPersonalInfom
 
-	public String selectPw(String pw) throws SQLException {
-		String curPw = "";
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			con = getConn();
-			StringBuilder selectPw = new StringBuilder();
-			selectPw.append("select password from id_info where password=?");
+public String selectPw(String pw) throws SQLException {
+String curPw = "";
+Connection con = null;
+PreparedStatement pstmt = null;
+ResultSet rs = null;
+try {
+con = getConn();
+StringBuilder selectPw = new StringBuilder();
+selectPw.append("select password from id_info where password=?");
 
-			pstmt = con.prepareStatement(selectPw.toString());
-			pstmt.setString(1, pw);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				curPw = rs.getString(1);
-			} // end while
-		} finally {
-			if (con != null) {
-				con.close();
-			} // end if
-			if (pstmt != null) {
-				pstmt.close();
-			} // end if
-			if (rs != null) {
-				rs.close();
-			} // end if
-		} // end finally
-		return curPw;
-	}// selectPw
+pstmt = con.prepareStatement(selectPw.toString());
+pstmt.setString(1, pw);
+rs = pstmt.executeQuery();
+while (rs.next()) {
+curPw = rs.getString(1);
+} // end while
+} finally {
+if (con != null) {
+con.close();
+} // end if
+if (pstmt != null) {
+pstmt.close();
+} // end if
+if (rs != null) {
+rs.close();
+} // end if
+} // end finally
+return curPw;
+}// selectPw
 
-	public boolean updatePw(String id, String pw) throws SQLException {
-		boolean updateFlag = false;
+public boolean updatePw(String id, String pw) throws SQLException {
+boolean updateFlag = false;
 
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = getConn();
-			StringBuilder updatePw = new StringBuilder();
-			updatePw.append("update id_info ").append(" set password =? ").append(" where user_id =? ");
-			pstmt = con.prepareStatement(updatePw.toString());
-			pstmt.setString(1, pw);
-			pstmt.setString(2, id);
+Connection con = null;
+PreparedStatement pstmt = null;
+try {
+con = getConn();
+StringBuilder updatePw = new StringBuilder();
+updatePw.append("update id_info ").append(" set password =? ").append(" where user_id =? ");
+pstmt = con.prepareStatement(updatePw.toString());
+pstmt.setString(1, pw);
+pstmt.setString(2, id);
 
-			updateFlag = pstmt.executeUpdate() == 1;
+updateFlag = pstmt.executeUpdate() == 1;
 
-		} finally {
-			if (con != null) {
-				con.close();
-			} // end if
-			if (pstmt != null) {
-				pstmt.close();
-			} // end if
-		} // end finally
-		return updateFlag;
-	}// updatePw
+} finally {
+if (con != null) {
+con.close();
+} // end if
+if (pstmt != null) {
+pstmt.close();
+} // end if
+} // end finally
+return updateFlag;
+}// updatePw
 
-	public boolean updateThing(modifyInformVO miVO) throws SQLException {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		boolean flag = false;
-		try {
-			con = getConn();
-			StringBuilder udThing = new StringBuilder();
-			udThing.append(" update id_info ").append("set ").append(miVO.getThing()).append("=? where user_id=?");
+public boolean updateThing(modifyInformVO miVO) throws SQLException {
+Connection con = null;
+PreparedStatement pstmt = null;
+boolean flag = false;
+try {
+con = getConn();
+StringBuilder udThing = new StringBuilder();
+udThing.append(" update id_info ").append("set ").append(miVO.getThing()).append("=? where user_id=?");
 
-			pstmt = con.prepareStatement(udThing.toString());
-			pstmt.setString(1, miVO.getValue());
-			pstmt.setString(2, miVO.getId());
+pstmt = con.prepareStatement(udThing.toString());
+pstmt.setString(1, miVO.getValue());
+pstmt.setString(2, miVO.getId());
 
-			flag = pstmt.executeUpdate() == 1;
+flag = pstmt.executeUpdate() == 1;
 
-		} finally {
-			if (con != null) {
-				con.close();
-			} // end if
-			if (pstmt != null) {
-				pstmt.close();
-			} // end if
+} finally {
+if (con != null) {
+con.close();
+} // end if
+if (pstmt != null) {
+pstmt.close();
+} // end if
 
-		} // end finally
+} // end finally
 
-		return flag;
-	}// selectThing
-
+return flag;
+}// selectThing
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //관심목록 추가 
 
 public int insertInterest(InterestListVO irVO,boolean checkFlag) throws SQLException {
@@ -1419,6 +1419,7 @@ return list;
 }//selectInterestList
 
 ///////////////////////////////////////////////////////////////////////여기까지 김서영 2019.9.19 수정//////////////////////////////////////////////////////////////   
+
 //	public static void main(String[] args) {
 //
 //	}//main

@@ -84,7 +84,7 @@ public class InterestListEvt extends MouseAdapter implements ActionListener{
 			JOptionPane.showMessageDialog(il,"삭제하실 제품을 선택해주세요." );
 		}//end else
 		setInterestList();
-	
+		
 	}//deleteInterestList
 	
 	
