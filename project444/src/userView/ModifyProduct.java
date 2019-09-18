@@ -61,8 +61,7 @@ public class ModifyProduct extends JFrame {
 		
 		///////////////////////// 상세설명 가져오기 /////////////////////////////////////////
 		//더 좋은 방법있으면 와서 설명 부탁ㅠ
-		
-		jtaExplain = new JTextArea("상세 설명");//이벤트처리-클릭 시 텍스트 사라지게
+		//수정필요0918
 		
 		String temp_flag = "S";
 		
@@ -70,6 +69,7 @@ public class ModifyProduct extends JFrame {
 //		List<SaleListVO> list =
 		
 
+		jtaExplain = new JTextArea("상세 설명");//이벤트처리-클릭 시 텍스트 사라지게
 
 		
 		///////////////////////// 상세설명 가져오기 끝 /////////////////////////////////////////
