@@ -61,7 +61,7 @@ public class ChattingViewEvt extends MouseAdapter implements ActionListener {
 		String msg = cv.getJtaChatField().getText().trim();
 
 		if (!msg.isEmpty()) {
-//		cv.getJtaChatView().append(me+": "+msg+"\n");
+		cv.getJtaChatView().append(me+": "+msg+"\n");
 			System.out.println(msg);
 			try {
 				uDAO.sendChat(me, you, msg, dealCode);
@@ -69,7 +69,7 @@ public class ChattingViewEvt extends MouseAdapter implements ActionListener {
 				e.printStackTrace();
 			}
 			cv.getJtaChatField().setText("");
-//		scrollPosition();
+		scrollPosition();
 			System.out.println(msg);
 		}
 
