@@ -14,6 +14,7 @@ import userRun.RunMarketMain;
 import userVO.AllListVO;
 import userVO.ChatListVO;
 import userVO.DCodeAndIdAO;
+import userVO.FlagVO;
 import userVO.ForgotIdVO;
 import userVO.ForgotPwVO;
 import userVO.InsertProductVO;
@@ -134,8 +135,8 @@ public class UserDAO {
 			StringBuilder selectArea = new StringBuilder();
 			selectArea.append(
 					" select p.PRODUCT_CODE, p.IMG_FILE, p.PRODUCT_NAME, to_char(p.UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate, p.CATEGORY_CODE,"
-					+ " P.USER_ID, p.PRICE, i.loc_code,l.loc ")
-					.append(" from PRODUCT p, id_info i, location_list l ")					
+							+ " P.USER_ID, p.PRICE, i.loc_code,l.loc ")
+					.append(" from PRODUCT p, id_info i, location_list l ")
 					.append(" where ( p.user_id= i.user_id and i.loc_code=l.loc_code) and all_flag ='P' ");
 
 			if (jcbAreaIndex != 0) {
@@ -460,43 +461,48 @@ public class UserDAO {
 		} // end finally
 		return mdVO;
 	}// selectProDetail
-	
+
 ///////////////////////////////////// 상품 입력창 //////////////////////////////////////////////
-	
+
 	public void insertProduct(InsertProductVO ipVO, String id) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
-			con=getConn();
-			
-			System.out.println(id+"바보");
-			StringBuilder insertProduct=new StringBuilder();
+			con = getConn();
+
+			System.out.println(id + "바보");
+			StringBuilder insertProduct = new StringBuilder();
 			insertProduct
-			.append("insert into product (product_code, img_file, category_code, product_name, info, price,"
-					+ "user_id) values(pro_code,?,?,?,?,?,?)" );
-			
-			//insert into product (product_code,img_file, category_code, product_name, info, price,
-			//user_id) values(pro_code,'주루미.jpg','07','귀욤귀욤 주루미','주루미 열쇠고리',999999, 'baek');
-			
-			System.out.println(df.format(Integer.parseInt(ipVO.getCategory())+1));
-			pstmt=con.prepareStatement(insertProduct.toString());
-			
+					.append("insert into product (product_code, img_file, category_code, product_name, info, price,"
+							+ "user_id) values(pro_code,?,?,?,?,?,?)");
+
+			// insert into product (product_code,img_file, category_code, product_name,
+			// info, price,
+			// user_id) values(pro_code,'주루미.jpg','07','귀욤귀욤 주루미','주루미 열쇠고리',999999,
+			// 'baek');
+
+			System.out.println(df.format(Integer.parseInt(ipVO.getCategory()) + 1));
+			pstmt = con.prepareStatement(insertProduct.toString());
+
 			pstmt.setString(1, ipVO.getImg());
-			pstmt.setString(2, df.format(Integer.parseInt(ipVO.getCategory())+1));
+			pstmt.setString(2, df.format(Integer.parseInt(ipVO.getCategory()) + 1));
 			pstmt.setString(3, ipVO.getSubject());
 			pstmt.setString(4, ipVO.getpDetail());
 			pstmt.setInt(5, ipVO.getPrice());
 			pstmt.setString(6, id);
-			
+
 			pstmt.executeUpdate();
 		} finally {
-	    	  if( pstmt!=null ) { pstmt.close(); } //end if
-	    	  if( con!=null ) { con.close(); } //end if	    
-		}//end finally
-	}//insertProduct
-	
-	
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+			if (con != null) {
+				con.close();
+			} // end if
+		} // end finally
+	}// insertProduct
+
 ///////////////////////////////////// Mypage method ///////////////////////////////////////
 
 	/**
@@ -519,20 +525,19 @@ public class UserDAO {
 
 //3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
 			StringBuilder selectAll = new StringBuilder();
-		
-			
-				if (temp_flag.equals("S")) {
-						selectAll.append(
+
+			if (temp_flag.equals("S")) {
+				selectAll.append(
 						" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code, all_flag ")
-						.append(" from PRODUCT, id_info ")							
-						.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' and PRODUCT.USER_ID=? ");			
-				} else if(temp_flag.equals("P")) {
-					selectAll.append(
-					" select PRODUCT.PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, "
-					+ "DEAL.SALE_DATE, PRICE, DEAL.SALE_FLAG, DEAL.USER_ID, id_info.loc_code ")
-					.append(" from PRODUCT, DEAL , id_info  ")							
-					.append(" where ( PRODUCT.PRODUCT_CODE= DEAL.PRODUCT_CODE and deal.user_id= id_info.user_id) and sale_flag ='P' and DEAL.USER_ID=? ");
-				}//end else
+						.append(" from PRODUCT, id_info ")
+						.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' and PRODUCT.USER_ID=? ");
+			} else if (temp_flag.equals("P")) {
+				selectAll.append(
+						" select PRODUCT.PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, "
+								+ "DEAL.SALE_DATE, PRICE, DEAL.SALE_FLAG, DEAL.USER_ID, id_info.loc_code ")
+						.append(" from PRODUCT, DEAL , id_info  ")
+						.append(" where ( PRODUCT.PRODUCT_CODE= DEAL.PRODUCT_CODE and deal.user_id= id_info.user_id) and sale_flag ='P' and DEAL.USER_ID=? ");
+			} // end else
 
 			pstmt = con.prepareStatement(selectAll.toString());
 
@@ -547,7 +552,6 @@ public class UserDAO {
 						rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),
 						rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"), rs.getString("all_flag"),
 						rs.getInt("PRICE"));
-				
 
 				list.add(slv);
 			} // end while
@@ -626,8 +630,6 @@ public class UserDAO {
 
 	}// selectCompList
 
-
-
 	public boolean deletePost(String product_code) throws SQLException {
 		boolean deleteFlag = false;
 		Connection con = null;
@@ -658,402 +660,369 @@ public class UserDAO {
 		} // end finally
 		return deleteFlag;
 	}// deletePost
-	
-	
-	
+
 /////////////////////////////////////////////////////////////////////////////////MyPage ////////////////////////////////////////////////////////////////////////
 
+	////////////////////////////////////// 채팅관련
+	////////////////////////////////////// 메서드!!!!///////////////////////////////////
 
-	   ////////////////////////////////////// 채팅관련
-	   ////////////////////////////////////// 메서드!!!!///////////////////////////////////
+	public int addDeal(String productCode, String id) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
-	   public int addDeal(String productCode, String id) throws SQLException {
-	      Connection con = null;
-	      PreparedStatement pstmt = null;
-	      ResultSet rs = null;
+		try {
+			// 커넥션 얻기
+			con = getConn();
 
-	      try {
-	         // 커넥션 얻기
-	         con = getConn();
+			String check = "select deal_code from deal where product_code =? and user_id=?";
 
-	         String check = "select deal_code from deal where product_code =? and user_id=?";
+			pstmt = con.prepareStatement(check);
 
-	         pstmt = con.prepareStatement(check);
+			// 4. 바인드변수에 값 넣기
+			pstmt.setString(1, productCode);
+			pstmt.setString(2, id);
+			// 5. 쿼리 수행 후 결과 얻기
+			rs = pstmt.executeQuery();
 
-	         // 4. 바인드변수에 값 넣기
-	         pstmt.setString(1, productCode);
-	         pstmt.setString(2, id);
-	         // 5. 쿼리 수행 후 결과 얻기
-	         rs = pstmt.executeQuery();
+			if (rs.next()) {
+				System.out.println("거래중입니다.");
+				return -1;
+			}
+			pstmt.close();
 
-	         if (rs.next()) {
-	            System.out.println("거래중입니다.");
-	            return -1;
-	         }
-	         pstmt.close();
+			String insert = "insert into deal(deal_code,product_code,user_id) values(deal_code,?,?) ";
+			pstmt = con.prepareStatement(insert);
+			pstmt.setString(1, productCode);
+			pstmt.setString(2, id);
+			int cnt = pstmt.executeUpdate();
 
-	         String insert = "insert into deal(deal_code,product_code,user_id) values(deal_code,?,?) ";
-	         pstmt = con.prepareStatement(insert);
-	         pstmt.setString(1, productCode);
-	         pstmt.setString(2, id);
-	         int cnt = pstmt.executeUpdate();
+			System.out.println(cnt);
+			return cnt;
 
-	         System.out.println(cnt);
-	         return cnt;
+		} finally {
+			// 6. 연결끊기
+			if (rs != null) {
+				rs.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+			if (con != null) {
+				con.close();
+			} // end if
 
-	      } finally {
-	         // 6. 연결끊기
-	         if (rs != null) {
-	            rs.close();
-	         } // end if
-	         if (pstmt != null) {
-	            pstmt.close();
-	         } // end if
-	         if (con != null) {
-	            con.close();
-	         } // end if
+		} // end finally
 
-	      } // end finally
+	}// addDeal
 
-	   }// addDeal
+	public DCodeAndIdAO getDCodeAndId(String productCode, String id) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
-	   public DCodeAndIdAO getDCodeAndId(String productCode, String id) throws SQLException {
-	      Connection con = null;
-	      PreparedStatement pstmt = null;
-	      ResultSet rs = null;
+		try {
+			// 커넥션 얻기
+			con = getConn();
 
-	      try {
-	         // 커넥션 얻기
-	         con = getConn();
+			String check = "select deal_code, p.user_id seller_id from deal d,product p where p.product_code = ? and  d.user_id= ? and (d.product_code = p.product_code)";
 
-	         String check = "select deal_code, p.user_id seller_id from deal d,product p where p.product_code = ? and  d.user_id= ? and (d.product_code = p.product_code)";
+			pstmt = con.prepareStatement(check);
 
-	         pstmt = con.prepareStatement(check);
+			// 4. 바인드변수에 값 넣기
+			pstmt.setString(1, productCode);
+			pstmt.setString(2, id);
+			// 5. 쿼리 수행 후 결과 얻기
+			rs = pstmt.executeQuery();
 
-	         // 4. 바인드변수에 값 넣기
-	         pstmt.setString(1, productCode);
-	         pstmt.setString(2, id);
-	         // 5. 쿼리 수행 후 결과 얻기
-	         rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return new DCodeAndIdAO(rs.getString("deal_code"), rs.getString("seller_id"));
+			} else {
+				System.out.println("거래가 없습니다.");
+				return new DCodeAndIdAO("", "");
+			}
 
-	         if (rs.next()) {
-	            return new DCodeAndIdAO(rs.getString("deal_code"), rs.getString("seller_id"));
-	         } else {
-	            System.out.println("거래가 없습니다.");
-	            return new DCodeAndIdAO("", "");
-	         }
+		} finally {
+			// 6. 연결끊기
+			if (rs != null) {
+				rs.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+			if (con != null) {
+				con.close();
+			} // end if
 
-	      } finally {
-	         // 6. 연결끊기
-	         if (rs != null) {
-	            rs.close();
-	         } // end if
-	         if (pstmt != null) {
-	            pstmt.close();
-	         } // end if
-	         if (con != null) {
-	            con.close();
-	         } // end if
+		} // end finally
+	}// getDealCode
 
-	      } // end finally
-	   }// getDealCode
+	public List<ChatVO> selectAllChat(String me, String you, String dealCode) throws SQLException {
+		List<ChatVO> list = new ArrayList<ChatVO>();
 
-	   public List<ChatVO> selectAllChat(String me, String you, String dealCode) throws SQLException {
-	      List<ChatVO> list = new ArrayList<ChatVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			// 2.커넥션 얻기
+			con = getConn();
 
-	      Connection con = null;
-	      PreparedStatement pstmt = null;
-	      ResultSet rs = null;
-	      try {
-	         // 2.커넥션 얻기
-	         con = getConn();
-
-	         // 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
-	         // 것부터 조회
-	         String selectLunch = " select chat,sender,input_date from chatting "
-	               + "where deal_code = ? order by input_date asc";
-	         pstmt = con.prepareStatement(selectLunch);
-	         pstmt.setString(1, dealCode);
+			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
+			// 것부터 조회
+			String selectLunch = " select chat,sender,input_date from chatting "
+					+ "where deal_code = ? order by input_date asc";
+			pstmt = con.prepareStatement(selectLunch);
+			pstmt.setString(1, dealCode);
 //	         pstmt.setString(2, me);
-	         rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 
-	         ChatVO CV = null;
-	         while (rs.next()) {
-	            CV = new ChatVO(rs.getString("chat"), rs.getString("sender"), rs.getDate("input_date"));
-	            list.add(CV);// 조회된 레코드를 저장한 VO를 list에 추가
-	         }
+			ChatVO CV = null;
+			while (rs.next()) {
+				CV = new ChatVO(rs.getString("chat"), rs.getString("sender"), rs.getDate("input_date"));
+				list.add(CV);// 조회된 레코드를 저장한 VO를 list에 추가
+			}
 
-	         pstmt.close();
+			pstmt.close();
 
-	         String setFlag = "update chatting set  read_flag = 'Y'   where read_flag ='N'and deal_code = ? and reciever =?";
-	         pstmt = con.prepareStatement(setFlag);
-	         pstmt.setString(1, dealCode);
-	         pstmt.setString(2, me);
-	         System.out.println(pstmt.executeUpdate() + "플래그 사이즈");
-	         System.out.println(list.size() + "리스트 사이즈");
-	         System.out.println("------------------------------");
+			String setFlag = "update chatting set  read_flag = 'Y'   where read_flag ='N'and deal_code = ? and reciever =?";
+			pstmt = con.prepareStatement(setFlag);
+			pstmt.setString(1, dealCode);
+			pstmt.setString(2, me);
+			System.out.println(pstmt.executeUpdate() + "플래그 사이즈");
+			System.out.println(list.size() + "리스트 사이즈");
+			System.out.println("------------------------------");
 
-	         // 4. 바인드 변수 값 넣기
-	         // 5. 쿼리 수행후 결과 얻기
+			// 4. 바인드 변수 값 넣기
+			// 5. 쿼리 수행후 결과 얻기
 
-	      } finally {
-	         // 6. 연결 끊기
-	         if (rs != null)
-	            rs.close();
-	         if (pstmt != null)
-	            pstmt.close();
-	         if (con != null)
-	            con.close();
+		} finally {
+			// 6. 연결 끊기
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (con != null)
+				con.close();
 
-	      }
-	      return list;
+		}
+		return list;
 
-	   }// selectAllChat
+	}// selectAllChat
 
-	   public List<ChatVO> selectChat(String me, String you, String dealCode) throws SQLException {
-	      List<ChatVO> list = new ArrayList<ChatVO>();
+	public List<ChatVO> selectChat(String me, String you, String dealCode) throws SQLException {
+		List<ChatVO> list = new ArrayList<ChatVO>();
 
-	      Connection con = null;
-	      PreparedStatement pstmt = null;
-	      ResultSet rs = null;
-	      try {
-	         // 2.커넥션 얻기
-	         con = getConn();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			// 2.커넥션 얻기
+			con = getConn();
 
-	         // 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
-	         // 것부터 조회
-	         String selectLunch = " select chat,sender,input_date from chatting "
-	               + "where read_flag ='N' and deal_code = ? and reciever =? order by input_date asc";
-	         pstmt = con.prepareStatement(selectLunch);
-	         pstmt.setString(1, dealCode);
-	         pstmt.setString(2, me);
-	         rs = pstmt.executeQuery();
+			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
+			// 것부터 조회
+			String selectLunch = " select chat,sender,input_date from chatting "
+					+ "where read_flag ='N' and deal_code = ? and reciever =? order by input_date asc";
+			pstmt = con.prepareStatement(selectLunch);
+			pstmt.setString(1, dealCode);
+			pstmt.setString(2, me);
+			rs = pstmt.executeQuery();
 
-	         ChatVO CV = null;
-	         while (rs.next()) {
-	            CV = new ChatVO(rs.getString("chat"), rs.getString("sender"), rs.getDate("input_date"));
-	            list.add(CV);// 조회된 레코드를 저장한 VO를 list에 추가
-	         }
+			ChatVO CV = null;
+			while (rs.next()) {
+				CV = new ChatVO(rs.getString("chat"), rs.getString("sender"), rs.getDate("input_date"));
+				list.add(CV);// 조회된 레코드를 저장한 VO를 list에 추가
+			}
 
-	         pstmt.close();
+			pstmt.close();
 
-	         String setFlag = "update chatting set  read_flag = 'Y'   where read_flag ='N'and deal_code = ? and reciever =? ";
-	         pstmt = con.prepareStatement(setFlag);
-	         pstmt.setString(1, dealCode);
-	         pstmt.setString(2, me);
-	         System.out.println(pstmt.executeUpdate() + "플래그 사이즈");
-	         System.out.println(list.size() + "리스트 사이즈");
-	         System.out.println("------------------------------");
+			String setFlag = "update chatting set  read_flag = 'Y'   where read_flag ='N'and deal_code = ? and reciever =? ";
+			pstmt = con.prepareStatement(setFlag);
+			pstmt.setString(1, dealCode);
+			pstmt.setString(2, me);
+			System.out.println(pstmt.executeUpdate() + "플래그 사이즈");
+			System.out.println(list.size() + "리스트 사이즈");
+			System.out.println("------------------------------");
 
-	         // 4. 바인드 변수 값 넣기
-	         // 5. 쿼리 수행후 결과 얻기
+			// 4. 바인드 변수 값 넣기
+			// 5. 쿼리 수행후 결과 얻기
 
-	      } finally {
-	         // 6. 연결 끊기
-	         if (rs != null)
-	            rs.close();
-	         if (pstmt != null)
-	            pstmt.close();
-	         if (con != null)
-	            con.close();
+		} finally {
+			// 6. 연결 끊기
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (con != null)
+				con.close();
 
-	      }
-	      return list;
+		}
+		return list;
 
-	   }// selectAllChat
+	}// selectAllChat
 
-	   public void sendChat(String me, String you, String chat, String dealCode) throws SQLException {
-	      Connection con = null;
-	      PreparedStatement pstmt = null;
-	      try {
-	         // 2.
-	         con = getConn();
-	         // 3.
-	         String sendChat = "";
-	         sendChat = "insert into chatting(sender,reciever,chat,deal_code) values(?,?,?,?)";
+	public void sendChat(String me, String you, String chat, String dealCode) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			// 2.
+			con = getConn();
+			// 3.
+			String sendChat = "";
+			sendChat = "insert into chatting(sender,reciever,chat,deal_code) values(?,?,?,?)";
 
-	         pstmt = con.prepareStatement(sendChat);
-	         // 4.
-	         pstmt.setString(1, me);
-	         pstmt.setString(2, you);
-	         pstmt.setString(3, chat);
-	         pstmt.setString(4, dealCode);
+			pstmt = con.prepareStatement(sendChat);
+			// 4.
+			pstmt.setString(1, me);
+			pstmt.setString(2, you);
+			pstmt.setString(3, chat);
+			pstmt.setString(4, dealCode);
 
-	         // 5.
-	         pstmt.executeUpdate();
+			// 5.
+			pstmt.executeUpdate();
 
-	      } finally {
-	         // 6.
-	         if (pstmt != null)
-	            pstmt.close();// end if
-	         if (con != null)
-	            con.close();// end if
+		} finally {
+			// 6.
+			if (pstmt != null)
+				pstmt.close();// end if
+			if (con != null)
+				con.close();// end if
 
-	      } // end finally
-	   }// sendChat
-	///////////////////////////// 채팅리스트 메서드!!!!!!!!!!!!///////////////////////////////////
+		} // end finally
+	}// sendChat
+	///////////////////////////// 채팅리스트
+	///////////////////////////// 메서드!!!!!!!!!!!!///////////////////////////////////
 
-	   public List<ChatListVO> setChatList(String flag) throws SQLException {
-	      List<ChatListVO> list = new ArrayList<ChatListVO>();
+	public List<ChatListVO> setChatList(String flag) throws SQLException {
+		List<ChatListVO> list = new ArrayList<ChatListVO>();
 
-	      Connection con = null;
-	      PreparedStatement pstmt = null;
-	      ResultSet rs = null;
-	      
-	      String dealCode ="";
-	      try {
-	         // 2.커넥션 얻기
-	         con = getConn();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
-	         // 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
-	         // 것부터 조회
-	         String chatList ="   select p.product_name product_name ,p.user_id id ,l.loc loc,deal_code from product p, deal d,id_info i,location_list l   "
-	               + " where  d.user_id=? and p.product_code = d.product_code and p.user_id = i.user_id and l.loc_code=i.loc_code   ";
-	         if(flag.equals("sell")) {
-	            chatList ="   select  p.product_name ,d.user_id id,l.loc loc ,deal_code from  product p, deal d,id_info i,location_list l "
-	                  + "   where  p.user_id =? and p.product_code = d.product_code and p.user_id = i.user_id and l.loc_code=i.loc_code   ";
-	         }
-	         
-	         
-	         pstmt = con.prepareStatement(chatList);
-	         pstmt.setString(1,RunMarketMain.userId);
-	      
-	         rs = pstmt.executeQuery();
+		String dealCode = "";
+		try {
+			// 2.커넥션 얻기
+			con = getConn();
 
-	         ChatListVO clVO = null;
-	         RecentChatVO rcVO = null;
-	         while (rs.next()) {
-	         dealCode = rs.getString("deal_code");   
-	         rcVO = recentChat(dealCode);
-	            clVO = new ChatListVO(rs.getString("product_name"), rs.getString("id"), rs.getString("loc"), rcVO.getTime(), rcVO.getChat(), dealCode);
-	            list.add(clVO);// 조회된 레코드를 저장한 VO를 list에 추가
-	         }
+			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
+			// 것부터 조회
+			String chatList = "   select p.product_name product_name ,p.user_id id ,l.loc loc,deal_code from product p, deal d,id_info i,location_list l   "
+					+ " where  d.user_id=? and p.product_code = d.product_code and p.user_id = i.user_id and l.loc_code=i.loc_code   ";
+			if (flag.equals("sell")) {
+				chatList = "   select  p.product_name ,d.user_id id,l.loc loc ,deal_code from  product p, deal d,id_info i,location_list l "
+						+ "   where  p.user_id =? and p.product_code = d.product_code and p.user_id = i.user_id and l.loc_code=i.loc_code   ";
+			}
 
-	      
+			pstmt = con.prepareStatement(chatList);
+			pstmt.setString(1, RunMarketMain.userId);
 
-	      } finally {
-	         // 6. 연결 끊기
-	         if (rs != null)
-	            rs.close();
-	         if (pstmt != null)
-	            pstmt.close();
-	         if (con != null)
-	            con.close();
+			rs = pstmt.executeQuery();
 
-	      }
-	      return list;
-	      
-	      
-	      
-	   }//setChatList
-	   
-	   public RecentChatVO recentChat(String dealCode) throws SQLException{
-	      Connection con = null;
-	      PreparedStatement pstmt = null;
-	      ResultSet rs = null;
-	      
-	      RecentChatVO rcVO = null;
-	   
-	      
-	      try {
-	         // 2.커넥션 얻기
-	         con = getConn();
+			ChatListVO clVO = null;
+			RecentChatVO rcVO = null;
+			while (rs.next()) {
+				dealCode = rs.getString("deal_code");
+				rcVO = recentChat(dealCode);
+				clVO = new ChatListVO(rs.getString("product_name"), rs.getString("id"), rs.getString("loc"),
+						rcVO.getTime(), rcVO.getChat(), dealCode);
+				list.add(clVO);// 조회된 레코드를 저장한 VO를 list에 추가
+			}
 
-	         // 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
-	         // 것부터 조회
-	         String RecentChat ="   select to_char(input_date,'yyyy-mm-dd hh24:mi:ss') input_date ,chat from  chatting where  (select max(input_date) from chatting where deal_code =?) = input_date   ";
-	         
-	         
-	         pstmt = con.prepareStatement(RecentChat);
-	         pstmt.setString(1,dealCode);
-	      
-	         rs = pstmt.executeQuery();
+		} finally {
+			// 6. 연결 끊기
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (con != null)
+				con.close();
 
-	         
-	         if (rs.next()) {
-	         rcVO = new RecentChatVO(rs.getString("input_date"), rs.getString("chat"));
-	         }else {
-	            rcVO = new RecentChatVO("", "");
-	         }
+		}
+		return list;
 
-	      
+	}// setChatList
 
-	      } finally {
-	         // 6. 연결 끊기
-	         if (rs != null)
-	            rs.close();
-	         if (pstmt != null)
-	            pstmt.close();
-	         if (con != null)
-	            con.close();
+	public RecentChatVO recentChat(String dealCode) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
-	      }
-	      return rcVO;
-	      
-	   }//recentChat
+		RecentChatVO rcVO = null;
+
+		try {
+			// 2.커넥션 얻기
+			con = getConn();
+
+			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
+			// 것부터 조회
+			String RecentChat = "   select to_char(input_date,'yyyy-mm-dd hh24:mi:ss') input_date ,chat from  chatting where  (select max(input_date) from chatting where deal_code =?) = input_date   ";
+
+			pstmt = con.prepareStatement(RecentChat);
+			pstmt.setString(1, dealCode);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				rcVO = new RecentChatVO(rs.getString("input_date"), rs.getString("chat"));
+			} else {
+				rcVO = new RecentChatVO("", "");
+			}
+
+		} finally {
+			// 6. 연결 끊기
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (con != null)
+				con.close();
+
+		}
+		return rcVO;
+
+	}// recentChat
 
 	////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////// 채팅  시작시에 상품의  플래그 확인 메서드!!!!!!!!!!!//////////////////////////////
-	   public void checkFlag() {
-		   		Connection con = null;
-		      PreparedStatement pstmt = null;
-		      ResultSet rs = null;
-		      
-		   
-		      
-//		      try {
-		         // 2.커넥션 얻기
-//		         con = getConn();
+	public FlagVO checkFlag(String dealCode) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
-		         // 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
-		         // 것부터 조회
-//		         String RecentChat ="   select to_char(input_date,'yyyy-mm-dd hh24:mi:ss') input_date ,chat from  chatting where  (select max(input_date) from chatting where deal_code =?) = input_date   ";
-		         
-		         
-//		         pstmt = con.prepareStatement(RecentChat);
-//		         pstmt.setString(1,dealCode);
-//		      
-//		         rs = pstmt.executeQuery();
-//
-//		         
-//		         if (rs.next()) {
-//		         rcVO = new RecentChatVO(rs.getString("input_date"), rs.getString("chat"));
-//		         }else {
-//		            rcVO = new RecentChatVO("", "");
-//		         }
-//
-//		      
-//
-//		      } finally {
-//		         // 6. 연결 끊기
-//		         if (rs != null)
-//		            rs.close();
-//		         if (pstmt != null)
-//		            pstmt.close();
-//		         if (con != null)
-//		            con.close();
-//
-//		      }
-//		   
-//		   
-		   
-	   }
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
+		FlagVO fVO = null;
+
+		try {
+			// 2.커넥션 얻기
+			con = getConn();
+
+			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
+			// 것부터 조회
+			String checkFlag = "   select   sale_flag, all_flag from deal d,product p where  deal_code = ? and d.product_code = p.product_code   ";
+
+			pstmt = con.prepareStatement(checkFlag);
+			pstmt.setString(1, dealCode);
+
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				fVO = new FlagVO(rs.getString("sale_flag"), rs.getString("all_flag"));
+			}
+
+		} finally {
+			// 6. 연결 끊기
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (con != null)
+				con.close();
+
+		}
+		return fVO;
+
+	}
+
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	

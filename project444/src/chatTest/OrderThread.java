@@ -11,6 +11,7 @@ import javax.swing.JTextArea;
 
 
 import userDAO.UserDAO;
+import userVO.FlagVO;
 
 //import kr.co.sist.util.cipher.DataDecrypt;
 
@@ -42,6 +43,7 @@ public class OrderThread extends Thread {
 
 	public void run() {
 		UserDAO uDAO = UserDAO.getInstance();
+		FlagVO fVO = null;
 		try {
 			List<ChatVO> list = null;
 //			Object[] rowData = null;
@@ -66,7 +68,7 @@ public class OrderThread extends Thread {
 			jsp.getVerticalScrollBar().setValue(jsp.getVerticalScrollBar().getMaximum());
 			list = null;
 			
-
+			
 //			boolean flag = false;
 			while (true) {
 				// 주문 목록을 조회
@@ -80,12 +82,17 @@ public class OrderThread extends Thread {
 
 					jsp.getVerticalScrollBar().setValue(jsp.getVerticalScrollBar().getMaximum());
 				} // end for
-				list = null;
 				try {
 					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				} // end catch
+				
+				fVO = uDAO.checkFlag(dealCode);
+				fVO.getDealFLag();
+				fVO.getAllFlag();
+				
+				
 			} // end while
 		} catch (SQLException e) {
 			e.printStackTrace();
