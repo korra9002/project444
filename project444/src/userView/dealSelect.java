@@ -67,7 +67,7 @@ public class dealSelect extends JFrame {
 	}//dealSelect
 	
 	     //
-	
+	  
 	public static void main(String[] args) {
 		new dealSelect();
 	}//main
