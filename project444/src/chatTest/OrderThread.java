@@ -80,7 +80,7 @@ public class OrderThread extends Thread {
 				} // end for
 				list = null;
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				} // end catch
