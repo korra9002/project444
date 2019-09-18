@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import userControl.InterestListEvt;
 import userRun.RunMarketMain;
 
 @SuppressWarnings("serial")
@@ -25,15 +26,14 @@ public class InterestList extends JDialog {
 	
 	public InterestList(RunMarketMain rmm) {
 		super(rmm,"관심목록");
-		String[] sellCol= {"이미지","제품명","가격","아이디","지역","시간"};
+		String[] sellCol= {"이미지","제품명","가격","아이디","지역","시간","카테고리"};
 		Object[][] sellRow = {
-				{1,2,3,4,5,6},
-				{1,2,3,4,5,6},
-				{1,2,3,4,5,6},
-				{1,2,3,4,5,6},
-				{1,2,3,4,5,6},
-				{1,2,3,4,5,6},
-				{1,2,3,4,5,6}
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7},
+				{1,2,3,4,5,6,7}
+				
 				};
 		
 		dtmInterest = new DefaultTableModel(sellRow, sellCol){//셀 내용 수정 금지
@@ -65,17 +65,17 @@ public class InterestList extends JDialog {
 		jtInterest.getTableHeader().setReorderingAllowed(false);//테이블 컬럼 위치 변경 금지
 		
 		jtInterest.getColumnModel().getColumn(0).setPreferredWidth(120);
-		jtInterest.getColumnModel().getColumn(0).setResizable(false);;//테이블 컬럼 사이즈 변경 금지
+		jtInterest.getColumnModel().getColumn(0).setResizable(false);//테이블 컬럼 사이즈 변경 금지
 		jtInterest.getColumnModel().getColumn(1).setPreferredWidth(120);
-		jtInterest.getColumnModel().getColumn(1).setResizable(false);;
+		jtInterest.getColumnModel().getColumn(1).setResizable(false);
 		jtInterest.getColumnModel().getColumn(2).setPreferredWidth(75);
-		jtInterest.getColumnModel().getColumn(2).setResizable(false);;
+		jtInterest.getColumnModel().getColumn(2).setResizable(false);
 		jtInterest.getColumnModel().getColumn(3).setPreferredWidth(75);
-		jtInterest.getColumnModel().getColumn(3).setResizable(false);;
+		jtInterest.getColumnModel().getColumn(3).setResizable(false);
 		jtInterest.getColumnModel().getColumn(4).setPreferredWidth(75);
-		jtInterest.getColumnModel().getColumn(4).setResizable(false);;
+		jtInterest.getColumnModel().getColumn(4).setResizable(false);
 		jtInterest.getColumnModel().getColumn(5).setPreferredWidth(75);
-		jtInterest.getColumnModel().getColumn(5).setResizable(false);;
+		jtInterest.getColumnModel().getColumn(5).setResizable(false);
 		
 		jtInterest.setRowHeight(100);
 		
@@ -91,14 +91,30 @@ public class InterestList extends JDialog {
 		jpInterestList.add(jspInterest);
 		
 		/////////////////////////////////첫번째 탭 끝/////////////////////////////////
-		
 		add(jpInterestList);
-		
+		//////////////////////수정사항//////////////////////
+		InterestListEvt ile = new InterestListEvt(this);
+		 jbtDelete.addActionListener(ile);
+		 jtInterest.addMouseListener(ile);
+		 
+		/////////////////////////////////////////////////
 		setBounds(100, 100, 565, 600);
 		setVisible(true);
 		setResizable(false);
 		
 	}//SaleList
+
+	public JButton getJbtDelete() {
+		return jbtDelete;
+	}//getJbtDelete
+
+	public JTable getJtInterest() {
+		return jtInterest;
+	}//getJtInterest
+
+	public DefaultTableModel getDtmInterest() {
+		return dtmInterest;
+	}//getDtmInterest
 
 
 }//class

@@ -18,6 +18,7 @@ import userVO.FlagVO;
 import userVO.ForgotIdVO;
 import userVO.ForgotPwVO;
 import userVO.InsertProductVO;
+import userVO.InterestListVO;
 import userVO.LoginVO;
 import userVO.MarketDetailVO;
 import userVO.PersonalInformVO;
@@ -55,9 +56,9 @@ public class UserDAO {
 
 		// 2. Connection 얻기
 
-//		String url="jdbc:oracle:thin:@localhost:1521:orcl";
-		String url = "jdbc:oracle:thin:@211.63.89.159:1521:orcl";
-		String id = "junggo";
+		String url="jdbc:oracle:thin:@localhost:1521:orcl";
+//		String url = "jdbc:oracle:thin:@211.63.89.159:1521:orcl";
+		String id = "seoyyyy";
 		String pass = "1234";
 
 		con = DriverManager.getConnection(url, id, pass);
@@ -1321,8 +1322,103 @@ public class UserDAO {
 		return flag;
 	}// selectThing
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//관심목록 추가 
 
+public int insertInterest(InterestListVO irVO,boolean checkFlag) throws SQLException {
+Connection con = null;
+PreparedStatement pstmt = null;
+int flag = 0;
+try {
+con=getConn();
+if(checkFlag) {
+StringBuilder insertInterest = new StringBuilder();
+insertInterest
+.append("insert into INTERESTED_PRODUCT(product_code , user_id)values")
+.append("((select product_code from product where product_code=?),?)");
+pstmt= con.prepareStatement(insertInterest.toString());
+System.out.println(irVO.getProduct_code()+" "+irVO.getUser_id());
+pstmt.setString(1,irVO.getProduct_code());
+pstmt.setString(2,irVO.getUser_id());
+flag = pstmt.executeUpdate();
+pstmt.close();
+}else if(!checkFlag) {
+StringBuilder deletInterest = new StringBuilder();
+deletInterest
+.append("delete from INTERESTED_PRODUCT where product_code=?");
+pstmt=con.prepareStatement(deletInterest.toString());
+pstmt.setString(1,irVO.getProduct_code());
+flag = pstmt.executeUpdate();
+}//end if
+} finally{
+if(con!=null) {con.close();}//end if
+if(pstmt!=null) {pstmt.close();}//end if
+}//end finally
+
+
+
+return flag;
+}//insertInterest
+public String selectInterestCheck(InterestListVO irVO) throws SQLException {
+Connection con =null;
+PreparedStatement pstmt = null;
+ResultSet rs= null;
+String user_id = "";
+try{
+con = getConn();
+String selectCheck= "select user_id from INTERESTED_PRODUCT where product_code=? and user_id=?";
+pstmt = con.prepareStatement(selectCheck);
+
+pstmt.setString(1, irVO.getProduct_code());
+pstmt.setString(2, irVO.getUser_id());
+rs = pstmt.executeQuery();
+while(rs.next()) {
+user_id = rs.getString(1);
+}
+}finally {
+if(con!=null) {con.close();}//end if
+if(pstmt!=null) {pstmt.close();}//end if
+if(rs!=null) {rs.close();}//end if
+
+}//end finally
+
+
+return user_id;
+}//selectInterestCheck
+//관심목록 보이기
+public List<AllListVO> selectInterestList() throws SQLException{
+List<AllListVO> list = new ArrayList<AllListVO>();
+Connection con = null;
+PreparedStatement pstmt = null;
+ResultSet rs=null;
+try {
+con=getConn();
+StringBuilder selectinterest = new StringBuilder();
+selectinterest
+.append(" select p.PRODUCT_CODE, p.IMG_FILE, p.PRODUCT_NAME, p.PRICE, P.USER_ID, i.loc_code,l.loc, to_char(p.UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,c.category ")
+.append(" from PRODUCT p, id_info i, location_list l,category_list c,interested_product ip ")
+.append(" where ( p.user_id= i.user_id and i.loc_code=l.loc_code and c.category_code=p.category_code and p.product_code=ip.product_code) ")
+.append(" and ip.user_id=?");
+
+pstmt = con.prepareStatement(selectinterest.toString());
+pstmt.setString(1, RunMarketMain.userId);
+rs = pstmt.executeQuery();
+while(rs.next()) {
+AllListVO aVO= new AllListVO(rs.getString("PRODUCT_CODE"),rs.getString("IMG_FILE"), 
+rs.getString("PRODUCT_NAME"), rs.getString("loc"), rs.getString("inputDate"),
+rs.getString("category"), rs.getString("USER_ID"), rs.getInt("PRICE"));
+list.add(aVO);
+}//end while
+
+}finally {
+if(con!=null) {con.close();}//end if
+if(pstmt!=null) {pstmt.close();}//end if
+if(rs!=null) {rs.close();}//end if
+}//end finally
+
+return list;
+}//selectInterestList
+
+///////////////////////////////////////////////////////////////////////여기까지 김서영 2019.9.19 수정//////////////////////////////////////////////////////////////   
 //	public static void main(String[] args) {
 //
 //	}//main

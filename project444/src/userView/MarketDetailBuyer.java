@@ -1,9 +1,11 @@
 package userView;
 
 import java.awt.Checkbox;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -11,6 +13,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import userControl.MarketDetailBuyerEvt;
+import userDAO.UserDAO;
+import userVO.InterestListVO;
 import userVO.MarketDetailVO;
 
 public class MarketDetailBuyer extends JDialog {
@@ -19,12 +23,12 @@ public class MarketDetailBuyer extends JDialog {
 	private JTextField jtfName, jtfPrice, jtfId, jtfInputDate, jtfCategory;
 	private JButton jbtChat;
 	private JTextArea jtaStrongPoint;
-	private Checkbox ckLike;
+	private JCheckBox jckLike;
 
 	private MarketMain mm;
 	private String productCode, id;
 
-	public MarketDetailBuyer(MarketMain mm, MarketDetailVO mdVO, String id) {
+	public MarketDetailBuyer(MarketMain mm, MarketDetailVO mdVO, String id) throws SQLException {
 		this.id = id;
 		jlDetailImg = new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/img/무민.jpg/"));// 썸네일X / 원본 이미지
 //		jlDetailImg.setHorizontalAlignment(JLabel.CENTER);
@@ -38,8 +42,16 @@ public class MarketDetailBuyer extends JDialog {
 		JLabel jlInputDate = new JLabel("올린일자");
 		JLabel jlCategory = new JLabel("카테고리");
 
-		ckLike = new Checkbox("관심목록에 추가");
-
+		jckLike = new JCheckBox("관심목록에 추가");
+		///////////변경사항 //////////////////////
+		InterestListVO irVO = new InterestListVO(productCode, id);
+		UserDAO uDAO = UserDAO.getInstance();
+		String flag = uDAO.selectInterestCheck(irVO);
+		if(flag.isEmpty()) {
+			jckLike.setSelected(false);
+		}else {
+			jckLike.setSelected(true);
+		}
 		// JTextField
 		jtfName = new JTextField(mdVO.getProductName());
 		jtfPrice = new JTextField(Integer.toString(mdVO.getPrice()));
@@ -80,7 +92,7 @@ public class MarketDetailBuyer extends JDialog {
 
 		jbtChat.setBounds(180, 280, 150, 30);
 
-		ckLike.setBounds(180, 320, 150, 50);
+		jckLike.setBounds(180, 320, 150, 50);
 
 		// 배치
 		setLayout(null);
@@ -95,7 +107,7 @@ public class MarketDetailBuyer extends JDialog {
 		add(jtfId);
 		add(jsp);
 		add(jbtChat);
-		add(ckLike);
+		add(jckLike);
 		add(jtfInputDate);
 		add(jtfCategory);
 
@@ -106,7 +118,6 @@ public class MarketDetailBuyer extends JDialog {
 		MarketDetailBuyerEvt mdbe = new MarketDetailBuyerEvt(mm, this);
 
 		jbtChat.addActionListener(mdbe);
-		ckLike.addMouseListener(mdbe);
 
 	}// MarketDetail
 
@@ -142,8 +153,8 @@ public class MarketDetailBuyer extends JDialog {
 		return jtaStrongPoint;
 	}
 
-	public Checkbox getCkLike() {
-		return ckLike;
+	public JCheckBox getjckLike() {
+		return jckLike;
 	}
 
 	public MarketMain getMm() {
