@@ -85,7 +85,7 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 		try {
 			fis = new FileInputStream(readFile);
 			if (readFile.exists()) {
-				File writeFile = new File("C:/Users/sist/git/project444/project444/src/images/" + readFile.getName());
+				File writeFile = new File("C:/dev/" + readFile.getName());
 				fos = new FileOutputStream(writeFile); // 이미지 폴더에 폭사
 
 				while ((len = fis.read(readData)) != -1) {
