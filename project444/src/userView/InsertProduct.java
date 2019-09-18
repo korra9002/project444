@@ -26,6 +26,8 @@ public class InsertProduct extends JPanel {
 	private JComboBox<String> jcbCategory;
 	private DefaultComboBoxModel<String> dcbCategory; 
 	
+
+
 	
 	RunMarketMain rmm;
 	
@@ -84,8 +86,14 @@ public class InsertProduct extends JPanel {
 		jbtCancel.addActionListener(ipe);
 		
 		jtfSubject.addMouseListener(ipe);
+		jtfSubject.addActionListener(ipe);
 		jtfPrice.addMouseListener(ipe);
+		jtfPrice.addActionListener(ipe);
 		jtaExplain.addMouseListener(ipe);
+		
+		
+		
+		
 		setBounds(100, 100, 420, 640);
 		setVisible(true);
 //		setResizable(false);

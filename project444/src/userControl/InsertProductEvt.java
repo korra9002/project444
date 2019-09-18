@@ -1,15 +1,14 @@
 package userControl;
 
 import java.awt.FileDialog;
-import java.awt.Frame;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -17,6 +16,7 @@ import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
 
 import kr.co.sist.util.img.ImageResize;
 import userDAO.UserDAO;
@@ -31,11 +31,62 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 	private String id;
 	private boolean imgFlag;
 
+	private static boolean subjectFlag = true;
+	private static boolean priceFlag = true;
+	private static boolean detailFlag = true;
+
 	public InsertProductEvt(InsertProduct ip, RunMarketMain rmm) {
 		System.out.println("생성자!!!!!");
 		this.ip = ip;
 		this.rmm = rmm;
 		id = RunMarketMain.userId;
+
+		ip.getJtfSubject().addKeyListener(new KeyAdapter() {
+			boolean flag = true;
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(flag) {
+					ip.getJtfSubject().setText("");
+					flag=false;
+					subjectFlag=false;
+//					priceFlag=false;
+//					detailFlag=false;
+				}//end if
+			}//keyPressed			 
+		});//KeyAdapter
+		
+		ip.getJtfPrice().addKeyListener(new KeyAdapter() {
+			boolean flag = true;
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(flag) {
+					ip.getJtfPrice().setText("");
+					flag=false;
+//					subjectFlag=false;
+					priceFlag=false;
+//					detailFlag=false;
+				}//end if
+			}//keyPressed
+		});//KeyAdapter
+		
+		ip.getJtaExplain().addKeyListener(new KeyAdapter() {
+			boolean flag = true;
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(flag) {
+					ip.getJtaExplain().setText("");
+					flag=false;
+//					subjectFlag=false;
+//					priceFlag=false;
+					detailFlag=false;
+				}//end if
+			}//keyPressed
+		});//KeyAdapter
+		
+		
 	}// InsertProductEvt
 
 	public void addImg() {
@@ -154,33 +205,65 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 
 	@Override
 	public void mouseClicked(MouseEvent me) {
-		//0917- flag 줘야함
-		if (me.getSource() == ip.getJtfSubject()) {
-			ip.getJtfSubject().setText("");
-		} else if (me.getSource() == ip.getJtfPrice()) {
-			ip.getJtfPrice().setText("");
-		} else if (me.getSource() == ip.getJtaExplain()) {
-			ip.getJtaExplain().setText("");
+		// 0917- flag 줘야함
+		if (subjectFlag) { 
+			if (me.getSource() == ip.getJtfSubject()) {
+				ip.getJtfSubject().setText("");
+				subjectFlag= false;
+			}//end if
+		}//end if
+		if (priceFlag) {
+			 if (me.getSource() == ip.getJtfPrice()) {
+					ip.getJtfPrice().setText("");
+					priceFlag=false;
+			 }//end if
+		}//end if
+		if (detailFlag) {			
+			if (me.getSource() == ip.getJtaExplain()) {
+				ip.getJtaExplain().setText("");
+				detailFlag=false;
+			}//end if
 		} // end if
 
 	}// mouseClicked
 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
+		System.out.println("이거 뜨긴하니");
 		if (ae.getSource() == ip.getJbtOkay()) {
 //			System.out.println(imgFlag+"   왜 true안나와?");
 			uploadPost();
-			ip.getJlbProductImg().setIcon(null);
-			ip.getJtfSubject().setText("");
-			ip.getJtfPrice().setText("");
-			ip.getJtaExplain().setText("");
-			ip.getJtfSubject().requestFocus();
+//			ip.getJlbProductImg().setIcon(null);
+//			ip.getJtfSubject().setText("");
+//			ip.getJtfPrice().setText("");
+//			ip.getJtaExplain().setText("");
+//			ip.getJtfSubject().requestFocus();
 		}
 
 		if (ae.getSource() == ip.getJbtSelectImg()) {
 			addImg();
 //			System.out.println(imgFlag+"addimg()후 플래그값");			
 		} // end if
+		
+		if (ae.getSource()==ip.getJtfSubject()) {
+			if (!ip.getJtfSubject().getText().equals("")) {
+				ip.getJtfPrice().requestFocus();
+				if(priceFlag) {
+					ip.getJtfPrice().setText("");
+					priceFlag=false;
+				}//end if
+			}//end if
+		}//end if
+		
+		if (ae.getSource()==ip.getJtfPrice()) {
+			if (!ip.getJtfPrice().getText().equals("")) {
+				ip.getJtaExplain().requestFocus();
+				if(priceFlag) {
+					ip.getJtaExplain().setText("");
+					detailFlag=false;
+				}//end if
+			}//end if
+		}//end if
 
 	}// actionPerformed
 }// class
