@@ -14,12 +14,17 @@ import userDAO.UserDAO;
 import userRun.RunMarketMain;
 import userVO.AllListVO;
 import userVO.InterestListVO;
+import userVO.MarketDetailVO;
 import userView.InterestList;
+import userView.MarketDetailBuyer;
+import userView.MarketMain;
 
 public class InterestListEvt extends MouseAdapter implements ActionListener{
 	private InterestList il;
+	private MarketMain mm;
 	public static final int DOUBLE_CLICK=2;
 	private String productCode="";
+	private String loc_code="";
 	public InterestListEvt(InterestList il) {
 		this.il =il;
 		try {
@@ -63,9 +68,10 @@ public class InterestListEvt extends MouseAdapter implements ActionListener{
 			rowData[5]=alv.getUpload_date();
 			rowData[6]=alv.getCategory();
 			//dtm¿¡ Ãß°¡
-			dtm.addRow(rowData);		
+			dtm.addRow(rowData);
+			loc_code = alv.getLoc_code();
 		}//end for		
-		
+	
 	}//setInterestList
 	
 	public void deleteInterestList() throws SQLException {
@@ -88,7 +94,16 @@ public class InterestListEvt extends MouseAdapter implements ActionListener{
 		if(me.getSource()==il.getJtInterest()) {
 				productCode =il.getJtInterest().getValueAt(il.getJtInterest().getSelectedRow(), 1).toString();
 				productCode=productCode.substring(productCode.indexOf("(")+1,productCode.indexOf(")"));
-			
+		if(me.getClickCount()==DOUBLE_CLICK) {
+			try {
+			UserDAO uDAO = UserDAO.getInstance();
+			MarketDetailVO mdVO;
+				mdVO = uDAO.selectProDetail(productCode, loc_code);
+			new MarketDetailBuyer(mm, mdVO, RunMarketMain.userId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}//end catch
+		}//end if
 		}//end if
 		}//mouseClicked
 	@Override
