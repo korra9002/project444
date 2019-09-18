@@ -63,6 +63,7 @@ public class AdminUserIdDetailViewEvt implements ActionListener {
 						
 						JOptionPane.showMessageDialog(aidv, msg);
 						exit();
+						ame.setUserIdList();
 					}//switch
 					
 				} else if(suspendMsg.equals("Y")){
@@ -80,6 +81,7 @@ public class AdminUserIdDetailViewEvt implements ActionListener {
 						
 						JOptionPane.showMessageDialog(aidv, msg);
 						exit();
+						ame.setUserIdList();
 					}//switch
 					
 				}//end else
@@ -98,7 +100,7 @@ public class AdminUserIdDetailViewEvt implements ActionListener {
 	
 	private void exit() {
 		aidv.dispose();
-		ame.resetUserIdList();
+		
 	}//exit
 	
 	@Override

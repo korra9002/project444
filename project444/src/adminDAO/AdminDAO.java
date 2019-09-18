@@ -10,6 +10,7 @@ import java.util.List;
 
 import adminVO.CheckListVO;
 import adminVO.CheckVO;
+import adminVO.ProductDetailVO;
 import adminVO.ProductListVO;
 import adminVO.ProductVO;
 import adminVO.SuspendIdVO;
@@ -526,6 +527,53 @@ public class AdminDAO {
 		return list;
 		
 	}//selectOrderByProductList
+	
+	/**
+	 * 디테일 창을 열 때 필요한 값들을 VO(DTO 역할)에 넣는 작업
+	 * @param cdVO 디테일 창에 필요한 값을 넣을 VO
+	 * @throws SQLException
+	 */
+	public void productDetail(ProductDetailVO pdVO) throws SQLException{
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StringBuilder selectProductDetail = new StringBuilder();
+		
+		try {
+			//2. 커넥션 얻기
+			con = getConnection();
+			selectProductDetail
+			.append("	select img_file, product_name, info,  to_char(upload_date,'yyyy-mm-dd hh24:mi')upload_date, user_id, c.category, price, rejection_reason	")
+			.append("	from product p, category_list c	")
+			.append("	where (p.category_code = c.category_code) and product_code = ?	");
+			
+			pstmt = con.prepareStatement(selectProductDetail.toString());
+			
+			pstmt.setString(1, pdVO.getProduct_code());
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				pdVO.setImg_file(rs.getString("img_file"));
+				pdVO.setProduct_name(rs.getString("product_name"));
+				pdVO.setInfo(rs.getString("info"));
+				pdVO.setUpload_date(rs.getString("upload_date"));
+				pdVO.setUser_id(rs.getString("user_id"));
+				pdVO.setCategory(rs.getString("category"));
+				pdVO.setPrice(rs.getString("price"));
+				pdVO.setRejectMsg(rs.getString("rejection_reason"));
+			}//end while
+			
+//			System.out.println(dv);
+		}finally {
+			
+			//6. 연결 끊기
+			if(rs != null) {rs.close();}//end if
+			if(pstmt != null) {pstmt.close();}//end if
+			if(con != null) {con.close();}//end if
+		}//end finally
+		
+	}//checkDetail
 	
 	////////////////////////////////////////////////////////////////////////두번째 탭 end/////////////////////////////////////////////////////////////////////////////////////
 

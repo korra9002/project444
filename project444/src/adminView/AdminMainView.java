@@ -108,7 +108,7 @@ public class AdminMainView extends JFrame {
 		jtCheckList.getColumnModel().getColumn(4).setResizable(false);
 		jtCheckList.getColumnModel().getColumn(5).setPreferredWidth(70);
 		jtCheckList.getColumnModel().getColumn(5).setResizable(false);;
-		jtCheckList.getColumnModel().getColumn(6).setPreferredWidth(70);
+		jtCheckList.getColumnModel().getColumn(6).setPreferredWidth(80);
 		jtCheckList.getColumnModel().getColumn(6).setResizable(false);
 		
 		jtCheckList.setRowHeight(100);
@@ -116,7 +116,7 @@ public class AdminMainView extends JFrame {
 		
 		JPanel jpCheckList = new JPanel(null);
 		
-		jspCheckList.setBounds(10, 10, 670, 500);
+		jspCheckList.setBounds(10, 10, 680, 500);
 		jbtRefresh1.setBounds(570, 540, 90, 30);
 		jbtReset1.setBounds(570, 590, 90, 30);
 		jbtRecent1.setBounds(50, 580, 90, 30);
@@ -211,7 +211,7 @@ public class AdminMainView extends JFrame {
 		jtProductList.getColumnModel().getColumn(4).setResizable(false);
 		jtProductList.getColumnModel().getColumn(5).setPreferredWidth(70);
 		jtProductList.getColumnModel().getColumn(5).setResizable(false);;
-		jtProductList.getColumnModel().getColumn(6).setPreferredWidth(70);
+		jtProductList.getColumnModel().getColumn(6).setPreferredWidth(80);
 		jtProductList.getColumnModel().getColumn(6).setResizable(false);
 		jtProductList.getColumnModel().getColumn(7).setPreferredWidth(70);
 		jtProductList.getColumnModel().getColumn(7).setResizable(false);
@@ -221,7 +221,7 @@ public class AdminMainView extends JFrame {
 
 		JPanel jpProductList = new JPanel(null);
 		
-		jspProductList.setBounds(10, 10, 670, 500);
+		jspProductList.setBounds(10, 10, 680, 500);
 		jcbCategory2.setBounds(50, 530, 120, 30);
 		jbtRecent2.setBounds(50, 580, 90, 30);
 		jrbSubject2.setBounds(230, 530, 70, 30);
@@ -307,7 +307,7 @@ public class AdminMainView extends JFrame {
 		jtUserList.getColumnModel().getColumn(3).setResizable(false);;
 		jtUserList.getColumnModel().getColumn(4).setPreferredWidth(90);
 		jtUserList.getColumnModel().getColumn(4).setResizable(false);;
-		jtUserList.getColumnModel().getColumn(5).setPreferredWidth(70);
+		jtUserList.getColumnModel().getColumn(5).setPreferredWidth(80);
 		jtUserList.getColumnModel().getColumn(5).setResizable(false);;
 		jtUserList.getColumnModel().getColumn(6).setPreferredWidth(70);
 		jtUserList.getColumnModel().getColumn(6).setResizable(false);;
@@ -317,7 +317,7 @@ public class AdminMainView extends JFrame {
 		
 		JPanel jpUserList = new JPanel(null);
 		
-		jspUserList.setBounds(10, 10, 670, 500);
+		jspUserList.setBounds(10, 10, 680, 500);
 //		jcbCategory3.setBounds(50, 550, 120, 30);
 		jbtRefresh3.setBounds(570, 530, 90, 30);
 		jbtReset3.setBounds(570, 570, 90, 30);

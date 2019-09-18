@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import adminDAO.AdminDAO;
 import adminVO.CheckListVO;
 import adminVO.CheckVO;
+import adminVO.ProductDetailVO;
 import adminVO.ProductListVO;
 import adminVO.ProductVO;
 import adminVO.SuspendIdVO;
@@ -25,6 +26,7 @@ import adminVO.CheckDetailVO;
 import adminView.AdminCheckDetailView;
 import adminView.AdminIdDetailView;
 import adminView.AdminMainView;
+import adminView.AdminProductDetailView;
 import adminView.AdminSuspendReasonView;
 
 public class AdminMainEvt extends MouseAdapter implements ActionListener{
@@ -43,7 +45,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 	/**
 	 * DBMS테이블에서 각 조건별로 조회한 검수 리스트를 JTable에 설정 
 	 */
-	private void setCheckList() {
+	public void setCheckList() {
 		DefaultTableModel dtm = amv.getDtmCheckList();
 		String value = null;
 		String col_name = null;
@@ -308,8 +310,8 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				rowData[3] = plv.getCategory();
 				rowData[4] = plv.getProduct_name();
 				rowData[5] = plv.getPrice();
-				rowData[6] = plv.getUpload_date();
-				
+				rowData[6] = "<HTML>" + plv.getUpload_date().replace(" ", " <br>");
+
 				switch (plv.getAll_flag()) {
 				case "P": rowData[7] = "판매중"; break;
 				case "F": rowData[7] = "판매거부"; break;
@@ -332,7 +334,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 	/**
 	 * DBMS테이블에서 조회한 모든 제품 리스트를 JTable에 설정 
 	 */
-	private void resetProductList() {
+	public void resetProductList() {
 		DefaultTableModel dtm = amv.getDtmProductList();
 		//JTable의 레코드 초기화
 		dtm.setRowCount(0);
@@ -362,7 +364,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				rowData[3] = plv.getCategory();
 				rowData[4] = plv.getProduct_name();
 				rowData[5] = plv.getPrice();
-				rowData[6] = plv.getUpload_date();
+				rowData[6] = "<HTML>" + plv.getUpload_date().replace(" ", " <br>");
 				
 				switch (plv.getAll_flag()) {
 				case "P": rowData[7] = "판매중"; break;
@@ -448,7 +450,8 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				rowData[3] = plv.getCategory();
 				rowData[4] = plv.getProduct_name();
 				rowData[5] = plv.getPrice();
-				rowData[6] = plv.getUpload_date();
+				rowData[6] = "<HTML>" + plv.getUpload_date().replace(" ", " <br>");
+				
 				switch (plv.getAll_flag()) {
 				case "P": rowData[7] = "판매중"; break;
 				case "F": rowData[7] = "판매거부"; break;
@@ -473,20 +476,20 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 	 * @param temp 선택한 행의 제품 코드를 얻기 위한 임시변수
 	 */
 	private void openProductDetail(JTable temp){
-		CheckDetailVO dv = new CheckDetailVO();
+		ProductDetailVO pdVO = new ProductDetailVO();
 		
 		//선택한 행의 제품 코드를 얻기
 		String product_code = (String)temp.getValueAt(temp.getSelectedRow(), 0);
 		
-		dv.setProduct_code(product_code);
+		pdVO.setProduct_code(product_code);
 		
 		//DB Table에서 얻을 수 있는 값
 		AdminDAO aDAO = AdminDAO.getInstance();
 		try {
-			aDAO.checkDetail(dv);
+			aDAO.productDetail(pdVO);
 			
 			//값을 가진 VO를 할당하여 상세화면을 띄워준다.
-//			new AdminCheckDetailView(amv, this, dv);
+			new AdminProductDetailView(amv, this, pdVO);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -499,7 +502,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 	/**
 	 * DBMS테이블에서 각 조건별로 조회한 ID 리스트를 JTable에 설정 
 	 */
-	private void setUserIdList() {
+	public void setUserIdList() {
 		DefaultTableModel dtm = amv.getDtmUserList();
 		String userId = null;
 		
@@ -531,13 +534,10 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				//배열에 값을 할당
 				rowData[0] = uiVO.getUser_id();
 				rowData[1] = uiVO.getUser_name();
-				switch (uiVO.getGender()) {
-				case "F":rowData[2] = "여자"; break;
-				default:rowData[2] = "남자"; break;
-				}//end switch
+				rowData[2] = uiVO.getGender().equals("F")?"여자":"남자";
 				rowData[3] = uiVO.getPhone();
 				rowData[4] = uiVO.getLoc();
-				rowData[5] = uiVO.getJoin_date();
+				rowData[5] = "<HTML>" + uiVO.getJoin_date().replace(" ", " <br>");
 				rowData[6] = uiVO.getSuspend_flag();
 				
 				//dtm에 추가
@@ -555,7 +555,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 	/**
 	 * DBMS테이블에서 조회한 모든 ID 리스트를 JTable에 설정 
 	 */
-	public void resetUserIdList() {
+	private void resetUserIdList() {
 		
 		DefaultTableModel dtm = amv.getDtmUserList();
 		//JTable의 레코드 초기화
@@ -582,13 +582,10 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				//배열에 값을 할당
 				rowData[0] = uiVO.getUser_id();
 				rowData[1] = uiVO.getUser_name();
-				switch (uiVO.getGender()) {
-				case "F":rowData[2] = "여자"; break;
-				default:rowData[2] = "남자"; break;
-				}//end switch
+				rowData[2] = uiVO.getGender().equals("F")?"여자":"남자";
 				rowData[3] = uiVO.getPhone();
 				rowData[4] = uiVO.getLoc();
-				rowData[5] = uiVO.getJoin_date();
+				rowData[5] = "<HTML>" + uiVO.getJoin_date().replace(" ", " <br>");
 				rowData[6] = uiVO.getSuspend_flag();
 				
 				//dtm에 추가
