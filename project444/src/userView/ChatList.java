@@ -38,7 +38,15 @@ public class ChatList extends JPanel {
 
 		String[] productColumn = { "이미지", "ID", "지역", "시간", "마지막 대화 내용","거래코드" };
 
-		dtmProductList = new DefaultTableModel(productColumn, 6);
+		dtmProductList = new DefaultTableModel(productColumn, 6) {
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+			
+			
+		};
 
 		jtProductList = new JTable(dtmProductList);
 

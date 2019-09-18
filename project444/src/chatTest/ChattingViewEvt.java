@@ -68,7 +68,7 @@ public class ChattingViewEvt implements ActionListener {
 		String msg = cv.getJtaChatField().getText().trim();
 		
 		if(!msg.isEmpty()) {
-		cv.getJtaChatView().append(me+": "+msg+"\n");
+//		cv.getJtaChatView().append(me+": "+msg+"\n");
 		System.out.println(msg);
 		try {
 			uDAO.sendChat(me, you, msg,dealCode);
@@ -104,6 +104,7 @@ public class ChattingViewEvt implements ActionListener {
 		if(e.getSource() == cv.getJbtSend() || e.getSource() ==cv.getJtaChatField()) {
 		try {
 			sendMsg();
+			System.out.println("메세지 보냄");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(cv,"대화상대가 접속을 종료하엿습니다.");

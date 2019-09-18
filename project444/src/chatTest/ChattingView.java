@@ -57,7 +57,7 @@ public class ChattingView extends JFrame {
 		//수동배치 
 		setLayout(null);
 		//TextArea
-		jtaChatView.setBounds(20,60,345,380);
+		jsp.setBounds(20,60,345,380);
 		jtaChatField.setBounds(20, 450, 260, 60);
 		//JButton
 		jbtProductInfo.setBounds(90, 5, 200, 50);
@@ -68,7 +68,7 @@ public class ChattingView extends JFrame {
 		jlNotice.setBounds(35,520 , 250, 25);
 		//배치
 		add(jbtProductInfo);
-		add(jtaChatView);
+		add(jsp);
 		add(jtaChatField);
 		add(jbtSend);
 		add(jlNotice);

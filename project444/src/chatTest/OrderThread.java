@@ -62,7 +62,7 @@ public class OrderThread extends Thread {
 				e.printStackTrace();
 			} // end catch
 			
-			
+			list = null;
 			
 
 //			boolean flag = false;
@@ -73,7 +73,7 @@ public class OrderThread extends Thread {
 
 				for (int i = 0; i < list.size(); i++) {
 					cv = list.get(i);
-
+					System.out.println(cv.getYou() + " : " + cv.getChat() + "\n");
 					jtaChatView.append(cv.getYou() + " : " + cv.getChat() + "\n");
 
 				} // end for

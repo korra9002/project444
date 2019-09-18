@@ -7,10 +7,14 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import chatTest.ChattingView;
 import userDAO.UserDAO;
+import userRun.RunMarketMain;
 import userVO.ChatListVO;
+import userVO.DCodeAndIdAO;
 import userView.ChatList;
 
 public class ChatListEvt extends MouseAdapter implements ActionListener {
@@ -37,8 +41,19 @@ public class ChatListEvt extends MouseAdapter implements ActionListener {
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		super.mouseClicked(e);
+	public void mouseClicked(MouseEvent me) {
+		if(me.getClickCount() == 2) {//더블클릭
+			if(me.getSource() == cl.getJtProductList()) {
+				openChat();
+			}//end if			
+		}//end if
+	}
+	
+	public void openChat() {
+		JTable jtProductList = cl.getJtProductList();
+		String dealCode = (String)jtProductList.getValueAt(jtProductList.getSelectedRow(), 5);
+		String id = (String)jtProductList.getValueAt(jtProductList.getSelectedRow(), 1);
+		new ChattingView( RunMarketMain.userId, new DCodeAndIdAO(dealCode, id));
 	}
 
 	public void refresh(String flag) {
