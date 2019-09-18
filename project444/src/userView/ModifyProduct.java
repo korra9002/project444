@@ -1,5 +1,8 @@
 package userView;
 
+import java.sql.SQLException;
+import java.util.List;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -12,19 +15,33 @@ import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import userControl.ModifyProductEvt;
+import userDAO.UserDAO;
+import userRun.RunMarketMain;
+import userVO.InsertProductVO;
+import userVO.SaleListVO;
+
 @SuppressWarnings("serial")
 public class ModifyProduct extends JFrame {
 
 	private JLabel jlbProductImg;
-	private JButton jbtSelectImg, jbtOkey, jbtCancle ;
+	private JButton jbtSelectImg, jbtOkay, jbtCancel ;
 	private JTextField jtfSubject, jtfPrice;
 	private JTextArea jtaExplain;
 	private JComboBox<String> jcbCategory;
 	private DefaultComboBoxModel<String> dcbCategory;
 	
-	public ModifyProduct() {
+	public ModifyProduct(SaleList sl, RunMarketMain rmm) {
 		super("제품 입력");
-		jlbProductImg = new JLabel("제품 이미지",JLabel.CENTER);
+		
+		String selectedValue0=(String)sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 0);
+		String selectedValue1=(String)sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 1);		
+		int selectedValue2=(int)sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 2);		
+		String selectedValue3=(String)sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 3);
+		
+		System.out.println(selectedValue3);
+		
+		jlbProductImg = new JLabel(selectedValue0,JLabel.CENTER);
 		jlbProductImg.setBorder(new EtchedBorder(EtchedBorder.RAISED));//이미지 라벨 테두리 설정
 		
 		jbtSelectImg = new JButton("사진 등록");
@@ -35,15 +52,33 @@ public class ModifyProduct extends JFrame {
 		dcbCategory = new DefaultComboBoxModel<String>(categoryList);
 		jcbCategory = new JComboBox<String>(dcbCategory);
 		jcbCategory.setBorder(new TitledBorder("카테고리 종류"));
+		jcbCategory.setSelectedIndex(Integer.parseInt(selectedValue3)-1);
 		
-		jtfSubject = new JTextField("글 제목");//이벤트처리-클릭 시 텍스트 사라지게
-		jtfPrice = new JTextField("가격 입력");//이벤트처리-클릭 시 텍스트 사라지게
+		
+		jtfSubject = new JTextField(selectedValue1);//이벤트처리-클릭 시 텍스트 사라지게
+		jtfPrice = new JTextField(String.valueOf(selectedValue2));//이벤트처리-클릭 시 텍스트 사라지게
+		
+		
+		///////////////////////// 상세설명 가져오기 /////////////////////////////////////////
+		//더 좋은 방법있으면 와서 설명 부탁ㅠ
 		
 		jtaExplain = new JTextArea("상세 설명");//이벤트처리-클릭 시 텍스트 사라지게
+		
+		String temp_flag = "S";
+		
+		UserDAO uDAO=UserDAO.getInstance();
+//		List<SaleListVO> list =
+		
+
+
+		
+		///////////////////////// 상세설명 가져오기 끝 /////////////////////////////////////////
+		
+		
 		JScrollPane jspExplain = new JScrollPane(jtaExplain);
 		
-		jbtOkey = new JButton("완료");
-		jbtCancle = new JButton("취소");
+		jbtOkay = new JButton("완료");
+		jbtCancel = new JButton("취소");
 		
 		setLayout(null);
 		
@@ -53,8 +88,8 @@ public class ModifyProduct extends JFrame {
 		jtfSubject.setBounds(10, 160, 385, 30);
 		jtfPrice.setBounds(10, 200, 385, 30);
 		jspExplain.setBounds(10, 240, 385, 240);
-		jbtOkey.setBounds(100, 500, 80, 30);
-		jbtCancle.setBounds(230, 500, 80, 30);
+		jbtOkay.setBounds(100, 500, 80, 30);
+		jbtCancel.setBounds(230, 500, 80, 30);
 		
 		add(jlbProductImg);
 		add(jbtSelectImg);
@@ -62,17 +97,49 @@ public class ModifyProduct extends JFrame {
 		add(jtfSubject);
 		add(jtfPrice);
 		add(jspExplain);
-		add(jbtOkey);
-		add(jbtCancle);
+		add(jbtOkay);
+		add(jbtCancel);
+		
+		ModifyProductEvt mpe=new ModifyProductEvt(this, sl, rmm);
 		
 		setBounds(100, 100, 420, 600);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		
+		
 	}//InsertProduct
+
+	public JButton getJbtSelectImg() {
+		return jbtSelectImg;
+	}
+
+	public JButton getJbtOkay() {
+		return jbtOkay;
+	}
+
+	public JButton getJbtCancel() {
+		return jbtCancel;
+	}
+
+	public JTextField getJtfSubject() {
+		return jtfSubject;
+	}
+
+	public JTextField getJtfPrice() {
+		return jtfPrice;
+	}
+
+	public JTextArea getJtaExplain() {
+		return jtaExplain;
+	}
+
+	public JComboBox<String> getJcbCategory() {
+		return jcbCategory;
+	}
 	
-	public static void main(String[] args) {
-	new ModifyProduct();
-	}//main
+//	public static void main(String[] args) {
+//	new ModifyProduct();
+//	}//main
 
 }//class

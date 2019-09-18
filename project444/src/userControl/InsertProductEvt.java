@@ -229,7 +229,6 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		System.out.println("이거 뜨긴하니");
 		if (ae.getSource() == ip.getJbtOkay()) {
 //			System.out.println(imgFlag+"   왜 true안나와?");
 			uploadPost();
