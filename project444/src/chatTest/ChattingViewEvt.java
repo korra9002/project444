@@ -30,7 +30,7 @@ public class ChattingViewEvt extends MouseAdapter implements ActionListener {
 		you = DIAO.getId();
 		dealCode = DIAO.getDealCode();
 
-		OrderThread ot = new OrderThread(cv.getJtaChatView(), me, you, cv.getJsp(), dealCode);
+		OrderThread ot = new OrderThread(cv, me, you, dealCode);
 //		ot.setDaemon(true);
 		ot.start();
 

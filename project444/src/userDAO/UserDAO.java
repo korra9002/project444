@@ -993,6 +993,68 @@ public class UserDAO {
 	   }//recentChat
 
 	////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////// 채팅  시작시에 상품의  플래그 확인 메서드!!!!!!!!!!!//////////////////////////////
+	   public void checkFlag() {
+		   		Connection con = null;
+		      PreparedStatement pstmt = null;
+		      ResultSet rs = null;
+		      
+		   
+		      
+//		      try {
+		         // 2.커넥션 얻기
+//		         con = getConn();
+
+		         // 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
+		         // 것부터 조회
+//		         String RecentChat ="   select to_char(input_date,'yyyy-mm-dd hh24:mi:ss') input_date ,chat from  chatting where  (select max(input_date) from chatting where deal_code =?) = input_date   ";
+		         
+		         
+//		         pstmt = con.prepareStatement(RecentChat);
+//		         pstmt.setString(1,dealCode);
+//		      
+//		         rs = pstmt.executeQuery();
+//
+//		         
+//		         if (rs.next()) {
+//		         rcVO = new RecentChatVO(rs.getString("input_date"), rs.getString("chat"));
+//		         }else {
+//		            rcVO = new RecentChatVO("", "");
+//		         }
+//
+//		      
+//
+//		      } finally {
+//		         // 6. 연결 끊기
+//		         if (rs != null)
+//		            rs.close();
+//		         if (pstmt != null)
+//		            pstmt.close();
+//		         if (con != null)
+//		            con.close();
+//
+//		      }
+//		   
+//		   
+		   
+	   }
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+/////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	// 로그인 시 이름 출력!!

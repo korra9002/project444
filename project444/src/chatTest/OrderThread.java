@@ -27,12 +27,14 @@ public class OrderThread extends Thread {
 //	private StringBuilder stb;
 	private JScrollPane jsp;
 	
+	
+	
 
-	public OrderThread(JTextArea jtaChatView, String me, String you, JScrollPane jsp, String dealCode) {
-		this.jtaChatView = jtaChatView;
+	public OrderThread(ChattingView cv, String me, String you, String dealCode) {
+		jtaChatView = cv.getJtaChatView();
+		jsp = cv.getJsp();
 		this.me = me;
 		this.you = you;
-		this.jsp = jsp;
 		this.dealCode = dealCode;
 		// this.stb= stb;
 
