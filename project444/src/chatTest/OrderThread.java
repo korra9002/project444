@@ -53,15 +53,15 @@ public class OrderThread extends Thread {
 				cv = list.get(i);
 
 				jtaChatView.append(cv.getYou() + " : " + cv.getChat() + "\n");
-
+				
 			} // end for
-			jsp.getVerticalScrollBar().setValue(jsp.getVerticalScrollBar().getMaximum());
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} // end catch
 			
+			jsp.getVerticalScrollBar().setValue(jsp.getVerticalScrollBar().getMaximum());
 			list = null;
 			
 
@@ -76,8 +76,9 @@ public class OrderThread extends Thread {
 					System.out.println(cv.getYou() + " : " + cv.getChat() + "\n");
 					jtaChatView.append(cv.getYou() + " : " + cv.getChat() + "\n");
 
+					jsp.getVerticalScrollBar().setValue(jsp.getVerticalScrollBar().getMaximum());
 				} // end for
-				jsp.getVerticalScrollBar().setValue(jsp.getVerticalScrollBar().getMaximum());
+				list = null;
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {

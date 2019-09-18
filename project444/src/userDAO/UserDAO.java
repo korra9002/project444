@@ -720,7 +720,7 @@ public class UserDAO {
 			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
 			// 것부터 조회
 			String selectLunch = " select chat,sender,input_date from chatting "
-					+ "where deal_code = ? order by input_date desc";
+					+ "where deal_code = ? order by input_date asc";
 			pstmt = con.prepareStatement(selectLunch);
 			pstmt.setString(1, dealCode);
 //			pstmt.setString(2, me);
@@ -772,7 +772,7 @@ public class UserDAO {
 			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
 			// 것부터 조회
 			String selectLunch = " select chat,sender,input_date from chatting "
-					+ "where read_flag ='N' and deal_code = ?  order by input_date desc";
+					+ "where read_flag ='N' and deal_code = ?  order by input_date asc";
 			pstmt = con.prepareStatement(selectLunch);
 			pstmt.setString(1, dealCode);
 //			pstmt.setString(2, me);

@@ -36,6 +36,9 @@ public class ChatListEvt extends MouseAdapter implements ActionListener {
 			flag = "sell";
 			refresh(flag);
 		}
+		if (e.getSource() == cl.getJbRefresh()) {
+			refresh(flag);
+		}
 		
 		
 	}
@@ -45,7 +48,8 @@ public class ChatListEvt extends MouseAdapter implements ActionListener {
 		if(me.getClickCount() == 2) {//더블클릭
 			if(me.getSource() == cl.getJtProductList()) {
 				openChat();
-			}//end if			
+			}//end if	
+			
 		}//end if
 	}
 	
