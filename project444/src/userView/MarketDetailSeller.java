@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -23,6 +24,10 @@ public class MarketDetailSeller extends JDialog {
 	private JButton jbtComplete, jbtDelete, jbtChange;
 	private JTextArea jtaStrongPoint;
 	private String id;
+	
+	public MarketDetailSeller() {
+		
+	}//MarketDetailSeller
 	
 	public MarketDetailSeller(MarketMain mm, MarketDetailVO mdVO, String id) {
 		this.id = id;

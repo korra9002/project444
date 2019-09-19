@@ -102,6 +102,8 @@ public class ModifyProduct extends JFrame {
 		
 		ModifyProductEvt mpe=new ModifyProductEvt(this, sl, rmm);
 		
+		
+		
 		setBounds(100, 100, 420, 600);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

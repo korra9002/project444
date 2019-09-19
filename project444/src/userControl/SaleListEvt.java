@@ -10,12 +10,16 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import userDAO.UserDAO;
 import userRun.RunMarketMain;
 import userVO.AllListVO;
+import userVO.MarketDetailVO;
 import userVO.SaleListVO;
+import userView.MarketDetailBuyer;
+import userView.MarketDetailSeller;
 import userView.ModifyProduct;
 import userView.SaleList;
 
@@ -23,7 +27,6 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 	private SaleList sl;
 	private RunMarketMain rmm;
 	String id;
-	
 
 	public SaleListEvt(SaleList sl, RunMarketMain rmm) throws SQLException {
 		this.sl = sl;
@@ -149,6 +152,40 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 		}// end switch
 	}// deleteSaleList
 
+	public void openDetail() throws SQLException {	
+		
+	
+		JTable jtProductList=sl.getJtSell();
+					
+			
+			// 문제는 flag가 B인 것을 가져와야 하는데 selectProDetail자체가 P를 디폴트로 함
+			// 새로 method 만들어야 할 것 같음. 아니면 클래스마다 플래그를 만들어서 상황별로 다 쓸 수 있게 만들기?
+			// 해야할 것 : setProDetail 사용한 클래스 확인 후 플래그 뭘로 할지 설정.
+			
+			
+		
+		
+		String temp=(String) jtProductList.getValueAt(jtProductList.getSelectedRow(), 1);
+		String loc_code=(String) jtProductList.getValueAt(jtProductList.getSelectedRow(), 4);
+		String productCode=temp.substring(temp.lastIndexOf("(")+1, temp.lastIndexOf(")"));
+		
+		
+		
+		//DBMS에서 조회
+		UserDAO uDAO =UserDAO.getInstance();
+
+		
+			MarketDetailVO mdVO=uDAO.selectProDetail(productCode, loc_code);
+			
+			
+			//현재 접속한 아이디와 포스팅 판매자 아이디와 같으면 MarketDetailBuyer
+			//다르다면 MarketDetailSeller
+				new MarketDetailSeller(null, mdVO, id);
+		
+		
+	}//openDetail
+	
+	
 	/**
 	 * 판매내역 창 닫기
 	 */
@@ -159,7 +196,7 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 	@Override
 	public void mouseClicked(MouseEvent me) {
 		// 판매완료 상품탭이 눌렸을 때 처리
-		
+
 		if (me.getSource() == sl.getJtp()) {
 			JTabbedPane jtpTemp = (JTabbedPane) me.getSource();
 
@@ -181,25 +218,40 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 
 			} // end if
 
-		}
+		} // end if
+		
+			if(me.getClickCount() == 2) {//더블클릭
+				if(me.getSource() == sl.getJtSell()) {
+					try {
+						openDetail();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				} else if (me.getSource()==sl.getJtComplete()) {
+						try {
+							openDetail();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}		
+				}
+			}//end if
 
-	}
+	}// mouseClicked
 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 
-		
-		if(sl.getJtSell().getSelectedRow() !=-1) {
+		if (sl.getJtSell().getSelectedRow() != -1) {
 			if (ae.getSource() == sl.getJbtModify()) {
 				new ModifyProduct(sl, rmm);
 			} // end if
 			if (ae.getSource() == sl.getJbtDelete()) {
 				deleteSaleList();
-			}// end if
+			} // end if
 		} else {
 			JOptionPane.showMessageDialog(sl, "수정/삭제를 원하시는 상품을 선택해주세요.");// end if
-		}//end else
-		
-	}//actionPerformed
+		} // end else
+
+	}// actionPerformed
 
 }// SaleListEvt

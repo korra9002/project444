@@ -1,7 +1,8 @@
 package userView;
 
 
-	import java.awt.event.MouseAdapter;
+	import java.awt.event.KeyAdapter;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
@@ -190,6 +191,8 @@ import userControl.MarketMainEvt;
 		jrbSubject.addActionListener(mme);
 		jrbId.addActionListener(mme);	
 		jtProductList.addMouseListener(mme);
+		
+	
 		
 		
 		

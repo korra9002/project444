@@ -10,7 +10,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
- 
+
+import sun.awt.RequestFocusController;
 import userDAO.UserDAO;
 import userVO.AllListVO;
 import userVO.MarketDetailVO;
@@ -19,7 +20,6 @@ import userView.MarketDetailSeller;
 import userView.MarketMain;
 
 public class MarketMainEvt extends MouseAdapter implements ActionListener{
-	public static final int DOUBLE_CLICK=2;
 	
 	private MarketMain mm;
 	private String id;
@@ -268,6 +268,7 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 		
 	
 
+
 	
 	
 	@Override
@@ -292,6 +293,10 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}//end catch
+		}//end if
+		
+		if(ae.getSource() ==mm.getJtfSearch() && !mm.getJtfSearch().getText().trim().isEmpty() ) {
+			mm.getJbSearch().doClick();
 		}//end if
 		
 		if (ae.getSource() == mm.getJbRecent()) {
