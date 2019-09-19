@@ -157,12 +157,10 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 	
 		JTable jtProductList=sl.getJtSell();
 					
-			
+			// SY - 2019.09.19 
 			// 문제는 flag가 B인 것을 가져와야 하는데 selectProDetail자체가 P를 디폴트로 함
 			// 새로 method 만들어야 할 것 같음. 아니면 클래스마다 플래그를 만들어서 상황별로 다 쓸 수 있게 만들기?
-			// 해야할 것 : setProDetail 사용한 클래스 확인 후 플래그 뭘로 할지 설정.
-			
-			
+			// 해야할 것 : setProDetail 사용한 클래스 확인 후 플래그 뭘로 할지 설정.			
 		
 		
 		String temp=(String) jtProductList.getValueAt(jtProductList.getSelectedRow(), 1);

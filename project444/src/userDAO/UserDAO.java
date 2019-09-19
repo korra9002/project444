@@ -149,7 +149,7 @@ public class UserDAO {
 				selectArea.append(" and p.category_code ='" + df.format(jcbCateIndex) + "' ");
 			}
 			if (!jtfText.isEmpty()) {
-				selectArea.append(" and p.product_name like '%" +  jtfText  + "%' ");
+				selectArea.append(" and lower(p.product_name) like '%" +  jtfText.toLowerCase()  + "%' ");
 			}
 
 //			selectArea.append(" order by inputDate desc "); 
@@ -227,7 +227,7 @@ public class UserDAO {
 				selectArea.append(" and p.category_code ='" + df.format(jcbCateIndex) + "' ");
 			}
 			if (!jtfText.isEmpty()) {
-				selectArea.append(" and i.user_id like '%" + jtfText + "%' ");
+				selectArea.append(" and lower(i.user_id) like '%" + jtfText.toLowerCase() + "%' ");
 			}
 
 			pstmt = con.prepareStatement(selectArea.toString());
@@ -293,7 +293,7 @@ public class UserDAO {
 				selectArea.append(" and p.category_code ='" + df.format(jcbCateIndex) + "' ");
 			}
 			if (!jtfText.isEmpty()) {
-				selectArea.append(" and p.product_name like '%" + jtfText + "%' ");
+				selectArea.append(" and lower(p.product_name) like '%" + jtfText.toLowerCase() + "%' ");
 			}
 
 			selectArea.append(" order by inputDate desc ");
@@ -371,7 +371,7 @@ public class UserDAO {
 				selectArea.append(" and p.category_code ='" + df.format(jcbCateIndex) + "' ");
 			}
 			if (!jtfText.isEmpty()) {
-				selectArea.append(" and p.product_name like '%" + jtfText + "%' ");
+				selectArea.append(" and lower(p.product_name) like '%" + jtfText.toLowerCase() + "%' ");
 			}
 
 			selectArea.append(" order by price desc ");

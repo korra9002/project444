@@ -23,12 +23,14 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 	
 	private MarketMain mm;
 	private String id;
+	//////서영 수정 09-19 19:48///////////////////
+	private InterestListEvt ile;
 	
 	
-	
-	public MarketMainEvt(MarketMain mm, String id) throws SQLException {
+	public MarketMainEvt(MarketMain mm, String id,InterestListEvt ile) throws SQLException {
 		this.mm=mm;	
 		this.id=id;
+		this.ile=ile;
 		setAllList();
 	}//MarketMainEvt
 	
@@ -258,7 +260,7 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 				if (mdVO.getSellerID().equals(id)) {
 					new MarketDetailSeller(mm, mdVO, id);
 				} else {
-					new MarketDetailBuyer(mm, mdVO, id);
+					new MarketDetailBuyer(mm, mdVO, id,ile);
 				}//end else
 			} catch (SQLException e) {
 				e.printStackTrace();
