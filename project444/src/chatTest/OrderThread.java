@@ -30,7 +30,10 @@ public class OrderThread extends Thread {
 	private String allFlag ;
 	private String userId ;
 
+	private ChattingView cv;
+	
 	public OrderThread(ChattingView cv, String me, String you, String dealCode) {
+		this.cv = cv;
 		jtaChatView = cv.getJtaChatView();
 		jsp = cv.getJsp();
 		this.me = me;
@@ -41,11 +44,16 @@ public class OrderThread extends Thread {
 	}
 	
 	public void setUpInfo(String msg) {
-		
+	cv.getJbtProductInfo().setVisible(false);
+	 cv.getJlResult().setText(msg);
+	 cv.getJlResult().setVisible(true);
+	 cv.add(cv.getJlResult());
 	}
 	
 	public void setDealInfo() {
-		
+		cv.getJlNotice().setVisible(true);
+		cv.getJbtOk().setVisible(true);
+		cv.getJbtCancle().setVisible(true);
 	}
 	
 	public void checkFlag(UserDAO uDAO) {

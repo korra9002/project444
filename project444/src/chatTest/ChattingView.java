@@ -37,8 +37,8 @@ public class ChattingView extends JFrame {
 	//	this.mm=mm;
 		
 		
-		jlNotice = new JLabel("------");
-		jlResult = new JLabel("------");
+		jlNotice = new JLabel();
+	
 		
 		
 		jtaChatView = new JTextArea();
@@ -84,10 +84,11 @@ public class ChattingView extends JFrame {
 		jbtOk.setVisible(false);
 		jbtCancle.setVisible(false);
 		
+//		jbtProductInfo.setVisible(false);
 ///////////	상단 상품정보 버튼 or 거래완료 삭제 메세지 
-		jbtProductInfo.setVisible(false);
-		jlResult.setVisible(true);
-		add(jlResult);
+		jlResult = new JLabel();
+//		jlResult.setVisible(true);
+//		add(jlResult);
 		
 //////////////////////
 		//////////////테스트 
@@ -217,6 +218,10 @@ public class ChattingView extends JFrame {
 
 	public JLabel getJlNotice() {
 		return jlNotice;
+	}
+
+	public JLabel getJlResult() {
+		return jlResult;
 	}
 
 	public JTextArea getJtaChatView() {
