@@ -183,9 +183,8 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 			uploadImg();
 			// DBMS에 추가
 			UserDAO uDAO = UserDAO.getInstance();
-			System.out.println("왜안ㄷㄷ좰ㄴ왜롲대뢔");
 			uDAO.insertProduct(ipVO, id);
-			JOptionPane.showMessageDialog(ip, "도시락 정보를 추가하였습니다.");
+			JOptionPane.showMessageDialog(ip, "상품 정보를 추가하였습니다.");
 			// 부모창의 도시락 리스트를 갱신하고
 			// 이거 지금 못하는중ㅠ
 //			lme.setLunchList();
