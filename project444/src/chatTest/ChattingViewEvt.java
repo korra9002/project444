@@ -51,7 +51,7 @@ public class ChattingViewEvt extends MouseAdapter implements ActionListener {
 		});// addWindowListener
 
 	}
-
+ 
 	private void scrollPosition() {
 		cv.getJsp().getVerticalScrollBar().setValue(cv.getJsp().getVerticalScrollBar().getMaximum());
 	}

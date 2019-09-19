@@ -99,7 +99,7 @@ public class InterestListEvt extends MouseAdapter implements ActionListener{
 			UserDAO uDAO = UserDAO.getInstance();
 			MarketDetailVO mdVO;
 				mdVO = uDAO.selectProDetail(productCode, loc_code);
-			new MarketDetailBuyer(mm, mdVO, RunMarketMain.userId);
+//			new MarketDetailBuyer(mm, mdVO, RunMarketMain.userId);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}//end catch

@@ -64,7 +64,7 @@ public class OrderThread extends Thread {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
 		
 		if(dealFlag == fVO.getDealFLag() && allFlag == fVO.getAllFlag()) {
 			return;
