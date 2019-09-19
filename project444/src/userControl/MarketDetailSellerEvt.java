@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import userView.DealSelect;
 import userView.MarketDetailSeller;
 import userView.MarketMain;
-import userView.dealSelect;
 
 
 
@@ -28,7 +28,10 @@ public class MarketDetailSellerEvt extends MouseAdapter implements ActionListene
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == mds.getJbtComplete()) {
-			new dealSelect();
+			String temp = mds.getJtfName().getText();
+//			temp = temp.substring(temp.lastIndexOf('(')+1,temp.lastIndexOf(')')).trim();
+//			System.out.println(temp+"상품코드");
+			new DealSelect(temp);
 		}
 	}
 

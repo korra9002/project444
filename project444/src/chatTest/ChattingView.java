@@ -36,6 +36,7 @@ public class ChattingView extends JFrame {
 		this.id = id;
 	//	this.mm=mm;
 		
+		jlResult = new JLabel();
 		
 		jlNotice = new JLabel();
 	
@@ -86,7 +87,6 @@ public class ChattingView extends JFrame {
 		
 //		jbtProductInfo.setVisible(false);
 ///////////	상단 상품정보 버튼 or 거래완료 삭제 메세지 
-		jlResult = new JLabel();
 //		jlResult.setVisible(true);
 //		add(jlResult);
 		

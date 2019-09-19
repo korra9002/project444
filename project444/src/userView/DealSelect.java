@@ -8,25 +8,29 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
-public class dealSelect extends JFrame {
+import userControl.DealSelectEvt;
+
+public class DealSelect extends JFrame {
 	
 	private JButton jbtsell , jbtcancell;	
 	private DefaultTableModel dtmAreaList;
 	private JTable jtpAreaList;
-	private JTextArea jta;
+	private JLabel jlb;
 	
+	private String productCode;
 	
-	public dealSelect() {
+	public DealSelect(String productCode) {
 		
+		this.productCode = productCode;
 		jbtsell=new JButton("판매완료");
 		jbtcancell=new JButton("취소");
 		
-		jta=new JTextArea("거래 상대를 선택하세요");
+		jlb=new JLabel("거래 상대를 선택하세요");
 		
-		jta.setEditable(false);
+	
 		
-		String[] areaColumn= {"ID","지역"};
-		dtmAreaList=new DefaultTableModel(areaColumn,2) {
+		String[] areaColumn= {"ID","지역","거래코드"};
+		dtmAreaList=new DefaultTableModel(areaColumn,0) {
 		
 		@Override
 		public boolean isCellEditable(int row, int column) {
@@ -51,25 +55,48 @@ public class dealSelect extends JFrame {
 	jspAreaList.setBounds(30, 180, 400, 200);
 	jbtsell.setBounds(130, 400, 90, 30);
 	jbtcancell.setBounds(250, 400, 90, 30);
-	jta.setBounds(30, 50, 400, 90);
+	jlb.setBounds(30, 50, 400, 90);
 	
 	setLayout(null);
 	add(jspAreaList);
 	add(jbtsell);
 	add(jbtcancell);
-	add(jta);
+	add(jlb);
 	
 //	setResizable(false);
 	setBounds(100, 100, 500, 600);
 	setVisible(true);
 	
+DealSelectEvt dse = new DealSelectEvt(this,productCode);
+	
 		
 	}//dealSelect
+
+	public JButton getJbtsell() {
+		return jbtsell;
+	}
+
+	public JButton getJbtcancell() {
+		return jbtcancell;
+	}
+
+	public DefaultTableModel getDtmAreaList() {
+		return dtmAreaList;
+	}
+
+	public JTable getJtpAreaList() {
+		return jtpAreaList;
+	}
+
+	public JLabel getjlb() {
+		return jlb;
+	}
+
+	public String getProductCode() {
+		return productCode;
+	}
 	
 	     //
 	    
-	public static void main(String[] args) {
-//		new dealSelect();
-	}//main
 
 }//class
