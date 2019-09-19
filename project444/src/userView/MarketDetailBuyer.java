@@ -1,6 +1,5 @@
 package userView;
 
-import java.awt.Checkbox;
 import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
@@ -12,6 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import userControl.InterestListEvt;
 import userControl.MarketDetailBuyerEvt;
 import userDAO.UserDAO;
 import userVO.InterestListVO;
@@ -24,15 +24,14 @@ public class MarketDetailBuyer extends JDialog {
 	private JButton jbtChat;
 	private JTextArea jtaStrongPoint;
 	private JCheckBox jckLike;
-
 	private MarketMain mm;
 	private String productCode, id;
-
-	public MarketDetailBuyer(MarketMain mm, MarketDetailVO mdVO, String id) throws SQLException {
+	private InterestListEvt ile;
+	public MarketDetailBuyer(MarketMain mm, MarketDetailVO mdVO, String id, InterestListEvt ile) throws SQLException {
 		this.id = id;
 		jlDetailImg = new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/img/무민.jpg/"));// 썸네일X / 원본 이미지
 //		jlDetailImg.setHorizontalAlignment(JLabel.CENTER);
-
+		this.ile = ile;
 		this.mm = mm;
 		productCode = mdVO.getProductCode();
 
@@ -52,6 +51,9 @@ public class MarketDetailBuyer extends JDialog {
 		}else {
 			jckLike.setSelected(true);
 		}
+		
+		
+		
 		// JTextField
 		jtfName = new JTextField(mdVO.getProductName());
 		jtfPrice = new JTextField(Integer.toString(mdVO.getPrice()));
@@ -115,10 +117,12 @@ public class MarketDetailBuyer extends JDialog {
 		setBounds(100, 100, 670, 440);
 		setVisible(true);
 
-		MarketDetailBuyerEvt mdbe = new MarketDetailBuyerEvt(mm, this);
+		MarketDetailBuyerEvt mdbe = new MarketDetailBuyerEvt(mm, this,ile);
 
 		jbtChat.addActionListener(mdbe);
+////////////////////////////변경사항/////////////////////////////////////////
 		jckLike.addActionListener(mdbe);
+/////////////////////////////////////////////////////////////////////////
 	}// MarketDetail
 
 	public JLabel getJlDetailImg() {

@@ -2,21 +2,15 @@ package userControl;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
-
 
 import chatTest.ChattingView;
 import userDAO.UserDAO;
 import userRun.RunMarketMain;
 import userVO.DCodeAndIdAO;
 import userVO.InterestListVO;
-import userView.InterestList;
 import userView.MarketDetailBuyer;
 import userView.MarketMain;
 
@@ -25,10 +19,13 @@ public class MarketDetailBuyerEvt implements ActionListener{
 	private MarketMain mm;
 	private String id,sellerId;
 	private DCodeAndIdAO DIAO;
-
-	public MarketDetailBuyerEvt(MarketMain mm, MarketDetailBuyer mdb) {
+	private InterestListEvt ile;
+	/////////////////////////////추가 김서영 2019-09-19/////////////////////
+	int cnt = 0;
+	public MarketDetailBuyerEvt(MarketMain mm, MarketDetailBuyer mdb,InterestListEvt ile) {
 		this.mdb = mdb;
 		this.mm = mm;
+		this.ile=ile;
 		id = RunMarketMain.userId;
 	}// MarketDetailBuyerEvt
 
@@ -52,7 +49,6 @@ public class MarketDetailBuyerEvt implements ActionListener{
 
 			
 			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -61,43 +57,59 @@ public class MarketDetailBuyerEvt implements ActionListener{
 		
 	}// dealStart
 ////////////////////////////변경사항/////////////////////////////////////////
-public void addInterest() throws SQLException {
-boolean checkFlag =mdb.getjckLike().isSelected();
-String productCode =mdb.getProductCode().trim();
-String userId = RunMarketMain.userId.trim();
-if(mdb.getjckLike().isSelected()) {
-JOptionPane.showMessageDialog(mdb, "관심목록에 추가되었습니다.");
-
-}else {
-JOptionPane.showMessageDialog(mdb,"관심목록에서 삭제되었습니다.");
-
-}//end else
-InterestListVO irVO = new InterestListVO(productCode,userId);
-
-UserDAO uDAO = UserDAO.getInstance();
-int flag = uDAO.insertInterest(irVO,checkFlag);
-
-
-}//addInterest
-
-
-//////////////////////////////////////////////////////////////////////////
-@Override
-public void actionPerformed(ActionEvent ae) {
-if (ae.getSource() == mdb.getJbtChat()) {
-//new ChattingView(mm);
-dealStart();
-}//end if
+	public void addInterest() throws SQLException {
+		boolean checkFlag =mdb.getjckLike().isSelected();
+		String productCode =mdb.getProductCode().trim();
+		String userId = RunMarketMain.userId.trim();
+		
+		
+		InterestListVO irVO = new InterestListVO(productCode,userId);
+		UserDAO uDAO = UserDAO.getInstance();
+		
+		if(mdb.getjckLike().isSelected()) {
+			if(	!RunMarketMain.userId.equals(uDAO.selectInterestCheck(irVO))) {
+				JOptionPane.showMessageDialog(mdb, "관심목록에 추가되었습니다.");
+			}else {
+				JOptionPane.showMessageDialog(mdb, "관심목록에 이미 존재합니다.");
+				return;
+				
+			}//end else
+		}else {
+			if(	RunMarketMain.userId.equals(uDAO.selectInterestCheck(irVO))) {
+			JOptionPane.showMessageDialog(mdb,"관심목록에서 삭제되었습니다.");
+			}else {
+				JOptionPane.showMessageDialog(mdb, "관심목록에서 이미 삭제되었습니다.");
+				return;
+			}
+		}//end else
+		
+		uDAO.insertInterest(irVO,checkFlag);
+		
+		if(ile != null) {
+			
+			ile.setInterestList();
+		}//end if
+	
+	}//addInterest
+	
+	
+//////////////////////////////////////////////////////////////////////////	
+	@Override
+	public void actionPerformed(ActionEvent ae) {
+		if (ae.getSource() == mdb.getJbtChat()) {
+//			new ChattingView(mm);
+			dealStart();
+		}//end if
 ////////////////////////////변경사항/////////////////////////////////////////
-if(ae.getSource()==mdb.getjckLike()) {
-try {
-addInterest();
-} catch (SQLException e) {
-e.printStackTrace();
-}
-}
+		if(ae.getSource()==mdb.getjckLike()) {
+			try {
+				addInterest();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 ///////////////////////////////////////////////////////////////////////		
-}// actionPerformed
+	}// actionPerformed
 
 
 

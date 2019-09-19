@@ -179,7 +179,7 @@ import userControl.MarketMainEvt;
 		
 	//이벤트 처리
 		
-		MarketMainEvt mme=new MarketMainEvt(this, id);
+		MarketMainEvt mme=new MarketMainEvt(this, id,null);
 		
 		jcbArea.addActionListener(mme);
 		jcbCategory.addActionListener(mme);
