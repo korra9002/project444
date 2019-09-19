@@ -475,6 +475,68 @@ public class UserDAO {
 		} // end finally
 		return mdVO;
 	}// selectProDetail
+	
+	////////////////////////////////////////////// SY-0919 ///////////////////////////////////////////////
+	
+	
+	public MarketDetailVO selectSaleDetail(String productCode, String loc_code, String tbFlag) throws SQLException {
+		
+		MarketDetailVO mdVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			// 커넥션 얻기
+			con = getConn();
+			
+			// 3.쿼리문 생성객체 얻기 : lunch테이블에서 이름 코드, 가격, 입력일을 가장 최근에 입력된 것 부터 조회
+			StringBuilder selectDetail = new StringBuilder();
+			if(tbFlag=="S") {
+			selectDetail.append(
+					" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code, info ")
+			.append(" from PRODUCT, id_info ")
+			.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' and PRODUCT_CODE=? ");// 물음표랑
+			// ''랑
+			// 같이쓰면
+			// 안됨.
+//				.append(" order by inputDate desc "); 
+			} else if (tbFlag=="C") {
+				selectDetail.append(
+						" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code, info ")
+				.append(" from PRODUCT, id_info ")
+				.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='B' and PRODUCT_CODE=? ");				
+			}//end else
+			
+			pstmt = con.prepareStatement(selectDetail.toString());
+			
+			// 4. 바인드변수에 값 넣기
+			pstmt.setString(1, productCode);
+			// 5. 쿼리 수행 후 결과 얻기
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				mdVO = new MarketDetailVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
+						rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),
+						rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"), rs.getString("INFO"),
+						rs.getInt("PRICE"));
+			} // end if
+		} finally {
+			// 6. 연결끊기
+			if (rs != null) {
+				rs.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+			if (con != null) {
+				con.close();
+			} // end if
+			
+		} // end finally
+		return mdVO;
+	}// selectProDetail
 
 ///////////////////////////////////// 상품 입력창 //////////////////////////////////////////////
 
@@ -542,17 +604,19 @@ public class UserDAO {
 
 			if (temp_flag.equals("S")) {
 				selectAll.append(
-						" select PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, PRICE,loc_code, all_flag ")
-						.append(" from PRODUCT, id_info ")
-						.append(" where ( PRODUCT.user_id= id_info.user_id) and all_flag ='P' and PRODUCT.USER_ID=? ");
+						" select p.PRODUCT_CODE, p.IMG_FILE, p.PRODUCT_NAME, to_char(p.UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,p.CATEGORY_CODE, p.USER_ID, p.PRICE,i.loc_code,l.loc, p.all_flag ")
+						.append(" from PRODUCT p, id_info i, location_list l ")
+						.append(" where ( p.user_id= i.user_id and i.loc_code=l.loc_code) and all_flag ='P' and p.USER_ID=? ");
 			} else if (temp_flag.equals("P")) {
 				selectAll.append(
-						" select PRODUCT.PRODUCT_CODE, IMG_FILE, PRODUCT_NAME, to_char(UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,CATEGORY_CODE, PRODUCT.USER_ID, "
-								+ "DEAL.SALE_DATE, PRICE, DEAL.SALE_FLAG, DEAL.USER_ID, id_info.loc_code ")
-						.append(" from PRODUCT, DEAL , id_info  ")
-						.append(" where ( PRODUCT.PRODUCT_CODE= DEAL.PRODUCT_CODE and deal.user_id= id_info.user_id) and sale_flag ='P' and DEAL.USER_ID=? ");
+						" select p.PRODUCT_CODE, p.IMG_FILE, p.PRODUCT_NAME, to_char(p.UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,p.CATEGORY_CODE, p.USER_ID, "
+								+ "d.SALE_DATE, p.PRICE, d.SALE_FLAG, d.USER_ID, i.loc_code, l.loc ")
+						.append(" from PRODUCT p, DEAL d, id_info i, location_list l  ")
+						.append(" where ( p.PRODUCT_CODE= d.PRODUCT_CODE and d.user_id= i.user_id and  i.loc_code=l.loc_code ) and sale_flag ='P' and d.USER_ID=? ");
 			} // end else
 
+			
+			
 			pstmt = con.prepareStatement(selectAll.toString());
 
 //4. 바인드변수에 값 넣기
@@ -563,7 +627,7 @@ public class UserDAO {
 
 			while (rs.next()) {
 				slv = new SaleListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
-						rs.getString("PRODUCT_NAME"), rs.getString("loc_code"), rs.getString("inputDate"),
+						rs.getString("PRODUCT_NAME"), rs.getString("loc"), rs.getString("inputDate"),
 						rs.getString("CATEGORY_CODE"), rs.getString("USER_ID"), rs.getString("all_flag"),
 						rs.getInt("PRICE"));
 

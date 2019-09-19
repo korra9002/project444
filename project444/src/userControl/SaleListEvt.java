@@ -154,8 +154,16 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 
 	public void openDetail() throws SQLException {	
 		
+		String tbFlag="";
 	
-		JTable jtProductList=sl.getJtSell();
+		JTable jtProductList=null;
+		if(sl.getJtp().getSelectedIndex()==0) {
+			jtProductList=sl.getJtSell();
+			tbFlag="S"; 
+		} else if (sl.getJtp().getSelectedIndex()==1) {
+			jtProductList=sl.getJtComplete();
+			tbFlag="C";
+		}
 					
 			// SY - 2019.09.19 
 			// 문제는 flag가 B인 것을 가져와야 하는데 selectProDetail자체가 P를 디폴트로 함
@@ -173,7 +181,7 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 		UserDAO uDAO =UserDAO.getInstance();
 
 		
-			MarketDetailVO mdVO=uDAO.selectProDetail(productCode, loc_code);
+			MarketDetailVO mdVO=uDAO.selectSaleDetail(productCode, loc_code,tbFlag);
 			
 			
 			//현재 접속한 아이디와 포스팅 판매자 아이디와 같으면 MarketDetailBuyer
