@@ -43,7 +43,7 @@ public class MarketDetailSeller extends JDialog {
 
 		
 		//JTextField
-		jtfName=new JTextField(mdVO.getProductName());
+		jtfName=new JTextField(mdVO.getProductName()+"("+mdVO.getProductCode()+")");
 		jtfPrice=new JTextField(Integer.toString(mdVO.getPrice()));
 		jtfId=new JTextField(mdVO.getSellerID());
 		jtfInputDate=new JTextField(mdVO.getUpload_date());

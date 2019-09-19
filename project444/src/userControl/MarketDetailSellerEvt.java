@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 
 import userView.MarketDetailSeller;
 import userView.MarketMain;
+import userView.dealSelect;
 
 
 
@@ -26,7 +27,9 @@ public class MarketDetailSellerEvt extends MouseAdapter implements ActionListene
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		if(e.getSource() == mds.getJbtComplete()) {
+			new dealSelect();
+		}
 	}
 
 	@Override
