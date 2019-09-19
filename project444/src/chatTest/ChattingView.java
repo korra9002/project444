@@ -20,7 +20,7 @@ import userVO.DCodeAndIdAO;
 import userView.MarketMain;
 
 public class ChattingView extends JFrame {
-	private JLabel jlNotice;
+	private JLabel jlNotice,jlResult;
 	private JTextArea jtaChatView;
 	private JTextField jtaChatField;
 	private JButton jbtProductInfo, jbtSend, jbtOk, jbtCancle;
@@ -38,6 +38,9 @@ public class ChattingView extends JFrame {
 		
 		
 		jlNotice = new JLabel("------");
+		jlResult = new JLabel("------");
+		
+		
 		jtaChatView = new JTextArea();
 		jtaChatField = new JTextField();
 		
@@ -61,12 +64,14 @@ public class ChattingView extends JFrame {
 		jtaChatField.setBounds(20, 450, 260, 60);
 		//JButton
 		jbtProductInfo.setBounds(90, 5, 200, 50);
+		jlResult.setBounds(90, 5, 200, 50);		
 		jbtSend.setBounds(285, 450, 80, 60);
 		jbtOk.setBounds(240, 520, 60, 25);
 		jbtCancle.setBounds(300,520, 75, 25);
 		//JLabel
 		jlNotice.setBounds(35,520 , 250, 25);
 		//배치
+//	
 		add(jbtProductInfo);
 		add(jsp);
 		add(jtaChatField);
@@ -74,12 +79,17 @@ public class ChattingView extends JFrame {
 		add(jlNotice);
 		add(jbtOk);
 		add(jbtCancle);
-		
-		//// 판매확익 메세지 숨기기
-		jlNotice.setVisible(false);
+		//// 판매확인 메세지 숨기기
+		jlNotice.setVisible(true);
 		jbtOk.setVisible(false);
 		jbtCancle.setVisible(false);
 		
+///////////	상단 상품정보 버튼 or 거래완료 삭제 메세지 
+		jbtProductInfo.setVisible(false);
+		jlResult.setVisible(true);
+		add(jlResult);
+		
+//////////////////////
 		//////////////테스트 
 		
 		

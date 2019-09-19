@@ -999,7 +999,7 @@ public class UserDAO {
 
 			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
 			// 것부터 조회
-			String checkFlag = "   select   sale_flag, all_flag from deal d,product p where  deal_code = ? and d.product_code = p.product_code   ";
+			String checkFlag = "   select   sale_flag, all_flag,d.user_id user_id from deal d,product p where  deal_code = ? and d.product_code = p.product_code   ";
 
 			pstmt = con.prepareStatement(checkFlag);
 			pstmt.setString(1, dealCode);
@@ -1007,7 +1007,7 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 
 			if(rs.next()) {
-				fVO = new FlagVO(rs.getString("sale_flag"), rs.getString("all_flag"));
+				fVO = new FlagVO(rs.getString("sale_flag"), rs.getString("all_flag"),rs.getString("user_id"));
 			}
 
 		} finally {
