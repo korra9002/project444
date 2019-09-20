@@ -249,9 +249,12 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener{
 			
 			//DBMS에서 조회
 			UserDAO uDAO =UserDAO.getInstance();
-
+			
+			String classFlag="M"; //userDAO에서 selectProDetail method 사용할 때 구분용 플래그
+			
+			
 			try {
-				MarketDetailVO mdVO=uDAO.selectProDetail(productCode, loc_code);
+				MarketDetailVO mdVO=uDAO.selectProDetail(productCode, classFlag);
 				
 				
 				//현재 접속한 아이디와 포스팅 판매자 아이디와 같으면 MarketDetailBuyer
