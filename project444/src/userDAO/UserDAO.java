@@ -1103,57 +1103,47 @@ public class UserDAO {
 	}
 	
 	/////////////////// 판매완료 누를시 채팅 리스트 불러오는 메서드ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ/////////////////
-//	public List<DealListVO> setDealList(String productCode){
-//		List<DealListVO> list = new ArrayList<DealListVO>();
-//
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//
-//		String dealCode = "";
-//		try {
-//			// 2.커넥션 얻기
-//			con = getConn();
-//
-//			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
-//			// 것부터 조회
-//			String chatList = "   select p.product_name product_name ,p.user_id id ,l.loc loc,deal_code from product p, deal d,id_info i,location_list l   "
-//					+ " where  d.user_id=? and p.product_code = d.product_code and p.user_id = i.user_id and l.loc_code=i.loc_code   ";
-//			if (flag.equals("sell")) {
-//				chatList = "   select  p.product_name ,d.user_id id,l.loc loc ,deal_code from  product p, deal d,id_info i,location_list l "
-//						+ "   where  p.user_id =? and p.product_code = d.product_code and p.user_id = i.user_id and l.loc_code=i.loc_code   ";
-//			}
-//
-//			pstmt = con.prepareStatement(chatList);
-//			pstmt.setString(1, RunMarketMain.userId);
-//
-//			rs = pstmt.executeQuery();
-//
-//			ChatListVO clVO = null;
-//			RecentChatVO rcVO = null;
-//			while (rs.next()) {
-//				dealCode = rs.getString("deal_code");
-//				rcVO = recentChat(dealCode);
-//				clVO = new ChatListVO(rs.getString("product_name"), rs.getString("id"), rs.getString("loc"),
-//						rcVO.getTime(), rcVO.getChat(), dealCode);
-//				list.add(clVO);// 조회된 레코드를 저장한 VO를 list에 추가
-//			}
-//
-//		} finally {
-//			// 6. 연결 끊기
-//			if (rs != null)
-//				rs.close();
-//			if (pstmt != null)
-//				pstmt.close();
-//			if (con != null)
-//				con.close();
-//
-//		}
-//		return list;
-//		
-//		
-//	}
-//	
+	public List<DealListVO> setDealList(String productCode) throws SQLException{
+		List<DealListVO> list = new ArrayList<DealListVO>();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			// 2.커넥션 얻기
+			con = getConn();
+
+			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
+			// 것부터 조회
+			String dealList = "	select  d.user_id user_id,loc ,deal_code from deal d, id_info i, location_list l  where d.product_code = ? and d.user_id = i.user_id and i.loc_code = l.loc_code	";
+		
+			pstmt = con.prepareStatement(dealList);
+			pstmt.setString(1, productCode);
+
+			rs = pstmt.executeQuery();
+
+			DealListVO dlVO = null;
+			while (rs.next()) {
+				dlVO = new DealListVO(rs.getString("user_id"), rs.getString("loc"), rs.getString("deal_code"));
+				list.add(dlVO);
+			}
+
+		} finally {
+			// 6. 연결 끊기
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (con != null)
+				con.close();
+
+		}
+		return list;
+		
+		
+	}
+	
 	
 	
 	

@@ -29,8 +29,9 @@ public class MarketDetailSellerEvt extends MouseAdapter implements ActionListene
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == mds.getJbtComplete()) {
 			String temp = mds.getJtfName().getText();
-//			temp = temp.substring(temp.lastIndexOf('(')+1,temp.lastIndexOf(')')).trim();
+			temp = temp.substring(temp.lastIndexOf('(')+1,temp.lastIndexOf(')')).trim();
 //			System.out.println(temp+"상품코드");
+			System.out.println(temp);
 			new DealSelect(temp);
 		}
 	}

@@ -21,47 +21,45 @@ private String productCode;
 
 
 	public DealSelectEvt(DealSelect ds, String productCode) {
-	super();
+		System.out.println("dealselectEvt 생성자");
 	this.ds = ds;
 	this.productCode = productCode;
 	ds.getjlb().setText(productCode);
+	setList();
 }
 
 	public void setList() {
+		System.out.println("setlist");
 		UserDAO uDAO = UserDAO.getInstance();
 		DefaultTableModel dtm = ds.getDtmAreaList();
 		dtm.setRowCount(0);
 
 		Object[] rowData = null;
-//		try {
-//			List<DealListVO> list = uDAO.setChatList(flag);
-//
-//			DealListVO dlVO = null;
-//			for (int i = 0; i < list.size(); i++) {
-//				dlVO = list.get(i);
-//				rowData = new Object[6];
-//
-//				rowData[0] = clVO.getProName();
-//				rowData[1] = clVO.getId();
-//				rowData[2] = clVO.getLoc();
-//				rowData[3] = clVO.getTime();
-//				rowData[4] = clVO.getLastchat();
-//				rowData[5] = clVO.getDealCode();
-//
-//				dtm.addRow(rowData);
-//			} // end for
-//
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try {
+			List<DealListVO> list = uDAO.setDealList(productCode);
+
+			DealListVO dlVO = null;
+			for (int i = 0; i < list.size(); i++) {
+				dlVO = list.get(i);
+				rowData = new Object[3];
+
+				rowData[0] = dlVO.getId();
+				rowData[1] = dlVO.getLoc();
+				rowData[2] = dlVO.getDealCode();
+			System.out.println("for문");
+				dtm.addRow(rowData);
+			} // end for
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
 	}
 
 }
