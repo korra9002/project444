@@ -1157,7 +1157,7 @@ public class UserDAO {
 
 			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
 			// 것부터 조회
-			String changeFlag = "	update deal set sale_flag='Y' where deal_code = ?;	";
+			String changeFlag = "	update deal set sale_flag='Y' where deal_code = ?	";
 		
 			pstmt = con.prepareStatement(changeFlag);
 			pstmt.setString(1, dealCode);
