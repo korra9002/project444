@@ -1571,7 +1571,7 @@ selectinterest
 .append(" select p.PRODUCT_CODE, p.IMG_FILE, p.PRODUCT_NAME, p.PRICE, P.USER_ID, i.loc_code,l.loc, to_char(p.UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate,c.category ")
 .append(" from PRODUCT p, id_info i, location_list l,category_list c,interested_product ip ")
 .append(" where ( p.user_id= i.user_id and i.loc_code=l.loc_code and c.category_code=p.category_code and p.product_code=ip.product_code) ")
-.append(" and ip.user_id=?");
+.append(" and ip.user_id=? and p.all_flag!='D'");
 
 pstmt = con.prepareStatement(selectinterest.toString());
 pstmt.setString(1, RunMarketMain.userId);
