@@ -27,6 +27,8 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 	private SaleList sl;
 	private RunMarketMain rmm;
 	String id;
+	String classFlag="";
+	String productCode="";
 
 	public SaleListEvt(SaleList sl, RunMarketMain rmm) throws SQLException {
 		this.sl = sl;
@@ -154,34 +156,32 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 
 	public void openDetail() throws SQLException {	
 		
-		String tbFlag="";
-	
-		JTable jtProductList=null;
-		if(sl.getJtp().getSelectedIndex()==0) {
-			jtProductList=sl.getJtSell();
-			tbFlag="S"; 
-		} else if (sl.getJtp().getSelectedIndex()==1) {
-			jtProductList=sl.getJtComplete();
-			tbFlag="C";
-		}
-					
-			// SY - 2019.09.19 
-			// 문제는 flag가 B인 것을 가져와야 하는데 selectProDetail자체가 P를 디폴트로 함
-			// 새로 method 만들어야 할 것 같음. 아니면 클래스마다 플래그를 만들어서 상황별로 다 쓸 수 있게 만들기?
-			// 해야할 것 : setProDetail 사용한 클래스 확인 후 플래그 뭘로 할지 설정.			
 		
 		
-		String temp=(String) jtProductList.getValueAt(jtProductList.getSelectedRow(), 1);
-		String loc_code=(String) jtProductList.getValueAt(jtProductList.getSelectedRow(), 4);
-		String productCode=temp.substring(temp.lastIndexOf("(")+1, temp.lastIndexOf(")"));
+		if(classFlag=="S") {
+		JTable jtProductList=sl.getJtSell();
 		
-		
-		
-		//DBMS에서 조회
-		UserDAO uDAO =UserDAO.getInstance();
+			String temp=(String) jtProductList.getValueAt(jtProductList.getSelectedRow(), 1);
+			productCode=temp.substring(temp.lastIndexOf("(")+1, temp.lastIndexOf(")"));
+			
 
 		
-			MarketDetailVO mdVO=uDAO.selectSaleDetail(productCode, loc_code,tbFlag);
+		} else if (classFlag=="C" ) {
+			JTable jtComList=sl.getJtComplete();
+			
+			String temp=(String) jtComList.getValueAt(jtComList.getSelectedRow(), 1);
+			productCode=temp.substring(temp.lastIndexOf("(")+1, temp.lastIndexOf(")"));
+
+		
+		}
+		
+		
+				
+		//DBMS에서 조회
+		UserDAO uDAO =UserDAO.getInstance();
+		
+		
+			MarketDetailVO mdVO=uDAO.selectProDetail(productCode, classFlag);
 			
 			
 			//현재 접속한 아이디와 포스팅 판매자 아이디와 같으면 MarketDetailBuyer
@@ -228,13 +228,16 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 		
 			if(me.getClickCount() == 2) {//더블클릭
 				if(me.getSource() == sl.getJtSell()) {
-					try {
+					try { 
+						classFlag="S";  //userDAO에서 selectProDetail method 사용할 때 구분용 플래그 ---->판매중인목록
+
 						openDetail();
 					} catch (SQLException e) {
-						e.printStackTrace();
+						e.printStackTrace(); 
 					}
 				} else if (me.getSource()==sl.getJtComplete()) {
 						try {
+							classFlag="C"; //userDAO에서 selectProDetail method 사용할 때 구분용 플래그 ---->판매완료된목록
 							openDetail();
 						} catch (SQLException e) {
 							e.printStackTrace();

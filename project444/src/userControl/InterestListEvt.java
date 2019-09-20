@@ -1,5 +1,5 @@
 package userControl;
- 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableModel; 
 
 import userDAO.UserDAO;
 import userRun.RunMarketMain;
@@ -25,6 +25,8 @@ public class InterestListEvt extends MouseAdapter implements ActionListener{
 	public static final int DOUBLE_CLICK=2;
 	private String productCode="";
 	private String loc_code="";
+	private String classFlag="I"; ////userDAO에서 selectProDetail method 사용할 때 구분용 플래그
+	
 	public InterestListEvt(InterestList il) {
 		this.il =il;
 		try {
@@ -91,6 +93,9 @@ public class InterestListEvt extends MouseAdapter implements ActionListener{
 
 	@Override
 	public void mouseClicked(MouseEvent me) {
+		
+		
+		
 		if(me.getSource()==il.getJtInterest()) {
 				productCode =il.getJtInterest().getValueAt(il.getJtInterest().getSelectedRow(), 1).toString();
 				productCode=productCode.substring(productCode.indexOf("(")+1,productCode.indexOf(")"));
@@ -98,7 +103,7 @@ public class InterestListEvt extends MouseAdapter implements ActionListener{
 			try {
 			UserDAO uDAO = UserDAO.getInstance();
 			MarketDetailVO mdVO;
-				mdVO = uDAO.selectProDetail(productCode, loc_code);
+				mdVO = uDAO.selectProDetail(productCode, classFlag);
 			new MarketDetailBuyer(mm, mdVO, RunMarketMain.userId,this);
 		} catch (SQLException e) {
 			e.printStackTrace();
