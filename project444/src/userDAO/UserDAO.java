@@ -1143,7 +1143,42 @@ public class UserDAO {
 		
 		
 	}
-	
+	//////////////////////// 판매 완료 누를때 플래그 날리기//////////////////
+	public int changeFlag(String dealCode) throws SQLException {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int result =0;
+		try {
+			// 2.커넥션 얻기
+			con = getConn();
+
+			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
+			// 것부터 조회
+			String changeFlag = "	update deal set sale_flag='Y' where deal_code = ?;	";
+		
+			pstmt = con.prepareStatement(changeFlag);
+			pstmt.setString(1, dealCode);
+
+			result = pstmt.executeUpdate();
+
+			
+
+		} finally {
+			// 6. 연결 끊기
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (con != null)
+				con.close();
+
+		}
+		
+		return result;
+	}
 	
 	
 	

@@ -17,11 +17,10 @@ public class DealSelect extends JFrame {
 	private JTable jtpAreaList;
 	private JLabel jlb;
 	
-	private String productCode;
+//	private String productName,productCode;
 	
-	public DealSelect(String productCode) {
-		
-		this.productCode = productCode;
+	public DealSelect(String nameAndCode) {
+	
 		jbtsell=new JButton("판매완료");
 		jbtcancell=new JButton("취소");
 		
@@ -67,8 +66,10 @@ public class DealSelect extends JFrame {
 	setBounds(100, 100, 500, 600);
 	setVisible(true);
 	
-DealSelectEvt dse = new DealSelectEvt(this,productCode);
-	
+DealSelectEvt dse = new DealSelectEvt(this,nameAndCode);
+	jtpAreaList.addMouseListener(dse);
+	jbtsell.addActionListener(dse);
+	jbtcancell.addActionListener(dse);
 		
 	}//dealSelect
 
@@ -92,9 +93,6 @@ DealSelectEvt dse = new DealSelectEvt(this,productCode);
 		return jlb;
 	}
 
-	public String getProductCode() {
-		return productCode;
-	}
 	
 	     //
 	    
