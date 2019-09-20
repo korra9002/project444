@@ -51,6 +51,7 @@ public class OrderThread extends Thread {
 	}
 	
 	public void setDealInfo() {
+		cv.getJlNotice().setText(you+"님에게 상품을 받으 셨나요?");
 		cv.getJlNotice().setVisible(true);
 		cv.getJbtOk().setVisible(true);
 		cv.getJbtCancle().setVisible(true);
