@@ -75,6 +75,7 @@ public class LoginEvt implements ActionListener {
 	}else if(pw.isEmpty()){
 		lg.getJlLoginFail().setBounds(270, 140, 200, 25);
 		lg.getJlLoginFail().setText("비밀번호를 입력해주세요.");
+		System.out.println("외 안됢");
 	}
 		
 	}//loginRun
