@@ -62,13 +62,20 @@ public class LoginEvt implements ActionListener {
 		} catch (SQLException e) {
 			
 		}catch(NullPointerException npe) {
+			lg.getJlLoginFail().setBounds(180, 140, 240, 25);
 			lg.getJlLoginFail().setText("아이디 또는 비밀번호를 확인해주세요.");
 			lg.getJtfId().setText("");
 			lg.getJpfPw().setText("");
 			lg.getJtfId().requestFocus();
 		}
 	
-	}//end if
+	}else if(id.isEmpty()){
+		lg.getJlLoginFail().setBounds(270, 140, 200, 25);
+		lg.getJlLoginFail().setText("아이디를 입력해주세요.");
+	}else if(pw.isEmpty()){
+		lg.getJlLoginFail().setBounds(270, 140, 200, 25);
+		lg.getJlLoginFail().setText("비밀번호를 입력해주세요.");
+	}
 		
 	}//loginRun
 	

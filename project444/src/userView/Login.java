@@ -37,7 +37,6 @@ public class Login extends JFrame {
 		// JLabel
 		jlId.setBounds(60, 160, 20, 25);
 		jlPw.setBounds(60, 190, 20, 25);
-		jlLoginFail.setBounds(180, 140, 240, 25);
 		// jtextField
 		jtfId.setBounds(110, 160, 200, 30);
 		jpfPw.setBounds(110, 190, 200, 30);
