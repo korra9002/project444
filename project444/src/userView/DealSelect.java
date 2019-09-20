@@ -17,10 +17,12 @@ public class DealSelect extends JFrame {
 	private JTable jtpAreaList;
 	private JLabel jlb;
 	
+	private MarketDetailSeller mds;
+	
 //	private String productName,productCode;
 	
-	public DealSelect(String nameAndCode) {
-	
+	public DealSelect(String nameAndCode,MarketDetailSeller mds) {
+		this.mds = mds;
 		jbtsell=new JButton("판매완료");
 		jbtcancell=new JButton("취소");
 		
@@ -72,6 +74,14 @@ DealSelectEvt dse = new DealSelectEvt(this,nameAndCode);
 	jbtcancell.addActionListener(dse);
 		
 	}//dealSelect
+
+	public JLabel getJlb() {
+		return jlb;
+	}
+
+	public MarketDetailSeller getMds() {
+		return mds;
+	}
 
 	public JButton getJbtsell() {
 		return jbtsell;
