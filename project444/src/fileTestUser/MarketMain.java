@@ -156,12 +156,12 @@ import javax.swing.DefaultComboBoxModel;
 			
 			try {
 				// 2. 소켓생성 : 서버로 연결
-				client = new Socket("211.63.89.159", 5000);
+				client = new Socket("localhost", 5000);
 				// 4. 데이터를 주고 받을 스트림 연결
 				dos = new DataOutputStream(client.getOutputStream());
 				dis = new DataInputStream(client.getInputStream());
 
-				File file = new File("c:/dev/fileTest2");
+				File file = new File("c:/dev/userFileTest");
 				File[] temp = file.listFiles();
 
 				StringBuilder csvFile = new StringBuilder();
@@ -194,7 +194,7 @@ import javax.swing.DefaultComboBoxModel;
 					revFileName = dis.readUTF();
 					System.out.println(revFileName);
 					// 13. 파일생성
-					fos = new FileOutputStream("c:/dev/fileTest2/"+revFileName);
+					fos = new FileOutputStream("c:/dev/userFileTest/"+revFileName);
 					bos = new BufferedOutputStream(fos);
 					//dos.writeUTF("Y");// 파일 받기 전에 확인 
 //					while(readCnt > 0) {
@@ -202,8 +202,9 @@ import javax.swing.DefaultComboBoxModel;
 //						fos.write(readData, 0,readSize);
 //						readCnt--;
 //					}//end while
+					
 					int len =0;
-					while((len = dis.read(readData)) !=-1) {
+					while((len = dis.read(readData)) >0) {
 						bos.write(readData,0,len);
 						System.out.println(len+"유저");
 					}

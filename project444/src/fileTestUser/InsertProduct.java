@@ -179,7 +179,7 @@ public class InsertProduct extends JFrame implements ActionListener {
 				DataOutputStream dos = null;
 				DataInputStream dis = null;
 				try {
-					fileClient = new Socket("211.63.89.159", 1025);
+					fileClient = new Socket("localhost", 5001);
 					System.out.println("접속 성공");
 					// 4.선택한 파일을 전송하기 위해 전처리(일의 조각을 몇번 전송할 것 인지 전송 갯수 계산)
 					int sendCnt = 0;

@@ -38,7 +38,7 @@ public class FileHelper extends Thread {
 		// C:\dev\workspace\jdbc_prj\src\kr\co\sist\admin\img
 		// temp에 존재하는 파일과 admin에 존재하는 파일을 비교하여 없는 파일을 찾아 출력
 
-		temp1 = new File("c:/dev/fileTest");
+		temp1 = new File("c:/dev/adminFileTest");
 		serverFile = temp1.listFiles();
 		listSendFile = new ArrayList<String>();
 
@@ -95,19 +95,20 @@ public class FileHelper extends Thread {
 //				} // end while
 				//////////////////////////////////////////////////
 				int len = 0;
-				while((len = bis.read(readData))!=-1) {
+				
+				while((len = bis.read(readData))>0) {
 					dos.write(readData,0,len);
 					System.out.println(len+"헬퍼");
 				}
-				
+				dos.flush();
+			
 				//////////////////////////////
 				
-				dos.flush();
-				dos.write(-1);
+//				dos.write(-1);
 				//////////////
-			//	dos.close();
 				////////////
 				fis.close();
+				bis.close();
 //				System.out.println(dis.readUTF()+"파일전송 끝");// 파일 전송 끝 확인
 				System.out.println("서버끝났다");
 				

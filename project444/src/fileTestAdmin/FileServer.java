@@ -75,7 +75,7 @@ public class FileServer  extends JFrame implements ActionListener, Runnable {
 	public void run() {
 		// 1. 서버 소켓 열기
 		try {
-			fileserver = new ServerSocket(1025);
+			fileserver = new ServerSocket(5001);
 			Socket client =null;
 			DataInputStream dis = null;
 			DataOutputStream dos = null;
@@ -100,7 +100,7 @@ public class FileServer  extends JFrame implements ActionListener, Runnable {
 				
 //				System.out.println(revCnt+"/"+fileName);
 				//10.전송하는 파일 받아서 HDD 생성
-				writeFile = new File("c:/dev/fileTest/"+fileName);
+				writeFile = new File("c:/dev/adminFileTest/"+fileName);
 				fos = new FileOutputStream(writeFile);//파일이 생성되었음
 				dos.writeUTF("파일 전송시작");
 			while(revCnt >0) {
