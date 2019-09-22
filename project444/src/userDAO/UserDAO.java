@@ -531,7 +531,7 @@ public class UserDAO {
 			// M- MainMarketEvt
 			// S- SaleListEvt에서 판매중인 목록
 			// C- SaleListEvt에서 판매완료된 목록
-			if (classFlag == "I" || classFlag == "M" || classFlag == "S") {
+			if (classFlag == "I" || classFlag == "M" ) {
 				System.out.println("1번이다.");
 				System.out.println(productCode);
 				selectDetail.append(
@@ -550,7 +550,13 @@ public class UserDAO {
 								+ " P.USER_ID, p.PRICE, p.info, i.loc_code, l.loc, c.category ")
 						.append(" from PRODUCT p, id_info i, location_list l, category_list c ")
 						.append(" where ( p.user_id= i.user_id and i.loc_code=l.loc_code and p.category_code=c.category_code) and all_flag ='B' and p.PRODUCT_CODE=? ");
-			} // end else
+			} else if( classFlag == "S") {
+				selectDetail.append(
+						" select p.PRODUCT_CODE, p.IMG_FILE, p.PRODUCT_NAME, to_char(p.UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate, p.CATEGORY_CODE,"
+								+ " P.USER_ID, p.PRICE, p.info, i.loc_code, l.loc, c.category ")
+						.append(" from PRODUCT p, id_info i, location_list l, category_list c ")
+						.append(" where ( p.user_id= i.user_id and i.loc_code=l.loc_code and p.category_code=c.category_code) and (all_flag ='P' or all_flag='N') and p.PRODUCT_CODE=? ");
+			}
 
 			pstmt = con.prepareStatement(selectDetail.toString());
 
@@ -1272,6 +1278,92 @@ System.out.println(slv);
 	}// selectDeal
 
 	/////////////////////////////////////////////////////////
+	//////////////////채팅창에서 상세정보창 띄우기!
+	//////////////////우선은 딜코드에서 상품코드 가져오기
+	public String getProCode(String dealCode) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String proCode= "";
+		ResultSet rs = null;
+
+		try {
+			// 2.커넥션 얻기
+			con = getConn();
+
+			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
+			// 것부터 조회
+			
+			String query = "	select product_code from deal where deal_code=?	";
+			
+		
+			
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, dealCode);
+	
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+			proCode =rs.getString("product_code");
+			}
+
+		} finally {
+			// 6. 연결 끊기
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (con != null)
+				con.close();
+
+		}
+		
+		return proCode	;
+	}
+	
+	///////////////////////////////////////////////
+	////////////////////// 디테일창에서 뭔가 누를때마다 플래그 확인
+	///////(검수중인지 거래중인지 판매완료인지 등등)
+	public FlagVO checkFlag2(String productCode) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		FlagVO fVO = null;
+
+		try {
+			// 2.커넥션 얻기
+			con = getConn();
+
+			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
+			// 것부터 조회
+			String checkFlag = "   select   sale_flag, all_flag,d.user_id user_id from deal d,product p where  p.product_code = ? and d.product_code = p.product_code   ";
+
+			pstmt = con.prepareStatement(checkFlag);
+			pstmt.setString(1, productCode);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				fVO = new FlagVO(rs.getString("sale_flag"), rs.getString("all_flag"), rs.getString("user_id"));
+			}
+
+		} finally {
+			// 6. 연결 끊기
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (con != null)
+				con.close();
+
+		}
+		return fVO;
+
+	}
+	
+	
+	
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 

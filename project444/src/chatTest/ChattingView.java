@@ -116,7 +116,7 @@ public class ChattingView extends JFrame {
 //		
 		
 		
-		
+		jbtProductInfo.addActionListener(cVE);
 		jbtSend.addActionListener(cVE);
 		jtaChatField.addActionListener(cVE);
 		jbtOk.addActionListener(cVE);

@@ -24,14 +24,14 @@ public class MarketDetailSeller extends JDialog {
 	private JButton jbtComplete, jbtDelete, jbtChange;
 	private JTextArea jtaStrongPoint;
 	private String id;
-	
+	private MarketDetailVO mdVO;
 	public MarketDetailSeller() {
 		
 	}//MarketDetailSeller
 	
 	public MarketDetailSeller(MarketMain mm, MarketDetailVO mdVO, String id) {
 		this.id = id;
-		
+		this.mdVO = mdVO;
 		jlDetailImg = new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/img/무민.jpg/"));//썸네일X / 원본 이미지
 //		jlDetailImg.setHorizontalAlignment(JLabel.CENTER);
 		
@@ -120,6 +120,10 @@ public class MarketDetailSeller extends JDialog {
 		
 		
 	}//MarketDetail
+
+	public MarketDetailVO getMdVO() {
+		return mdVO;
+	}
 
 	public JLabel getJlDetailImg() {
 		return jlDetailImg;
