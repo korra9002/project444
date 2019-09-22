@@ -239,15 +239,21 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener {
 
 		try {
 			MarketDetailVO mdVO = uDAO.selectProDetail(productCode, classFlag);
+			if (mdVO != null) {//// 디테일 창을 띄우기 위한 조회시에 해당 물건의 플래그가
+				// 판매되는 등의 이유로 변경되어 조회된 값이 없을떄 메세지를 띄우기위한 if문
+				// 현재 접속한 아이디와 포스팅 판매자 아이디와 같으면 MarketDetailBuyer
+				// 다르다면 MarketDetailSeller
+				System.out.println(id + "/" + mdVO.getSellerID());
+				if (mdVO.getSellerID().equals(id)) {
+					new MarketDetailSeller(mm, mdVO, id);
+				} else {
+					new MarketDetailBuyer(mm, mdVO, id, ile);
+				} // end else
 
-			// 현재 접속한 아이디와 포스팅 판매자 아이디와 같으면 MarketDetailBuyer
-			// 다르다면 MarketDetailSeller
-			System.out.println(id + "/" + mdVO.getSellerID());
-			if (mdVO.getSellerID().equals(id)) {
-				new MarketDetailSeller(mm, mdVO, id);
 			} else {
-				new MarketDetailBuyer(mm, mdVO, id, ile);
-			} // end else
+				JOptionPane.showMessageDialog(mm, "판매중인 상품이 아닙니다.");
+				setList(sortFlag);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} // end catch

@@ -44,6 +44,12 @@ public String getCheck() {
 public int getPrice() {
 	return price;
 }
+@Override
+public String toString() {
+	return "SaleListVO [productCode=" + productCode + ", image=" + image + ", productName=" + productName
+			+ ", loc_code=" + loc_code + ", upload_date=" + upload_date + ", category=" + category + ", sellerID="
+			+ sellerID + ", check=" + check + ", price=" + price + "]";
+}
 
 
 }

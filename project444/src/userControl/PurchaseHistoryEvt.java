@@ -40,20 +40,22 @@ public class PurchaseHistoryEvt extends MouseAdapter {
 		//DBMS에서 조회
 		UserDAO uDAO=UserDAO.getInstance();
 		List<SaleListVO> list=uDAO.selectSaleList(id, temp_flag);
-		if (list.isEmpty()) {
-			JOptionPane.showMessageDialog(ph, "구매한 상품이 없습니다.");
-		}//end if
+//		if (list.isEmpty()) {
+//			JOptionPane.showMessageDialog(ph, "구매한 상품이 없습니다.");
+//		}//end if
 		SaleListVO slv=null;
+		System.out.println(dtm.getColumnCount());
 		for(int i=0; i<list.size(); i++) {
 			slv=list.get(i);
 			//조회 결과로 JTable 레코드에 들어갈 데이터를 생성하고
-			rowData=new Object[5];
+			rowData=new Object[6];
 			//배열에 값 할당
 			rowData[0]=slv.getImage();
 			rowData[1]=slv.getProductName()+"("+slv.getProductCode()+")";
 			rowData[2]=slv.getPrice();
-			rowData[3]=slv.getLoc_code();
-			rowData[4]=slv.getUpload_date();
+			rowData[3]=slv.getSellerID();
+			rowData[4]=slv.getLoc_code();
+			rowData[5]=slv.getUpload_date();
 			//dtm에 추가
 			dtm.addRow(rowData);		
 		}//end for

@@ -42,7 +42,7 @@ public class MarketDetailBuyer extends JDialog {
 		JLabel jlCategory = new JLabel("카테고리");
 
 		jckLike = new JCheckBox("관심목록에 추가");
-		///////////변경사항 //////////////////////
+		///////////변경사항 //////////////////////--- 나중에 Evt로 옮기기
 		InterestListVO irVO = new InterestListVO(productCode, id);
 		UserDAO uDAO = UserDAO.getInstance();
 		String flag = uDAO.selectInterestCheck(irVO);

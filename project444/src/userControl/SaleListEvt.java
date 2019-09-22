@@ -27,8 +27,8 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 	private SaleList sl;
 	private RunMarketMain rmm;
 	String id;
-	String classFlag="";
-	String productCode="";
+	String classFlag = "";
+	String productCode = "";
 
 	public SaleListEvt(SaleList sl, RunMarketMain rmm) throws SQLException {
 		this.sl = sl;
@@ -56,10 +56,10 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 		// DBMS에서 조회
 		UserDAO uDAO = UserDAO.getInstance();
 		List<SaleListVO> list = uDAO.selectSaleList(id, temp_flag);
-		if (list.isEmpty()) {
-			JOptionPane.showMessageDialog(sl, "현재 판매하시는 상품이 없습니다. ");
-
-		}
+//		if (list.isEmpty()) {
+//			JOptionPane.showMessageDialog(sl, "현재 판매하시는 상품이 없습니다. ");
+//
+//		} /// 메세지 안띄어도 괜찮은거 같음
 		SaleListVO slv = null;
 		for (int i = 0; i < list.size(); i++) {
 			slv = list.get(i);
@@ -96,10 +96,10 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 		// DBMS에서 조회
 		UserDAO uDAO = UserDAO.getInstance();
 		List<SaleListVO> list = uDAO.selectCompList(RunMarketMain.userId);
-		if (list.isEmpty()) {
-			JOptionPane.showMessageDialog(sl, "현재 판매완료된 상품이 없습니다. ");
-
-		}
+//		if (list.isEmpty()) {
+//			JOptionPane.showMessageDialog(sl, "현재 판매완료된 상품이 없습니다. ");
+//
+//		}
 		SaleListVO slv = null;
 		for (int i = 0; i < list.size(); i++) {
 			slv = list.get(i);
@@ -154,44 +154,38 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 		}// end switch
 	}// deleteSaleList
 
-	public void openDetail() throws SQLException {	
-		
-		
-		
-		if(classFlag=="S") {
-		JTable jtProductList=sl.getJtSell();
-		
-			String temp=(String) jtProductList.getValueAt(jtProductList.getSelectedRow(), 1);
-			productCode=temp.substring(temp.lastIndexOf("(")+1, temp.lastIndexOf(")"));
-			
+	public void openDetail() throws SQLException {
 
-		
-		} else if (classFlag=="C" ) {
-			JTable jtComList=sl.getJtComplete();
-			
-			String temp=(String) jtComList.getValueAt(jtComList.getSelectedRow(), 1);
-			productCode=temp.substring(temp.lastIndexOf("(")+1, temp.lastIndexOf(")"));
+		if (classFlag == "S") {
+			JTable jtProductList = sl.getJtSell();
 
-		
+			String temp = (String) jtProductList.getValueAt(jtProductList.getSelectedRow(), 1);
+			productCode = temp.substring(temp.lastIndexOf("(") + 1, temp.lastIndexOf(")"));
+
+		} else if (classFlag == "C") {
+			JTable jtComList = sl.getJtComplete();
+
+			String temp = (String) jtComList.getValueAt(jtComList.getSelectedRow(), 1);
+			productCode = temp.substring(temp.lastIndexOf("(") + 1, temp.lastIndexOf(")"));
+
 		}
-		
-		
-				
-		//DBMS에서 조회
-		UserDAO uDAO =UserDAO.getInstance();
-		
-		
-			MarketDetailVO mdVO=uDAO.selectProDetail(productCode, classFlag);
-			
-			
-			//현재 접속한 아이디와 포스팅 판매자 아이디와 같으면 MarketDetailBuyer
-			//다르다면 MarketDetailSeller
-				new MarketDetailSeller(null, mdVO, id);
-		
-		
-	}//openDetail
-	
-	
+
+		// DBMS에서 조회
+		UserDAO uDAO = UserDAO.getInstance();
+
+		MarketDetailVO mdVO = uDAO.selectProDetail(productCode, classFlag);
+
+		if (mdVO != null) {
+
+			// 현재 접속한 아이디와 포스팅 판매자 아이디와 같으면 MarketDetailBuyer
+			// 다르다면 MarketDetailSeller
+			new MarketDetailSeller(null, mdVO, id);
+		} else {
+			JOptionPane.showMessageDialog(sl, "판매중인 상품이 아닙니다.");
+		}
+
+	}// openDetail
+
 	/**
 	 * 판매내역 창 닫기
 	 */
@@ -225,25 +219,25 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 			} // end if
 
 		} // end if
-		
-			if(me.getClickCount() == 2) {//더블클릭
-				if(me.getSource() == sl.getJtSell()) {
-					try { 
-						classFlag="S";  //userDAO에서 selectProDetail method 사용할 때 구분용 플래그 ---->판매중인목록
 
-						openDetail();
-					} catch (SQLException e) {
-						e.printStackTrace(); 
-					}
-				} else if (me.getSource()==sl.getJtComplete()) {
-						try {
-							classFlag="C"; //userDAO에서 selectProDetail method 사용할 때 구분용 플래그 ---->판매완료된목록
-							openDetail();
-						} catch (SQLException e) {
-							e.printStackTrace();
-						}		
+		if (me.getClickCount() == 2) {// 더블클릭
+			if (me.getSource() == sl.getJtSell()) {
+				try {
+					classFlag = "S"; // userDAO에서 selectProDetail method 사용할 때 구분용 플래그 ---->판매중인목록
+
+					openDetail();
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
-			}//end if
+			} else if (me.getSource() == sl.getJtComplete()) {
+//				try {
+////					classFlag = "C"; // userDAO에서 selectProDetail method 사용할 때 구분용 플래그 ---->판매완료된목록
+////					openDetail();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+			}
+		} // end if
 
 	}// mouseClicked
 

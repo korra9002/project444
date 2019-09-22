@@ -51,11 +51,11 @@ public class InterestListEvt extends MouseAdapter implements ActionListener{
 		List<AllListVO> list=uDAO.selectInterestList();
 
 
-		if(list.isEmpty()) { 
-			JOptionPane.showMessageDialog(il, "관심상품이 존재하지 않습니다. ");
-			
-			
-		}
+//		if(list.isEmpty()) { 
+//			JOptionPane.showMessageDialog(il, "관심상품이 존재하지 않습니다. ");
+//			
+//			
+//		}
 		AllListVO alv=null;
 		for(int i=0; i<list.size(); i++) {
 			alv=list.get(i);
@@ -104,7 +104,18 @@ public class InterestListEvt extends MouseAdapter implements ActionListener{
 			UserDAO uDAO = UserDAO.getInstance();
 			MarketDetailVO mdVO;
 				mdVO = uDAO.selectProDetail(productCode, classFlag);
-			new MarketDetailBuyer(mm, mdVO, RunMarketMain.userId,this);
+				if(mdVO != null) {
+					new MarketDetailBuyer(mm, mdVO, RunMarketMain.userId,this);
+					
+				}else {
+					JOptionPane.showMessageDialog(il, "판매중인 상품이 아닙니다.");
+					try {
+						setInterestList();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}//end catch
