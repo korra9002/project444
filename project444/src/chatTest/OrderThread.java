@@ -75,22 +75,23 @@ public class OrderThread extends Thread {
 		userId = fVO.getId();
 
 		
-		
 		switch (dealFlag) {
 		case "N":
 			switch (allFlag) {
 			case "B":
+				System.out.println("NB");
 				if (userId.equals(RunMarketMain.userId)) {
-					setUpInfo("다른 이용자에게 판매된 상품입니다.");
+					setUpInfo("판매된 상품입니다.");
 				}else {
-					setUpInfo("다른 이용자에게 판매한 상품입니다.");
+					setUpInfo("다른 이용자와 거래 완료된 상품입니다.");
 				}
 				break;
 			case "D":
+				System.out.println("ND");
 				if (userId.equals(RunMarketMain.userId)) {
 					setUpInfo("삭제된 상품 입니다.");
 				}else {
-					setUpInfo("내가 삭제한 상품 입니다.");
+					setUpInfo("삭제한 상품 입니다.");
 				}
 				break;
 			}// end switch
@@ -98,6 +99,7 @@ public class OrderThread extends Thread {
 		case "Y":
 			switch (allFlag) {
 			case "P":
+				System.out.println("YP");
 				if (userId.equals(RunMarketMain.userId)) {
 					setDealInfo();
 				}else {
@@ -105,11 +107,11 @@ public class OrderThread extends Thread {
 				}
 				break;
 			case "D":
+				System.out.println("YD");
 				if (userId.equals(RunMarketMain.userId)) {
-					
 					setUpInfo("삭제된 상품 입니다.");
 				}else {
-					setUpInfo("내가 삭제한 상품 입니다.");
+					setUpInfo("삭제한 상품 입니다.");
 				}
 				break;
 
@@ -117,11 +119,15 @@ public class OrderThread extends Thread {
 
 			break;
 		case "P":
+			System.out.println("P");
 			if (userId.equals(RunMarketMain.userId)) {
 				
-				setUpInfo("내가 구매한 상품 입니다.");
+				cv.getJlNotice().setVisible(true);
+				cv.getJbtOk().setVisible(true);
+				cv.getJbtCancle().setVisible(true);
+				setUpInfo("구매한 상품 입니다.");
 			}else {
-				setUpInfo("내가 판매완료한 상품 입니다.");
+				setUpInfo("거래완료된 상품 입니다.");
 			}
 			break;
 

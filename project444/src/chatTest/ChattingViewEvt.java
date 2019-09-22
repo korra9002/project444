@@ -79,9 +79,19 @@ public class ChattingViewEvt extends MouseAdapter implements ActionListener {
 
 	}// close
 
-//	public static void main(String[] args) {
-//		new ChattingView();
-//	}// main
+///////채팅창에서 구매 확인 예 아니오 눌렀을 때
+	private void selectDeal(String flag) {
+		UserDAO uDAO = UserDAO.getInstance();
+		int result =0;
+		try {
+			result =uDAO.selectDeal(flag, dealCode);
+			JOptionPane.showMessageDialog(cv, "처리완료");
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(cv, "오류 발생");
+			e.printStackTrace();
+		}
+	}//selectDeal
 
 	public void actionPerformed(ActionEvent e) {
 
@@ -94,6 +104,13 @@ public class ChattingViewEvt extends MouseAdapter implements ActionListener {
 				JOptionPane.showMessageDialog(cv, "대화상대가 접속을 종료하엿습니다.");
 				e1.printStackTrace();
 			} // end catch
+		}
+		
+		if(e.getSource() == cv.getJbtOk()) {
+			selectDeal("P");
+		}
+		if(e.getSource() == cv.getJbtCancle()) {
+			selectDeal("N");
 		}
 
 	}// actionPerformed
