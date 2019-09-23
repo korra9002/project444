@@ -68,7 +68,7 @@ public class InsertProduct extends JPanel {
 		jtfSubject.setBounds(50, 270, 680, 40);
 		jtfPrice.setBounds(50, 320, 680, 40);
 		jspExplain.setBounds(50, 380, 680, 310);
-		jbtOkay.setBounds(240, 720, 120, 40);
+		jbtOkay.setBounds(240, 720, 120, 40); 
 		jbtCancel.setBounds(400, 720, 120, 40);
 		
 		add(jlbProductImg);
