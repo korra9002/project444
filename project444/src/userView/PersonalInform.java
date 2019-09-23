@@ -18,6 +18,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -104,21 +105,36 @@ public class PersonalInform extends JDialog {
 			jlPwAnswer.setBounds(60, 470, 100, 25);
 
 			jtfId.setBounds(140, 100, 180, 25);
-			jtfName.setBounds(140, 200, 220, 25);
-			jtfPhone1.setBounds(215, 310, 60, 25);
-			jtfPhone2.setBounds(285, 310, 60, 25);
+			jtfName.setBounds(140, 200, 100, 25);
 			jtfPwAnswer.setBounds(140, 470, 250, 25);
 
-			jtfGender.setBounds(160, 260, 100, 20);
+			jtfGender.setBounds(140, 260, 100, 25);
 
 			jcbLoc.setBounds(140, 360, 150, 25);
 			jcbPwHint.setBounds(140, 410, 250, 25);
-			jcbPhoneNum.setBounds(140, 310, 60, 25);
 			
 			jbtRegister.setBounds(230, 580, 100, 30);
 			jbtCancle.setBounds(360, 580, 100, 30);
 			jbtPwUpdate.setBounds(140, 150, 220, 25);
-
+			
+			
+			//연락처 패널
+			JPanel jpPhone = new JPanel(null);
+			JLabel Hyphen1 = new JLabel("-");
+			JLabel Hyphen2 = new JLabel("-");
+			jcbPhoneNum.setBounds(0, 0, 50, 25);
+			Hyphen1.setBounds(60, 0, 5, 25);
+			jtfPhone1.setBounds(75, 0, 50, 25);
+			Hyphen2.setBounds(135, 0, 5, 25);
+			jtfPhone2.setBounds(150, 0, 50, 25);
+			jpPhone.add(jcbPhoneNum);
+			jpPhone.add(Hyphen1);
+			jpPhone.add(jtfPhone1);
+			jpPhone.add(Hyphen2);
+			jpPhone.add(jtfPhone2);
+			jpPhone.setBounds(140,305,250,35);
+			
+			
 			// 배치
 			add(jlId);
 			add(jlPw);
@@ -131,18 +147,17 @@ public class PersonalInform extends JDialog {
 
 			add(jtfId);
 			add(jtfName);
-			add(jtfPhone1);
-			add(jtfPhone2);
 			add(jtfPwAnswer);
 			add(jtfGender);
 			
 			add(jcbLoc);
 			add(jcbPwHint);
-			add(jcbPhoneNum);
 			
 			add(jbtRegister);
 			add(jbtCancle);
 			add(jbtPwUpdate);
+			
+			add(jpPhone);
 			//이벤트처리
 			PersonalInformEvt psie = new PersonalInformEvt(this,rmm); 
 			jbtPwUpdate.addActionListener(psie);
@@ -155,6 +170,7 @@ public class PersonalInform extends JDialog {
 			jtfName.setEditable(false);
 			//배경색 변경
 			jtfId.setBackground(Color.white);
+			jtfName.setBackground(Color.WHITE);
 			jtfGender.setBackground(Color.WHITE);
 			// WindowSizing
 			setBounds(100, 100, 550, 700);

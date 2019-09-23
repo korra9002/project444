@@ -25,7 +25,6 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 
 	public void register() {
 		DecimalFormat dfNum = new DecimalFormat("00");
-		DecimalFormat df = new DecimalFormat("0000");
 		String gender = "";
 		// 성별 저장
 		try {
@@ -34,7 +33,7 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 			} else if (su.getJrbMan().isSelected()) {
 				gender = "M";
 			} // end else
-
+				
 		} catch (NullPointerException npe) {
 		} // end catch
 			// 회원정보 저장
