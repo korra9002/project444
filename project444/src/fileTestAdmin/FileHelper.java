@@ -24,8 +24,10 @@ private ServerSocket server;
 	private FileInputStream fis;
 	private BufferedInputStream bis;
 	private OutputStream os;
+	private byte[] byteArray;
 
 	public FileHelper(ServerSocket server,Socket client,Socket client2) throws IOException {
+		byteArray = "END".getBytes();
 		this.client = client;
 		this.client2 = client2;
 		this.server = server;
@@ -94,7 +96,7 @@ private ServerSocket server;
 				System.out.println(client.getInetAddress());
 //				client.shutdownOutput();
 				System.out.println(client.getInetAddress());
-				
+				os.write(byteArray,0,byteArray.length);
 				
 //				System.out.println(dis.readUTF());///5555
 			
