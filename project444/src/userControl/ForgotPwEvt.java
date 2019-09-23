@@ -1,5 +1,8 @@
 package userControl;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.NoSuchAlgorithmException;
@@ -7,7 +10,11 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.UUID;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 import kr.co.sist.util.cipher.DataEncrypt;
 import userDAO.UserDAO;
@@ -56,7 +63,18 @@ public class ForgotPwEvt implements ActionListener {
 			if(flag==false) {
 				JOptionPane.showMessageDialog(fp, "입력하신 정보가 올바르지 않습니다.");
 			}else {
-				JOptionPane.showMessageDialog(fp, "고객님의 임시 비밀번호는["+uuid+"]입니다.");
+				
+				JPanel panel = new JPanel(new GridLayout(2,2));
+				JLabel label = new JLabel("고객님의 임시 비밀번호는");
+				JTextField jtfPw = new JTextField(uuid);
+				jtfPw.setEditable(false);
+				panel.add(label);
+				panel.add(new JLabel());
+				panel.add(jtfPw);
+				panel.add(new JLabel("입니다."));
+				String[] options = new String[]{"확인"};
+				int option = JOptionPane.showOptionDialog(fp, panel, "현재 비밀번호 입력", JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+				fp.dispose();
 			}//end else
 		}//end else
 		

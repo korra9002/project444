@@ -77,7 +77,7 @@ public class PwUpdateEvt implements ActionListener {
 			try {
 				modifyPw();
 			} catch (SQLException e) {
-				JOptionPane.showMessageDialog(pu,"변경하실 비밀번호를 입력해주세요.");
+				JOptionPane.showMessageDialog(pu,"dbms의 연결이 원활하지 않습니다..");
 			}//end catch
 		}//end if
 	}//actionPerformed

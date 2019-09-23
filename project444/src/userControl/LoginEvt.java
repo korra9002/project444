@@ -50,7 +50,6 @@ public class LoginEvt implements ActionListener {
 			String suspend_flag = uDAO.loginRun(lvo)[1];
 			if(suspend_flag.equals("N")) {
 		if(!Login_name.isEmpty()) {
-			JOptionPane.showMessageDialog(lg, Login_name+"님 안녕하세요!");
 			
 			new RunMarketMain(id);
 			lg.dispose();
@@ -72,9 +71,11 @@ public class LoginEvt implements ActionListener {
 	}else if(id.isEmpty()){
 		lg.getJlLoginFail().setBounds(270, 140, 200, 25);
 		lg.getJlLoginFail().setText("아이디를 입력해주세요.");
+		lg.getJtfId().requestFocus();
 	}else if(pw.isEmpty()){
 		lg.getJlLoginFail().setBounds(270, 140, 200, 25);
 		lg.getJlLoginFail().setText("비밀번호를 입력해주세요.");
+		lg.getJpfPw().requestFocus();
 	}
 		
 	}//loginRun
