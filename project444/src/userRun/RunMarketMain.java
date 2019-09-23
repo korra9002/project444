@@ -1,8 +1,10 @@
 package userRun;
 
+import java.awt.Dimension;
 import java.sql.SQLException;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 
 import userControl.RunMarketMainEvt;
@@ -20,10 +22,14 @@ private JTabbedPane jtp;
 private ChatList cl;
 
 	public RunMarketMain(String id) throws SQLException {
-		userId = id;
 		
+		
+		
+		
+		userId = id;
 		setLayout(null);
 		jtp = new JTabbedPane();
+		
 		jtp.add("홈", new MarketMain(id));
 		jtp.add("상품입력", new InsertProduct(this));
 		jtp.add("채팅", cl =new ChatList());
@@ -42,7 +48,7 @@ private ChatList cl;
 		
 		RunMarketMainEvt rmme = new RunMarketMainEvt(this);
 		jtp.addMouseListener(rmme);
-		
+		setResizable(false);
 		
 	}
 
