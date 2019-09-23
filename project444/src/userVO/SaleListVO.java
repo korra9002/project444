@@ -2,10 +2,10 @@ package userVO;
 
 public class SaleListVO {
 
-String productCode, image, productName, loc_code ,upload_date, category, sellerID, check;
+String productCode, image, productName, loc_code ,upload_date, category, sellerID, check, pDetail;
 int price;
 public SaleListVO(String productCode, String image, String productName, String loc_code, String upload_date,
-		String category, String sellerID, String check, int price) {
+		String category, String sellerID, String check, String pDetail, int price) {
 	super();
 	this.productCode = productCode;
 	this.image = image;
@@ -15,6 +15,7 @@ public SaleListVO(String productCode, String image, String productName, String l
 	this.category = category;
 	this.sellerID = sellerID;
 	this.check = check;
+	this.pDetail = pDetail;
 	this.price = price;
 }
 public String getProductCode() {
@@ -41,6 +42,9 @@ public String getSellerID() {
 public String getCheck() {
 	return check;
 }
+public String getpDetail() {
+	return pDetail;
+}
 public int getPrice() {
 	return price;
 }
@@ -48,8 +52,10 @@ public int getPrice() {
 public String toString() {
 	return "SaleListVO [productCode=" + productCode + ", image=" + image + ", productName=" + productName
 			+ ", loc_code=" + loc_code + ", upload_date=" + upload_date + ", category=" + category + ", sellerID="
-			+ sellerID + ", check=" + check + ", price=" + price + "]";
+			+ sellerID + ", check=" + check + ", pDetail=" + pDetail + ", price=" + price + "]";
 }
+
+
 
 
 }

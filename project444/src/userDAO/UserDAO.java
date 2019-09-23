@@ -545,11 +545,11 @@ public class UserDAO {
 			} else if (classFlag == "C") {
 				System.out.println(productCode);
 				System.out.println("2번이다.");
-				selectDetail.append(
-						" select p.PRODUCT_CODE, p.IMG_FILE, p.PRODUCT_NAME, to_char(p.UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate, p.CATEGORY_CODE,"
-								+ " P.USER_ID, p.PRICE, p.info, i.loc_code, l.loc, c.category ")
-						.append(" from PRODUCT p, id_info i, location_list l, category_list c ")
-						.append(" where ( p.user_id= i.user_id and i.loc_code=l.loc_code and p.category_code=c.category_code) and all_flag ='B' and p.PRODUCT_CODE=? ");
+				selectDetail.append(					
+						" select p.PRODUCT_CODE, p.IMG_FILE, p.PRODUCT_NAME, to_char(d.SALE_DATE,'yyyy-mm-dd hh24:mi') inputDate, p.CATEGORY_CODE,\r\n" + 
+						" p.USER_ID, p.PRICE, p.info, i.loc_code, l.loc, c.category, d.sale_flag ")
+						.append(" from PRODUCT p, id_info i, location_list l, category_list c, deal d ")
+						.append(" p.user_id= i.user_id and i.loc_code=l.loc_code and p.category_code=c.category_code and d.product_code=p.product_code ) and sale_flag ='P' and p.PRODUCT_CODE=? ");
 			} else if( classFlag == "S") {
 				selectDetail.append(
 						" select p.PRODUCT_CODE, p.IMG_FILE, p.PRODUCT_NAME, to_char(p.UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate, p.CATEGORY_CODE,"
@@ -654,7 +654,7 @@ public class UserDAO {
 			if (temp_flag.equals("S")) { // 마이페이지-판매내역-판매중
 				selectAll.append(
 						" select p.PRODUCT_CODE, p.IMG_FILE, p.PRODUCT_NAME, to_char(p.UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate, p.CATEGORY_CODE,"
-								+ " P.USER_ID, p.PRICE, i.loc_code,l.loc, p.all_flag, c.category ")
+								+ " P.USER_ID, p.PRICE, i.loc_code,l.loc, p.all_flag, c.category, p.info ")
 						.append(" from PRODUCT p, id_info i, location_list l, category_list c ")
 						.append(" where ( p.user_id= i.user_id and i.loc_code=l.loc_code and p.category_code=c.category_code) and (all_flag ='P'or all_flag ='N') and p.USER_ID=? ");
 			} else if (temp_flag.equals("P")) { // 마이페이지-구매내역
@@ -678,7 +678,7 @@ public class UserDAO {
 				slv = new SaleListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
 						rs.getString("PRODUCT_NAME"), rs.getString("loc"), temp_flag.equals("P") ?rs.getString("sale_date"):rs.getString("inputDate"),
 						rs.getString("CATEGORY"), rs.getString("USER_ID"), temp_flag.equals("P") ? rs.getString("sale_flag"):rs.getString("all_flag"),
-						rs.getInt("PRICE"));
+						rs.getString("INFO"), rs.getInt("PRICE"));
 System.out.println(slv);
 				list.add(slv);
 			} // end while
@@ -721,7 +721,7 @@ System.out.println(slv);
 			StringBuilder selectAll = new StringBuilder();
 			selectAll.append(
 					" select p.PRODUCT_CODE, p.IMG_FILE, p.PRODUCT_NAME, to_char(p.UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate, p.CATEGORY_CODE,"
-							+ " P.USER_ID, p.PRICE, i.loc_code,l.loc, c.category, p.all_flag ")
+							+ " P.USER_ID, p.PRICE, i.loc_code,l.loc, c.category, p.all_flag, p.info ")
 					.append(" from PRODUCT p, id_info i, location_list l, category_list c ")
 					.append(" where ( p.user_id= i.user_id and i.loc_code=l.loc_code and p.category_code=c.category_code) and p.all_flag ='B' and p.USER_ID=? ");
 
@@ -736,7 +736,7 @@ System.out.println(slv);
 			while (rs.next()) {
 				slv = new SaleListVO(rs.getString("PRODUCT_CODE"), rs.getString("IMG_FILE"),
 						rs.getString("PRODUCT_NAME"), rs.getString("loc"), rs.getString("inputDate"),
-						rs.getString("CATEGORY"), rs.getString("USER_ID"), rs.getString("all_flag"),
+						rs.getString("CATEGORY"), rs.getString("USER_ID"), rs.getString("all_flag"), rs.getString("info"),
 						rs.getInt("PRICE"));
 
 				list.add(slv);

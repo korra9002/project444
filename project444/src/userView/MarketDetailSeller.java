@@ -49,20 +49,25 @@ public class MarketDetailSeller extends JDialog {
 		jtfInputDate=new JTextField(mdVO.getUpload_date());
 		jtfCategory=new JTextField(mdVO.getCategory());
 		
+		
+		//JTextArea
+		jtaStrongPoint=new JTextArea("상세정보");
+		jtaStrongPoint=new JTextArea(mdVO.getpDetail());
+		JScrollPane jsp=new JScrollPane(jtaStrongPoint);
+		
+		//JButton
+		jbtComplete=new JButton("판매완료");
+		jbtDelete=new JButton("삭제");
+		jbtChange=new JButton("수정");
+		
 		//바꾸지 못하게
 		jtfName.setEditable(false);
 		jtfPrice.setEditable(false);
 		jtfId.setEditable(false);
 		jtfInputDate.setEditable(false);
 		jtfCategory.setEditable(false);
+		jtaStrongPoint.setEditable(false);
 		
-		//JTextArea
-		jtaStrongPoint=new JTextArea();
-		JScrollPane jsp=new JScrollPane(jtaStrongPoint);
-		
-		jbtComplete=new JButton("판매완료");
-		jbtDelete=new JButton("삭제");
-		jbtChange=new JButton("수정");
 		
 		//setBounds
 		jlDetailImg.setBounds(15, 15, 320, 320);

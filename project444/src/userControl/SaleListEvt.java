@@ -104,7 +104,7 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 		for (int i = 0; i < list.size(); i++) {
 			slv = list.get(i);
 			// 조회 결과로 JTable 레코드에 들어갈 데이터를 생성하고
-			rowData = new Object[6];
+			rowData = new Object[7];
 			// 배열에 값 할당
 			rowData[0] = slv.getImage();
 			rowData[1] = slv.getProductName() + "(" + slv.getProductCode() + ")";
@@ -112,6 +112,8 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 			rowData[3] = slv.getCategory();
 			rowData[4] = slv.getLoc_code();
 			rowData[5] = slv.getSellerID();
+			rowData[6] = slv.getUpload_date();
+			
 			// dtm에 추가
 			dtm.addRow(rowData);
 		} // end for

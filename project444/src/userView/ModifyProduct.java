@@ -24,7 +24,7 @@ import userVO.SaleListVO;
 @SuppressWarnings("serial")
 public class ModifyProduct extends JFrame {
 
-	private JLabel jlbProductImg;
+	private JLabel jlbProductImg, jlCategory ;
 	private JButton jbtSelectImg, jbtOkay, jbtCancel ;
 	private JTextField jtfSubject, jtfPrice;
 	private JTextArea jtaExplain;
@@ -50,10 +50,14 @@ public class ModifyProduct extends JFrame {
 							"뷰티/미용","남성패션/잡화","스포츠/레저","게임/취미","도서/티켓/음반","반려동물용품","기타 중고물품"};
 		
 		dcbCategory = new DefaultComboBoxModel<String>(categoryList);
-		jcbCategory = new JComboBox<String>(dcbCategory);
-		jcbCategory.setBorder(new TitledBorder("카테고리 종류"));
-		jcbCategory.setSelectedIndex(Integer.parseInt(selectedValue3)-1);
+//		jcbCategory = new JComboBox<String>(dcbCategory);
+	//	jcbCategory.setBorder(new TitledBorder("카테고리 종류"));
+	//	jcbCategory.setSelectedItem(selectedValue3);
+	//	jcbCategory.setEditable(false);
 		
+		jlCategory=new JLabel(selectedValue3);
+		jlCategory.setBorder(new TitledBorder("카테고리 종류"));
+
 		
 		jtfSubject = new JTextField(selectedValue1);//이벤트처리-클릭 시 텍스트 사라지게
 		jtfPrice = new JTextField(String.valueOf(selectedValue2));//이벤트처리-클릭 시 텍스트 사라지게
@@ -84,7 +88,7 @@ public class ModifyProduct extends JFrame {
 		
 		jlbProductImg.setBounds(10, 20, 120, 100);//이미지 사이즈 120x100
 		jbtSelectImg.setBounds(150, 55, 100, 30);
-		jcbCategory.setBounds(270, 43, 120, 50);
+		jlCategory.setBounds(270, 43, 120, 50);
 		jtfSubject.setBounds(10, 160, 385, 30);
 		jtfPrice.setBounds(10, 200, 385, 30);
 		jspExplain.setBounds(10, 240, 385, 240);
@@ -93,7 +97,7 @@ public class ModifyProduct extends JFrame {
 		
 		add(jlbProductImg);
 		add(jbtSelectImg);
-		add(jcbCategory);
+		add(jlCategory);
 		add(jtfSubject);
 		add(jtfPrice);
 		add(jspExplain);
@@ -106,7 +110,7 @@ public class ModifyProduct extends JFrame {
 		
 		setBounds(100, 100, 420, 600);
 		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
 		

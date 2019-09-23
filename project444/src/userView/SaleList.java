@@ -94,13 +94,13 @@ public class SaleList extends JDialog {
 		
 		/////////////////////////////////첫번째 탭 끝/////////////////////////////////
 		////////////////////////////////두번째 탭 시작////////////////////////////////
-		String[] compCol= {"이미지","제품명","가격","카테고리", "지역","구매자ID"};
+		String[] compCol= {"이미지","제품명","가격","카테고리", "지역","구매자ID","판매완료일자"};
 //		Object[][] compRow = {
 //				{1,2,3,4,5},
 //				{1,2,3,4,5}
 //				};
 		
-		dtmComp = new DefaultTableModel(compCol, 5) {//셀 내용 수정 금지
+		dtmComp = new DefaultTableModel(compCol, 6) {//셀 내용 수정 금지
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
