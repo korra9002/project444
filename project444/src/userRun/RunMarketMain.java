@@ -29,7 +29,7 @@ private ChatList cl;
 		jtp.add("Ã¤ÆÃ", cl =new ChatList());
 		jtp.add("MyPage", new UserInfo(id,this));
 		  
-		jtp.setBounds(10, 10, 660, 700);
+		jtp.setBounds(10, 10, 810, 830);
 		 
 	 
 		add(jtp); 
@@ -37,7 +37,7 @@ private ChatList cl;
 	 
 		add(jtp);
 		setVisible(true);
-		setBounds(10, 10, 700, 780);
+		setBounds(10, 10, 850, 900);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		RunMarketMainEvt rmme = new RunMarketMainEvt(this);
