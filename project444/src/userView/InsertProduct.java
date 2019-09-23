@@ -62,14 +62,14 @@ public class InsertProduct extends JPanel {
 		setLayout(null);
 		
 //		jtp.setBounds(0, 10, 400, 30);
-		jlbProductImg.setBounds(40, 20, 120, 100);//이미지 사이즈 120x100
-		jbtSelectImg.setBounds(180, 65, 100, 30);
-		jcbCategory.setBounds(300, 53, 120, 50);
-		jtfSubject.setBounds(40, 170, 385, 30);
-		jtfPrice.setBounds(40, 210, 385, 30);
-		jspExplain.setBounds(40, 250, 385, 240);
-		jbtOkay.setBounds(130, 510, 80, 30);
-		jbtCancel.setBounds(260, 510, 80, 30);
+		jlbProductImg.setBounds(50, 30, 220, 200);//이미지 사이즈 120x100
+		jbtSelectImg.setBounds(330, 100, 140, 40);
+		jcbCategory.setBounds(530, 80, 200, 60);
+		jtfSubject.setBounds(50, 270, 680, 40);
+		jtfPrice.setBounds(50, 320, 680, 40);
+		jspExplain.setBounds(50, 380, 680, 310);
+		jbtOkay.setBounds(240, 720, 120, 40);
+		jbtCancel.setBounds(400, 720, 120, 40);
 		
 		add(jlbProductImg);
 		add(jbtSelectImg);
