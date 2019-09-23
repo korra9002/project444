@@ -6,6 +6,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 import userDAO.UserDAO;
 import userRun.RunMarketMain;
 import userVO.FlagVO;
@@ -106,6 +108,43 @@ public class MarketDetailSellerEvt extends MouseAdapter implements ActionListene
 //		}// end switch
 		return fVO;
 	}
+	
+	public void delete() {
+
+		switch (JOptionPane.showConfirmDialog(mds, "판매글을 삭제하시겠습니까?")) {
+		case JOptionPane.OK_OPTION:
+
+			// DBMS에서 레코드를 삭제
+			UserDAO uDAO = UserDAO.getInstance();
+
+			String msg = "선택하신 판매글을 삭제하지 못했습니다.";
+			try {
+
+//			StringBuilder removeFileName = new StringBuilder(ld.getJlImg().getIcon().toString());
+				String temp = (String) mds.getJtfName().getText();
+				String product_code = temp.substring(temp.lastIndexOf("(") + 1, temp.lastIndexOf(")"));
+				System.out.println(product_code);
+				if (uDAO.deletePost(product_code)) {
+					// 삭제된 이후 업로드된 파일을 삭제한다.
+//					File originFile=new File(removeFileName.toString());
+//					File thumbFile=new File(removeFileName.insert(removeFileName.lastIndexOf("/")+1,"rs_").toString());
+//					originFile.delete();
+//					thumbFile.delete();
+
+					msg = "선택하신 판매글을 삭제하였습니다.";
+					mds.dispose();
+					// 부모창의 도시락 리스트를 갱신
+					
+					// 현재창 닫기
+				} // end if
+			} catch (SQLException e) {
+				msg = " 삭제 작업 중 문제가 발생하였습니다.";
+				e.printStackTrace();
+			} // end catch
+			JOptionPane.showMessageDialog(mds, msg);
+		}// end switch
+	}// deleteSaleList
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == mds.getJbtComplete()) {
@@ -117,7 +156,11 @@ public class MarketDetailSellerEvt extends MouseAdapter implements ActionListene
 			FlagVO fVO = checkFlag();
 			
 			new DealSelect(temp,mds);
-		}
+		}//end if
+		
+		if(e.getSource() == mds.getJbtDelete()) {
+			delete();
+		}//end if
 		
 		
 	}

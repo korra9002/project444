@@ -144,7 +144,7 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 					// 부모창의 도시락 리스트를 갱신
 					setAllList();
 					// 현재창 닫기
-					close();
+					//close();
 				} // end if
 			} catch (SQLException e) {
 				msg = " 삭제 작업 중 문제가 발생하였습니다.";

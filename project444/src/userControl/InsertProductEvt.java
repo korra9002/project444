@@ -166,7 +166,7 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 		String img = new File(ip.getJlbProductImg().getIcon().toString()).getName();
 		String category = Integer.toString(ip.getJcbCategory().getSelectedIndex());
 		String subject = ip.getJtfSubject().getText().trim(); // 제목은 무조건 상품명으로-
-		String pDetail = ip.getJtaExplain().getText().trim();
+		String pDetail = ip. getJtaExplain().getText().trim();
 		int price = 0;
 		try {
 			price = Integer.parseInt(ip.getJtfPrice().getText().trim());
@@ -185,6 +185,7 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 			UserDAO uDAO = UserDAO.getInstance();
 			uDAO.insertProduct(ipVO, id);
 			JOptionPane.showMessageDialog(ip, "상품 정보를 추가하였습니다.");
+			reset();
 			// 부모창의 도시락 리스트를 갱신하고
 			// 이거 지금 못하는중ㅠ
 //			lme.setLunchList();
@@ -226,6 +227,20 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 
 	}// mouseClicked
 
+	public void reset() {
+		ip.getJtaExplain().setText("상세 설명");
+		ip.getJtfSubject().setText("글 제목");
+		ip.getJtfPrice().setText("가격 입력");
+		ip.getJlbProductImg().setIcon(null);
+		ip.getJlbProductImg().setText("제품 이미지");
+		ip.getJlbProductImg().setHorizontalTextPosition(JLabel.CENTER);
+		subjectFlag = true;
+		priceFlag = true;
+		detailFlag = true;
+		imgFlag = true;
+	
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == ip.getJbtOkay()) {
@@ -262,6 +277,10 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 				}//end if
 			}//end if
 		}//end if
+		
+		if(ae.getSource()==ip.getJbtCancel()) {
+			reset();
+		}
 
 	}// actionPerformed
 }// class
