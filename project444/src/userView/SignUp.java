@@ -95,7 +95,6 @@ public class SignUp extends JDialog {
 		jlRePw.setBounds(50, 200, 120, 25);
 		jlName.setBounds(60, 240, 50, 25);
 		jlGender.setBounds(60, 280, 50, 25);
-//		jlPhone.setBounds(60, 320, 60, 25);
 		jlLoc.setBounds(60, 370, 50, 25);
 		jlPwHint.setBounds(40, 420, 100, 25);
 		jlPwAnswer.setBounds(60, 480, 100, 25);
@@ -104,8 +103,6 @@ public class SignUp extends JDialog {
 		jpfPw.setBounds(140, 150, 220, 25);
 		jpfRePass.setBounds(140, 200, 220, 25);
 		jtfName.setBounds(140, 240, 220, 25);
-//		jtfPhone.setBounds(225, 320, 80, 25);
-//		jtfPhone2.setBounds(320, 320,85, 25);
 		jtfPwAnswer.setBounds(140, 480, 250, 25);
 
 		jrbMan.setBounds(160, 280, 100, 20);
@@ -143,7 +140,6 @@ public class SignUp extends JDialog {
 		add(jlName);
 		add(jlGender);
 		add(jlLoc);
-//		add(jlPhone);
 		add(jlPwHint);
 		add(jlPwAnswer);
 		
@@ -151,8 +147,6 @@ public class SignUp extends JDialog {
 		add(jpfPw);
 		add(jpfRePass);
 		add(jtfName);
-//		add(jtfPhone);
-//		add(jtfPhone2);
 		add(jtfPwAnswer);
 
 		add(jrbMan);
@@ -160,7 +154,6 @@ public class SignUp extends JDialog {
 
 		add(jcbLoc);
 		add(jcbPwHint);
-//		add(jcbPhoneNum);
 		
 		add(jbtIdCheck);
 		add(jbtRegister);
