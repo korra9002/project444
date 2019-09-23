@@ -21,6 +21,7 @@ public class SimpleFileServer {
     Socket sock = null;
     try {
       servsock = new ServerSocket(SOCKET_PORT);
+      
       while (true) {
         System.out.println("Waiting...");
         try {
@@ -37,6 +38,7 @@ public class SimpleFileServer {
           os.write(mybytearray,0,mybytearray.length);
           os.flush();
           System.out.println("Done.");
+          
         }
         finally {
           if (bis != null) bis.close();

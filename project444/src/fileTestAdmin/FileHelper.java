@@ -7,30 +7,33 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileHelper extends Thread {
-	private Socket client;
+	private Socket client,client2;
 	private DataInputStream dis;
 	private DataOutputStream dos;
-	private FileInputStream fis;
 	private List<String> listSendFile; // 접속자에게 보낼 리스트
 	private File temp1 = null;
 
+private ServerSocket server;
+	////////////////
+	private FileInputStream fis;
+	private BufferedInputStream bis;
 	private OutputStream os;
 
-	////////////////
-	private BufferedInputStream bis;
-
-	public FileHelper(Socket client) throws IOException {
+	public FileHelper(ServerSocket server,Socket client,Socket client2) throws IOException {
 		this.client = client;
+		this.client2 = client2;
+		this.server = server;
 		// 4. 데이터를 주고 받을 스트림 연결
 
-		os = client.getOutputStream();
-		dis = new DataInputStream(client.getInputStream());
-		dos = new DataOutputStream(os);
+	
+		dis = new DataInputStream(client2.getInputStream());
+		dos = new DataOutputStream(client2.getOutputStream());
 		String temp = "";
 		temp1 = null;
 		File[] serverFile = null;
@@ -70,6 +73,9 @@ public class FileHelper extends Thread {
 			// 8. 전송할 파일 정보 얻기
 
 			for (int i = 0; i < listSendFile.size(); i++) {
+				
+		
+				os = client.getOutputStream();
 				System.out.println(listSendFile.get(i)+"파일이름");
 				dos.writeUTF(listSendFile.get(i));//3333333
 
@@ -85,10 +91,12 @@ public class FileHelper extends Thread {
 				os.write(mybytearray, 0, mybytearray.length); //444444
 				os.flush();
 				System.out.println("Done.");
-
+				System.out.println(client.getInetAddress());
+//				client.shutdownOutput();
+				System.out.println(client.getInetAddress());
 				
 				
-				System.out.println(dis.readUTF());///5555
+//				System.out.println(dis.readUTF());///5555
 			
 			} // end for
 		} catch (IOException ie) {

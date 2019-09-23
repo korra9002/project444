@@ -28,20 +28,25 @@ public class FileServer2 extends Thread {
 	public void run() {
 		// 1. 서버 소켓 열기
 		ServerSocket server = null;
+		ServerSocket server2 = null;
 		DataInputStream dis = null;
 		DataOutputStream dos = null;
 		FileInputStream fis = null;
 
 		try {
 			server = new ServerSocket(5000);
+			server2 = new ServerSocket(5001);
 			Socket client = null;
+			Socket client2 = null;
 
 			FileHelper fh = null;
 			while (true) {
 				// 3. 접속자가 들어오면
 				client = server.accept();
 				System.out.println("입장"+client.getInetAddress());
-				fh = new FileHelper(client);
+				client2 = server2.accept();
+				System.out.println("입장"+client2.getInetAddress());
+				fh = new FileHelper(server,client,client2);
 				list.add(fh);
 				fh.start();
 

@@ -136,23 +136,26 @@ public class MarketMain extends JFrame implements ActionListener {
 		int bytesRead;
 		int current = 0;
 		Socket sock = null;
-
+		Socket sock2 = null;
 		Socket client = null;
+		Socket client2 = null;
+		
 		DataOutputStream dos = null;
 		DataInputStream dis = null;
+		//////////////////////////
 		FileOutputStream fos = null;
-		////////////////////////
 		BufferedOutputStream bos = null;
-
 		InputStream is = null;
+
 
 		try {
 			// 2. 소켓생성 : 서버로 연결
 			client = new Socket("localhost", 5000);
+			client2 = new Socket("localhost",5001);
 			// 4. 데이터를 주고 받을 스트림 연결
 			is = client.getInputStream();
-			dos = new DataOutputStream(client.getOutputStream());
-			dis = new DataInputStream(is);
+			dos = new DataOutputStream(client2.getOutputStream());
+			dis = new DataInputStream(client2.getInputStream());
 
 			File file = new File("c:\\dev\\filetest2");
 			File[] temp = file.listFiles();
@@ -173,11 +176,16 @@ public class MarketMain extends JFrame implements ActionListener {
 			  // receive file
 			
 			for (int i = 0; i < fileCnt; i++) {
+//				if(dis == null) {
+//					dis = new DataInputStream(is);
+//				}
 		      byte [] mybytearray  = new byte [FILE_SIZE];
 		      revFileName = dis.readUTF();//333333
+//		      dis.close();
 		      File myFile = new File("c:\\dev\\filetest2\\"+revFileName);
 		      fos = new FileOutputStream(myFile);
 		      bos = new BufferedOutputStream(fos);
+		     
 		      
 		      
 		      bytesRead = is.read(mybytearray,0,mybytearray.length); //4444 이하 444
@@ -188,14 +196,15 @@ public class MarketMain extends JFrame implements ActionListener {
 		         if(bytesRead >= 0) current += bytesRead;
 		         System.out.println(bytesRead);
 		      } while(bytesRead > -1);
-
+		      System.out.println("파일받기 일단 끝");
+		      
 		      bos.write(mybytearray, 0 , current);
 		      bos.flush();
 		      System.out.println("File " + "c:\\dev\\userFileTest\\"+revFileName
 		          + " downloaded (" + current + " bytes read)");
 		      
 		      
-		      dos.writeUTF("파일받기완료");///5555
+//		      dos.writeUTF("파일받기완료");///5555
 			} // end for
 		      
 //			for (int i = 0; i < fileCnt; i++) {
@@ -230,6 +239,8 @@ public class MarketMain extends JFrame implements ActionListener {
 				client.close();
 			if (fos != null)
 				fos.close();
+			if(client2 != null)
+				client2.close();
 		}
 	}// sendFileList
 
