@@ -38,7 +38,7 @@ public class FileServer2 extends Thread {
 			server2 = new ServerSocket(5001);
 			Socket client = null;
 			Socket client2 = null;
-
+ 
 			FileHelper fh = null;
 			while (true) {
 				// 3. 접속자가 들어오면

@@ -9,7 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class SimpleFileServer {
-
+ 
   public final static int SOCKET_PORT = 5000;  // you may change this
   public final static String FILE_TO_SEND = "c:/dev/fileTest/169cf9623852c161.gif";  // you may change this
 

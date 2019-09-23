@@ -186,7 +186,7 @@ public class MarketMain extends JFrame implements ActionListener {
 		      fos = new FileOutputStream(myFile);
 		      bos = new BufferedOutputStream(fos);
 		     
-		      
+		       
 		      
 		      bytesRead = is.read(mybytearray,0,mybytearray.length); //4444 юлго 444
 		      current = bytesRead;

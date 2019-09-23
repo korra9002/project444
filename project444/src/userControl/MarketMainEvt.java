@@ -390,6 +390,6 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener {
 			} // end if
 		} // end if
 
-	}
+	} 
 
 }// class

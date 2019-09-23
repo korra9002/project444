@@ -78,7 +78,7 @@ private ServerSocket server;
 				os = client.getOutputStream();
 				System.out.println(listSendFile.get(i)+"파일이름");
 				dos.writeUTF(listSendFile.get(i));//3333333
-
+ 
 				File myFile = new File(temp1.getAbsolutePath() + "\\" + listSendFile.get(i));
 				System.out.println(temp1.getAbsolutePath() + "\\" + listSendFile.get(i)+"파일경로");
 				byte[] mybytearray = new byte[(int) myFile.length()];

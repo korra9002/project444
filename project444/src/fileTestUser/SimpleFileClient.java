@@ -27,7 +27,7 @@ public class SimpleFileClient {
     try {
       sock = new Socket(SERVER, SOCKET_PORT);
       System.out.println("Connecting...");
-
+ 
       // receive file
       byte [] mybytearray  = new byte [FILE_SIZE];
       InputStream is = sock.getInputStream();

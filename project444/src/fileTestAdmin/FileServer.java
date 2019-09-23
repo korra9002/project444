@@ -70,7 +70,7 @@ public class FileServer  extends JFrame implements ActionListener, Runnable {
 		});
 
 	}// FileServer
-
+ 
 	@Override
 	public void run() {
 		// 1. 서버 소켓 열기
