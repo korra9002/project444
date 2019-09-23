@@ -24,7 +24,7 @@ import userView.PwUpdate;
 public class PersonalInformEvt implements ActionListener{
 	private PersonalInform psi;
 	private RunMarketMain rmm;
-	
+	private boolean pwFlag= false;
 	public PersonalInformEvt(PersonalInform psi, RunMarketMain rmm) {
 		this.psi=psi;
 		this.rmm = rmm;
@@ -45,7 +45,7 @@ public class PersonalInformEvt implements ActionListener{
 		if(option == 0){
 		    char[] password = jpfPw.getPassword();
 		    pw= new String(password);
-		    
+		    pwFlag =true;
 		  //비밀번호 암호화 처리
 			try {
 				dePw = DataEncrypt.messageDigest("MD5", pw);
@@ -148,7 +148,7 @@ public class PersonalInformEvt implements ActionListener{
 				flag =true;
 			}//end else
 		}//end if
-		if(flag ==true) {
+		if(flag ==true||pwFlag==true) {
 			JOptionPane.showMessageDialog(psi, "정보가 변경되었습니다.");
 			PersonalInformClose();
 		}else {

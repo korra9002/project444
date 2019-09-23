@@ -2,12 +2,14 @@ package userControl;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.UUID;
 
 import javax.swing.JOptionPane;
 
+import kr.co.sist.util.cipher.DataEncrypt;
 import userDAO.UserDAO;
 import userVO.ForgotPwVO;
 import userView.ForgotPw;
@@ -26,9 +28,15 @@ public class ForgotPwEvt implements ActionListener {
 		String id="";
 		int pwHint=0;
 		String pwAnswer = "";
+		String depw ="";
 		
 		 String uuid = UUID.randomUUID().toString().replaceAll("-", ""); 
 		    	uuid = uuid.substring(0, 10); 
+		   try {
+			depw = DataEncrypt.messageDigest("MD5", uuid);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}//end catch
 		boolean flag = false;
 		DecimalFormat df = new DecimalFormat("00");
 		id= fp.getJtfId().getText().trim();
@@ -44,7 +52,7 @@ public class ForgotPwEvt implements ActionListener {
 		}else {
 			ForgotPwVO fpVO =new ForgotPwVO(id, df.format(pwHint), pwAnswer);
 			UserDAO uDAO = UserDAO.getInstance();
-			flag = uDAO.updateForgotPw(fpVO, uuid);
+			flag = uDAO.updateForgotPw(fpVO, depw);
 			if(flag==false) {
 				JOptionPane.showMessageDialog(fp, "입력하신 정보가 올바르지 않습니다.");
 			}else {
