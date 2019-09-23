@@ -1,24 +1,21 @@
 package userView;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import userControl.UserInfoEvt;
 import userRun.RunMarketMain;
 
+@SuppressWarnings("serial")
 public class UserInfo extends JPanel {
 	private JLabel jlLevelImg, jlaId;
 	private JButton jbtPersonalData, jbtSell, jbtBuy, jbtLike;
-	private JTextArea jtaAd;
+	private JLabel jlaAd;
 	
 	String id;
 	RunMarketMain rmm;
@@ -36,7 +33,7 @@ public class UserInfo extends JPanel {
 		jbtSell = new JButton("판매내역");
 		jbtBuy = new JButton("구매내역");
 		jbtLike = new JButton("관심목록");
-		jtaAd = new JTextArea("광고");
+		jlaAd = new JLabel();
 		Font ft = new Font(Font.DIALOG,Font.BOLD, 50);
 		Font ft2 = new Font(Font.DIALOG,Font.BOLD, 20);
 		jlaId.setFont(ft);
@@ -51,15 +48,15 @@ public class UserInfo extends JPanel {
 		jbtBuy.setBounds(445, 200, 300, 100);
 		jbtLike.setBounds(50, 320, 300, 100);
 		jbtPersonalData.setBounds(445, 320, 300, 100);
-		jtaAd.setBounds(50, 600, 700, 180);
-
+		jlaAd.setBounds(50, 600, 700, 180);
+		jlaAd.setBorder(new TitledBorder("광고"));
 //	  add(jlLevelImg);
 		add(jlaId);
 		add(jbtPersonalData);
 		add(jbtSell);
 		add(jbtBuy);
 		add(jbtLike);
-		add(jtaAd);
+		add(jlaAd);
 
 		setLayout(null);
 //      setResizable(false);
@@ -100,8 +97,8 @@ public class UserInfo extends JPanel {
 		return jbtLike;
 	}// getJbtLike
 
-	public JTextArea getJtaAd() {
-		return jtaAd;
-	}// getJtaAd
+	public JLabel getjlaAd() {
+		return jlaAd;
+	}// getjlaAd
 
 }// class
