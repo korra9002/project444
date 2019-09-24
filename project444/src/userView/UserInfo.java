@@ -14,7 +14,7 @@ import userRun.RunMarketMain;
 @SuppressWarnings("serial")
 public class UserInfo extends JPanel {
 	private JLabel jlLevelImg, jlaId;
-	private JButton jbtPersonalData, jbtSell, jbtBuy, jbtLike;
+	private JButton jbtPersonalData, jbtSell, jbtBuy, jbtLike,jbtLogout;
 	private JLabel jlaAd;
 	
 	String id;
@@ -33,6 +33,7 @@ public class UserInfo extends JPanel {
 		jbtSell = new JButton("판매내역");
 		jbtBuy = new JButton("구매내역");
 		jbtLike = new JButton("관심목록");
+		jbtLogout = new JButton("로그아웃");
 		jlaAd = new JLabel();
 		Font ft = new Font(Font.DIALOG,Font.BOLD, 40);
 		Font ft2 = new Font(Font.DIALOG,Font.BOLD, 20);
@@ -43,7 +44,8 @@ public class UserInfo extends JPanel {
 		jbtPersonalData.setFont(ft2);
 		// setBounds
 //	  jlLevelImg.setBounds(50, 15, 200, 150);
-		jlaId.setBounds(50, 50, 700, 50);
+		jlaId.setBounds(50, 50, 600, 50);
+		jbtLogout.setBounds(650, 50, 100, 50);
 		jbtSell.setBounds(50, 200, 300, 100);
 		jbtBuy.setBounds(445, 200, 300, 100);
 		jbtLike.setBounds(50, 320, 300, 100);
@@ -56,6 +58,7 @@ public class UserInfo extends JPanel {
 		add(jbtSell);
 		add(jbtBuy);
 		add(jbtLike);
+		add(jbtLogout);
 		add(jlaAd);
 
 		setLayout(null);
@@ -68,6 +71,7 @@ public class UserInfo extends JPanel {
 		jbtBuy.addActionListener(uife);
 		jbtLike.addActionListener(uife);
 		jbtSell.addActionListener(uife);
+		jbtLogout.addActionListener(uife);
 		// 가시화
 		setVisible(true);
 
@@ -100,5 +104,7 @@ public class UserInfo extends JPanel {
 	public JLabel getjlaAd() {
 		return jlaAd;
 	}// getjlaAd
-
+	public JButton getjbtLogout() {
+		return jbtLogout;
+	}//getjbtLogout
 }// class

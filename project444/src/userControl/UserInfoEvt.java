@@ -4,8 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+import userRun.RunLogin;
 import userRun.RunMarketMain;
 import userView.InterestList;
+import userView.Login;
 import userView.PersonalInform;
 import userView.PurchaseHistory;
 import userView.SaleList;
@@ -36,7 +38,6 @@ public class UserInfoEvt implements ActionListener {
 			try {
 				new SaleList(rmm);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}//end if
@@ -50,7 +51,10 @@ public class UserInfoEvt implements ActionListener {
 		if(ae.getSource()==uif.getJbtLike()) {
 			new InterestList(rmm);
 		}//end if
-		
+		if(ae.getSource()==uif.getjbtLogout()) {
+			new Login();
+			rmm.dispose();
+		}
 	}//actionPerformed
 
 }//class

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import adminView.AdminMainView;
 import kr.co.sist.util.cipher.DataEncrypt;
 import userDAO.UserDAO;
 import userRun.RunMarketMain;
@@ -48,8 +49,13 @@ public class LoginEvt implements ActionListener {
 			
 			String Login_name = uDAO.loginRun(lvo)[0];
 			String suspend_flag = uDAO.loginRun(lvo)[1];
+			//°ü¸®ÀÚ
+			if(id.equals("admin")&&pw.equals("1234")) {
+				new AdminMainView();
+				lg.dispose();
+			}//end if
 			if(suspend_flag.equals("N")) {
-		if(!Login_name.isEmpty()) {
+		if(!Login_name.isEmpty()&&!id.equals("admin")) {
 			
 			new RunMarketMain(id);
 			lg.dispose();
