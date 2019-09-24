@@ -104,7 +104,7 @@ public class ModifyProduct extends JFrame {
 		add(jspExplain);
 		add(jbtOkay);
 		add(jbtCancel);
-		
+		 
 		ModifyProductEvt mpe=new ModifyProductEvt(this, sl, rmm);
 		
 		jbtOkay.addActionListener(mpe);

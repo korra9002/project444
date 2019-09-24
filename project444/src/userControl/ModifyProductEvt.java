@@ -30,7 +30,7 @@ public class ModifyProductEvt extends MouseAdapter implements ActionListener{
 		this.rmm=rmm;		
 		id=RunMarketMain.userId;
 	}//ModifyProductEvt
-	
+	 
 	public void close() {
 		mp.dispose();
 	}//close
