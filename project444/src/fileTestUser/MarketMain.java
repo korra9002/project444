@@ -152,8 +152,8 @@ public class MarketMain extends JFrame implements ActionListener {
 
 		try {
 			// 2. 소켓생성 : 서버로 연결
-			client = new Socket("localhost", 5000);
-			client2 = new Socket("localhost",1025);
+			client = new Socket("211.63.89.159", 5000);
+			client2 = new Socket("211.63.89.159",1025);
 			// 4. 데이터를 주고 받을 스트림 연결
 			is = client.getInputStream();
 			dos2= new DataOutputStream(client.getOutputStream());
