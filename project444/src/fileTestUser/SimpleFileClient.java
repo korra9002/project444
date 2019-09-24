@@ -11,7 +11,7 @@ public class SimpleFileClient {
   public final static int SOCKET_PORT = 5000;      // you may change this
   public final static String SERVER = "211.63.89.159";  // localhost
   public final static String
-       FILE_TO_RECEIVED = "c:/dev/fileTest2/[크기변환]5dc113c098a84d1b302eb772f76c01f8.jpg";  // you may change this, I give a
+       FILE_TO_RECEIVED = "c:/dev/fileTest2/1231231.jpg";  // you may change this, I give a
                                                             // different name because i don't want to
                                                             // overwrite the one used by server...
 
@@ -29,45 +29,13 @@ public class SimpleFileClient {
       System.out.println("Connecting...");
  
       // receive file
-      byte [] mybytearray  = new byte [FILE_SIZE];
+      byte [] mybytearray  = new byte [6022386];
       InputStream is = sock.getInputStream();
       fos = new FileOutputStream(FILE_TO_RECEIVED);
       bos = new BufferedOutputStream(fos);
 //      bytesRead = is.read(mybytearray,0,mybytearray.length);
 //      current = bytesRead;
-//1856861
-//      65536
-//      14600
-//      32120
-//      18816
-//      65536
-//      65536
-//      65536
-//      65536
-//      65536
-//      65536
-//      65536
-//      65536
-//      65536
-//      65536
-//      65536
-//      65536
-//      65536
-//      65536
-//      65536
-//      65536
-//      65536
-//      65536
-//      65536
-//      65536
-//      65536
-//      65536
-//      65536
-//      65536
-//      65536
-//      16060
-//      5793
-//      -1
+
       do {
          bytesRead =
             is.read(mybytearray, current, (mybytearray.length-current));

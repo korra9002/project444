@@ -1,22 +1,29 @@
 package userControl;
 
 import java.awt.FileDialog;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 
 import kr.co.sist.util.img.ImageResize;
 import userDAO.UserDAO;
@@ -29,8 +36,10 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 	private InsertProduct ip;
 	private RunMarketMain rmm;
 	private String id;
-	private boolean imgFlag;
+	private File file;
+	private String pathAndName ;
 
+	private boolean imgFlag;
 	private static boolean subjectFlag = true;
 	private static boolean priceFlag = true;
 	private static boolean detailFlag = true;
@@ -46,132 +55,204 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(flag) {
+				if (flag) {
 					ip.getJtfSubject().setText("");
-					flag=false;
-					subjectFlag=false;
+					flag = false;
+					subjectFlag = false;
 //					priceFlag=false;
 //					detailFlag=false;
-				}//end if
-			}//keyPressed			 
-		});//KeyAdapter
-		
+				} // end if
+			}// keyPressed
+		});// KeyAdapter
+
 		ip.getJtfPrice().addKeyListener(new KeyAdapter() {
 			boolean flag = true;
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(flag) {
+				if (flag) {
 					ip.getJtfPrice().setText("");
-					flag=false;
+					flag = false;
 //					subjectFlag=false;
-					priceFlag=false;
+					priceFlag = false;
 //					detailFlag=false;
-				}//end if
-			}//keyPressed
-		});//KeyAdapter
-		
+				} // end if
+			}// keyPressed
+		});// KeyAdapter
+
 		ip.getJtaExplain().addKeyListener(new KeyAdapter() {
 			boolean flag = true;
-			
+
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(flag) {
+				if (flag) {
 					ip.getJtaExplain().setText("");
-					flag=false;
+					flag = false;
 //					subjectFlag=false;
 //					priceFlag=false;
-					detailFlag=false;
-				}//end if
-			}//keyPressed
-		});//KeyAdapter
-		
-		
+					detailFlag = false;
+				} // end if
+			}// keyPressed
+		});// KeyAdapter
+
 	}// InsertProductEvt
 
 	public void addImg() {
 
-		FileDialog fd = new FileDialog(rmm);
+//		FileDialog fd = new FileDialog(rmm);
 
-		FileDialog fdOpen = new FileDialog(fd, "ㅎㅇㅎㅇ", FileDialog.LOAD);
+		FileDialog fdOpen = new FileDialog(rmm, "업로드 파일 선택", FileDialog.LOAD);
 		fdOpen.setVisible(true);
 
 		String path = fdOpen.getDirectory();
-		String file = fdOpen.getFile();
+		String name = fdOpen.getFile();
+		
 //		System.out.println(path+file);
-		if (file != null) { // 변경할 파일을 선택
-			// 확장자 확인
-			String flagExt = "jpg,gif,png,bmp";
-			String ext = file.substring(file.lastIndexOf(".") + 1);
+		if (path != null && name != null) {
 
-			if (!flagExt.contains(ext.toLowerCase())) {
-				JOptionPane.showMessageDialog(ip, file + "은 이미지가 아니거나 사용할 수 없는 이미지 입니다.");
-				return;
-			} // end if
+			if ((name.toLowerCase().endsWith(".jpg") || name.toLowerCase().endsWith(".png")) ) {
+				try {
+//				this.setTitle(file.getName());
+//				t = new Test(file);
+//				jlnotice.setText(String.format(" 범위  [ %d - %d ]", 1, t.getLastIndex()));
+					// openFlag = true;
+					pathAndName = path + name;
+//					Image img = new ImageIcon(pathAndName).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+					ip.getJlbProductImg().setText("");
+					ip.getJlbProductImg().setIcon(new ImageIcon(new ImageIcon(pathAndName).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH)));
+					file = new File(pathAndName);
+					imgFlag = true;
+					return;
+				} catch (NullPointerException ne) {
+					ne.printStackTrace();
+				}
 
-			// 이미지를 미리보기 라벨에 설정
-			JLabel imgPreview = ip.getJlbProductImg();
-			imgPreview.setIcon(new ImageIcon(path + file));
+			} else {
 
-			imgFlag = true; // 이미지가 선택되었음을 설정한다.
-		} else {
-			imgFlag = false;
+				JOptionPane.showMessageDialog(rmm, "이미지 파일이 아닙니다.");
+//				imgFlag = false;
+				addImg();
+			} // end else
+				// 이미지를 미리보기 라벨에 설정
+//			JLabel imgPreview = ip.getJlbProductImg();
+//			imgPreview.setText("");
+//			imgPreview.setIcon(new ImageIcon(path + file));
 
+			// 이미지가 선택되었음을 설정한다.
 		} // end if
 //		System.out.println(imgFlag);
 
 	}// addImg
 
-	private void uploadImg() throws IOException {
-		// 선택한 이미지를 이미지 폴더에 복사
-		File readFile = new File(ip.getJlbProductImg().getIcon().toString());// 선택한 이미지 경로
-
-		byte[] readData = new byte[512]; // 읽어들인 정보를 저장할 배열
-		int len = 0;
-
-		FileOutputStream fos = null;
+	private void uploadImg(String newName) throws IOException {
 		FileInputStream fis = null;
+	    BufferedInputStream bis = null;
+	    OutputStream os = null;
+//	    ServerSocket servsock = null;
+	    Socket sock = null;
 
-		System.out.println(readFile.getName());
-		try {
-			fis = new FileInputStream(readFile);
-			if (readFile.exists()) {
-				File writeFile = new File("C:/dev/" + readFile.getName());
-				fos = new FileOutputStream(writeFile); // 이미지 폴더에 폭사
+//		FileInputStream fis = null;
+//		BufferedInputStream bis = null;
+//		OutputStream os = null;
+////		ServerSocket servsock = null;
+//		Socket sock = null;
+//		DataOutputStream dos = null;
+//		try {
+//			servsock = new ServerSocket(5001);
 
-				while ((len = fis.read(readData)) != -1) {
+//			while (true) {
+				System.out.println("Waiting...");
+				try {
+					sock = new Socket("211.63.89.159",5001);
+					os = sock.getOutputStream();
+					System.out.println("Accepted connection : " + sock);
+					// send file
+					File myFile = new File(pathAndName);
+					byte[] mybytearray = new byte[(int) myFile.length()];
+					fis = new FileInputStream(myFile);
+					bis = new BufferedInputStream(fis);
+					bis.read(mybytearray, 0, mybytearray.length);
+					DataOutputStream dos = new DataOutputStream(os);
+					dos.writeUTF(newName);
+//					dos.flush();
+					
+					System.out.println("Sending " + pathAndName + "(" + mybytearray.length + " bytes)");
+					os.write(mybytearray, 0, mybytearray.length);
+					os.flush();
+					
+//					bis.close();///////////////////////////////////
+					System.out.println("Done.");
+					
+//					dos.close();
+				} finally {
+						
+			          if (bis != null) bis.close();
+			          if (os != null) os.close();
+			          if (sock!=null) sock.close();
 
-					fos.write(readData, 0, len);
-				} // end while
-
-				fos.flush();
-				// 이미지를 thumbnail image로 생성
-				ImageResize.resizeImage(writeFile.getAbsolutePath(), 120, 100);
-			} // end if
-
-		} finally {
-			if (fos != null) {
-				fos.close();
-			} // end if
-			if (fis != null) {
-				fis.close();
-			} // end if
-		} // end finally
+				
+			
+			}
+//		} finally {
+//			
+//		}
 
 	}// uploadImg
 
+//	private void uploadImg() throws IOException {
+//		// 선택한 이미지를 이미지 폴더에 복사
+//		File readFile = new File(ip.getJlbProductImg().getIcon().toString());// 선택한 이미지 경로
+//		
+//		byte[] readData = new byte[512]; // 읽어들인 정보를 저장할 배열
+//		int len = 0;
+//		
+//		FileOutputStream fos = null;
+//		FileInputStream fis = null;
+//		
+//		System.out.println(readFile.getName());
+//		try {
+//			fis = new FileInputStream(readFile);
+//			if (readFile.exists()) {
+//				File writeFile = new File("C:/dev/" + readFile.getName());
+//				fos = new FileOutputStream(writeFile); // 이미지 폴더에 폭사
+//				
+//				while ((len = fis.read(readData)) != -1) {
+//					
+//					fos.write(readData, 0, len);
+//				} // end while
+//				
+//				fos.flush();
+//				// 이미지를 thumbnail image로 생성
+//				ImageResize.resizeImage(writeFile.getAbsolutePath(), 120, 100);
+//			} // end if
+//			
+//		} finally {
+//			if (fos != null) {
+//				fos.close();
+//			} // end if
+//			if (fis != null) {
+//				fis.close();
+//			} // end if
+//		} // end finally
+//		
+//	}// uploadImg
+
 	public void uploadPost() {
 
+		Date today = new Date();
+		SimpleDateFormat s = new SimpleDateFormat("yyyyMMddHHmmss");
+		System.out.println(s.format(today));
 		// 입력된 값을 가지고 VO에 설정하고
-		String img = new File(ip.getJlbProductImg().getIcon().toString()).getName();
+		String img = file.getName();
 		String category = Integer.toString(ip.getJcbCategory().getSelectedIndex());
 		String subject = ip.getJtfSubject().getText().trim(); // 제목은 무조건 상품명으로-
-		String pDetail = ip. getJtaExplain().getText().trim();
+		String pDetail = ip.getJtaExplain().getText().trim();
+		String newName = id+"_"+s.format(today)+"_"+img;
 		int price = 0;
 		try {
 			price = Integer.parseInt(ip.getJtfPrice().getText().trim());
 			System.out.println(img + " " + category + " " + subject + " " + pDetail + " " + price);
-			InsertProductVO ipVO = new InsertProductVO(img, category, subject, pDetail, price);
+			InsertProductVO ipVO = new InsertProductVO(newName, category, subject, pDetail, price);
 
 //			System.out.println(imgFlag);
 
@@ -180,7 +261,10 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 				return;
 			} // end if
 				// 이미지 업로드
-			uploadImg();
+			
+			System.out.println(newName+"새이름");
+			uploadImg(newName);
+			
 			// DBMS에 추가
 			UserDAO uDAO = UserDAO.getInstance();
 			uDAO.insertProduct(ipVO, id);
@@ -206,23 +290,23 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 	@Override
 	public void mouseClicked(MouseEvent me) {
 		// 0917- flag 줘야함
-		if (subjectFlag) { 
+		if (subjectFlag) {
 			if (me.getSource() == ip.getJtfSubject()) {
 				ip.getJtfSubject().setText("");
-				subjectFlag= false;
-			}//end if
-		}//end if
+				subjectFlag = false;
+			} // end if
+		} // end if
 		if (priceFlag) {
-			 if (me.getSource() == ip.getJtfPrice()) {
-					ip.getJtfPrice().setText("");
-					priceFlag=false;
-			 }//end if
-		}//end if
-		if (detailFlag) {			
+			if (me.getSource() == ip.getJtfPrice()) {
+				ip.getJtfPrice().setText("");
+				priceFlag = false;
+			} // end if
+		} // end if
+		if (detailFlag) {
 			if (me.getSource() == ip.getJtaExplain()) {
 				ip.getJtaExplain().setText("");
-				detailFlag=false;
-			}//end if
+				detailFlag = false;
+			} // end if
 		} // end if
 
 	}// mouseClicked
@@ -234,13 +318,15 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 		ip.getJlbProductImg().setIcon(null);
 		ip.getJlbProductImg().setText("제품 이미지");
 		ip.getJlbProductImg().setHorizontalTextPosition(JLabel.CENTER);
+		pathAndName="";
+		file = null;
 		subjectFlag = true;
 		priceFlag = true;
 		detailFlag = true;
 		imgFlag = true;
-	
+
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == ip.getJbtOkay()) {
@@ -257,28 +343,28 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 			addImg();
 //			System.out.println(imgFlag+"addimg()후 플래그값");			
 		} // end if
-		
-		if (ae.getSource()==ip.getJtfSubject()) {
+
+		if (ae.getSource() == ip.getJtfSubject()) {
 			if (!ip.getJtfSubject().getText().equals("")) {
 				ip.getJtfPrice().requestFocus();
-				if(priceFlag) {
+				if (priceFlag) {
 					ip.getJtfPrice().setText("");
-					priceFlag=false;
-				}//end if
-			}//end if
-		}//end if
-		
-		if (ae.getSource()==ip.getJtfPrice()) {
+					priceFlag = false;
+				} // end if
+			} // end if
+		} // end if
+
+		if (ae.getSource() == ip.getJtfPrice()) {
 			if (!ip.getJtfPrice().getText().equals("")) {
 				ip.getJtaExplain().requestFocus();
-				if(priceFlag) {
+				if (priceFlag) {
 					ip.getJtaExplain().setText("");
-					detailFlag=false;
-				}//end if
-			}//end if
-		}//end if
-		
-		if(ae.getSource()==ip.getJbtCancel()) {
+					detailFlag = false;
+				} // end if
+			} // end if
+		} // end if
+
+		if (ae.getSource() == ip.getJbtCancel()) {
 			reset();
 		}
 
