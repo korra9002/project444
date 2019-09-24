@@ -32,7 +32,7 @@ public class ModifyProduct extends JFrame {
 	private DefaultComboBoxModel<String> dcbCategory;
 	
 	public ModifyProduct(SaleList sl, RunMarketMain rmm) {
-		super("제품 입력");
+		super("상품 수정");
 		
 		String selectedValue0=(String)sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 0);
 		String selectedValue1=(String)sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 1);		
@@ -60,12 +60,13 @@ public class ModifyProduct extends JFrame {
 
 		
 		jtfSubject = new JTextField(selectedValue1);//이벤트처리-클릭 시 텍스트 사라지게
+		jtfSubject.setEditable(false);
+		
 		jtfPrice = new JTextField(String.valueOf(selectedValue2));//이벤트처리-클릭 시 텍스트 사라지게
 		
 		
 		///////////////////////// 상세설명 가져오기 /////////////////////////////////////////
-		//더 좋은 방법있으면 와서 설명 부탁ㅠ
-		//수정필요0918
+
 		
 		String temp_flag = "S";
 		
@@ -87,7 +88,7 @@ public class ModifyProduct extends JFrame {
 		setLayout(null);
 		
 		jlbProductImg.setBounds(10, 20, 120, 100);//이미지 사이즈 120x100
-		jbtSelectImg.setBounds(150, 55, 100, 30);
+//		jbtSelectImg.setBounds(150, 55, 100, 30);
 		jlCategory.setBounds(270, 43, 120, 50);
 		jtfSubject.setBounds(10, 160, 385, 30);
 		jtfPrice.setBounds(10, 200, 385, 30);
@@ -96,7 +97,7 @@ public class ModifyProduct extends JFrame {
 		jbtCancel.setBounds(230, 500, 80, 30);
 		
 		add(jlbProductImg);
-		add(jbtSelectImg);
+//		add(jbtSelectImg);
 		add(jlCategory);
 		add(jtfSubject);
 		add(jtfPrice);
@@ -105,6 +106,11 @@ public class ModifyProduct extends JFrame {
 		add(jbtCancel);
 		
 		ModifyProductEvt mpe=new ModifyProductEvt(this, sl, rmm);
+		
+		jbtOkay.addActionListener(mpe);
+		jbtCancel.addActionListener(mpe);
+		jtfPrice.addActionListener(mpe);
+		jtaExplain.addMouseListener(mpe);
 		
 		
 		

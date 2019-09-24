@@ -757,6 +757,41 @@ System.out.println(slv);
 		return list;
 
 	}// selectCompList
+	
+	//////////////////////////////////////// 수연 수정 - 20190924 ////////////////////////////////////////////////////////////
+	
+	
+	public boolean updatePost(String productCode, int price, String pDetail) throws SQLException {
+		
+		boolean updateFlag = false;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = getConn();
+			StringBuilder updatePost = new StringBuilder();
+			updatePost.append("update product ").append(" set info =?, price=? ").append(" where product_code =? ");
+			pstmt = con.prepareStatement(updatePost.toString());
+			pstmt.setString(1, pDetail);
+			pstmt.setInt(2, price);
+			pstmt.setString(3, productCode);
+
+			updateFlag = pstmt.executeUpdate() == 1;
+
+		} finally {
+			if (con != null) {
+				con.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+		} // end finally
+		return updateFlag;	
+		
+	}//updatePost
+	
+	
+	//////////////////////////////////////// 수연 수정 끝 - 20190924 ////////////////////////////////////////////////////////////
 
 	public boolean deletePost(String product_code) throws SQLException {
 		boolean deleteFlag = false;
