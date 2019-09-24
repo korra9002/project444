@@ -15,7 +15,7 @@ import java.net.Socket;
 
 import kr.co.sist.util.img.ImageResize;
 
-public class FileRecieve extends Thread {
+public class AdminFileRecieve extends Thread {
 	int bytesRead;
 	int current = 0;
 	FileOutputStream fos = null;
@@ -24,7 +24,7 @@ public class FileRecieve extends Thread {
 
 	ServerSocket servsock = null;
 
-	public FileRecieve() throws IOException {
+	public AdminFileRecieve() throws IOException {
 		servsock = new ServerSocket(5001);
 
 	}
@@ -97,7 +97,7 @@ public class FileRecieve extends Thread {
 
 	public static void main(String[] args) {
 		try {
-			new FileRecieve().start();
+			new AdminFileRecieve().start();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
