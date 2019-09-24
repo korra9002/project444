@@ -34,7 +34,7 @@ public class UserInfo extends JPanel {
 		jbtBuy = new JButton("备概郴开");
 		jbtLike = new JButton("包缴格废");
 		jlaAd = new JLabel();
-		Font ft = new Font(Font.DIALOG,Font.BOLD, 50);
+		Font ft = new Font(Font.DIALOG,Font.BOLD, 40);
 		Font ft2 = new Font(Font.DIALOG,Font.BOLD, 20);
 		jlaId.setFont(ft);
 		jbtSell.setFont(ft2);
@@ -43,7 +43,7 @@ public class UserInfo extends JPanel {
 		jbtPersonalData.setFont(ft2);
 		// setBounds
 //	  jlLevelImg.setBounds(50, 15, 200, 150);
-		jlaId.setBounds(50, 50, 400, 50);
+		jlaId.setBounds(50, 50, 700, 50);
 		jbtSell.setBounds(50, 200, 300, 100);
 		jbtBuy.setBounds(445, 200, 300, 100);
 		jbtLike.setBounds(50, 320, 300, 100);
