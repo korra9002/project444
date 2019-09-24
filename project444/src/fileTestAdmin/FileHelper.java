@@ -25,6 +25,7 @@ private ServerSocket server;
 	private BufferedInputStream bis;
 	private OutputStream os;
 	private byte[] byteArray;
+	private DataInputStream dis2;
 
 	public FileHelper(ServerSocket server,Socket client,Socket client2) throws IOException {
 		byteArray = "END".getBytes();
@@ -33,7 +34,8 @@ private ServerSocket server;
 		this.server = server;
 		// 4. 데이터를 주고 받을 스트림 연결
 
-	
+		os = client.getOutputStream();
+		dis2 = new DataInputStream(client.getInputStream());
 		dis = new DataInputStream(client2.getInputStream());
 		dos = new DataOutputStream(client2.getOutputStream());
 		String temp = "";
@@ -43,7 +45,7 @@ private ServerSocket server;
 		// 6. 클라이언트가 보내오는 파일 목록 받기
 
 		temp = dis.readUTF(); // 11111
-		
+		System.out.println(temp+"받은 파일목록");
 		
 		
 		// C:\dev\workspace\jdbc_prj\src\kr\co\sist\admin\img
@@ -77,11 +79,16 @@ private ServerSocket server;
 			for (int i = 0; i < listSendFile.size(); i++) {
 				
 		
-				os = client.getOutputStream();
+			
 				System.out.println(listSendFile.get(i)+"파일이름");
 				dos.writeUTF(listSendFile.get(i));//3333333
+				dos.flush();
  
 				File myFile = new File(temp1.getAbsolutePath() + "\\" + listSendFile.get(i));
+				int fileSize =(int) myFile.length();
+				System.out.println("파일크기"+fileSize);
+				dos.writeInt(fileSize);/// 3.5555 파일 크기 
+				
 				System.out.println(temp1.getAbsolutePath() + "\\" + listSendFile.get(i)+"파일경로");
 				byte[] mybytearray = new byte[(int) myFile.length()];
 				fis = new FileInputStream(myFile);
@@ -91,14 +98,20 @@ private ServerSocket server;
 				
 				System.out.println("Sending " + temp1.getAbsolutePath() + "/" + listSendFile.get(i) + "(" + mybytearray.length + " bytes)");
 				os.write(mybytearray, 0, mybytearray.length); //444444
-				os.flush();
+					os.flush();
+			
 				System.out.println("Done.");
 				System.out.println(client.getInetAddress());
 //				client.shutdownOutput();
 				System.out.println(client.getInetAddress());
-				os.write(byteArray,0,byteArray.length);
+//				os.write(byteArray,0,byteArray.length);
 				
-//				System.out.println(dis.readUTF());///5555
+				bis.close();
+//				fis.close();
+				
+				int msg = dis.readInt();
+				System.out.println(msg );
+//				System.out.println(dis2.readUTF());///5555
 			
 			} // end for
 		} catch (IOException ie) {

@@ -11,7 +11,7 @@ import java.net.Socket;
 public class SimpleFileServer {
  
   public final static int SOCKET_PORT = 5000;  // you may change this
-  public final static String FILE_TO_SEND = "c:/dev/fileTest/169cf9623852c161.gif";  // you may change this
+  public final static String FILE_TO_SEND = "c:/dev/fileTest/[크기변환]5dc113c098a84d1b302eb772f76c01f8.jpg";  // you may change this
 
   public static void main (String [] args ) throws IOException {
     FileInputStream fis = null;

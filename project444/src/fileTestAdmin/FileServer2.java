@@ -35,7 +35,7 @@ public class FileServer2 extends Thread {
 
 		try {
 			server = new ServerSocket(5000);
-			server2 = new ServerSocket(5001);
+			server2 = new ServerSocket(1025);
 			Socket client = null;
 			Socket client2 = null;
  

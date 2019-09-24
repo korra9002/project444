@@ -145,15 +145,18 @@ public class MarketMain extends JFrame implements ActionListener {
 		//////////////////////////
 		FileOutputStream fos = null;
 		BufferedOutputStream bos = null;
+		DataOutputStream dos2 = null;
 		InputStream is = null;
+		
 
 
 		try {
 			// 2. 소켓생성 : 서버로 연결
 			client = new Socket("localhost", 5000);
-			client2 = new Socket("localhost",5001);
+			client2 = new Socket("localhost",1025);
 			// 4. 데이터를 주고 받을 스트림 연결
 			is = client.getInputStream();
+			dos2= new DataOutputStream(client.getOutputStream());
 			dos = new DataOutputStream(client2.getOutputStream());
 			dis = new DataInputStream(client2.getInputStream());
 
@@ -171,6 +174,7 @@ public class MarketMain extends JFrame implements ActionListener {
 			dos.writeUTF(csvFile.toString()); // 111111
 
 			int fileCnt = dis.readInt();//2222222222222222
+			System.out.println(fileCnt+"앞으로 받을 파일 갯수");
 			String revFileName = "";
 
 			  // receive file
@@ -181,30 +185,42 @@ public class MarketMain extends JFrame implements ActionListener {
 //				}
 		      byte [] mybytearray  = new byte [FILE_SIZE];
 		      revFileName = dis.readUTF();//333333
+		  	System.out.println(revFileName+"받을 파일 제목");
+		  	int fileSize = dis.readInt();
+		  	System.out.println(fileSize+"받을 파일 크기");
 //		      dis.close();
 		      File myFile = new File("c:\\dev\\filetest2\\"+revFileName);
 		      fos = new FileOutputStream(myFile);
 		      bos = new BufferedOutputStream(fos);
 		     
+		       current =0;
+		       bytesRead =0;
 		       
-		      
-		      bytesRead = is.read(mybytearray,0,mybytearray.length); //4444 이하 444
-		      current = bytesRead;
-		      do {
-		         bytesRead =
-		            is.read(mybytearray, current, (mybytearray.length-current));
-		         if(bytesRead >= 0) current += bytesRead;
-		         System.out.println(bytesRead);
-		      } while(bytesRead > -1);
+//		      bytesRead = is.read(mybytearray,0,mybytearray.length); //4444 이하 444
+//		      current = bytesRead;
+//		      System.out.println("첫번째 "+current);
+//		      if(fileSize>65536) {
+		    	  
+		    	  do {
+		    		  bytesRead =
+		    				  is.read(mybytearray, current, (mybytearray.length-current));
+		    		  if(bytesRead >= 0) current += bytesRead;
+		    		  System.out.println(bytesRead+"/"+current+"/"+fileSize);
+		    	  } while(current < fileSize);
+//		      }
 		      System.out.println("파일받기 일단 끝");
 		      
 		      bos.write(mybytearray, 0 , current);
 		      bos.flush();
 		      System.out.println("File " + "c:\\dev\\userFileTest\\"+revFileName
 		          + " downloaded (" + current + " bytes read)");
+		      bos.close();
+//		      fos.close();
 		      
-		      
-//		      dos.writeUTF("파일받기완료");///5555
+		      dos.writeInt(0);
+//		      dos2.writeUTF("파일 다받은 신호");///5555
+//		      dos2.flush();
+		  //    dos2.flush();
 			} // end for
 		      
 //			for (int i = 0; i < fileCnt; i++) {
