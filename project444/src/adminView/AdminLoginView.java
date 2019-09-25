@@ -17,7 +17,8 @@ public class AdminLoginView extends JFrame {
 	private JTextField jtfId;
 	private JPasswordField jpfPw;
 	private JButton jbtLogin;
-
+	public static String imgPath = "c:/dev/adminRecieveFile";
+	
 	public AdminLoginView() {
 		super("관리자 로그인");
 		

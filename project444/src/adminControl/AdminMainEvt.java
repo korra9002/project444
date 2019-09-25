@@ -1,12 +1,15 @@
 package adminControl;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
@@ -25,9 +28,11 @@ import adminVO.UserIdVO;
 import adminVO.CheckDetailVO;
 import adminView.AdminCheckDetailView;
 import adminView.AdminIdDetailView;
+import adminView.AdminLoginView;
 import adminView.AdminMainView;
 import adminView.AdminProductDetailView;
 import adminView.AdminSuspendReasonView;
+import userRun.RunMarketMain;
 
 public class AdminMainEvt extends MouseAdapter implements ActionListener{
 
@@ -88,7 +93,16 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				
 				//배열에 값을 할당
 				rowData[0] = clv.getProduct_code();
-				rowData[1] = clv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
+				if(new File(RunMarketMain.imgPath+"/"+clv.getImg_file()).exists()) {
+					
+					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+clv.getImg_file()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+//			System.out.println("이미지");
+				}else {
+					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+"default.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+//					System.out.println("문자열");
+				}	
+				
+//				rowData[1] = clv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
 				rowData[2] = clv.getUser_id();
 				rowData[3] = clv.getCategory();
 				rowData[4] = clv.getProduct_name();
@@ -150,7 +164,15 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				
 				//배열에 값을 할당
 				rowData[0] = clv.getProduct_code();
-				rowData[1] = clv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
+	if(new File(RunMarketMain.imgPath+"/"+clv.getImg_file()).exists()) {
+					
+					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+clv.getImg_file()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+//			System.out.println("이미지");
+				}else {
+					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+"default.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+//					System.out.println("문자열");
+				}	
+//				rowData[1] = clv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
 				rowData[2] = clv.getUser_id();
 				rowData[3] = clv.getCategory();
 				rowData[4] = clv.getProduct_name();
@@ -197,7 +219,15 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				
 				//배열에 값을 할당
 				rowData[0] = clv.getProduct_code();
-				rowData[1] = clv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
+	if(new File(RunMarketMain.imgPath+"/"+clv.getImg_file()).exists()) {
+					
+					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+clv.getImg_file()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+//			System.out.println("이미지");
+				}else {
+					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+"default.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+//					System.out.println("문자열");
+				}	
+//				rowData[1] = clv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
 				rowData[2] = clv.getUser_id();
 				rowData[3] = clv.getCategory();
 				rowData[4] = clv.getProduct_name();
@@ -305,7 +335,15 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				
 				//배열에 값을 할당
 				rowData[0] = plv.getProduct_code();
-				rowData[1] = plv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
+	if(new File(RunMarketMain.imgPath+"/"+plv.getImg_file()).exists()) {
+					
+					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+plv.getImg_file()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+//			System.out.println("이미지");
+				}else {
+					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+"default.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+//					System.out.println("문자열");
+				}	
+//				rowData[1] = plv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
 				rowData[2] = plv.getUser_id();
 				rowData[3] = plv.getCategory();
 				rowData[4] = plv.getProduct_name();
@@ -359,7 +397,16 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				
 				//배열에 값을 할당
 				rowData[0] = plv.getProduct_code();
-				rowData[1] = plv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
+if(new File(RunMarketMain.imgPath+"/"+plv.getImg_file()).exists()) {
+					
+					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+plv.getImg_file()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+//			System.out.println("이미지");
+				}else {
+					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+"default.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+//					System.out.println("문자열");
+				}	
+				
+//				rowData[1] = plv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
 				rowData[2] = plv.getUser_id();
 				rowData[3] = plv.getCategory();
 				rowData[4] = plv.getProduct_name();
@@ -445,7 +492,16 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				
 				//배열에 값을 할당
 				rowData[0] = plv.getProduct_code();
-				rowData[1] = plv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
+				
+if(new File(RunMarketMain.imgPath+"/"+plv.getImg_file()).exists()) {
+					
+					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+plv.getImg_file()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+//			System.out.println("이미지");
+				}else {
+					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+"default.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+//					System.out.println("문자열");
+				}	
+//				rowData[1] = plv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
 				rowData[2] = plv.getUser_id();
 				rowData[3] = plv.getCategory();
 				rowData[4] = plv.getProduct_name();
