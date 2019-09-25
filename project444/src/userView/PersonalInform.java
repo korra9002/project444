@@ -52,6 +52,7 @@ public class PersonalInform extends JDialog {
 			 
 			
 			String phone= piVO.getPhone();
+			String phone0 = phone.substring(0,3);
 			String phone1 = phone.substring(phone.indexOf("-")+1,phone.lastIndexOf("-"));
 			String phone2 = phone.substring(phone.lastIndexOf("-")+1);
 			String gender = piVO.getGender();
@@ -92,6 +93,7 @@ public class PersonalInform extends JDialog {
 			jcbLoc.setSelectedIndex(locCode);
 			jcbPwHint = new JComboBox<String>(dcbPwHint);
 			jcbPhoneNum = new JComboBox<String>(dcbPhoneNum);
+			jcbPhoneNum.setSelectedItem(phone0);
 			// 수동배치
 			setLayout(null);
 
