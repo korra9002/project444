@@ -58,11 +58,9 @@ public class ModifyProductEvt extends MouseAdapter implements ActionListener{
 			JOptionPane.showMessageDialog(mp, "입력하신 내용이 수정되지 않았습니다. 다시 시도해 주세요.");
 		}//end else 
 		
-		close();
-		
-		// + 그리고 jtSell테이블 새로고침되게 해야함 20190924 - 수연 ////////////////////////////////////////
 		
 		sle.setAllList();
+		close();
 		
 	}//modifyPost
 
