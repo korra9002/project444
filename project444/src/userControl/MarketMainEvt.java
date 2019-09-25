@@ -313,7 +313,7 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener {
 			// 배열에 값 할당
 			if(new File(RunMarketMain.imgPath+"/"+alv.getImage()).exists()) {
 				
-				rowData[0] = (new ImageIcon(new ImageIcon(RunMarketMain.imgPath+"/"+alv.getImage()).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH)));
+				rowData[0] = (new ImageIcon(new ImageIcon(RunMarketMain.imgPath+"/"+alv.getImage()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 			}else {
 				rowData[0] = alv.getImage();
 			}
