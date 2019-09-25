@@ -16,6 +16,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 import userControl.ModifyProductEvt;
+import userControl.SaleListEvt;
 import userDAO.UserDAO;
 import userRun.RunMarketMain;
 import userVO.InsertProductVO;
@@ -31,7 +32,7 @@ public class ModifyProduct extends JFrame {
 	private JComboBox<String> jcbCategory;
 	private DefaultComboBoxModel<String> dcbCategory;
 	
-	public ModifyProduct(SaleList sl, RunMarketMain rmm) {
+	public ModifyProduct(SaleList sl, SaleListEvt sle, RunMarketMain rmm) {
 		super("상품 수정");
 		
 		String selectedValue0=(String)sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 0);
@@ -105,7 +106,7 @@ public class ModifyProduct extends JFrame {
 		add(jbtOkay);
 		add(jbtCancel);
 		 
-		ModifyProductEvt mpe=new ModifyProductEvt(this, sl, rmm);
+		ModifyProductEvt mpe=new ModifyProductEvt(this, sl, sle,  rmm);
 		
 		jbtOkay.addActionListener(mpe);
 		jbtCancel.addActionListener(mpe);

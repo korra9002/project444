@@ -262,7 +262,7 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 
 		if (sl.getJtSell().getSelectedRow() != -1) {
 			if (ae.getSource() == sl.getJbtModify()) {
-				new ModifyProduct(sl, rmm);
+				new ModifyProduct(sl,this, rmm);
 			} // end if
 			if (ae.getSource() == sl.getJbtDelete()) {
 				deleteSaleList();
