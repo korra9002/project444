@@ -1,18 +1,25 @@
 package userControl;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import sun.awt.RequestFocusController;
 import userDAO.UserDAO;
+import userFileRecieve.UserFileRecieve;
+import userRun.RunMarketMain;
 import userVO.AllListVO;
 import userVO.MarketDetailVO;
 import userVO.searchValueVO;
@@ -262,6 +269,16 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener {
 	}// productDetail
 
 	public void setList(String sortFlag) {
+		UserFileRecieve uFR = UserFileRecieve.getInstance();
+		try {
+			uFR.getImgFile();
+		} catch (UnknownHostException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		searchValueVO svVO = new searchValueVO(mm.getJcbArea().getSelectedIndex(),
 				mm.getJcbCategory().getSelectedIndex(), mm.getJtfSearch().getText().trim(),
 				mm.getJrbId().isSelected() ? "ID" : "SU", sortFlag);
@@ -294,7 +311,12 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener {
 			// 조회 결과로 JTable 레코드에 들어갈 데이터를 생성하고
 			rowData = new Object[7];
 			// 배열에 값 할당
-			rowData[0] = alv.getImage();
+			if(new File(RunMarketMain.imgPath+"/"+alv.getImage()).exists()) {
+				
+				rowData[0] = (new ImageIcon(new ImageIcon(RunMarketMain.imgPath+"/"+alv.getImage()).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH)));
+			}else {
+				rowData[0] = alv.getImage();
+			}
 			rowData[1] = alv.getProductName() + "(" + alv.getProductCode() + ")";
 			rowData[2] = alv.getLoc_code();
 			rowData[3] = alv.getPrice();

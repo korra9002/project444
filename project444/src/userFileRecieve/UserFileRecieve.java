@@ -24,7 +24,7 @@ public class UserFileRecieve {
 		return uFR;
 	}
 	
-	public synchronized void sendFileList() throws UnknownHostException, IOException {
+	public synchronized void getImgFile() throws UnknownHostException, IOException {
 		int bytesRead =0;
 		int current = 0;
 		Socket client = null;
@@ -51,6 +51,9 @@ public class UserFileRecieve {
 			dis = new DataInputStream(client2.getInputStream());
 
 			File file = new File("c:/dev/userRecieveFile");
+			if(!file.exists()) {
+				file.mkdirs();
+			}
 			File[] temp = file.listFiles();
 
 			StringBuilder csvFile = new StringBuilder();

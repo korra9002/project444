@@ -1,5 +1,7 @@
 package userView;
 
+import java.awt.Image;
+import java.io.File;
 import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
@@ -14,6 +16,7 @@ import javax.swing.JTextField;
 import userControl.InterestListEvt;
 import userControl.MarketDetailBuyerEvt;
 import userDAO.UserDAO;
+import userRun.RunMarketMain;
 import userVO.InterestListVO;
 import userVO.MarketDetailVO;
 
@@ -29,7 +32,7 @@ public class MarketDetailBuyer extends JDialog {
 	private InterestListEvt ile;
 	public MarketDetailBuyer(MarketMain mm, MarketDetailVO mdVO, String id, InterestListEvt ile) throws SQLException {
 		this.id = id;
-		jlDetailImg = new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/img/무민.jpg/"));// 썸네일X / 원본 이미지
+//		jlDetailImg = new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/img/무민.jpg/"));// 썸네일X / 원본 이미지
 //		jlDetailImg.setHorizontalAlignment(JLabel.CENTER);
 		this.ile = ile;
 		this.mm = mm;
@@ -55,6 +58,14 @@ public class MarketDetailBuyer extends JDialog {
 		
 		
 		// JTextField
+		jlDetailImg = new JLabel();
+		if(new File(RunMarketMain.imgPath+"/"+mdVO.getImage()).exists()) {
+			
+			jlDetailImg.setIcon(new ImageIcon(new ImageIcon(RunMarketMain.imgPath+"/"+mdVO.getImage()).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH)));
+		}else {
+			jlDetailImg.setText(mdVO.getImage());
+		}
+		
 		jtfName = new JTextField(mdVO.getProductName());
 		jtfPrice = new JTextField(Integer.toString(mdVO.getPrice()));
 		jtfId = new JTextField(mdVO.getSellerID());

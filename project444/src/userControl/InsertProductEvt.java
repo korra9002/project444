@@ -277,8 +277,10 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 			imgFlag = false;
 
 		} catch (NumberFormatException nfe) {
+			nfe.printStackTrace();
 			JOptionPane.showMessageDialog(ip, "가격은 정수 형태로만 입력해주세요.");
 		} catch (IOException ie) {
+			ie.printStackTrace();
 			JOptionPane.showMessageDialog(ip, "이미지 선택 중 문제 발생");
 		} catch (SQLException se) {
 			JOptionPane.showMessageDialog(ip, "DBMS에서 문제 발생");

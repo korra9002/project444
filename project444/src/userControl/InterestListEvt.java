@@ -1,12 +1,15 @@
 package userControl;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel; 
 
@@ -62,7 +65,13 @@ public class InterestListEvt extends MouseAdapter implements ActionListener{
 			//조회 결과로 JTable 레코드에 들어갈 데이터를 생성하고
 			rowData=new Object[7];
 			//배열에 값 할당
-			rowData[0]=alv.getImage();
+			if (new File(RunMarketMain.imgPath + "/" + alv.getImage()).exists()) {
+
+				rowData[0] = (new ImageIcon(new ImageIcon(RunMarketMain.imgPath + "/" + alv.getImage()).getImage()
+						.getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+			} else {
+				rowData[0] = alv.getImage();
+			}
 			rowData[1]=alv.getProductName()+"("+alv.getProductCode()+")";
 			rowData[2]=alv.getPrice();
 			rowData[3]=alv.getSellerID();

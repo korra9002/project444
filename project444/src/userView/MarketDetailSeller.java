@@ -1,6 +1,8 @@
 package userView;
 
 import java.awt.Checkbox;
+import java.awt.Image;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,6 +15,7 @@ import javax.swing.JTextField;
 
 import userControl.MarketDetailBuyerEvt;
 import userControl.MarketDetailSellerEvt;
+import userRun.RunMarketMain;
 import userVO.MarketDetailVO;
 
 
@@ -32,7 +35,7 @@ public class MarketDetailSeller extends JDialog {
 	public MarketDetailSeller(MarketMain mm, MarketDetailVO mdVO, String id) {
 		this.id = id;
 		this.mdVO = mdVO;
-		jlDetailImg = new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/img/무민.jpg/"));//썸네일X / 원본 이미지
+//		jlDetailImg = new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/img/무민.jpg/"));//썸네일X / 원본 이미지
 //		jlDetailImg.setHorizontalAlignment(JLabel.CENTER);
 		
 		JLabel jlId=new JLabel("판매자");
@@ -43,6 +46,15 @@ public class MarketDetailSeller extends JDialog {
 
 		
 		//JTextField
+		jlDetailImg = new JLabel();
+		if(new File(RunMarketMain.imgPath+"/"+mdVO.getImage()).exists()) {
+			
+			jlDetailImg.setIcon(new ImageIcon(new ImageIcon(RunMarketMain.imgPath+"/"+mdVO.getImage()).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH)));
+		}else {
+			jlDetailImg.setText(mdVO.getImage());
+		}
+		
+		
 		jtfName=new JTextField(mdVO.getProductName()+"("+mdVO.getProductCode()+")");
 		jtfPrice=new JTextField(Integer.toString(mdVO.getPrice()));
 		jtfId=new JTextField(mdVO.getSellerID());

@@ -1,5 +1,6 @@
 package userControl;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -8,6 +9,7 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -66,7 +68,13 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 			// 조회 결과로 JTable 레코드에 들어갈 데이터를 생성하고
 			rowData = new Object[7];
 			// 배열에 값 할당
-			rowData[0] = slv.getImage();
+			if (new File(RunMarketMain.imgPath + "/" + slv.getImage()).exists()) {
+
+				rowData[0] = (new ImageIcon(new ImageIcon(RunMarketMain.imgPath + "/" + slv.getImage()).getImage()
+						.getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+			} else {
+				rowData[0] = slv.getImage();
+			}
 			rowData[1] = slv.getProductName() + "(" + slv.getProductCode() + ")";
 			rowData[2] = slv.getPrice();
 			rowData[3] = slv.getCategory();
@@ -106,14 +114,20 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 			// 조회 결과로 JTable 레코드에 들어갈 데이터를 생성하고
 			rowData = new Object[7];
 			// 배열에 값 할당
-			rowData[0] = slv.getImage();
+			if (new File(RunMarketMain.imgPath + "/" + slv.getImage()).exists()) {
+
+				rowData[0] = (new ImageIcon(new ImageIcon(RunMarketMain.imgPath + "/" + slv.getImage()).getImage()
+						.getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+			} else {
+				rowData[0] = slv.getImage();
+			}
 			rowData[1] = slv.getProductName() + "(" + slv.getProductCode() + ")";
 			rowData[2] = slv.getPrice();
 			rowData[3] = slv.getCategory();
 			rowData[4] = slv.getLoc_code();
 			rowData[5] = slv.getSellerID();
 			rowData[6] = slv.getUpload_date();
-			
+
 			// dtm에 추가
 			dtm.addRow(rowData);
 		} // end for
@@ -146,7 +160,7 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 					// 부모창의 도시락 리스트를 갱신
 					setAllList();
 					// 현재창 닫기
-					//close();
+					// close();
 				} // end if
 			} catch (SQLException e) {
 				msg = " 삭제 작업 중 문제가 발생하였습니다.";

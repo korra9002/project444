@@ -1,10 +1,13 @@
 package userControl;
 
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -50,7 +53,13 @@ public class PurchaseHistoryEvt extends MouseAdapter {
 			//조회 결과로 JTable 레코드에 들어갈 데이터를 생성하고
 			rowData=new Object[6];
 			//배열에 값 할당
-			rowData[0]=slv.getImage();
+			if (new File(RunMarketMain.imgPath + "/" + slv.getImage()).exists()) {
+
+				rowData[0] = (new ImageIcon(new ImageIcon(RunMarketMain.imgPath + "/" + slv.getImage()).getImage()
+						.getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+			} else {
+				rowData[0] = slv.getImage();
+			}
 			rowData[1]=slv.getProductName()+"("+slv.getProductCode()+")";
 			rowData[2]=slv.getPrice();
 			rowData[3]=slv.getSellerID();
