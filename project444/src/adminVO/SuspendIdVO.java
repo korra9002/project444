@@ -1,13 +1,18 @@
 package adminVO;
 
+import java.util.Date;
+
 public class SuspendIdVO {
 
-	private String userId, suspendReason, suspendDate;
-
-	public SuspendIdVO(String userId, String suspendReason, String suspendDate) {
+	private String userId, suspendReason;
+	private Date suspendDate;
+	private int period;
+	
+	public SuspendIdVO(String userId, String suspendReason, Date suspendDate, int period) {
 		this.userId = userId;
 		this.suspendReason = suspendReason;
 		this.suspendDate = suspendDate;
+		this.period = period;
 	}
 
 	public String getUserId() {
@@ -26,18 +31,20 @@ public class SuspendIdVO {
 		this.suspendReason = suspendReason;
 	}
 
-	public String getSuspendDate() {
+	public Date getSuspendDate() {
 		return suspendDate;
 	}
 
-	public void setSuspendDate(String suspendDate) {
+	public void setSuspendDate(Date suspendDate) {
 		this.suspendDate = suspendDate;
 	}
 
-	@Override
-	public String toString() {
-		return "SuspendIdVO [userId=" + userId + ", suspendReason=" + suspendReason + ", suspendDate=" + suspendDate
-				+ "]";
+	public int getPeriod() {
+		return period;
+	}
+
+	public void setPeriod(int period) {
+		this.period = period;
 	}
 
 }//SuspendIdVO

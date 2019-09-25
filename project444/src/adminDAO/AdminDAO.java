@@ -745,7 +745,7 @@ public class AdminDAO {
 			con = getConnection();
 			
 			selectSuspend
-			.append("	select user_id, suspend_reason, to_char(suspend_date,'yyyy-mm-dd hh24:mi')suspend_date	")
+			.append("	select user_id, suspend_reason, suspend_date, period	")
 			.append("	from suspended_user	");
 			
 			pstmt= con.prepareStatement(selectSuspend.toString());
@@ -757,7 +757,7 @@ public class AdminDAO {
 			SuspendIdVO siVO = null;
 			
 			while(rs.next()) {
-				siVO = new SuspendIdVO(rs.getString("user_id"), rs.getString("suspend_reason"), rs.getString("suspend_date"));
+				siVO = new SuspendIdVO(rs.getString("user_id"), rs.getString("suspend_reason"), rs.getDate("suspend_date"), rs.getInt("period"));
 				list.add(siVO);//조회된 레코드를 저장한 VO를 list에 추가
 			
 			}//end while
@@ -874,13 +874,14 @@ public class AdminDAO {
 				StringBuilder insert = new StringBuilder();
 				
 				insert
-				.append("	insert into suspended_user(user_id, suspend_reason) 	")
-				.append("	values(?,?)	");
+				.append("	insert into suspended_user(user_id, suspend_reason, period) 	")
+				.append("	values(?,?,?)	");
 				
 				pstmt= con.prepareStatement(insert.toString());
 				
 				pstmt.setString(1, uicVO.getUserId());
 				pstmt.setString(2, uicVO.getSuspendMsg());
+				pstmt.setInt(3, uicVO.getPeriod());
 				
 			}//end if
 			

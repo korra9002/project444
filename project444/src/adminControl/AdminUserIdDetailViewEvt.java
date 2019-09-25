@@ -38,15 +38,45 @@ public class AdminUserIdDetailViewEvt implements ActionListener {
 		String userId = aidv.getJtfId().getText();
 		String suspendFlag = aidv.getJtfSuspendFlag().getText();
 		String suspendMsg = "Y";
+		String[] tempData = {"",""};
+		int period = 0;
 		
-		if (!suspendFlag.equals("Y")) {
-			suspendMsg = JOptionPane.showInputDialog("정지 사유 입력");
-		}//end if
-//		System.out.println(suspendFlag);
 		try {
+			if (!suspendFlag.equals("Y")) {
+				suspendMsg = JOptionPane.showInputDialog("<HTML>[정지 사유, 정지 기간] 입력<br/>위의 형식으로 입력해주세요.");
+				tempData = suspendMsg.split(",");
+				suspendMsg = (String) tempData[0];
+				period = Integer.parseInt(tempData[1],10);
+			}//end if
+		} catch (NullPointerException npe) {
+			JOptionPane.showMessageDialog(aidv, "형식에 맞게 입력해주세요.");
+		}
+//		System.out.println(suspendMsg + 11);
+//		System.out.println(tempData.length);
+		try {
+			if(suspendMsg.equals("Y")){
+				switch (JOptionPane.showConfirmDialog(aidv, "정말로 아이디를 복구할까요?")) {
+				case JOptionPane.OK_OPTION:
+					
+					AdminDAO aDAO=AdminDAO.getInstance();
+					UserIdControlVO uicVO = new UserIdControlVO(userId, suspendFlag, suspendMsg, period);
+					String msg = "아이디를 복구할 수 없습니다.";
+					
+					if (aDAO.suspendControl(uicVO)) {
+						msg="아이디가 복구되었습니다.";
+						
+					}//end if
+					
+					JOptionPane.showMessageDialog(aidv, msg);
+					exit();
+					ame.setUserIdList();
+				}//switch
 				
-			if(!suspendMsg.isEmpty()) {
-				UserIdControlVO uicVO = new UserIdControlVO(userId, suspendFlag, suspendMsg);
+			}//end else
+			
+			if(tempData.length == 2) {
+				
+				UserIdControlVO uicVO = new UserIdControlVO(userId, suspendFlag, suspendMsg, period);
 				
 				if(!suspendMsg.equals("Y")) {
 					switch (JOptionPane.showConfirmDialog(aidv, "정말로 아이디를 정지할까요?")) {
@@ -66,29 +96,15 @@ public class AdminUserIdDetailViewEvt implements ActionListener {
 						ame.setUserIdList();
 					}//switch
 					
-				} else if(suspendMsg.equals("Y")){
-					switch (JOptionPane.showConfirmDialog(aidv, "정말로 아이디를 복구할까요?")) {
-					case JOptionPane.OK_OPTION:
-						
-						AdminDAO aDAO=AdminDAO.getInstance();
-						
-						String msg = "아이디를 복구할 수 없습니다.";
-						
-						if (aDAO.suspendControl(uicVO)) {
-							msg="아이디가 복구되었습니다.";
-							
-						}//end if
-						
-						JOptionPane.showMessageDialog(aidv, msg);
-						exit();
-						ame.setUserIdList();
-					}//switch
-					
-				}//end else
+				} 
 				
 			} else {
-				JOptionPane.showMessageDialog(aidv, "정지 사유를 입력해주세요.");
+				JOptionPane.showMessageDialog(aidv, "정지 사유 및 기간을 다시 입력해주세요.");
 			}//end else
+			
+			
+				
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -640,7 +640,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 			
 			new AdminSuspendReasonView(amv, list );
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(amv, "관리자님, reset실패! 서비스가 원활하지 못한 점 죄송합니다.");
+			JOptionPane.showMessageDialog(amv, "관리자님, 서비스가 원활하지 못한 점 죄송합니다.");
 			e.printStackTrace();
 		}//end catch
 		

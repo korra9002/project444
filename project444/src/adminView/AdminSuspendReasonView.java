@@ -26,7 +26,7 @@ public class AdminSuspendReasonView extends JDialog {
 		this.amv = amv;
 		this.list = list;
 		
-		String [] cols = {"아이디", "정지사유", "정지날짜"};
+		String [] cols = {"아이디", "정지사유", "정지날짜", "정지기간"};
 		String [][] rows = {{"", "", ""}};
 		
 		dtmSuspendList = new DefaultTableModel(rows, cols){//셀 내용 수정 금지
@@ -56,18 +56,20 @@ public class AdminSuspendReasonView extends JDialog {
 		jtaSuspendList.getColumnModel().getColumn(1).setResizable(false);
 		jtaSuspendList.getColumnModel().getColumn(2).setPreferredWidth(80);
 		jtaSuspendList.getColumnModel().getColumn(2).setResizable(false);
+		jtaSuspendList.getColumnModel().getColumn(3).setPreferredWidth(80);
+		jtaSuspendList.getColumnModel().getColumn(3).setResizable(false);
 		
 		jtaSuspendList.setRowHeight(50);
 		////////테이블 크기설정 끝////////
 		
 		setLayout(null);
-		jspSuspendList.setBounds(10, 10, 400, 300);
+		jspSuspendList.setBounds(10, 10, 480, 300);
 		
 		add(jspSuspendList);
 		
 		AdminSuspendReasonViewEvt asrve = new AdminSuspendReasonViewEvt(this);
 		
-		setBounds(amv.getX()+800, amv.getY()+50, 440, 380);
+		setBounds(amv.getX()+800, amv.getY()+50, 520, 380);
 		setVisible(true);
 		setResizable(false);
 		
