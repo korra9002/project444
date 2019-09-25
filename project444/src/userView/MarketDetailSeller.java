@@ -98,9 +98,9 @@ public class MarketDetailSeller extends JDialog {
 		
 		jsp.setBounds(345, 260, 295, 120);
 		
-		jbtComplete.setBounds(240, 300, 90, 30);
-		jbtDelete.setBounds(40, 350, 70, 30);
-		jbtChange.setBounds(120, 350, 70, 30);
+		jbtComplete.setBounds(240, 350, 88, 30);
+		jbtDelete.setBounds(20, 350, 88, 30);
+		jbtChange.setBounds(130, 350, 88, 30);
 
 		
 		//¹èÄ¡
