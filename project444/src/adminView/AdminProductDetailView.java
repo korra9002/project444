@@ -28,7 +28,7 @@ public class AdminProductDetailView extends JDialog {
 	private JButton jbtGrant, jbtReject, jbtOk;
 	private JTextArea jtaReason, jtaInfo;
 	private String code;
-
+ 
 	private AdminMainView amv;
 
 	public AdminProductDetailView(AdminMainView amv, AdminMainEvt ame, ProductDetailVO pdVO) {

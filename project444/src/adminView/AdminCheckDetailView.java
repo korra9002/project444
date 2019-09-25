@@ -32,7 +32,7 @@ public class AdminCheckDetailView extends JDialog {
 	public AdminCheckDetailView(AdminMainView amv, AdminMainEvt ame, CheckDetailVO cdVO) {
 		super(amv, "제품상세", true);
 		this.amv = amv;
-
+ 
 		jlDetailImg = new JLabel();// 썸네일X / 원본 이미지
 		jlDetailImg.setBorder(new EtchedBorder(EtchedBorder.RAISED));// 이미지 라벨 테두리 설정
 
