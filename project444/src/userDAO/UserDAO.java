@@ -660,7 +660,7 @@ public class UserDAO {
 			} else if (temp_flag.equals("P")) { // 마이페이지-구매내역
 				selectAll.append(
 						" select p.PRODUCT_CODE, p.IMG_FILE, p.PRODUCT_NAME, to_char(p.UPLOAD_DATE,'yyyy-mm-dd hh24:mi') inputDate, p.CATEGORY_CODE,"
-								+ "p.PRICE, i.loc_code,l.loc,c.category, p.USER_ID, d.SALE_FLAG, to_char(d.SALE_DATE,'yyyy-mm-dd hh24:mi') sale_date ")
+								+ "p.PRICE, i.loc_code,l.loc,c.category, p.USER_ID, d.SALE_FLAG, to_char(d.SALE_DATE,'yyyy-mm-dd hh24:mi') sale_date, p.info ")
 						.append(" from PRODUCT p, id_info i, location_list l, category_list c , DEAL d  ")
 						.append(" where ( d.user_id= i.user_id and i.loc_code=l.loc_code and p.category_code=c.category_code and p.PRODUCT_CODE= d.PRODUCT_CODE) and d.sale_flag ='P' and d.USER_ID=?");
 
