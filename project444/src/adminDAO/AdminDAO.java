@@ -820,7 +820,6 @@ public class AdminDAO {
 			
 			pstmt= con.prepareStatement(update.toString());
 			
-			
 			pstmt.setString(1, msg);
 			pstmt.setString(2, code);
 			

@@ -2,9 +2,13 @@ package adminControl;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.NoSuchAlgorithmException;
+
+import javax.swing.JOptionPane;
 
 import adminView.AdminLoginView;
 import adminView.AdminMainView;
+import kr.co.sist.util.cipher.DataEncrypt;
 
 public class AdminLoginEvt implements ActionListener {
 
@@ -14,19 +18,30 @@ public class AdminLoginEvt implements ActionListener {
 		this.alv = alv;
 	}//AdminLoginEvt
 	
+	private void login() {
+		String id = alv.getJtfId().getText();
+		String pw = "";
+		char[] cPw = alv.getJpfPw().getPassword();
+		
+		for (int i = 0; i < cPw.length; i++) {
+			pw = String.valueOf(cPw);
+		}//end for
+		
+		if (id.equals("admin") && pw.equals("1234")) {
+			new AdminMainView();
+			alv.dispose();
+		}else {
+			JOptionPane.showMessageDialog(alv, "아이디 또는 비밀번호를 확인해주세요.");
+			alv.getJpfPw().setText("");
+			alv.getJpfPw().requestFocus();
+		}//end else
+		
+	}//login
+	
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		if (ae.getSource() == alv.getJbtLogin()) {
-			new AdminMainView();
-				alv.dispose();
-//			if (alv.getJtfId().getText().equals("admin")&& alv.getJpfPw().getText().equals("1234")) {
-//				new AdminMainView();
-//				alv.dispose();
-//			} else {
-//				alv.getJlLoginFail().setText("아이디 또는 비밀번호를 확인해주세요.");
-//				alv.getJtfId().setText("");
-//				alv.getJpfPw().setText("");
-//			}//end else
+		if (ae.getSource() == alv.getJbtLogin() || ae.getSource() == alv.getJpfPw()) {
+			login();
 			
 		}//end if
 		

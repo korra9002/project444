@@ -1809,7 +1809,41 @@ System.out.println(slv);
 	}// selectInterestList
 
 ///////////////////////////////////////////////////////////////////////여기까지 김서영 2019.9.19 수정//////////////////////////////////////////////////////////////   
-
+	
+	public int suspendRelief(String UserId) throws SQLException {//윤태식 추가 19-09-25
+		int cnt=0;
+//		System.out.println(UserId);
+		Connection con=null;
+		PreparedStatement pstmt=null;
+//		System.out.println(1);
+		try {
+			con=getConn();
+			System.out.println(2);
+			StringBuilder reliefFlag = new StringBuilder();
+			
+			reliefFlag
+			.append("	update ID_INFO 	")
+			.append("	set suspend_flag = 'N'	")
+			.append("	where  (sysdate >= (select max(suspend_date+period) sus from SUSPENDED_USER where user_id=?)) and user_id=? 	");
+			
+//			System.out.println(reliefFlag);
+			pstmt= con.prepareStatement(reliefFlag.toString());
+//			System.out.println(3);
+			pstmt.setString(1, UserId);
+			pstmt.setString(2, UserId);
+//			System.out.println(4);
+			cnt = pstmt.executeUpdate();
+//			System.out.println(cnt);
+//			System.out.println(5);
+		} finally {
+			if(pstmt != null) {pstmt.close();}//end if
+			if(con != null) {con.close();}//end if
+		}//end finally
+//		System.out.println(6);
+		return cnt;
+		
+	}//updateSuspend
+	
 //	public static void main(String[] args) {
 //
 //	}//main
