@@ -378,7 +378,7 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 			reset();
 		}
 		
-		
+		 
 		////////////////////////////////////////// 고쳐야함 //////////////////////////////////////////////////
 		if(rmm.getJtp().getSelectedIndex()!=1) {
 			System.out.println("되나?");
