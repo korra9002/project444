@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -35,14 +36,14 @@ public class ModifyProduct extends JFrame {
 	public ModifyProduct(SaleList sl, SaleListEvt sle, RunMarketMain rmm) {
 		super("상품 수정");
 		
-		String selectedValue0=(String)sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 0);
+		ImageIcon selectedValue0=(ImageIcon)sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 0);
 		String selectedValue1=(String)sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 1);		
 		int selectedValue2=(int)sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 2);		
 		String selectedValue3=(String)sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 3);
 		
 		System.out.println(selectedValue3);
 		
-		jlbProductImg = new JLabel(selectedValue0,JLabel.CENTER);
+		jlbProductImg = new JLabel(selectedValue0);
 		jlbProductImg.setBorder(new EtchedBorder(EtchedBorder.RAISED));//이미지 라벨 테두리 설정
 		
 		jbtSelectImg = new JButton("사진 등록");

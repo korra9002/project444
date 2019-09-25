@@ -35,7 +35,7 @@ public class SaleList extends JDialog {
 //				{1,2,3,4,5,6}
 //				};
 		
-		dtmSell = new DefaultTableModel(sellCol, 6){//셀 내용 수정 금지
+		dtmSell = new DefaultTableModel(sellCol, 0){//셀 내용 수정 금지
 			@Override
 			public Class<?> getColumnClass(int column) {
 				return getValueAt(0, column).getClass();
@@ -100,7 +100,7 @@ public class SaleList extends JDialog {
 //				{1,2,3,4,5}
 //				};
 		
-		dtmComp = new DefaultTableModel(compCol, 6) {//셀 내용 수정 금지
+		dtmComp = new DefaultTableModel(compCol, 0) {//셀 내용 수정 금지
 			
 			@Override
 			public Class<?> getColumnClass(int column) {
