@@ -19,7 +19,7 @@ import adminControl.AdminProductDetailViewEvt;
 import adminVO.CheckDetailVO;
 import adminVO.ProductDetailVO;
 import userRun.RunMarketMain;
-
+ 
 @SuppressWarnings("serial")
 public class AdminProductDetailView extends JDialog {
 

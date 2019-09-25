@@ -28,7 +28,7 @@ public class AdminCheckDetailView extends JDialog {
 	private String code;
 
 	private AdminMainView amv;
-
+ 
 	public AdminCheckDetailView(AdminMainView amv, AdminMainEvt ame, CheckDetailVO cdVO) {
 		super(amv, "제품상세", true);
 		this.amv = amv;
