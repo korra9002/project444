@@ -269,16 +269,21 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 
 		} // end if
 
-		if (me.getClickCount() == 2) {// 더블클릭
+		if (me.getClickCount() == 2) {// 더블클릭			
 			if (me.getSource() == sl.getJtSell()) {
-				try {
-					classFlag = "S"; // userDAO에서 selectProDetail method 사용할 때 구분용 플래그 ---->판매중인목록
-
-					openDetail();
+				if(sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(),6).equals("P")) {						
+					try {
+						classFlag = "S"; // userDAO에서 selectProDetail method 사용할 때 구분용 플래그 ---->판매중인목록
+	
+						openDetail();
+						
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}//end catch
 					
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+				} else {
+					JOptionPane.showMessageDialog(sl, "해당 상품은 검수중입니다");
+				}//end if
 			} else if (me.getSource() == sl.getJtComplete()) {
 //				try {
 ////					classFlag = "C"; // userDAO에서 selectProDetail method 사용할 때 구분용 플래그 ---->판매완료된목록
@@ -286,7 +291,7 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 //				} catch (SQLException e) {
 //					e.printStackTrace();
 //				}
-			}
+			}//end else
 		} // end if
 
 	}// mouseClicked
@@ -296,13 +301,17 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 
 		if (sl.getJtSell().getSelectedRow() != -1) {
 			if (ae.getSource() == sl.getJbtModify()) {
-				try {
-					modifySaleList();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				if(sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 6).equals("P")) {
+					try {
+						modifySaleList();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}//end catch
 
+				} else {
+					JOptionPane.showMessageDialog(sl, "해당 상품은 검수중입니다.");
+				}//end else
 			} // end if
 			if (ae.getSource() == sl.getJbtDelete()) {
 				deleteSaleList();
