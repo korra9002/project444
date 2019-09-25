@@ -6,7 +6,6 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
 
 import userControl.UserInfoEvt;
 import userRun.RunMarketMain;
@@ -34,7 +33,7 @@ public class UserInfo extends JPanel {
 		jbtBuy = new JButton("구매내역");
 		jbtLike = new JButton("관심목록");
 		jbtLogout = new JButton("로그아웃");
-		jlaAd = new JLabel();
+		jlaAd = new JLabel("광고받습니다.");
 		Font ft = new Font(Font.DIALOG,Font.BOLD, 40);
 		Font ft2 = new Font(Font.DIALOG,Font.BOLD, 20);
 		jlaId.setFont(ft);
@@ -51,7 +50,8 @@ public class UserInfo extends JPanel {
 		jbtLike.setBounds(50, 320, 300, 100);
 		jbtPersonalData.setBounds(445, 320, 300, 100);
 		jlaAd.setBounds(50, 600, 700, 180);
-		jlaAd.setBorder(new TitledBorder("광고"));
+		jlaAd.setOpaque(true);
+		jlaAd.setBackground(Color.WHITE);
 //	  add(jlLevelImg);
 		add(jlaId);
 		add(jbtPersonalData);
