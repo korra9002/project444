@@ -58,7 +58,7 @@ public class PurchaseHistoryEvt extends MouseAdapter {
 				rowData[0] = (new ImageIcon(new ImageIcon(RunMarketMain.imgPath + "/" + slv.getImage()).getImage()
 						.getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 			} else {
-				rowData[0] = slv.getImage();
+				rowData[0] = (new ImageIcon(new ImageIcon(RunMarketMain.imgPath+"/"+"default.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 			}
 			rowData[1]=slv.getProductName()+"("+slv.getProductCode()+")";
 			rowData[2]=slv.getPrice();

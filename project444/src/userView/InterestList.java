@@ -32,18 +32,21 @@ public class InterestList extends JDialog {
 				
 				};
 		
-		dtmInterest = new DefaultTableModel(sellRow, sellCol){//셀 내용 수정 금지
+		dtmInterest = new DefaultTableModel(sellCol,7);
+		jtInterest = new JTable(dtmInterest){//셀 내용 수정 금지
+			
+			@Override
+			public Class<?> getColumnClass(int column) {
+				// 입력된 행 하나의 모든 컬럼의 값을 원래의 클래스로 반환하는 일
+				// 0행 현재 입력된 행 하나만 대상으로 처리
+				return getValueAt(0, column).getClass();
+			}
+			
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}//isCellEditable
-		};
-		jtInterest = new JTable(dtmInterest) {
-			@Override
-			public Class<?> getColumnClass(int column) {
-				return getValueAt(0, column).getClass();
-			}//getColumnClass
-		};
+		}; 
 		
 		JScrollPane jspInterest = new JScrollPane(jtInterest);
 		
@@ -52,7 +55,7 @@ public class InterestList extends JDialog {
 		dtcr.setHorizontalAlignment(SwingConstants.CENTER);//가운데 정렬 세팅
 		TableColumnModel tcm = jtInterest.getColumnModel();//정렬할 테이블의 컬럼모델을 가져옴
 		
-		for (int i = 0; i < tcm.getColumnCount(); i++) {//컬럼의 수만큼 반복하여 가운데정렬함
+		for (int i = 1; i < tcm.getColumnCount(); i++) {//컬럼의 수만큼 반복하여 가운데정렬함
 			tcm.getColumn(i).setCellRenderer(dtcr);
 		}//end for
 		

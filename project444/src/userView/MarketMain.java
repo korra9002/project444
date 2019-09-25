@@ -98,7 +98,9 @@ import userControl.MarketMainEvt;
 			public Class<?> getColumnClass(int column) {
 				// 입력된 행 하나의 모든 컬럼의 값을 원래의 클래스로 반환하는 일
 				// 0행 현재 입력된 행 하나만 대상으로 처리
-				return getValueAt(0, column).getClass();
+    		  Class t= getValueAt(0, column).getClass();
+    		 System.err.println(t);
+				return t;
 			}
 
             @Override

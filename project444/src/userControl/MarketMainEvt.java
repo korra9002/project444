@@ -314,8 +314,10 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener {
 			if(new File(RunMarketMain.imgPath+"/"+alv.getImage()).exists()) {
 				
 				rowData[0] = (new ImageIcon(new ImageIcon(RunMarketMain.imgPath+"/"+alv.getImage()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+		System.out.println("이미지");
 			}else {
-				rowData[0] = alv.getImage();
+				rowData[0] = (new ImageIcon(new ImageIcon(RunMarketMain.imgPath+"/"+"default.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+				System.out.println("문자열");
 			}
 			rowData[1] = alv.getProductName() + "(" + alv.getProductCode() + ")";
 			rowData[2] = alv.getLoc_code();
