@@ -27,6 +27,7 @@ public class UserInfoEvt implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource()==uif.getJbtPersonalData()) {
+			PwUpdateEvt.uFlag=false;
 			String id = uif.getjlaId().getText();
 			try {
 				new PersonalInform(id,rmm);

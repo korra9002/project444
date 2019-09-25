@@ -25,7 +25,6 @@ public class PersonalInformEvt implements ActionListener{
 	private PersonalInform psi;
 	private RunMarketMain rmm;
 	private String curpw="";
-	private boolean pwFlag= false;
 	public PersonalInformEvt(PersonalInform psi, RunMarketMain rmm) {
 		this.psi=psi;
 		this.rmm = rmm;
@@ -46,7 +45,7 @@ public class PersonalInformEvt implements ActionListener{
 		if(option == 0){
 		    char[] password = jpfPw.getPassword();
 		    pw= new String(password);
-		    pwFlag =true;
+		   
 		  //비밀번호 암호화 처리
 			try {
 				dePw = DataEncrypt.messageDigest("MD5", pw);
@@ -62,7 +61,6 @@ public class PersonalInformEvt implements ActionListener{
 		    	JOptionPane.showMessageDialog(psi, "비밀번호 확인 완료");
 		    	new PwUpdate(rmm,id);
 		    }//end else
-		    
 		    
 		}//end if
 		
@@ -83,10 +81,15 @@ public class PersonalInformEvt implements ActionListener{
 		UserDAO uDAO = UserDAO.getInstance();
 		PersonalInformVO piVO = uDAO.selectPersonalInfom(id);
 		
+		
 		if(mfPhone2.isEmpty()||mfPhone3.isEmpty()) {
 			JOptionPane.showMessageDialog(psi, "변경할 연락처 정보를 입력해주세요.");
 			return;
-		}else {
+		}//end if
+		if ((mfPhone2.length() < 3 || mfPhone2.length() > 4) || mfPhone3.length() != 4) {
+			JOptionPane.showMessageDialog(psi, "연락처를 정확히 기입해주세요.");
+			return;
+		}//end if
 			int phone2 = 0;
 			int phone3 = 0;
 			try {
@@ -96,24 +99,18 @@ public class PersonalInformEvt implements ActionListener{
 				JOptionPane.showMessageDialog(psi, "연락처는 숫자형식만 가능합니다.");
 				return;
 			} // end catch
-			if ((mfPhone2.length() < 3 || mfPhone2.length() > 4) || mfPhone3.length() != 4) {
-				JOptionPane.showMessageDialog(psi, "연락처를 정확히 기입해주세요.");
-				return;
-			}//end if
-				
 			mfPhone = mfPhone1 + "-" + mfPhone2 + "-" + mfPhone3;
-					if(!mfPhone.equals(piVO.getPhone())) {
-					flag = false;
-					modifyInformVO miVO = new modifyInformVO(id,"phone",mfPhone);
-					 if(flag==uDAO.updateThing(miVO)) {
-						 JOptionPane.showMessageDialog(psi, "값 변경 실패");
-							return;
-					}else {
-						 flag =true;
-					}//end else
+			if(!mfPhone.equals(piVO.getPhone())) {
+				flag = false;
+				modifyInformVO miVO = new modifyInformVO(id,"phone",mfPhone);
+			if(flag==uDAO.updateThing(miVO)) {
+				JOptionPane.showMessageDialog(psi, "값 변경 실패");
+					return;
+			}else {
+				 flag =true;
+			}//end else
 			 }//end if
 			
-		}//end else
 		
 		 
 		
@@ -149,7 +146,7 @@ public class PersonalInformEvt implements ActionListener{
 				flag =true;
 			}//end else
 		}//end if
-		if(flag ==true||pwFlag==true) {
+		if(flag ==true||PwUpdateEvt.uFlag==true) {
 			JOptionPane.showMessageDialog(psi, "정보가 변경되었습니다.");
 			PersonalInformClose();
 		}else {
@@ -162,6 +159,7 @@ public class PersonalInformEvt implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource()==psi.getJbtPwUpdate()) {
+			PwUpdateEvt.uFlag=false;
 			try {
 				modifyPw();
 			} catch (SQLException e) {
