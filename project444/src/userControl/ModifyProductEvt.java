@@ -22,12 +22,15 @@ public class ModifyProductEvt extends MouseAdapter implements ActionListener{
 	
 	private ModifyProduct mp;
 	private SaleList sl;
+	private SaleListEvt sle;
 	private RunMarketMain rmm;
 	private String id;
-	public ModifyProductEvt(ModifyProduct mp, SaleList sl, RunMarketMain rmm) {
+	public ModifyProductEvt(ModifyProduct mp, SaleList sl, SaleListEvt sle, RunMarketMain rmm) {
 		this.mp=mp;
 		this.sl=sl;
+		this.sle=sle;
 		this.rmm=rmm;		
+		
 		id=RunMarketMain.userId;
 	}//ModifyProductEvt
 	 
@@ -59,6 +62,7 @@ public class ModifyProductEvt extends MouseAdapter implements ActionListener{
 		
 		// + 그리고 jtSell테이블 새로고침되게 해야함 20190924 - 수연 ////////////////////////////////////////
 		
+		sle.setAllList();
 		
 	}//modifyPost
 
