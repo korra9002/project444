@@ -25,6 +25,7 @@ public class PersonalInformEvt implements ActionListener{
 	private PersonalInform psi;
 	private RunMarketMain rmm;
 	private String curpw="";
+	private boolean flag = false;
 	public PersonalInformEvt(PersonalInform psi, RunMarketMain rmm) {
 		this.psi=psi;
 		this.rmm = rmm;
@@ -66,7 +67,7 @@ public class PersonalInformEvt implements ActionListener{
 		
 	}//PersonalInformEvt
 	public void modifyRegister() throws SQLException {
-		boolean flag = false;
+		
 		DecimalFormat df = new DecimalFormat("00");
 		String id = psi.getJtfId().getText().trim();
 		//텍스트필드의 현재(변경할) 값 가져오기
@@ -156,6 +157,8 @@ public class PersonalInformEvt implements ActionListener{
 	public void PersonalInformClose() {
 		psi.dispose();
 	}//PersonalInform
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource()==psi.getJbtPwUpdate()) {
@@ -167,7 +170,9 @@ public class PersonalInformEvt implements ActionListener{
 			}//end catch
 		}//end if
 		if(ae.getSource()==psi.getJbtCancle()) {
-			PersonalInformClose();
+			
+				PersonalInformClose();
+			
 		}//end if
 		if(ae.getSource()==psi.getJbtRegister()) {
 			try {
