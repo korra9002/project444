@@ -140,7 +140,7 @@ import userControl.MarketMainEvt;
       jtProductList.setRowHeight(100);
       jtProductList.getTableHeader().setReorderingAllowed(false);
       
-      jtProductList.getColumnModel().getColumn(0).setPreferredWidth(50);
+      jtProductList.getColumnModel().getColumn(0).setPreferredWidth(30);
       jtProductList.getColumnModel().getColumn(1).setPreferredWidth(30);
       jtProductList.getColumnModel().getColumn(2).setPreferredWidth(30);
       jtProductList.getColumnModel().getColumn(3).setPreferredWidth(30);

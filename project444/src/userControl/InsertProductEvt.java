@@ -51,28 +51,28 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 		id = RunMarketMain.userId;
 
 		ip.getJtfSubject().addKeyListener(new KeyAdapter() {
-			boolean flag = true;
-
+//			boolean flag = true;
+			
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (flag) {
-					ip.getJtfSubject().setText("");
-					flag = false;
-					subjectFlag = false;
-//					priceFlag=false;
-//					detailFlag=false;
+				if (subjectFlag) {
+						ip.getJtfSubject().setText("");
+//						flag = false;
+						subjectFlag = false;
+	//					priceFlag=false;
+	//					detailFlag=false;
 				} // end if
 			}// keyPressed
 		});// KeyAdapter
 
 		ip.getJtfPrice().addKeyListener(new KeyAdapter() {
-			boolean flag = true;
+//			boolean flag = true;
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (flag) {
+				if (priceFlag) {
 					ip.getJtfPrice().setText("");
-					flag = false;
+//					flag = false;
 //					subjectFlag=false;
 					priceFlag = false;
 //					detailFlag=false;
@@ -81,13 +81,13 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 		});// KeyAdapter
 
 		ip.getJtaExplain().addKeyListener(new KeyAdapter() {
-			boolean flag = true;
+//			boolean flag = true;
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (flag) {
+				if (detailFlag) {
 					ip.getJtaExplain().setText("");
-					flag = false;
+//					flag = false;
 //					subjectFlag=false;
 //					priceFlag=false;
 					detailFlag = false;
@@ -236,6 +236,9 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 //		} // end finally
 //		
 //	}// uploadImg
+	
+	
+	
 
 	public void uploadPost() {
 
@@ -309,7 +312,8 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 				ip.getJtaExplain().setText("");
 				detailFlag = false;
 			} // end if
-		} // end if
+		} // end if		
+
 
 	}// mouseClicked
 
@@ -329,6 +333,9 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 
 	}
 
+	
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == ip.getJbtOkay()) {
@@ -354,7 +361,8 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 					priceFlag = false;
 				} // end if
 			} // end if
-		} // end if
+		} // end if	
+		
 
 		if (ae.getSource() == ip.getJtfPrice()) {
 			if (!ip.getJtfPrice().getText().equals("")) {
@@ -369,6 +377,16 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 		if (ae.getSource() == ip.getJbtCancel()) {
 			reset();
 		}
-
+		
+		
+		////////////////////////////////////////// 고쳐야함 //////////////////////////////////////////////////
+		if(rmm.getJtp().getSelectedIndex()!=1) {
+			System.out.println("되나?");
+		}
+		if (ae.getSource() == rmm.getJtp()) {
+			System.out.println("왜안됑?");
+			reset();
+			//취소할때나 이동할 때 ㅌ컨펌메세지 받기
+		}
 	}// actionPerformed
 }// class

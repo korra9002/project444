@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 
+import userControl.InsertProductEvt;
 import userControl.RunMarketMainEvt;
 import userView.ChatList;
 import userView.InsertProduct;
