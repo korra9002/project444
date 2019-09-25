@@ -61,7 +61,7 @@ public class MarketDetailBuyer extends JDialog {
 		jlDetailImg = new JLabel();
 		if(new File(RunMarketMain.imgPath+"/"+mdVO.getImage()).exists()) {
 			
-			jlDetailImg.setIcon(new ImageIcon(new ImageIcon(RunMarketMain.imgPath+"/"+mdVO.getImage()).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH)));
+			jlDetailImg.setIcon(new ImageIcon(new ImageIcon(RunMarketMain.imgPath+"/"+mdVO.getImage()).getImage().getScaledInstance(320, 320, Image.SCALE_SMOOTH)));
 		}else {
 			jlDetailImg.setText(mdVO.getImage());
 		}

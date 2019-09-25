@@ -21,13 +21,11 @@ import userView.SaleList;
 public class ModifyProductEvt extends MouseAdapter implements ActionListener{
 	
 	private ModifyProduct mp;
-	private SaleList sl;
 	private SaleListEvt sle;
 	private RunMarketMain rmm;
 	private String id;
-	public ModifyProductEvt(ModifyProduct mp, SaleList sl, SaleListEvt sle, RunMarketMain rmm) {
+	public ModifyProductEvt(ModifyProduct mp, SaleListEvt sle, RunMarketMain rmm) {
 		this.mp=mp;
-		this.sl=sl;
 		this.sle=sle;
 		this.rmm=rmm;		
 		
@@ -58,8 +56,10 @@ public class ModifyProductEvt extends MouseAdapter implements ActionListener{
 			JOptionPane.showMessageDialog(mp, "입력하신 내용이 수정되지 않았습니다. 다시 시도해 주세요.");
 		}//end else 
 		
-		
+		//SY : 마켓메인도 불러서 새로고침 해야함.
+		//상품 디테일 창도 새로고침 되야함.
 		sle.setAllList();
+		
 		close();
 		
 	}//modifyPost

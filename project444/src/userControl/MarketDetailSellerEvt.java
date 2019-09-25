@@ -6,14 +6,18 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import userDAO.UserDAO;
 import userRun.RunMarketMain;
 import userVO.FlagVO;
+import userVO.MarketDetailVO;
+import userVO.modifyCommonVO;
 import userView.DealSelect;
 import userView.MarketDetailSeller;
 import userView.MarketMain;
+import userView.ModifyProduct;
 
 
 
@@ -144,10 +148,43 @@ public class MarketDetailSellerEvt extends MouseAdapter implements ActionListene
 			JOptionPane.showMessageDialog(mds, msg);
 		}// end switch
 	}// deleteSaleList
+	 
+	
+	public void modify() throws SQLException {
+		
+		
+		MarketDetailVO mdVO=null;
+		//VO에 넣을 값들
+		String temp = (String) mds.getJtfName().getText();;	//상품명+코드
+		String product_Code = temp.substring(temp.lastIndexOf("(") + 1, temp.lastIndexOf(")"));
+
+		UserDAO uDAO=UserDAO.getInstance();
+		uDAO.selectProDetail(product_Code, "M");
+
+		
+		
+		mdVO=uDAO.selectProDetail(product_Code, "M");
+		
+		new ModifyProduct(mdVO ,null, null);
+		
+		/*
+		 * ImageIcon image=(ImageIcon)mds.getJlDetailImg().getIcon();
+		 * 
+		 * int price= Integer.parseInt(mds.getJtfPrice().getText().trim()); String
+		 * category=mds.getJtfCategory().getText().trim(); String
+		 * pDetail=mds.getJtaStrongPoint().getText().trim(); String
+		 * sellerID=mds.getJtfId().getText().trim();
+		 */
+		
+		//지역을 빼긴 뺐는데....
+		//DAO에서 불러오면 상품정보 가져오면 되는거 아님????????
+	
+
+	}//modify
 	
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == mds.getJbtComplete()) {
+	public void actionPerformed(ActionEvent ae) {
+		if(ae.getSource() == mds.getJbtComplete()) {
 			String temp = mds.getJtfName().getText();
 //			temp = temp.substring(temp.lastIndexOf('(')+1,temp.lastIndexOf(')')).trim();
 //			System.out.println(temp+"상품코드");
@@ -158,11 +195,18 @@ public class MarketDetailSellerEvt extends MouseAdapter implements ActionListene
 			new DealSelect(temp,mds);
 		}//end if
 		
-		if(e.getSource() == mds.getJbtDelete()) {
+		if(ae.getSource() == mds.getJbtDelete()) {
 			delete();
 		}//end if
 		
-		
+		if(ae.getSource() == mds.getJbtChange()) {
+			try {
+				modify();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override

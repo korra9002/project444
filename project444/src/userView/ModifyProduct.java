@@ -1,5 +1,7 @@
 package userView;
 
+import java.awt.Image;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -21,7 +23,9 @@ import userControl.SaleListEvt;
 import userDAO.UserDAO;
 import userRun.RunMarketMain;
 import userVO.InsertProductVO;
+import userVO.MarketDetailVO;
 import userVO.SaleListVO;
+import userVO.modifyCommonVO;
 
 @SuppressWarnings("serial")
 public class ModifyProduct extends JFrame {
@@ -33,17 +37,24 @@ public class ModifyProduct extends JFrame {
 	private JComboBox<String> jcbCategory;
 	private DefaultComboBoxModel<String> dcbCategory;
 	
-	public ModifyProduct(SaleList sl, SaleListEvt sle, RunMarketMain rmm) {
+	public ModifyProduct(MarketDetailVO mdVO, SaleListEvt sle, RunMarketMain rmm) {
 		super("상품 수정");
 		
-		ImageIcon selectedValue0=(ImageIcon)sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 0);
-		String selectedValue1=(String)sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 1);		
-		int selectedValue2=(int)sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 2);		
-		String selectedValue3=(String)sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 3);
-		
+		String selectedValue0=mdVO.getImage();//이미지
+		String selectedValue1=mdVO.getProductName()+"("+mdVO.getProductCode()+")"; 
+		int selectedValue2=mdVO.getPrice();	//가격	
+		String selectedValue3=mdVO.getCategory(); //카테고리
+
 		System.out.println(selectedValue3);
 		
-		jlbProductImg = new JLabel(selectedValue0);
+		jlbProductImg = new JLabel();
+		if(new File(RunMarketMain.imgPath+"/"+selectedValue0).exists()) {
+			
+			jlbProductImg.setIcon(new ImageIcon(new ImageIcon(RunMarketMain.imgPath+"/"+selectedValue0).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+		}else {
+			jlbProductImg.setText(selectedValue0);
+//			jlbProductImg.setIcon(new ImageIcon(RunMarketMain.imgPath+"/"+"default.png"));
+		}
 		jlbProductImg.setBorder(new EtchedBorder(EtchedBorder.RAISED));//이미지 라벨 테두리 설정
 		
 		jbtSelectImg = new JButton("사진 등록");
@@ -107,7 +118,7 @@ public class ModifyProduct extends JFrame {
 		add(jbtOkay);
 		add(jbtCancel);
 		 
-		ModifyProductEvt mpe=new ModifyProductEvt(this, sl, sle,  rmm);
+		ModifyProductEvt mpe=new ModifyProductEvt(this, sle,  rmm);
 		
 		jbtOkay.addActionListener(mpe);
 		jbtCancel.addActionListener(mpe);

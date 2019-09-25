@@ -20,6 +20,7 @@ import userRun.RunMarketMain;
 import userVO.AllListVO;
 import userVO.MarketDetailVO;
 import userVO.SaleListVO;
+import userVO.modifyCommonVO;
 import userView.MarketDetailBuyer;
 import userView.MarketDetailSeller;
 import userView.ModifyProduct;
@@ -132,6 +133,38 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 			dtm.addRow(rowData);
 		} // end for
 	}// setAllList
+	
+	public void modifySaleList() throws SQLException {
+		
+		MarketDetailVO mdVO=null;
+		//VO에 넣을 값들
+		String temp=(String)sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 1);	//상품명+코드
+		String product_Code = temp.substring(temp.lastIndexOf("(") + 1, temp.lastIndexOf(")"));
+		
+//		ImageIcon image=(ImageIcon)sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 0); //이미지
+//		String productName= temp.substring(0, temp.lastIndexOf( "(" ) - 1);
+//		
+//		int price=(int)sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 2);		//가격
+//		String category=(String)sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 3); //카테고리
+//
+//		String seller=sl.getJtSell().get
+//		
+//		String pDetail=mds.getJtaStrongPoint().getText().trim();
+//		String sellerID=mds.getJtfId().getText().trim();
+		
+		UserDAO uDAO=UserDAO.getInstance();
+		uDAO.selectProDetail(product_Code, "M");
+
+		
+		
+		mdVO=uDAO.selectProDetail(product_Code, "M");
+		
+		new ModifyProduct(mdVO ,this, rmm);
+		
+
+		
+		
+	}//modifySaleList
 
 	public void deleteSaleList() {
 
@@ -242,6 +275,7 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 					classFlag = "S"; // userDAO에서 selectProDetail method 사용할 때 구분용 플래그 ---->판매중인목록
 
 					openDetail();
+					
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -262,14 +296,23 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 
 		if (sl.getJtSell().getSelectedRow() != -1) {
 			if (ae.getSource() == sl.getJbtModify()) {
-				new ModifyProduct(sl,this, rmm);
+				try {
+					modifySaleList();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 			} // end if
 			if (ae.getSource() == sl.getJbtDelete()) {
 				deleteSaleList();
 			} // end if
+
+		
 		} else {
 			JOptionPane.showMessageDialog(sl, "수정/삭제를 원하시는 상품을 선택해주세요.");// end if
 		} // end else
+		
 
 	}// actionPerformed
 
