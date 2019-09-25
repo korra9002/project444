@@ -13,7 +13,8 @@ import userRun.RunMarketMain;
 import userView.PwUpdate;
 
 public class PwUpdateEvt implements ActionListener {
-	PwUpdate pu;
+	private PwUpdate pu;
+	public static boolean uFlag = false;
 	public PwUpdateEvt(PwUpdate pu) {
 		this.pu=pu;
 	}//PwUpdateEvt
@@ -58,15 +59,16 @@ public class PwUpdateEvt implements ActionListener {
 			JOptionPane.showMessageDialog(pu, "현재 비밀번호와 입력하신 변경할 비밀번호가 일치합니다.");
 			return;
 		}//end if
-					if(!curPw.isEmpty()&&!mfPw.isEmpty()) {
-						flag = uDAO.updatePw(pu.getId(), deMfPw);
-					}//end if
-							if(flag==false){
-								JOptionPane.showMessageDialog(pu,"변경하실 비밀번호를 입력해주세요.");
-							}else {
-								JOptionPane.showMessageDialog(pu,"비밀번호 변경이 올바르게 되었습니다.");
-									PwUpdateClose();
-							}//end else
+		if(!curPw.isEmpty()&&!mfPw.isEmpty()) {
+			flag = uDAO.updatePw(pu.getId(), deMfPw);
+			}//end if
+		if(flag==false){
+			JOptionPane.showMessageDialog(pu,"변경하실 비밀번호를 입력해주세요.");
+		}else {
+			JOptionPane.showMessageDialog(pu,"비밀번호 변경이 올바르게 되었습니다.");
+				uFlag =true;
+				PwUpdateClose();
+		}//end else
 		
 	}//modifyPw
 	

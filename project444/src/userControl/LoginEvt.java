@@ -68,17 +68,28 @@ public class LoginEvt implements ActionListener {
 					}//end if
 					
 				} else {
-					System.out.println(id);
-					System.out.println(Login_name);
+//					System.out.println(id);
+//					System.out.println(Login_name);
 					int cnt = 0;
 					if (!Login_name.isEmpty() && (cnt=uDAO.suspendRelief(id))!=0) {
+						boolean exitFlag = false;
 						
-						String msg = JOptionPane.showInputDialog(lg, "'매너유저가 되겠습니다'를 똑같이 적어주세요");
-						if (msg.equals("매너유저가 되겠습니다")) {
-							JOptionPane.showMessageDialog(lg, "정지가 해제되었습니다.^^");
-							new RunMarketMain(id);
-							lg.dispose();
-						}//end if
+						do {
+							String msg = JOptionPane.showInputDialog(lg, "'매너유저가 되겠습니다'를 똑같이 적어주세요");
+							switch(msg) {
+							case "매너유저가 되겠습니다":
+								JOptionPane.showMessageDialog(lg, "정지가 해제되었습니다.^^");
+								new RunMarketMain(id);
+								lg.dispose();	
+								exitFlag = true;
+								break;
+							
+							default : JOptionPane.showMessageDialog(lg, "제대로 입력해주세요.");
+							
+							System.out.println(exitFlag);
+							}//end switch
+							System.out.println(exitFlag);
+						}while(!exitFlag);
 						
 					}else {
 						JOptionPane.showMessageDialog(lg, "정지된 계정입니다.");
