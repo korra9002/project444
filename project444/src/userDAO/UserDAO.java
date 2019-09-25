@@ -1614,7 +1614,7 @@ System.out.println(slv);
 		return piVO;
 	}// selectPersonalInfom
 
-	public String selectPw(String pw) throws SQLException {
+	public String selectPw(String id,String pw) throws SQLException {
 		String curPw = "";
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -1622,10 +1622,11 @@ System.out.println(slv);
 		try {
 			con = getConn();
 			StringBuilder selectPw = new StringBuilder();
-			selectPw.append("select password from id_info where password=?");
+			selectPw.append("select password from id_info where user_id=? and password=?");
 
 			pstmt = con.prepareStatement(selectPw.toString());
-			pstmt.setString(1, pw);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				curPw = rs.getString(1);

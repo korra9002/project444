@@ -24,6 +24,7 @@ import userView.PwUpdate;
 public class PersonalInformEvt implements ActionListener{
 	private PersonalInform psi;
 	private RunMarketMain rmm;
+	private String curpw="";
 	private boolean pwFlag= false;
 	public PersonalInformEvt(PersonalInform psi, RunMarketMain rmm) {
 		this.psi=psi;
@@ -32,7 +33,7 @@ public class PersonalInformEvt implements ActionListener{
 	
 	public void modifyPw() throws SQLException {
 		String pw = "";
-		String curpw = "";
+	
 		String dePw = "";
 		String id = psi.getJtfId().getText().trim();
 		JPanel panel = new JPanel();
@@ -54,7 +55,7 @@ public class PersonalInformEvt implements ActionListener{
 			} // end catch
 		    
 		  UserDAO uDAO = UserDAO.getInstance();
-		  curpw= uDAO.selectPw(dePw);
+		  curpw= uDAO.selectPw(RunMarketMain.userId,dePw);
 		    if(curpw.isEmpty()) {
 		    	JOptionPane.showMessageDialog(psi, "비밀번호가 정확하지 않습니다.");
 		    }else {
