@@ -16,16 +16,16 @@ import java.net.Socket;
 import kr.co.sist.util.img.ImageResize;
 
 public class AdminFileRecieve extends Thread {
-	int bytesRead;
-	int current = 0;
-	FileOutputStream fos = null;
-	BufferedOutputStream bos = null;
-	Socket sock = null;
+	private int bytesRead;
+	private int current = 0;
+	private FileOutputStream fos = null;
+	private BufferedOutputStream bos = null;
+	private Socket sock = null;
 
-	ServerSocket servsock = null;
+	private ServerSocket servSock = null;
 
 	public AdminFileRecieve() throws IOException {
-		servsock = new ServerSocket(5001);
+		servSock = new ServerSocket(5001);
 
 	}
 
@@ -36,7 +36,7 @@ public class AdminFileRecieve extends Thread {
 			while (true) {
 				System.out.println("Waiting...");
 				try {
-					sock = servsock.accept();
+					sock = servSock.accept();
 					System.out.println("Accepted connection : " + sock);
 					// send file
 					byte[] mybytearray = new byte[6022386];
@@ -87,8 +87,8 @@ public class AdminFileRecieve extends Thread {
 			}
 		} finally {
 			try {
-				if (servsock != null)
-					servsock.close();
+				if (servSock != null)
+					servSock.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
