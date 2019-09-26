@@ -32,7 +32,7 @@ import userControl.MarketMainEvt;
    public class MarketMain extends JPanel {
       
       public static final int DOUBLE_CLICK=2;
-      
+       
       
       private DefaultComboBoxModel<String> dcbm, dcbm1;
       private JComboBox<String> jcbArea, jcbCategory;
