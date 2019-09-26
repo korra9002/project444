@@ -195,6 +195,7 @@ public class MarketDetailSellerEvt extends MouseAdapter implements ActionListene
 			//FlagVO fVO = checkFlag();
 			
 			sellerFlagVO sfVO = checkFlag();
+			System.out.println(sfVO);
 			if(!sfVO.getAllFLag().equals("P")) {
 				JOptionPane.showMessageDialog(mds, "판매중인 상품이 아닙니다. ");
 //				mds.dispose();
@@ -215,6 +216,7 @@ public class MarketDetailSellerEvt extends MouseAdapter implements ActionListene
 		
 		if(ae.getSource() == mds.getJbtDelete()) {
 			sellerFlagVO sfVO = checkFlag();
+			System.out.println(sfVO);
 			if(!sfVO.getAllFLag().equals("P")) {
 				JOptionPane.showMessageDialog(mds, "판매중인 상품이 아닙니다. ");
 //				mds.dispose();
@@ -233,6 +235,7 @@ public class MarketDetailSellerEvt extends MouseAdapter implements ActionListene
 		
 		if(ae.getSource() == mds.getJbtChange()) {
 			sellerFlagVO sfVO = checkFlag();
+			System.out.println(sfVO);
 			if(!sfVO.getAllFLag().equals("P")) {
 				JOptionPane.showMessageDialog(mds, "판매중인 상품이 아닙니다. ");
 //				mds.dispose();

@@ -1026,7 +1026,7 @@ System.out.println(slv);
 
 			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
 			// 것부터 조회
-			String checkFlag = "	select   product_code, (select count( sale_flag)from deal where (sale_flag  = 'P') and product_code=?  ) flag_count_P, (select count( sale_flag)from deal where (sale_flag  = 'Y') and product_code=?  ) flag_count_Y from product  where  product_code = ?;   ";
+			String checkFlag = "	select   all_flag, (select count( sale_flag)from deal where (sale_flag  = 'P') and product_code=?  ) flag_count_P, (select count( sale_flag)from deal where (sale_flag  = 'Y') and product_code=?  ) flag_count_Y from product  where  product_code = ?   ";
 
 			pstmt = con.prepareStatement(checkFlag);
 			pstmt.setString(1, productCode);
@@ -1036,7 +1036,7 @@ System.out.println(slv);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				sFVO = new sellerFlagVO(rs.getString("product_code"),rs.getInt("flag_count_p"),rs.getInt("flag_count_y") );
+				sFVO = new sellerFlagVO(rs.getString("all_flag"),rs.getInt("flag_count_p"),rs.getInt("flag_count_y") );
 			}
 
 		} finally {
