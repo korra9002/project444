@@ -33,6 +33,7 @@ public class AdminLoginView extends JFrame {
 		
 		// Jbutton
 		jbtLogin = new JButton("로그인");
+		jbtLogin .setBackground(new Color(0xFFCC66));
 
 		// 수동배치
 		setLayout(null);

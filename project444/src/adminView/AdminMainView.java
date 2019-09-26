@@ -1,5 +1,6 @@
 package adminView;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.ButtonGroup;
@@ -46,6 +47,7 @@ public class AdminMainView extends JFrame {
 
 		dcbCategory1 = new DefaultComboBoxModel<String>(categoryList1);
 		jcbCategory1 = new JComboBox<String>(dcbCategory1);
+		jcbCategory1 .setBackground(new Color(0xFFCC66));
 		
 		jtfSearch1 = new JTextField();
 		
@@ -59,6 +61,11 @@ public class AdminMainView extends JFrame {
 		jbtRefresh1 = new JButton("새로고침");
 		jbtRecent1 = new JButton("최신순");
 		jbtReset1 = new JButton("초기화");
+		
+		jbtSearch1 .setBackground(new Color(0xFFCC66));
+		jbtRefresh1 .setBackground(new Color(0xFFCC66));
+		jbtRecent1 .setBackground(new Color(0xFFCC66));
+		jbtReset1 .setBackground(new Color(0xFFCC66));
 		
 		String[] checkCol= {"상품코드", "이미지", "아이디", "카테고리", "제품명", "가격", "올린일자"};
 		Object[][] checkRow = {
@@ -150,6 +157,7 @@ public class AdminMainView extends JFrame {
 
 		dcbCategory2 = new DefaultComboBoxModel<String>(categoryList2);
 		jcbCategory2 = new JComboBox<String>(dcbCategory2);
+		jcbCategory2 .setBackground(new Color(0xFFCC66));
 		
 		onSale = new JCheckBox("판매중", true);
 		deleteNComplete = new JCheckBox("<html>판매완료/<br>삭제", true);
@@ -166,6 +174,11 @@ public class AdminMainView extends JFrame {
 		jbtRefresh2 = new JButton("새로고침");
 		jbtRecent2 = new JButton("최신순");
 		jbtReset2 = new JButton("초기화");
+		
+		jbtSearch2 .setBackground(new Color(0xFFCC66));
+		jbtRefresh2 .setBackground(new Color(0xFFCC66));
+		jbtRecent2 .setBackground(new Color(0xFFCC66));
+		jbtReset2 .setBackground(new Color(0xFFCC66));
 		
 		String[] productCol= {"상품코드","이미지","아이디","카테고리","제품명","가격","올린일자","<html>판매여부/<br/>삭제여부"};
 		Object[][] productRow = {
@@ -262,6 +275,7 @@ public class AdminMainView extends JFrame {
 
 		dcbCategory3 = new DefaultComboBoxModel<String>(searchList);
 		jcbCategory3 = new JComboBox<String>(dcbCategory3);
+		jcbCategory3 .setBackground(new Color(0xFFCC66));
 		
 		jtfSearch3 = new JTextField();
 		
@@ -269,6 +283,11 @@ public class AdminMainView extends JFrame {
 		jbtRefresh3 = new JButton("새로고침");
 		jbtReset3 = new JButton("초기화");
 		jbtReason = new JButton("정지사유");
+		
+		jbtSearch3 .setBackground(new Color(0xFFCC66));
+		jbtRefresh3 .setBackground(new Color(0xFFCC66));
+		jbtReset3 .setBackground(new Color(0xFFCC66));
+		jbtReason .setBackground(new Color(0xFFCC66));
 		JLabel jlbId = new JLabel("아이디");
 		
 		String[] idCol= {"아이디","이름","성별","전화번호","지역","가입일자","정지여부"};
@@ -307,11 +326,11 @@ public class AdminMainView extends JFrame {
 		////////테이블 크기설정 시작////////
 		jtUserList.getTableHeader().setReorderingAllowed(false);//테이블 컬럼 위치 변경 금지
 		
-		jtUserList.getColumnModel().getColumn(0).setPreferredWidth(90);
+		jtUserList.getColumnModel().getColumn(0).setPreferredWidth(140);
 		jtUserList.getColumnModel().getColumn(0).setResizable(false);;//테이블 컬럼 사이즈 변경 금지
-		jtUserList.getColumnModel().getColumn(1).setPreferredWidth(140);
+		jtUserList.getColumnModel().getColumn(1).setPreferredWidth(90);
 		jtUserList.getColumnModel().getColumn(1).setResizable(false);;
-		jtUserList.getColumnModel().getColumn(2).setPreferredWidth(110);
+		jtUserList.getColumnModel().getColumn(2).setPreferredWidth(100);
 		jtUserList.getColumnModel().getColumn(2).setResizable(false);;
 		jtUserList.getColumnModel().getColumn(3).setPreferredWidth(130);
 		jtUserList.getColumnModel().getColumn(3).setResizable(false);;
@@ -322,7 +341,7 @@ public class AdminMainView extends JFrame {
 		jtUserList.getColumnModel().getColumn(6).setPreferredWidth(90);
 		jtUserList.getColumnModel().getColumn(6).setResizable(false);;
 		
-		jtUserList.setRowHeight(100);
+		jtUserList.setRowHeight(30);
 		////////테이블 크기설정 끝////////
 		
 		JPanel jpUserList = new JPanel(null);
@@ -386,6 +405,7 @@ public class AdminMainView extends JFrame {
 		setBounds(100, 100, 850, 700);
 		setResizable(false);
 		setVisible(true);
+		setBackground(new Color(0xE8E8E8));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}//SaleList

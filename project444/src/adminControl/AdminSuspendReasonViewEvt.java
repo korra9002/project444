@@ -1,5 +1,7 @@
 package adminControl;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -9,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import adminVO.SuspendIdVO;
 import adminView.AdminSuspendReasonView;
 
-public class AdminSuspendReasonViewEvt{
+public class AdminSuspendReasonViewEvt implements ActionListener{
 	
 	private AdminSuspendReasonView asrv;
 	
@@ -54,5 +56,13 @@ public class AdminSuspendReasonViewEvt{
 		}//end for
 
 	}//selectSuspendList
+
+	@Override
+	public void actionPerformed(ActionEvent ae) {
+		if (ae.getSource() == asrv.getJbtOk()) {
+			asrv.dispose();
+		}//end if
+		
+	}//actionPerformed
 	
 }//class

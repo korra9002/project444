@@ -1,7 +1,9 @@
 package adminView;
 
+import java.awt.Color;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -17,6 +19,7 @@ import adminVO.SuspendIdVO;
 public class AdminSuspendReasonView extends JDialog {
 	private JTable jtaSuspendList;
 	private DefaultTableModel dtmSuspendList;
+	private JButton jbtOk;
 	private List<SuspendIdVO> list;
 	
 	private AdminMainView amv;
@@ -28,6 +31,9 @@ public class AdminSuspendReasonView extends JDialog {
 		
 		String [] cols = {"아이디", "정지사유", "정지날짜", "정지기간(일)"};
 		String [][] rows = {{"", "", ""}};
+		
+		jbtOk = new JButton("확인");
+		jbtOk .setBackground(new Color(0xFFCC66));
 		
 		dtmSuspendList = new DefaultTableModel(rows, cols){//셀 내용 수정 금지
 			@Override
@@ -63,11 +69,14 @@ public class AdminSuspendReasonView extends JDialog {
 		////////테이블 크기설정 끝////////
 		
 		setLayout(null);
-		jspSuspendList.setBounds(10, 10, 480, 300);
+		jspSuspendList.setBounds(10, 10, 480, 250);
+		jbtOk.setBounds(230, 280, 60, 30);
 		
 		add(jspSuspendList);
+		add(jbtOk);
 		
 		AdminSuspendReasonViewEvt asrve = new AdminSuspendReasonViewEvt(this);
+		jbtOk.addActionListener(asrve);
 		
 		setBounds(amv.getX()+800, amv.getY()+50, 520, 380);
 		setVisible(true);
@@ -89,6 +98,10 @@ public class AdminSuspendReasonView extends JDialog {
 
 	public AdminMainView getAmv() {
 		return amv;
+	}
+
+	public JButton getJbtOk() {
+		return jbtOk;
 	}
 
 }//class
