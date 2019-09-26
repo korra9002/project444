@@ -19,7 +19,7 @@ import userRun.RunMarketMain;
 @SuppressWarnings("serial")
 public class InsertProduct extends JPanel {
 
-	private JLabel jlbProductImg;
+	private JLabel jlbProductImg, jlSubject, jlPrice, jlExplain;
 	private JButton jbtSelectImg, jbtOkay, jbtCancel ;
 	private JTextField jtfSubject, jtfPrice;
 	private JTextArea jtaExplain;
@@ -39,6 +39,10 @@ public class InsertProduct extends JPanel {
 		
 		jlbProductImg = new JLabel("제품 이미지",JLabel.CENTER);
 		jlbProductImg.setBorder(new EtchedBorder(EtchedBorder.RAISED));//이미지 라벨 테두리 설정
+		
+		jlSubject=new JLabel("상품명", JLabel.CENTER);
+		jlPrice=new JLabel("상품 가격", JLabel.CENTER);
+		jlExplain=new JLabel("상품 정보", JLabel.CENTER);
 		
 		jbtSelectImg = new JButton("사진 등록");
 //		jbtSelectImg.addActionListener(new InsertProductEvt(this,rmm));
@@ -62,18 +66,24 @@ public class InsertProduct extends JPanel {
 		setLayout(null);
 		
 //		jtp.setBounds(0, 10, 400, 30);
-		jlbProductImg.setBounds(50, 30, 220, 200);//이미지 사이즈 120x100
+		jlbProductImg.setBounds(50, 30, 200, 200);//이미지 사이즈 120x100
 		jbtSelectImg.setBounds(330, 100, 140, 40);
+		jlSubject.setBounds(50, 270, 130, 40);
+		jlPrice.setBounds(50, 320, 130, 40);
+		jlExplain.setBounds(50, 380, 130, 40);
 		jcbCategory.setBounds(530, 80, 200, 60);
-		jtfSubject.setBounds(50, 270, 680, 40);
-		jtfPrice.setBounds(50, 320, 680, 40);
-		jspExplain.setBounds(50, 380, 680, 310);
+		jtfSubject.setBounds(180, 270, 550, 40);
+		jtfPrice.setBounds(180, 320, 550, 40);
+		jspExplain.setBounds(180, 380, 550, 310);
 		jbtOkay.setBounds(240, 720, 120, 40); 
 		jbtCancel.setBounds(400, 720, 120, 40);
 		
 		add(jlbProductImg);
 		add(jbtSelectImg);
 		add(jcbCategory);
+		add(jlSubject);
+		add(jlPrice);
+		add(jlExplain);
 		add(jtfSubject);
 		add(jtfPrice);
 		add(jspExplain);
