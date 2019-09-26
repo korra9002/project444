@@ -179,7 +179,7 @@ public class PersonalInformEvt implements ActionListener{
 				modifyRegister();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}//end catch
+			}//end catch 
 		}//end if
 	}//actionPerformed
 	
