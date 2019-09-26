@@ -30,9 +30,7 @@ public class MarketDetailSeller extends JDialog {
 	private String id;
 	private MarketDetailVO mdVO;
 	DecimalFormat df=new DecimalFormat ("#,###,###");
-	public MarketDetailSeller() {
-		
-	}//MarketDetailSeller
+
 	
 	public MarketDetailSeller(MarketMain mm, MarketDetailVO mdVO, String id) {
 

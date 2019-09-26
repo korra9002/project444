@@ -17,7 +17,7 @@ import userView.MarketMain;
 public class MarketDetailBuyerEvt implements ActionListener{
 	private MarketDetailBuyer mdb;
 	private MarketMain mm;
-	private String id,sellerId;
+	private String id;
 	private DCodeAndIdAO DIAO;
 	private InterestListEvt ile;
 	/////////////////////////////Ãß°¡ ±è¼­¿µ 2019-09-19/////////////////////
