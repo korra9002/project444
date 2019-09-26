@@ -2,10 +2,13 @@ package adminControl;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
 import javax.swing.JOptionPane;
 
+import adminFileServer.AdminFileRecieve;
+import adminFileServer.AdminFileSend;
 import adminView.AdminLoginView;
 import adminView.AdminMainView;
 import kr.co.sist.util.cipher.DataEncrypt;
@@ -16,6 +19,7 @@ public class AdminLoginEvt implements ActionListener {
 	
 	public AdminLoginEvt(AdminLoginView alv) {
 		this.alv = alv;
+		
 	}//AdminLoginEvt
 	
 	private void login() {
@@ -29,6 +33,12 @@ public class AdminLoginEvt implements ActionListener {
 		
 		if (id.equals("admin") && pw.equals("1234")) {
 			new AdminMainView();
+			try {
+				new AdminFileRecieve().start();
+				new AdminFileSend().start();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}//end catch
 			alv.dispose();
 		}else {
 			JOptionPane.showMessageDialog(alv, "아이디 또는 비밀번호를 확인해주세요.");
