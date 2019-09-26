@@ -78,10 +78,10 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 		try {
 			List<CheckListVO> list = aDAO.selectAllCheckList(cv);
 			
-			if(list.isEmpty()) {//검수할 제품이 없는 경우
-				JOptionPane.showMessageDialog(amv, "검수할 제품이 없습니다.");
-				resetCheckList();
-			}//end if
+//			if(list.isEmpty()) {//검수할 제품이 없는 경우
+//				JOptionPane.showMessageDialog(amv, "검수할 제품이 없습니다.");
+//				resetCheckList();
+//			}//end if
 			
 			CheckListVO clv = null;
 			
@@ -107,7 +107,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				rowData[3] = clv.getCategory();
 				rowData[4] = clv.getProduct_name();
 				rowData[5] = clv.getPrice();
-				rowData[6] = "<HTML>" + clv.getUpload_date().replace(" ", " <br>");
+				rowData[6] = clv.getUpload_date();
 				
 				//dtm에 추가
 				dtm.addRow(rowData);
@@ -151,9 +151,9 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 		try {
 			List<CheckListVO> list = aDAO.selectCheckOrderbyList(cv);
 			
-			if(list.isEmpty()) {//제품이 없는 경우
-				JOptionPane.showMessageDialog(amv, "정렬할 제품이 없습니다.");
-			}//end if
+//			if(list.isEmpty()) {//제품이 없는 경우
+//				JOptionPane.showMessageDialog(amv, "정렬할 제품이 없습니다.");
+//			}//end if
 			
 			CheckListVO clv = null;
 			
@@ -179,7 +179,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				rowData[3] = clv.getCategory();
 				rowData[4] = clv.getProduct_name();
 				rowData[5] = clv.getPrice();
-				rowData[6] = "<HTML>" + clv.getUpload_date().replace(" ", " <br>");
+				rowData[6] = clv.getUpload_date();
 				
 				//dtm에 추가
 				dtm.addRow(rowData);
@@ -235,7 +235,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				rowData[3] = clv.getCategory();
 				rowData[4] = clv.getProduct_name();
 				rowData[5] = clv.getPrice();
-				rowData[6] = "<HTML>" + clv.getUpload_date().replace(" ", " <br>");
+				rowData[6] = clv.getUpload_date();
 				
 				//dtm에 추가
 				dtm.addRow(rowData);
@@ -325,7 +325,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 
 			if(list.isEmpty()) {//제품이 없는 경우
 //				JOptionPane.showMessageDialog(amv, "등록된 제품이 없습니다.");
-				resetProductList();
+//				resetProductList();
 			}//end if
 			
 			ProductListVO plv = null;
@@ -353,7 +353,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				rowData[3] = plv.getCategory();
 				rowData[4] = plv.getProduct_name();
 				rowData[5] = plv.getPrice();
-				rowData[6] = "<HTML>" + plv.getUpload_date().replace(" ", " <br>");
+				rowData[6] = plv.getUpload_date();
 
 				switch (plv.getAll_flag()) {
 				case "P": rowData[7] = "판매중"; break;
@@ -415,7 +415,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				rowData[3] = plv.getCategory();
 				rowData[4] = plv.getProduct_name();
 				rowData[5] = plv.getPrice();
-				rowData[6] = "<HTML>" + plv.getUpload_date().replace(" ", " <br>");
+				rowData[6] = plv.getUpload_date();
 				
 				switch (plv.getAll_flag()) {
 				case "P": rowData[7] = "판매중"; break;
@@ -484,10 +484,10 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 		try {
 			List<ProductListVO> list = aDAO.selectOrderByProductList(pVO);
 			
-			if(list.isEmpty()) {//제품이 없는 경우
-				JOptionPane.showMessageDialog(amv, "정렬할 제품이 없습니다.");
-				resetProductList();
-			}//end if
+//			if(list.isEmpty()) {//제품이 없는 경우
+//				JOptionPane.showMessageDialog(amv, "정렬할 제품이 없습니다.");
+//				resetProductList();
+//			}//end if
 			
 			ProductListVO plv = null;
 			
@@ -513,7 +513,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				rowData[3] = plv.getCategory();
 				rowData[4] = plv.getProduct_name();
 				rowData[5] = plv.getPrice();
-				rowData[6] = "<HTML>" + plv.getUpload_date().replace(" ", " <br>");
+				rowData[6] = plv.getUpload_date();
 				
 				switch (plv.getAll_flag()) {
 				case "P": rowData[7] = "판매중"; break;
@@ -600,7 +600,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				rowData[2] = uiVO.getGender().equals("F")?"여자":"남자";
 				rowData[3] = uiVO.getPhone();
 				rowData[4] = uiVO.getLoc();
-				rowData[5] = "<HTML>" + uiVO.getJoin_date().replace(" ", " <br>");
+				rowData[5] = uiVO.getJoin_date();
 				rowData[6] = uiVO.getSuspend_flag();
 				
 				//dtm에 추가
@@ -648,7 +648,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				rowData[2] = uiVO.getGender().equals("F")?"여자":"남자";
 				rowData[3] = uiVO.getPhone();
 				rowData[4] = uiVO.getLoc();
-				rowData[5] = "<HTML>" + uiVO.getJoin_date().replace(" ", " <br>");
+				rowData[5] = uiVO.getJoin_date();
 				rowData[6] = uiVO.getSuspend_flag();
 				
 				//dtm에 추가

@@ -26,7 +26,7 @@ public class AdminSuspendReasonView extends JDialog {
 		this.amv = amv;
 		this.list = list;
 		
-		String [] cols = {"아이디", "정지사유", "정지날짜", "정지기간"};
+		String [] cols = {"아이디", "정지사유", "정지날짜", "정지기간(일)"};
 		String [][] rows = {{"", "", ""}};
 		
 		dtmSuspendList = new DefaultTableModel(rows, cols){//셀 내용 수정 금지
