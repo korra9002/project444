@@ -43,6 +43,7 @@ public class ModifyProduct extends JFrame {
 		String selectedValue1=mdVO.getProductName()+"("+mdVO.getProductCode()+")"; 
 		int selectedValue2=mdVO.getPrice();	//가격	
 		String selectedValue3=mdVO.getCategory(); //카테고리
+		String selectedValue4=mdVO.getpDetail(); // 상품디테일
 
 		System.out.println(selectedValue3);
 		
@@ -86,7 +87,7 @@ public class ModifyProduct extends JFrame {
 //		List<SaleListVO> list =
 		
 
-		jtaExplain = new JTextArea("상세 설명");//이벤트처리-클릭 시 텍스트 사라지게
+		jtaExplain = new JTextArea(selectedValue4);//이벤트처리-클릭 시 텍스트 사라지게
 
 		
 		///////////////////////// 상세설명 가져오기 끝 /////////////////////////////////////////
@@ -99,7 +100,7 @@ public class ModifyProduct extends JFrame {
 		
 		setLayout(null);
 		
-		jlbProductImg.setBounds(10, 20, 120, 100);//이미지 사이즈 120x100
+		jlbProductImg.setBounds(10, 20, 100, 100);//이미지 사이즈 120x100
 //		jbtSelectImg.setBounds(150, 55, 100, 30);
 		jlCategory.setBounds(270, 43, 120, 50);
 		jtfSubject.setBounds(10, 160, 385, 30);

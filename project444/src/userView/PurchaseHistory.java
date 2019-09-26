@@ -25,6 +25,7 @@ public class PurchaseHistory extends JDialog {
 	private JTable jtPurchaseList;
 	private DefaultTableModel dtmPurchaseList;
 	public static final int CENTER = 0;
+	
 	 
 	public PurchaseHistory(RunMarketMain rmm) throws SQLException {
 		super(rmm,"구매내역");
@@ -67,17 +68,17 @@ public class PurchaseHistory extends JDialog {
 		////////테이블 크기설정////////
 		jtPurchaseList.getTableHeader().setReorderingAllowed(false);//테이블 컬럼 위치 변경 금지
 		
-		jtPurchaseList.getColumnModel().getColumn(0).setPreferredWidth(120);
+		jtPurchaseList.getColumnModel().getColumn(0).setPreferredWidth(100);
 		jtPurchaseList.getColumnModel().getColumn(0).setResizable(false);;//테이블 컬럼 사이즈 변경 금지
-		jtPurchaseList.getColumnModel().getColumn(1).setPreferredWidth(120);
+		jtPurchaseList.getColumnModel().getColumn(1).setPreferredWidth(170);
 		jtPurchaseList.getColumnModel().getColumn(1).setResizable(false);;
-		jtPurchaseList.getColumnModel().getColumn(2).setPreferredWidth(75);
+		jtPurchaseList.getColumnModel().getColumn(2).setPreferredWidth(50);
 		jtPurchaseList.getColumnModel().getColumn(2).setResizable(false);;
-		jtPurchaseList.getColumnModel().getColumn(3).setPreferredWidth(75);
+		jtPurchaseList.getColumnModel().getColumn(3).setPreferredWidth(50);
 		jtPurchaseList.getColumnModel().getColumn(3).setResizable(false);;
-		jtPurchaseList.getColumnModel().getColumn(4).setPreferredWidth(75);
+		jtPurchaseList.getColumnModel().getColumn(4).setPreferredWidth(48);
 		jtPurchaseList.getColumnModel().getColumn(4).setResizable(false);;
-		jtPurchaseList.getColumnModel().getColumn(5).setPreferredWidth(75);
+		jtPurchaseList.getColumnModel().getColumn(5).setPreferredWidth(110);
 		jtPurchaseList.getColumnModel().getColumn(5).setResizable(false);;
 		
 		jtPurchaseList.setRowHeight(100);

@@ -2,6 +2,7 @@ package userView;
 
 import java.awt.BorderLayout;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -25,7 +26,7 @@ public class SaleList extends JDialog {
 	private JButton jbtDelete, jbtModify;
 	private JTable jtSell, jtComplete;
 	private DefaultTableModel dtmSell, dtmComp;
-	
+
 	public SaleList(RunMarketMain rmm) throws SQLException {
 		super(rmm,"판매내역");
 		////////////////////////////////첫번째 탭 시작////////////////////////////////

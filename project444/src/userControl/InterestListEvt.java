@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -32,6 +33,7 @@ public class InterestListEvt extends MouseAdapter implements ActionListener{
 	private String productCode="";
 	private String loc_code="";
 	private String classFlag="I"; ////userDAO에서 selectProDetail method 사용할 때 구분용 플래그
+	DecimalFormat df=new DecimalFormat ("#,###,###");
 	
 	public InterestListEvt(InterestList il) {
 		this.il =il;
@@ -90,7 +92,7 @@ public class InterestListEvt extends MouseAdapter implements ActionListener{
 				rowData[0] =(new ImageIcon(new ImageIcon(RunMarketMain.imgPath+"/"+"default.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 			}
 			rowData[1]=alv.getProductName()+"("+alv.getProductCode()+")";
-			rowData[2]=alv.getPrice();
+			rowData[2]=df.format(alv.getPrice());
 			rowData[3]=alv.getSellerID();
 			rowData[4]=alv.getLoc_code();
 			rowData[5]=alv.getUpload_date();

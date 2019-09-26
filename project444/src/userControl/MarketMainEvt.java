@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -36,13 +37,17 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener {
 
 	private String sortFlag = "UD";
 	private boolean recentFlag, priceFlag;
-
+	
+	DecimalFormat df=new DecimalFormat ("#,###,###");
 	public MarketMainEvt(MarketMain mm, String id, InterestListEvt ile) throws SQLException {
 		this.mm = mm;
 		this.id = id;
 		this.ile = ile;
 //		setAllList();
 		setList(sortFlag);
+		
+
+		
 	}// MarketMainEvt
 
 //	public void setAllList() throws SQLException {
@@ -321,7 +326,7 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener {
 			}
 			rowData[1] = alv.getProductName() + "(" + alv.getProductCode() + ")";
 			rowData[2] = alv.getLoc_code();
-			rowData[3] = alv.getPrice();
+			rowData[3] = df.format(alv.getPrice());
 			rowData[4] = alv.getUpload_date();
 			rowData[5] = alv.getCategory();
 			rowData[6] = alv.getSellerID();

@@ -63,17 +63,17 @@ public class InterestList extends JDialog {
 		////////테이블 크기설정////////
 		jtInterest.getTableHeader().setReorderingAllowed(false);//테이블 컬럼 위치 변경 금지
 		
-		jtInterest.getColumnModel().getColumn(0).setPreferredWidth(120);
+		jtInterest.getColumnModel().getColumn(0).setPreferredWidth(100);
 		jtInterest.getColumnModel().getColumn(0).setResizable(false);//테이블 컬럼 사이즈 변경 금지
 		jtInterest.getColumnModel().getColumn(1).setPreferredWidth(120);
 		jtInterest.getColumnModel().getColumn(1).setResizable(false);
-		jtInterest.getColumnModel().getColumn(2).setPreferredWidth(75);
+		jtInterest.getColumnModel().getColumn(2).setPreferredWidth(50);
 		jtInterest.getColumnModel().getColumn(2).setResizable(false);
 		jtInterest.getColumnModel().getColumn(3).setPreferredWidth(75);
 		jtInterest.getColumnModel().getColumn(3).setResizable(false);
-		jtInterest.getColumnModel().getColumn(4).setPreferredWidth(75);
+		jtInterest.getColumnModel().getColumn(4).setPreferredWidth(50);
 		jtInterest.getColumnModel().getColumn(4).setResizable(false);
-		jtInterest.getColumnModel().getColumn(5).setPreferredWidth(75);
+		jtInterest.getColumnModel().getColumn(5).setPreferredWidth(80);
 		jtInterest.getColumnModel().getColumn(5).setResizable(false);
 		
 		jtInterest.setRowHeight(100);

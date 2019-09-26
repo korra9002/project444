@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -24,6 +25,7 @@ public class PurchaseHistoryEvt extends MouseAdapter {
 	private PurchaseHistory ph;
 	private RunMarketMain rmm;
 	String id;
+	DecimalFormat df=new DecimalFormat ("#,###,###");
 	
 	public PurchaseHistoryEvt(PurchaseHistory ph, RunMarketMain rmm ) throws SQLException {
 		
@@ -76,7 +78,7 @@ public class PurchaseHistoryEvt extends MouseAdapter {
 				rowData[0] = (new ImageIcon(new ImageIcon(RunMarketMain.imgPath+"/"+"default.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 			}
 			rowData[1]=slv.getProductName()+"("+slv.getProductCode()+")";
-			rowData[2]=slv.getPrice();
+			rowData[2]=df.format(slv.getPrice());
 			rowData[3]=slv.getSellerID();
 			rowData[4]=slv.getLoc_code();
 			rowData[5]=slv.getUpload_date();

@@ -3,6 +3,7 @@ package userView;
 import java.awt.Image;
 import java.io.File;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,6 +31,7 @@ public class MarketDetailBuyer extends JDialog {
 	private MarketMain mm;
 	private String productCode, id;
 	private InterestListEvt ile;
+	DecimalFormat df=new DecimalFormat ("#,###,###");
 	public MarketDetailBuyer(MarketMain mm, MarketDetailVO mdVO, String id, InterestListEvt ile) throws SQLException {
 		this.id = id;
 //		jlDetailImg = new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/img/¹«¹Î.jpg/"));// ½æ³×ÀÏX / ¿øº» ÀÌ¹ÌÁö
@@ -67,7 +69,7 @@ public class MarketDetailBuyer extends JDialog {
 		}
 		
 		jtfName = new JTextField(mdVO.getProductName());
-		jtfPrice = new JTextField(Integer.toString(mdVO.getPrice()));
+		jtfPrice = new JTextField((df.format (mdVO.getPrice())));
 		jtfId = new JTextField(mdVO.getSellerID());
 		jtfInputDate = new JTextField(mdVO.getUpload_date());
 		jtfCategory = new JTextField(mdVO.getCategory());

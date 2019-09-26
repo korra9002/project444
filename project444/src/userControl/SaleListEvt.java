@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -34,7 +35,8 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 	String id;
 	String classFlag = "";
 	String productCode = "";
-
+	DecimalFormat df=new DecimalFormat ("#,###,###");
+	
 	public SaleListEvt(SaleList sl, RunMarketMain rmm) throws SQLException {
 		this.sl = sl;
 		this.rmm = rmm;
@@ -104,7 +106,7 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 				rowData[0] = (new ImageIcon(new ImageIcon(RunMarketMain.imgPath+"/"+"default.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 			}
 			rowData[1] = slv.getProductName() + "(" + slv.getProductCode() + ")";
-			rowData[2] = slv.getPrice();
+			rowData[2] = df.format(slv.getPrice());
 			rowData[3] = slv.getCategory();
 			rowData[4] = slv.getLoc_code();
 			rowData[5] = slv.getUpload_date();
@@ -151,7 +153,7 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 				rowData[0] = (new ImageIcon(new ImageIcon(RunMarketMain.imgPath+"/"+"default.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 			}
 			rowData[1] = slv.getProductName() + "(" + slv.getProductCode() + ")";
-			rowData[2] = slv.getPrice();
+			rowData[2] = df.format(slv.getPrice());
 			rowData[3] = slv.getCategory();
 			rowData[4] = slv.getLoc_code();
 			rowData[5] = slv.getSellerID();

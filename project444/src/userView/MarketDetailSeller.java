@@ -3,6 +3,7 @@ package userView;
 import java.awt.Checkbox;
 import java.awt.Image;
 import java.io.File;
+import java.text.DecimalFormat;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,11 +29,13 @@ public class MarketDetailSeller extends JDialog {
 	private JTextArea jtaStrongPoint;
 	private String id;
 	private MarketDetailVO mdVO;
+	DecimalFormat df=new DecimalFormat ("#,###,###");
 	public MarketDetailSeller() {
 		
 	}//MarketDetailSeller
 	
 	public MarketDetailSeller(MarketMain mm, MarketDetailVO mdVO, String id) {
+
 		this.id = id;
 		this.mdVO = mdVO;
 //		jlDetailImg = new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/img/¹«¹Î.jpg/"));//½æ³×ÀÏX / ¿øº» ÀÌ¹ÌÁö
@@ -56,7 +59,7 @@ public class MarketDetailSeller extends JDialog {
 		
 		
 		jtfName=new JTextField(mdVO.getProductName()+"("+mdVO.getProductCode()+")");
-		jtfPrice=new JTextField(Integer.toString(mdVO.getPrice()));
+		jtfPrice = new JTextField((df.format (mdVO.getPrice())));
 		jtfId=new JTextField(mdVO.getSellerID());
 		jtfInputDate=new JTextField(mdVO.getUpload_date());
 		jtfCategory=new JTextField(mdVO.getCategory());
