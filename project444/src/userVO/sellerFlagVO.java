@@ -19,6 +19,10 @@ public class sellerFlagVO {
 	public int getyFlag() {
 		return yFlag;
 	}
+	@Override
+	public String toString() {
+		return "sellerFlagVO [pFlag=" + pFlag + ", yFlag=" + yFlag + ", allFLag=" + allFLag + "]";
+	}
 	
 	
 }
