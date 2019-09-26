@@ -1,5 +1,7 @@
 package chatTest;
 
+import java.awt.Color;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -15,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 
 import userVO.DCodeAndIdAO;
 import userView.MarketMain;
@@ -71,6 +74,28 @@ public class ChattingView extends JFrame {
 		jbtCancle.setBounds(300,520, 75, 25);
 		//JLabel
 		jlNotice.setBounds(35,520 , 250, 25);
+		
+		Container c = getContentPane();
+		c.setBackground(new Color(0xE8E8E8));
+		jbtCancle.setBackground(new Color(0xFFCC66));
+		jbtOk.setBackground(new Color(0xFFCC66));
+		jbtProductInfo.setBackground(new Color(0xFFCC66));
+		jbtSend.setBackground(new Color(0xFFCC66));
+		
+		jsp.getVerticalScrollBar().setBackground(new Color(0xFFFFFF));
+		
+		jsp.getVerticalScrollBar().setUI(new BasicScrollBarUI()
+        {
+			
+            @Override
+            protected void configureScrollBarColors()
+            {
+                this.thumbColor = new Color(0xFFCC66);
+            }
+            
+        });
+		
+		
 		//¹èÄ¡
 //	
 		add(jbtProductInfo);

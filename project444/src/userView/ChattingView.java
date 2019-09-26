@@ -1,5 +1,8 @@
 package userView;
 
+import java.awt.Color;
+import java.awt.Container;
+
 import javax.swing.JButton; 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -35,6 +38,16 @@ public class ChattingView extends JFrame {
 		jbtCancle.setBounds(300,520, 75, 25);
 		//JLabel
 		jlNotice.setBounds(35,520 , 250, 25);
+		
+		Container c = getContentPane();
+		c.setBackground(new Color(0xE8E8E8));
+		jbtCancle.setBackground(new Color(0xFFCC66));
+		jbtOk.setBackground(new Color(0xFFCC66));
+		jbtProductInfo.setBackground(new Color(0xFFCC66));
+		jbtSend.setBackground(new Color(0xFFCC66));
+		
+		
+		
 		//¹èÄ¡
 		add(jbtProductInfo);
 		add(jtaChatView);
