@@ -22,7 +22,7 @@ public class AdminSuspendReasonViewEvt{
 	
 	private void selectSuspendList() {
 		DefaultTableModel dtm = asrv.getDtmSuspendList();
-		SimpleDateFormat sdf = new SimpleDateFormat ( "yyyy-MM-dd HH");
+		SimpleDateFormat sdf = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
 		
 		dtm.setRowCount(0);
 		Object[] rowData = null;
@@ -46,7 +46,7 @@ public class AdminSuspendReasonViewEvt{
 			rowData[1] = siVO.getSuspendReason();
 //			rowData[2] = siVO.getSuspendDate();
 //			date[i] =  siVO.getSuspendDate();
-			rowData[2] = sdf.format(siVO.getSuspendDate());
+			rowData[2] = "<HTML>"+sdf.format(siVO.getSuspendDate()).replace(" ", "<br/>");
 			rowData[3] = new Integer(siVO.getPeriod());
 
 			dtm.addRow(rowData);
