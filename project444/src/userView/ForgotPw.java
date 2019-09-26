@@ -1,5 +1,7 @@
 package userView;
 
+import java.awt.Color;
+import java.awt.Container;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -49,6 +51,13 @@ public class ForgotPw extends JDialog {
 		jbtCancle.setBounds(250, 250, 80, 30);
 		
 		jcbPwHint.setBounds(100, 125, 300, 25);
+		
+		Container c = getContentPane();
+		c.setBackground(new Color(0xE8E8E8));
+		jbtCancle.setBackground(new Color(0xFFCC66));
+		jbtSearch.setBackground(new Color(0xFFCC66));
+		jcbPwHint.setBackground(new Color(0xE8E8E8));
+		
 		add(jlId);
 		add(jlPwHint);
 		add(jlPwAnswer);

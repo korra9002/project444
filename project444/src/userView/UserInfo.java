@@ -66,12 +66,12 @@ public class UserInfo extends JPanel {
 //      setResizable(false);
 //		setBounds(100, 100, 540, 470);
 
-		setBackground(new Color(0xFFFFFF));
-		jbtPersonalData.setBackground(new Color(0xc8ddf2));
-		jbtBuy.setBackground(new Color(0xc8ddf2));	
-		jbtSell.setBackground(new Color(0xc8ddf2));
-		jbtLike.setBackground(new Color(0xc8ddf2));	
-		jbtLogout.setBackground(new Color(0xc8ddf2));	
+		setBackground(new Color(0xE8E8E8));
+		jbtPersonalData.setBackground(new Color(0xFFCC66));
+		jbtBuy.setBackground(new Color(0xFFCC66));	
+		jbtSell.setBackground(new Color(0xFFCC66));
+		jbtLike.setBackground(new Color(0xFFCC66));	
+		jbtLogout.setBackground(new Color(0xFFCC66));	
 	
 		// 이벤트처리
 		UserInfoEvt uife = new UserInfoEvt(this, rmm);

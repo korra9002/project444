@@ -4,6 +4,8 @@ package userView;
 
 import java.awt.Checkbox;
 import java.awt.CheckboxGroup;
+import java.awt.Color;
+import java.awt.Container;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -133,6 +135,15 @@ public class SignUp extends JDialog {
 		jpPhone.add(jtfPhone2);
 		jpPhone.setBounds(60, 320, 550, 25);
 		
+		
+		Container c = getContentPane();
+		c.setBackground(new Color(0xE8E8E8));
+		jbtRegister.setBackground(new Color(0xFFCC66));
+		jbtCancle.setBackground(new Color(0xFFCC66));
+		jbtIdCheck.setBackground(new Color(0xFFCC66));
+		jpPhone.setBackground(new Color(0xE8E8E8));
+		jrbMan.setBackground(new Color(0xE8E8E8));
+		jrbWomen.setBackground(new Color(0xE8E8E8));
 		// ¹èÄ¡
 		add(jlId);
 		add(jlPw);

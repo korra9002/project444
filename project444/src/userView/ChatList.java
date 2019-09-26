@@ -96,11 +96,11 @@ public class ChatList extends JPanel {
 		add(jbSell);
 
 //		setBounds(100, 100,  600, 450);
-		setBackground(new Color(0xFFFFFF));
-		jtProductList.getTableHeader().setBackground(new Color(0xFFB495));
-		jbBuy.setBackground(new Color(0xFFB495));
-		jbSell.setBackground(new Color(0xFFB495));
-		jbRefresh.setBackground(new Color(0xFFB495));
+		setBackground(new Color(0xE8E8E8));
+		jtProductList.getTableHeader().setBackground(new Color(0xFFCC66));
+		jbBuy.setBackground(new Color(0xFFCC66));
+		jbSell.setBackground(new Color(0xFFCC66));
+		jbRefresh.setBackground(new Color(0xFFCC66));
 		setVisible(true);
 cle = new ChatListEvt(this);
 jbRefresh.addActionListener(cle);

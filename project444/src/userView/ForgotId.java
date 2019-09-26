@@ -1,5 +1,7 @@
 package userView;
 
+import java.awt.Color;
+import java.awt.Container;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -51,6 +53,15 @@ public class ForgotId extends JDialog {
 		
 		jcbPhoneNum.setBounds(100, 50,55, 25);
 		setBounds(100, 100, 380, 250);
+		
+		Container c = getContentPane();
+		c.setBackground(new Color(0xE8E8E8));
+		jbtCancle.setBackground(new Color(0xFFCC66));
+		jbtSearch.setBackground(new Color(0xFFCC66));
+		jcbPhoneNum.setBackground(new Color(0xE8E8E8));
+		
+		
+		
 
 		add(jlPhone);
 		add(jlHyphen);
