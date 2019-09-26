@@ -93,14 +93,14 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				
 				//배열에 값을 할당
 				rowData[0] = clv.getProduct_code();
+				
 				if(new File(RunMarketMain.imgPath+"/"+clv.getImg_file()).exists()) {
-					
 					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+clv.getImg_file()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-//			System.out.println("이미지");
+//					System.out.println("이미지");
 				}else {
 					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+"default.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 //					System.out.println("문자열");
-				}	
+				}//end else
 				
 //				rowData[1] = clv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
 				rowData[2] = clv.getUser_id();
@@ -108,6 +108,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				rowData[4] = clv.getProduct_name();
 				rowData[5] = clv.getPrice();
 				rowData[6] = "<HTML>" + clv.getUpload_date().replace(" ", " <br>");
+				
 				//dtm에 추가
 				dtm.addRow(rowData);
 				
@@ -164,14 +165,15 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				
 				//배열에 값을 할당
 				rowData[0] = clv.getProduct_code();
-	if(new File(RunMarketMain.imgPath+"/"+clv.getImg_file()).exists()) {
-					
+				
+				if(new File(RunMarketMain.imgPath+"/"+clv.getImg_file()).exists()) {
 					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+clv.getImg_file()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-//			System.out.println("이미지");
+//					System.out.println("이미지");
 				}else {
 					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+"default.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 //					System.out.println("문자열");
-				}	
+				}//end else
+				
 //				rowData[1] = clv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
 				rowData[2] = clv.getUser_id();
 				rowData[3] = clv.getCategory();
@@ -205,9 +207,9 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 		try {
 			List<CheckListVO> list = aDAO.reselectAllCheckList();
 			
-			if(list.isEmpty()) {//제품이 없는 경우
-				JOptionPane.showMessageDialog(amv, "검수할 제품이 없습니다.");
-			}//end if
+//			if(list.isEmpty()) {//제품이 없는 경우
+//				JOptionPane.showMessageDialog(amv, "검수할 제품이 없습니다.");
+//			}//end if
 			
 			CheckListVO clv = null;
 			
@@ -219,14 +221,15 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				
 				//배열에 값을 할당
 				rowData[0] = clv.getProduct_code();
-	if(new File(RunMarketMain.imgPath+"/"+clv.getImg_file()).exists()) {
+				if(new File(RunMarketMain.imgPath+"/"+clv.getImg_file()).exists()) {
 					
 					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+clv.getImg_file()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-//			System.out.println("이미지");
+//					System.out.println("이미지");
 				}else {
 					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+"default.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 //					System.out.println("문자열");
-				}	
+				}//end else
+				
 //				rowData[1] = clv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
 				rowData[2] = clv.getUser_id();
 				rowData[3] = clv.getCategory();
@@ -248,7 +251,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 			e.printStackTrace();
 		}//end catch
 		
-	}//end resetCheckList
+	}//resetCheckList
 	
 	/**
 	 * 검수 table 행을  더블클릭 시 해당 정보를 포함하는 Dialog를 불러오는 일 
@@ -321,7 +324,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 			
 
 			if(list.isEmpty()) {//제품이 없는 경우
-				JOptionPane.showMessageDialog(amv, "등록된 제품이 없습니다.");
+//				JOptionPane.showMessageDialog(amv, "등록된 제품이 없습니다.");
 				resetProductList();
 			}//end if
 			
@@ -335,14 +338,16 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				
 				//배열에 값을 할당
 				rowData[0] = plv.getProduct_code();
-	if(new File(RunMarketMain.imgPath+"/"+plv.getImg_file()).exists()) {
+				
+				if(new File(RunMarketMain.imgPath+"/"+plv.getImg_file()).exists()) {
 					
 					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+plv.getImg_file()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-//			System.out.println("이미지");
+//					System.out.println("이미지");
 				}else {
 					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+"default.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 //					System.out.println("문자열");
-				}	
+				}//end else
+				
 //				rowData[1] = plv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
 				rowData[2] = plv.getUser_id();
 				rowData[3] = plv.getCategory();
@@ -383,9 +388,9 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 		try {
 			List<ProductListVO> list = aDAO.reselectAllProductList();
 			
-			if(list.isEmpty()) {//제품이 없는 경우
-				JOptionPane.showMessageDialog(amv, "등록된 제품이 없습니다.");
-			}//end if
+//			if(list.isEmpty()) {//제품이 없는 경우
+//				JOptionPane.showMessageDialog(amv, "등록된 제품이 없습니다.");
+//			}//end if
 			
 			ProductListVO plv = null;
 			
@@ -397,14 +402,13 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				
 				//배열에 값을 할당
 				rowData[0] = plv.getProduct_code();
-if(new File(RunMarketMain.imgPath+"/"+plv.getImg_file()).exists()) {
-					
+				if(new File(RunMarketMain.imgPath+"/"+plv.getImg_file()).exists()) {
 					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+plv.getImg_file()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-//			System.out.println("이미지");
+//					System.out.println("이미지");
 				}else {
 					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+"default.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 //					System.out.println("문자열");
-				}	
+				}//end else	
 				
 //				rowData[1] = plv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
 				rowData[2] = plv.getUser_id();
@@ -428,6 +432,9 @@ if(new File(RunMarketMain.imgPath+"/"+plv.getImg_file()).exists()) {
 			amv.getJtfSearch2().setText("");
 			amv.getJcbCategory2().setSelectedIndex(0);
 			amv.getJrbSubject2().setSelected(true);
+			amv.getOnSale().setSelected(true);
+			amv.getDeleteNComplete().setSelected(true);
+			
 			
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(amv, "관리자님, reset실패! 서비스가 원활하지 못한 점 죄송합니다.");
@@ -478,7 +485,7 @@ if(new File(RunMarketMain.imgPath+"/"+plv.getImg_file()).exists()) {
 			List<ProductListVO> list = aDAO.selectOrderByProductList(pVO);
 			
 			if(list.isEmpty()) {//제품이 없는 경우
-				JOptionPane.showMessageDialog(amv, "등록된 제품이 없습니다.");
+				JOptionPane.showMessageDialog(amv, "정렬할 제품이 없습니다.");
 				resetProductList();
 			}//end if
 			
@@ -493,14 +500,14 @@ if(new File(RunMarketMain.imgPath+"/"+plv.getImg_file()).exists()) {
 				//배열에 값을 할당
 				rowData[0] = plv.getProduct_code();
 				
-if(new File(RunMarketMain.imgPath+"/"+plv.getImg_file()).exists()) {
-					
+				if(new File(RunMarketMain.imgPath+"/"+plv.getImg_file()).exists()) {
 					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+plv.getImg_file()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-//			System.out.println("이미지");
+//					System.out.println("이미지");
 				}else {
 					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+"default.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 //					System.out.println("문자열");
-				}	
+				}//end else
+				
 //				rowData[1] = plv.getImg_file();//new ImageIcon("경로" + plv.getImg_file());
 				rowData[2] = plv.getUser_id();
 				rowData[3] = plv.getCategory();
@@ -576,7 +583,7 @@ if(new File(RunMarketMain.imgPath+"/"+plv.getImg_file()).exists()) {
 			
 			if(list.isEmpty()) {//제품이 없는 경우
 				JOptionPane.showMessageDialog(amv, "등록된 유저가 없습니다.");
-//				resetUserIdList();
+				resetUserIdList();
 			}//end if
 			
 			UserIdVO uiVO = null;
@@ -623,9 +630,9 @@ if(new File(RunMarketMain.imgPath+"/"+plv.getImg_file()).exists()) {
 		try {
 			List<UserIdVO> list = aDAO.reselectAllUserIdList();
 			
-			if(list.isEmpty()) {//제품이 없는 경우
-				JOptionPane.showMessageDialog(amv, "등록된 유저가 없습니다.");
-			}//end if
+//			if(list.isEmpty()) {//유저가 없는 경우
+//				JOptionPane.showMessageDialog(amv, "등록된 유저가 없습니다.");
+//			}//end if
 			
 			UserIdVO uiVO = null;
 			
