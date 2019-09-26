@@ -1,5 +1,7 @@
 package adminView;
 
+import java.awt.Color;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -38,6 +40,10 @@ public class AdminIdDetailView extends JDialog {
 		jbtOkey = new JButton("확인");
 		jbtSuspend = new JButton("정지");
 		jbtRelief = new JButton("복원");
+		
+		jbtOkey .setBackground(new Color(0xFFCC66));
+		jbtSuspend .setBackground(new Color(0xFFCC66));
+		jbtRelief .setBackground(new Color(0xFFCC66));
 		
 		JLabel jlbID = new JLabel("ID"); 
 		JLabel jlbName = new JLabel("이름");

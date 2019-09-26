@@ -733,7 +733,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 		
 		if(ae.getSource() == amv.getJbtSearch1()) {//검색1버튼 클릭
 			
-			if (amv.getJtfSearch1().getText().isEmpty()) {
+			if (amv.getJtfSearch1().getText().trim().isEmpty()) {
 				JOptionPane.showMessageDialog(amv, "검색어를 입력해주세요.");
 				amv.getJtfSearch1().getCursor();
 				
@@ -745,7 +745,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 		
 		if(ae.getSource() == amv.getJbtSearch2()) {//검색2버튼 클릭
 			
-			if (amv.getJtfSearch2().getText().isEmpty()) {
+			if (amv.getJtfSearch2().getText().trim().isEmpty()) {
 				JOptionPane.showMessageDialog(amv, "검색어를 입력해주세요.");
 				amv.getJtfSearch2().getCursor();
 				
@@ -757,7 +757,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 		
 		if(ae.getSource() == amv.getJbtSearch3()) {//검색3버튼 클릭
 			
-			if (amv.getJtfSearch3().getText().isEmpty()) {
+			if (amv.getJtfSearch3().getText().trim().isEmpty()) {
 				JOptionPane.showMessageDialog(amv, "검색어를 입력해주세요.");
 				amv.getJtfSearch3().getCursor();
 				

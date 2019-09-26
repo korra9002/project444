@@ -8,7 +8,7 @@ import java.awt.event.MouseListener;
 
 import userRun.RunMarketMain;
 
-public class RunMarketMainEvt extends MouseAdapter implements ActionListener{
+public class RunMarketMainEvt extends MouseAdapter{
 	private RunMarketMain rmm;
 	private ChatListEvt cle;
 	
@@ -37,12 +37,6 @@ public class RunMarketMainEvt extends MouseAdapter implements ActionListener{
 	}
 
 
-
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		
-	}
 
 	
 

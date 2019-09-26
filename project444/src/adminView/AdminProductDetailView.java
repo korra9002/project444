@@ -1,5 +1,6 @@
 package adminView;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 
@@ -65,6 +66,7 @@ public class AdminProductDetailView extends JDialog {
 //		jbtGrant=new JButton("판매승인");
 //		jbtReject=new JButton("판매거부");
 		jbtOk = new JButton("확인");
+		jbtOk .setBackground(new Color(0xFFCC66));
 
 		// set text
 		if (new File(AdminLoginView.imgPath + "/" + pdVO.getImg_file()).exists()) {
