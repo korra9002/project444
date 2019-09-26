@@ -57,8 +57,8 @@ public class OrderThread extends Thread {
 		cv.getJbtCancle().setVisible(true);
 	}
 	
+	private FlagVO fVO = null;
 	public void checkFlag() {
-		FlagVO fVO = null;
 		UserDAO uDAO = UserDAO.getInstance();
 
 		try {
