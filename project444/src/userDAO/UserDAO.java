@@ -656,7 +656,7 @@ System.out.println(slv);
 			pstmt = con.prepareStatement(setFlag);
 			pstmt.setString(1, dealCode);
 			pstmt.setString(2, me);
-//			System.out.println(pstmt.executeUpdate() + "플래그 사이즈");
+			System.out.println(pstmt.executeUpdate() + "플래그 사이즈");
 //			System.out.println(list.size() + "리스트 사이즈");
 //			System.out.println("------------------------------");
 
