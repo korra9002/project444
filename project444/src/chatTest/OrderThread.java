@@ -57,8 +57,9 @@ public class OrderThread extends Thread {
 		cv.getJbtCancle().setVisible(true);
 	}
 	
-	public void checkFlag(UserDAO uDAO) {
+	public void checkFlag() {
 		FlagVO fVO = null;
+		UserDAO uDAO = UserDAO.getInstance();
 
 		try {
 			fVO = uDAO.checkFlag(dealCode);
@@ -80,7 +81,8 @@ public class OrderThread extends Thread {
 			switch (allFlag) {
 			case "B":
 				System.out.println("NB");
-				if (userId.equals(RunMarketMain.userId)) {
+				System.out.println(userId+"/"+RunMarketMain.userId);
+				if (!userId.equals(RunMarketMain.userId)) {
 					setUpInfo("판매된 상품입니다.");
 				}else {
 					setUpInfo("다른 이용자와 거래 완료된 상품입니다.");
@@ -122,9 +124,9 @@ public class OrderThread extends Thread {
 			System.out.println("P");
 			if (userId.equals(RunMarketMain.userId)) {
 				
-				cv.getJlNotice().setVisible(true);
-				cv.getJbtOk().setVisible(true);
-				cv.getJbtCancle().setVisible(true);
+				cv.getJlNotice().setVisible(false);
+				cv.getJbtOk().setVisible(false);
+				cv.getJbtCancle().setVisible(false);
 				setUpInfo("구매한 상품 입니다.");
 			}else {
 				setUpInfo("거래완료된 상품 입니다.");
@@ -145,7 +147,7 @@ public class OrderThread extends Thread {
 
 			///// 채팅 시작시 플래그체크
 	
-			checkFlag(uDAO);
+			checkFlag();
 //			
 //			if (dealFlag.equals("N")) {
 //			
@@ -193,7 +195,7 @@ public class OrderThread extends Thread {
 					e.printStackTrace();
 				} // end catch
 
-			checkFlag(uDAO);
+			checkFlag();
 
 			} // end while
 		} catch (SQLException e) {

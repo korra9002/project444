@@ -96,6 +96,17 @@ private String productName,productCode;
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() ==ds.getJbtcancell()) {
+			ds.dispose();
+		}
+		
+		if(e.getSource() == ds.getJbtsell()) {
+			if(ds.getJtpAreaList().getSelectedRow() !=-1) {
+				sendDealMsg();
+			}else {
+				JOptionPane.showMessageDialog(ds, "ID를 선택하세요");
+			}
+		}
 	}//actionPerformed
 
 }
