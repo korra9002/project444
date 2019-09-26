@@ -2,25 +2,18 @@ package userView;
 
 
    import java.awt.Color;
-import java.awt.Container;
-import java.awt.event.KeyAdapter;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
-   import javax.swing.JButton;
-   import javax.swing.JComboBox;
-   import javax.swing.JFrame;
-   import javax.swing.JPanel;
-   import javax.swing.JRadioButton;
-   import javax.swing.JScrollPane;
-   import javax.swing.JTabbedPane;
-   import javax.swing.JTable;
-   import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -232,7 +225,6 @@ import userControl.MarketMainEvt;
             }
             
         });
-		
 		
 		
 		

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
+import javax.swing.UIManager;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
 import userControl.RunMarketMainEvt;
@@ -40,6 +41,8 @@ private ChatList cl;
 		  
 		jtp.setBounds(10, 10, 810, 830);
 		jtp.setBackground(new Color(0xFFCC66));
+		   UIManager.put("jtp.selected", new Color(0XFFFFFF));
+		   jtp.updateUI();
 		Container c = getContentPane();
 		c.setBackground(Color.white);
 		
@@ -54,8 +57,9 @@ private ChatList cl;
 				            return borderInsets;
 				        }
 				    });
-		
+				
 		add(jtp); 
+		
 		
 	 
 		setVisible(true);
