@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -16,6 +18,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import userDAO.UserDAO;
+import userFileRecieve.UserFileRecieve;
 import userRun.RunMarketMain;
 import userVO.AllListVO;
 import userVO.MarketDetailVO;
@@ -41,13 +44,38 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 
 	}// SaleListEvt
 
+	public void loadFile() {
+		/////////////////// 서버에 접속해서 파일 받기 /////////////////
+		UserFileRecieve uFR = UserFileRecieve.getInstance();
+		try {
+			uFR.getImgFile();
+		} catch (UnknownHostException e) {
+			JOptionPane.showMessageDialog(sl, "파일서버에 접속 실패");
+			e.printStackTrace();
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(sl, "파일 로드 실패");
+			e.printStackTrace();
+		}
+		///////////////////////////////////////////////////
+	}//loadFile
+	
+	
 	/**
 	 * 판매목록 띄우기
 	 * 
 	 * @param sl
 	 * @throws SQLException
+	 * 
+	 * 
+	 * 
+	 * 
 	 */
+	
+	
+	
 	public void setAllList() throws SQLException {
+		loadFile();
+		
 
 		DefaultTableModel dtm = sl.getDtmSell();
 
@@ -94,7 +122,8 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 	 * @throws SQLException
 	 */
 	public void setCompList() throws SQLException {
-
+		loadFile();
+		
 		DefaultTableModel dtm = sl.getDtmComp();
 
 		// JTable의 레코드 초기화
@@ -314,7 +343,14 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 				}//end else
 			} // end if
 			if (ae.getSource() == sl.getJbtDelete()) {
+				
+				if(sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 6).equals("P")) {
+				
+				
 				deleteSaleList();
+				} else {
+					JOptionPane.showMessageDialog(sl, "해당 상품은 검수중입니다.");
+				}//end else
 			} // end if
 
 		

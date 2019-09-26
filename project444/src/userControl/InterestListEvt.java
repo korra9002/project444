@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel; 
 
 import userDAO.UserDAO;
+import userFileRecieve.UserFileRecieve;
 import userRun.RunMarketMain;
 import userVO.AllListVO;
 import userVO.InterestListVO;
@@ -40,6 +43,20 @@ public class InterestListEvt extends MouseAdapter implements ActionListener{
 	}//InterestListEvt
 	
 	public void setInterestList() throws SQLException {
+		
+		/////////////////// 서버에 접속해서 파일 받기 /////////////////
+		UserFileRecieve uFR = UserFileRecieve.getInstance();
+		try {
+			uFR.getImgFile();
+		} catch (UnknownHostException e) {
+			JOptionPane.showMessageDialog(il, "파일서버에 접속 실패");
+			e.printStackTrace();
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(il, "파일 로드 실패");
+			e.printStackTrace();
+		}
+		///////////////////////////////////////////////////
+		
 		DefaultTableModel dtm=il.getDtmInterest();
 		
 		//JTable의 레코드 초기화
