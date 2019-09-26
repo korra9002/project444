@@ -2,9 +2,8 @@ package userView;
 
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,6 +20,8 @@ public class Login extends JFrame {
 	public Login() {
 		super("로그인");
 		// JLabel
+		ImageIcon ii= new ImageIcon("C:/Users/seoyy/git/project444/project444/src/image/바나나마켓.png");
+		JLabel logo = new JLabel(ii);
 		JLabel jlId = new JLabel("ID");
 		JLabel jlPw = new JLabel("PW");
 		jlLoginFail = new JLabel();
@@ -35,17 +36,32 @@ public class Login extends JFrame {
 
 		// 수동배치
 		setLayout(null);
+		// 로고
+		logo.setBounds(50,50, 300, 225);
 		// JLabel
-		jlId.setBounds(60, 160, 20, 25);
-		jlPw.setBounds(60, 190, 20, 25);
+		jlId.setBounds(30, 310, 20, 25);
+		jlPw.setBounds(30, 340, 20, 25);
 		// jtextField
-		jtfId.setBounds(110, 160, 200, 30);
-		jpfPw.setBounds(110, 190, 200, 30);
+		jtfId.setBounds(80, 310, 200, 30);
+		jpfPw.setBounds(80, 340, 200, 30);
 		// jbutton
-		jbtLogin.setBounds(320, 160, 100, 55);
-		jbtSignUp.setBounds(320, 220, 100, 25);
-		jbtForgotId.setBounds(280, 250, 78, 25);
-		jbtForgotPw.setBounds(360, 250, 78, 25);
+		jbtLogin.setBounds(290, 310, 100, 55);
+		jbtSignUp.setBounds(290, 370, 100, 25);
+		jbtForgotId.setBounds(250, 400, 78, 25);
+		jbtForgotPw.setBounds(330, 400, 78, 25);
+//		// 로고
+//		logo.setBounds(70,-20, 300, 225);
+//		// JLabel
+//		jlId.setBounds(60, 160, 20, 25);
+//		jlPw.setBounds(60, 190, 20, 25);
+//		// jtextField
+//		jtfId.setBounds(110, 160, 200, 30);
+//		jpfPw.setBounds(110, 190, 200, 30);
+//		// jbutton
+//		jbtLogin.setBounds(320, 160, 100, 55);
+//		jbtSignUp.setBounds(320, 220, 100, 25);
+//		jbtForgotId.setBounds(280, 250, 78, 25);
+//		jbtForgotPw.setBounds(360, 250, 78, 25);
 		// 배치
 		add(jlId);
 		add(jlPw);
@@ -59,12 +75,15 @@ public class Login extends JFrame {
 		add(jbtForgotId);
 		add(jbtForgotPw);
 		
+		add(logo);
+		
 		jlLoginFail.setForeground(Color.RED);
 		Container c = getContentPane();
 //		c.setBackground(Color.white);
-		c.setBackground(new Color(0xE8E8E8));
+		c.setBackground(new Color(0xf6f2ef));
 		// 윈도우 사이즈
-		setBounds(100, 100, 480, 330);
+//		setBounds(100, 100, 480, 330);
+		setBounds(100, 100, 450, 500);
 		setBackground(Color.WHITE);
 		// 임시 테스트용 이벤트처리
 		LoginEvt le = new LoginEvt(this);
