@@ -96,7 +96,7 @@ public class ChatList extends JPanel {
 		add(jbSell);
 
 //		setBounds(100, 100,  600, 450);
-		setBackground(new Color(0xE8E8E8));
+		setBackground(new Color(0xf6f2ef));
 		jtProductList.getTableHeader().setBackground(new Color(0xFFCC66));
 		jbBuy.setBackground(new Color(0xFFCC66));
 		jbSell.setBackground(new Color(0xFFCC66));

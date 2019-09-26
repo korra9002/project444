@@ -40,7 +40,7 @@ public class ChattingView extends JFrame {
 		jlNotice.setBounds(35,520 , 250, 25);
 		
 		Container c = getContentPane();
-		c.setBackground(new Color(0xE8E8E8));
+		c.setBackground(new Color(0xf6f2ef));
 		jbtCancle.setBackground(new Color(0xFFCC66));
 		jbtOk.setBackground(new Color(0xFFCC66));
 		jbtProductInfo.setBackground(new Color(0xFFCC66));

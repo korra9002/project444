@@ -66,7 +66,6 @@ public class Login extends JFrame {
 		
 		jlLoginFail.setForeground(Color.RED);
 		Container c = getContentPane();
-//		c.setBackground(Color.white);
 		c.setBackground(new Color(0xf6f2ef));
 		// 윈도우 사이즈
 		setBounds(100, 100, 480, 330);

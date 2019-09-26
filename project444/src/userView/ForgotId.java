@@ -55,10 +55,10 @@ public class ForgotId extends JDialog {
 		setBounds(100, 100, 380, 250);
 		
 		Container c = getContentPane();
-		c.setBackground(new Color(0xE8E8E8));
+		c.setBackground(new Color(0xf6f2ef));
 		jbtCancle.setBackground(new Color(0xFFCC66));
 		jbtSearch.setBackground(new Color(0xFFCC66));
-		jcbPhoneNum.setBackground(new Color(0xE8E8E8));
+		jcbPhoneNum.setBackground(new Color(0xFFFFFF));
 		
 		
 		

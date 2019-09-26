@@ -109,11 +109,11 @@ public class InsertProduct extends JPanel {
 		jtaExplain.addMouseListener(ipe);
 		
 		
-		setBackground(new Color(0xE8E8E8));
+		setBackground(new Color(0xf6f2ef));
 		jbtOkay.setBackground(new Color(0xFFCC66));
 		jbtCancel.setBackground(new Color(0xFFCC66));
 		jbtSelectImg.setBackground(new Color(0xFFCC66));
-		jcbCategory.setBackground(new Color(0xE8E8E8));
+		jcbCategory.setBackground(new Color(0xf6f2ef));
 		
 		
 		setBounds(100, 100, 420, 640);

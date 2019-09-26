@@ -1,11 +1,15 @@
 package userView;
 
+import java.awt.Color;
+import java.awt.Container;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -97,6 +101,32 @@ public class InterestList extends JDialog {
 		 jtInterest.addMouseListener(ile);
 		 
 		/////////////////////////////////////////////////
+		 
+	////// 탭, 색 디자인 //////////////
+			Container c = getContentPane();
+			c.setBackground(new Color(0xf6f2ef));
+		 	setBackground(new Color(0xFFCC66));
+			jbtDelete.setBackground(new Color(0xFFCC66));
+			jbtDelete.setBackground(new Color(0xFFCC66));
+			jtInterest.getTableHeader().setBackground(new Color(0xFFCC66));
+			jspInterest.getVerticalScrollBar().setBackground(new Color(0xFFFFFF));
+			
+			//스크롤 색 변경 //
+			jspInterest.getVerticalScrollBar().setUI(new BasicScrollBarUI()
+	        {
+				
+	            @Override
+	            protected void configureScrollBarColors()
+	            {
+	                this.thumbColor = new Color(0xFFCC66);
+	            }
+	            
+	        });
+			
+			//////////////////////////
+		 
+		 
+		 
 		setBounds(100, 100, 565, 600);
 		setVisible(true);
 		setResizable(false);

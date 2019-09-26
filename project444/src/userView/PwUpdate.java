@@ -1,5 +1,7 @@
 package userView;
 
+import java.awt.Color;
+import java.awt.Container;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -65,6 +67,11 @@ public class PwUpdate extends JDialog {
 		jpfReUpdatePw.addActionListener(pue);
 		jpfUpdatePw.addActionListener(pue);
 		
+		//»ö º¯°æ
+		Container c = getContentPane();
+		c.setBackground(new Color(0xf6f2ef));
+		jbtOk.setBackground(new Color(0xFFCC66));
+		jbtCancle.setBackground(new Color(0xFFCC66));
 		//visible
 		setVisible(true);
 		

@@ -3,6 +3,7 @@ package userView;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,7 +24,7 @@ public class UserInfo extends JPanel {
 	
 	
 	public UserInfo(String id,RunMarketMain rmm) {
-//	  jlLevelImg=new JLabel(new ImageIcon("C:/dev/workspace/jdbc_prj/src/kr/co/sist/admin/img/c1_c1.png"));
+	  jlLevelImg=new JLabel(new ImageIcon("C:/Users/seoyy/git/project444/project444/src/image/바나나마켓1.png"));
 		this.id=id;
 		this.rmm=rmm;
 		
@@ -35,16 +36,15 @@ public class UserInfo extends JPanel {
 		jbtLike = new JButton("관심목록");
 		jbtLogout = new JButton("로그아웃");
 		jlaAd = new JLabel("광고받습니다.");
-		Font ft = new Font(Font.DIALOG,Font.BOLD, 40);
-		Font ft2 = new Font(Font.DIALOG,Font.BOLD, 20);
+		Font ft = new Font(Font.DIALOG,Font.BOLD, 20);
 		jlaId.setFont(ft);
-		jbtSell.setFont(ft2);
-		jbtBuy.setFont(ft2);
-		jbtLike.setFont(ft2);
-		jbtPersonalData.setFont(ft2);
+		jbtSell.setFont(ft);
+		jbtBuy.setFont(ft);
+		jbtLike.setFont(ft);
+		jbtPersonalData.setFont(ft);
 		// setBounds
-//	  jlLevelImg.setBounds(50, 15, 200, 150);
-		jlaId.setBounds(50, 50, 600, 50);
+	  jlLevelImg.setBounds(-20, -70, 300, 250);
+		jlaId.setBounds(500, 50, 100, 50);
 		jbtLogout.setBounds(650, 50, 100, 50);
 		jbtSell.setBounds(50, 200, 300, 100);
 		jbtBuy.setBounds(445, 200, 300, 100);
@@ -53,7 +53,7 @@ public class UserInfo extends JPanel {
 		jlaAd.setBounds(50, 600, 700, 180);
 		jlaAd.setOpaque(true);
 		jlaAd.setBackground(Color.WHITE);
-//	  add(jlLevelImg);
+	  add(jlLevelImg);
 		add(jlaId);
 		add(jbtPersonalData);
 		add(jbtSell);
@@ -66,7 +66,7 @@ public class UserInfo extends JPanel {
 //      setResizable(false);
 //		setBounds(100, 100, 540, 470);
 
-		setBackground(new Color(0xE8E8E8));
+		setBackground(new Color(0xf6f2ef));
 		jbtPersonalData.setBackground(new Color(0xFFCC66));
 		jbtBuy.setBackground(new Color(0xFFCC66));	
 		jbtSell.setBackground(new Color(0xFFCC66));

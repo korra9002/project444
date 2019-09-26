@@ -203,7 +203,7 @@ import userControl.MarketMainEvt;
       //윈도우 가시화
       setVisible(true);
       
-		setBackground(new Color(0xE8E8E8));
+		setBackground(new Color(0xf6f2ef));
 		
 //		jbSearch.setBackground(new Color(0xFFB495));
 //		jbRecent.setBackground(new Color(0xFFB495));
@@ -214,11 +214,11 @@ import userControl.MarketMainEvt;
 		jbPrice.setBackground(new Color(0xFFCC66));
 		jbRefresh.setBackground(new Color(0xFFCC66));
 
-		jcbArea.setBackground(new Color(0xE8E8E8));
-		jcbCategory.setBackground(new Color(0xE8E8E8));
+		jcbArea.setBackground(new Color(0xFFFFFF));
+		jcbCategory.setBackground(new Color(0xFFFFFF));
 		
-		jrbSubject.setBackground(new Color(0xE8E8E8));
-		jrbId.setBackground(new Color(0xE8E8E8));
+		jrbSubject.setBackground(new Color(0xf6f2ef));
+		jrbId.setBackground(new Color(0xf6f2ef));
 		jtProductList.getTableHeader().setBackground(new Color(0xFFCC66));
 		jspProductList.getVerticalScrollBar().setBackground(new Color(0xFFFFFF));
 		

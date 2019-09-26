@@ -53,10 +53,10 @@ public class ForgotPw extends JDialog {
 		jcbPwHint.setBounds(100, 125, 300, 25);
 		
 		Container c = getContentPane();
-		c.setBackground(new Color(0xE8E8E8));
+		c.setBackground(new Color(0xf6f2ef));
 		jbtCancle.setBackground(new Color(0xFFCC66));
 		jbtSearch.setBackground(new Color(0xFFCC66));
-		jcbPwHint.setBackground(new Color(0xE8E8E8));
+		jcbPwHint.setBackground(new Color(0xFFFFFF));
 		
 		add(jlId);
 		add(jlPwHint);

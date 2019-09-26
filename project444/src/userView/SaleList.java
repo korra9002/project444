@@ -1,6 +1,10 @@
 package userView;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Graphics;
+import java.awt.Insets;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 
@@ -12,6 +16,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.plaf.basic.BasicScrollBarUI;
+import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -159,6 +165,51 @@ public class SaleList extends JDialog {
 		jtp.add("판매중",jpSellList);
 		jtp.add("판매완료",jpCompList);
 		add(jtp);
+		
+		
+		////// 탭, 색 디자인 //////////////
+		Container c = getContentPane();
+		c.setBackground(new Color(0xFFFFFF));
+		setBackground(new Color(0xFFCC66));
+		jtp.setBackground(new Color(0xFFCC66));
+		jbtDelete.setBackground(new Color(0xFFCC66));
+		jbtModify.setBackground(new Color(0xFFCC66));
+		jtComplete.getTableHeader().setBackground(new Color(0xFFCC66));
+		jtSell.getTableHeader().setBackground(new Color(0xFFCC66));
+		jspComp.getVerticalScrollBar().setBackground(new Color(0xFFFFFF));
+		// 텝 테두리 없애기 //
+		jtp.setUI(new BasicTabbedPaneUI() {
+			private final Insets borderInsets = new Insets(0, 0, 0, 0);
+			@Override
+			protected void paintContentBorder(Graphics g, int tabPlacement, int selectedIndex) {
+			}
+			@Override
+			protected Insets getContentBorderInsets(int tabPlacement) {
+				return borderInsets;
+			}
+		});
+		//스크롤 색 변경 //
+		jspComp.getVerticalScrollBar().setUI(new BasicScrollBarUI()
+        {
+			
+            @Override
+            protected void configureScrollBarColors()
+            {
+                this.thumbColor = new Color(0xFFCC66);
+            }
+            
+        });
+		jspSell.getVerticalScrollBar().setUI(new BasicScrollBarUI()
+        {
+			
+            @Override
+            protected void configureScrollBarColors()
+            {
+                this.thumbColor = new Color(0xFFCC66);
+            }
+            
+        });
+		//////////////////////////
 		
 		setBounds(100, 100, 560, 700);
 		

@@ -3,6 +3,7 @@ package userView;
 import java.awt.Checkbox;
 import java.awt.CheckboxGroup;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -22,6 +23,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 import userControl.PersonalInformEvt;
 import userDAO.UserDAO;
@@ -171,9 +174,23 @@ public class PersonalInform extends JDialog {
 			jtfGender.setEditable(false);
 			jtfName.setEditable(false);
 			//배경색 변경
-			jtfId.setBackground(Color.white);
-			jtfName.setBackground(Color.WHITE);
-			jtfGender.setBackground(Color.WHITE);
+			jtfId.setBackground(new Color(0xf6f2ef));
+			jtfName.setBackground(new Color(0xf6f2ef));
+			jtfGender.setBackground(new Color(0xf6f2ef));
+			jtfName.setBorder(new LineBorder(null, 0));
+			jtfId.setBorder(new LineBorder(null, 0));
+			jtfGender.setBorder(new LineBorder(null, 0));
+			// 색 디자인
+			Container c = getContentPane();
+			c.setBackground(new Color(0xf6f2ef));
+			jbtRegister.setBackground(new Color(0xFFCC66));
+			jbtCancle.setBackground(new Color(0xFFCC66));
+			jbtPwUpdate.setBackground(new Color(0xFFCC66));
+			jpPhone.setBackground(new Color(0xf6f2ef));
+			jcbLoc.setBackground(new Color(0xFFFFFF));
+			jcbPhoneNum.setBackground(new Color(0xFFFFFF));
+			jcbPwHint.setBackground(new Color(0xFFFFFF));
+			
 			// WindowSizing
 			setBounds(100, 100, 550, 700);
 			// visible

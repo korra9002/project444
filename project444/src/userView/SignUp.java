@@ -137,13 +137,16 @@ public class SignUp extends JDialog {
 		
 		
 		Container c = getContentPane();
-		c.setBackground(new Color(0xE8E8E8));
+		c.setBackground(new Color(0xf6f2ef));
 		jbtRegister.setBackground(new Color(0xFFCC66));
 		jbtCancle.setBackground(new Color(0xFFCC66));
 		jbtIdCheck.setBackground(new Color(0xFFCC66));
-		jpPhone.setBackground(new Color(0xE8E8E8));
-		jrbMan.setBackground(new Color(0xE8E8E8));
-		jrbWomen.setBackground(new Color(0xE8E8E8));
+		jpPhone.setBackground(new Color(0xf6f2ef));
+		jrbMan.setBackground(new Color(0xf6f2ef));
+		jrbWomen.setBackground(new Color(0xf6f2ef));
+		jcbLoc.setBackground(new Color(0xFFFFFF));
+		jcbPhoneNum.setBackground(new Color(0xFFFFFF));
+		jcbPwHint.setBackground(new Color(0xFFFFFF));
 		// ¹èÄ¡
 		add(jlId);
 		add(jlPw);
