@@ -73,6 +73,7 @@ public class Login extends JFrame {
 		c.setBackground(new Color(0xf6f2ef));
 		// 윈도우 사이즈
 		setBounds(100, 100, 480, 330);
+		setResizable(false);
 		// 임시 테스트용 이벤트처리
 		LoginEvt le = new LoginEvt(this);
 		jbtSignUp.addActionListener(le);
