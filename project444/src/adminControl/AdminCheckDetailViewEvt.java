@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import adminDAO.AdminDAO;
-import adminVO.CheckDetailVO;
-import adminVO.CheckVO;
 import adminView.AdminCheckDetailView;
 
 public class AdminCheckDetailViewEvt implements ActionListener {
@@ -16,9 +14,8 @@ public class AdminCheckDetailViewEvt implements ActionListener {
 	private AdminCheckDetailView acdv;
 	private AdminMainEvt ame;
 	
-	public AdminCheckDetailViewEvt(AdminCheckDetailView acdv, AdminMainEvt ame) {
+	public AdminCheckDetailViewEvt(AdminCheckDetailView acdv) {
 		this.acdv = acdv;
-		this.ame = ame;
 	}//AdminCheckDetailViewEvt
 	
 	private void grant() {

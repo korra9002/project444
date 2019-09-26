@@ -12,13 +12,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 
-import adminControl.AdminCheckDetailViewEvt;
-//import adminControl.AdminCheckDetailEvt;
-import adminControl.AdminMainEvt;
 import adminControl.AdminProductDetailViewEvt;
-import adminVO.CheckDetailVO;
 import adminVO.ProductDetailVO;
-import userRun.RunMarketMain;
  
 @SuppressWarnings("serial")
 public class AdminProductDetailView extends JDialog {
@@ -31,7 +26,7 @@ public class AdminProductDetailView extends JDialog {
  
 	private AdminMainView amv;
 
-	public AdminProductDetailView(AdminMainView amv, AdminMainEvt ame, ProductDetailVO pdVO) {
+	public AdminProductDetailView(AdminMainView amv,  ProductDetailVO pdVO) {
 		super(amv, "제품상세", true);////////
 		this.amv = amv;////////////
 
@@ -133,7 +128,7 @@ public class AdminProductDetailView extends JDialog {
 		add(jtfCategory);
 
 		// event
-		AdminProductDetailViewEvt apdve = new AdminProductDetailViewEvt(this, ame);
+		AdminProductDetailViewEvt apdve = new AdminProductDetailViewEvt(this);
 		jbtOk.addActionListener(apdve);
 
 		setResizable(false);

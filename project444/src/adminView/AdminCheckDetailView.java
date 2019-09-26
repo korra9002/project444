@@ -13,10 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 
 import adminControl.AdminCheckDetailViewEvt;
-//import adminControl.AdminCheckDetailEvt;
-import adminControl.AdminMainEvt;
 import adminVO.CheckDetailVO;
-import userRun.RunMarketMain;
 
 @SuppressWarnings("serial")
 public class AdminCheckDetailView extends JDialog {
@@ -29,7 +26,7 @@ public class AdminCheckDetailView extends JDialog {
 
 	private AdminMainView amv;
  
-	public AdminCheckDetailView(AdminMainView amv, AdminMainEvt ame, CheckDetailVO cdVO) {
+	public AdminCheckDetailView(AdminMainView amv, CheckDetailVO cdVO) {
 		super(amv, "제품상세", true);
 		this.amv = amv;
  
@@ -121,7 +118,7 @@ public class AdminCheckDetailView extends JDialog {
 		add(jtfUploadDate);
 		add(jtfCategory);
 
-		AdminCheckDetailViewEvt acdve = new AdminCheckDetailViewEvt(this, ame);
+		AdminCheckDetailViewEvt acdve = new AdminCheckDetailViewEvt(this);
 		jbtGrant.addActionListener(acdve);
 		jbtReject.addActionListener(acdve);
 		jbtOk.addActionListener(acdve);

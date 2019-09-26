@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -32,13 +31,10 @@ import adminView.AdminLoginView;
 import adminView.AdminMainView;
 import adminView.AdminProductDetailView;
 import adminView.AdminSuspendReasonView;
-import userRun.RunMarketMain;
 
 public class AdminMainEvt extends MouseAdapter implements ActionListener{
 
 	private AdminMainView amv;
-	private int index;
-//	private OrderThread ot;
 	
 	public AdminMainEvt(AdminMainView amv) {
 		this.amv = amv;
@@ -271,7 +267,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 			aDAO.checkDetail(dv);
 			
 			//값을 가진 VO를 할당하여 상세화면을 띄워준다.
-			new AdminCheckDetailView(amv, this, dv);
+			new AdminCheckDetailView(amv, dv);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -552,7 +548,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 			aDAO.productDetail(pdVO);
 			
 			//값을 가진 VO를 할당하여 상세화면을 띄워준다.
-			new AdminProductDetailView(amv, this, pdVO);
+			new AdminProductDetailView(amv,pdVO);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -682,10 +678,10 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 		//DBTable에서 얻을 수 있는 값
 		AdminDAO aDAO = AdminDAO.getInstance();
 		try {
-			aDAO.UserIdDetail(uidVO);
+			aDAO.userIdDetail(uidVO);
 			
 			//값을 가진 VO를 할당하여 상세화면을 띄워준다.
-			new AdminIdDetailView(amv, this, uidVO);
+			new AdminIdDetailView(amv, uidVO);
 			
 //			System.out.println(dv);
 		} catch (SQLException e) {

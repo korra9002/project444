@@ -692,7 +692,7 @@ public class AdminDAO {
 	 * @param uidVO 디테일 창에 필요한 값을 넣을 VO
 	 * @throws SQLException
 	 */
-	public void UserIdDetail(UserIdDetailVO uidVO) throws SQLException{
+	public void userIdDetail(UserIdDetailVO uidVO) throws SQLException{
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;

@@ -5,7 +5,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import adminControl.AdminMainEvt;
 import adminControl.AdminUserIdDetailViewEvt;
 import adminVO.UserIdDetailVO;
 
@@ -16,7 +15,7 @@ public class AdminIdDetailView extends JDialog {
 	
 	private AdminMainView amv;
 	
-	public AdminIdDetailView(AdminMainView amv, AdminMainEvt ame, UserIdDetailVO uidVO) {
+	public AdminIdDetailView(AdminMainView amv, UserIdDetailVO uidVO) {
 		super(amv,"아이디 상세 정보",true);
 		this.amv = amv;
 		
@@ -96,7 +95,7 @@ public class AdminIdDetailView extends JDialog {
 		add(jbtSuspend);
 		add(jbtRelief);
 		
-		AdminUserIdDetailViewEvt auidve=new AdminUserIdDetailViewEvt(this, ame);
+		AdminUserIdDetailViewEvt auidve=new AdminUserIdDetailViewEvt(this);
 		jbtOkey.addActionListener(auidve);
 		jbtSuspend.addActionListener(auidve);
 		jbtRelief.addActionListener(auidve);
