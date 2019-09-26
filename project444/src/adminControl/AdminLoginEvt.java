@@ -38,7 +38,7 @@ public class AdminLoginEvt implements ActionListener {
 				new AdminFileSend().start();
 			} catch (IOException e) {
 				e.printStackTrace();
-			}//end catch
+			}//end catch 
 			alv.dispose();
 		}else {
 			JOptionPane.showMessageDialog(alv, "아이디 또는 비밀번호를 확인해주세요.");
