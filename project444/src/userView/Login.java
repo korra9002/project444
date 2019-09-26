@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 import userControl.LoginEvt;;
 
@@ -39,16 +40,19 @@ public class Login extends JFrame {
 		// 로고
 		logo.setBounds(70,-20, 300, 225);
 		// JLabel
-		jlId.setBounds(60, 160, 20, 25);
-		jlPw.setBounds(60, 190, 20, 25);
+		jlId.setBounds(60, 155, 20, 25);
+		jlPw.setBounds(60, 185, 20, 25);
 		// jtextField
-		jtfId.setBounds(110, 160, 200, 30);
-		jpfPw.setBounds(110, 190, 200, 30);
+		jtfId.setBounds(110, 155, 200, 30);
+		jpfPw.setBounds(110, 185, 200, 30);
 		// jbutton
-		jbtLogin.setBounds(320, 160, 100, 55);
-		jbtSignUp.setBounds(320, 220, 100, 25);
-		jbtForgotId.setBounds(280, 250, 78, 25);
-		jbtForgotPw.setBounds(360, 250, 78, 25);
+		jbtLogin.setBounds(310, 155, 100, 60);
+		jbtSignUp.setBounds(310, 217, 100, 30);
+//		jbtForgotId.setBounds(270, 250, 78, 25);
+//		jbtForgotPw.setBounds(348, 250, 78, 25);
+		jbtForgotId.setBounds(100, 217, 50, 25);
+		jbtForgotPw.setBounds(150, 217, 50, 25);
+		jbtSignUp.setBounds(340, 217, 70, 25);
 		// 배치
 		add(jlId);
 		add(jlPw);
@@ -69,7 +73,6 @@ public class Login extends JFrame {
 		c.setBackground(new Color(0xf6f2ef));
 		// 윈도우 사이즈
 		setBounds(100, 100, 480, 330);
-		setBackground(Color.WHITE);
 		// 임시 테스트용 이벤트처리
 		LoginEvt le = new LoginEvt(this);
 		jbtSignUp.addActionListener(le);
@@ -81,10 +84,15 @@ public class Login extends JFrame {
 		jpfPw.addActionListener(le);
 		
 		jbtSignUp.setBackground(new Color(0xFFCC66));
-		jbtForgotId.setBackground(new Color(0xFFCC66));
 		jbtLogin.setBackground(new Color(0xFFCC66));
-		jbtForgotPw.setBackground(new Color(0xFFCC66));
-
+//		jbtForgotId.setBackground(new Color(0xFFCC66));
+//		jbtForgotPw.setBackground(new Color(0xFFCC66));
+		jbtForgotId.setBackground(new Color(0xf6f2ef));
+		jbtForgotPw.setBackground(new Color(0xf6f2ef));
+		jbtSignUp.setBackground(new Color(0xf6f2ef));
+		jbtForgotId.setBorder(new LineBorder(null,0));
+		jbtForgotPw.setBorder(new LineBorder(null,0));
+		jbtSignUp.setBorder(new LineBorder(null,0));
 		// 가시화
 		setVisible(true);
 		// 윈도우 종료처리
