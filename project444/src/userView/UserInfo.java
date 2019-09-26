@@ -24,7 +24,7 @@ public class UserInfo extends JPanel {
 	
 	
 	public UserInfo(String id,RunMarketMain rmm) {
-	  jlLevelImg=new JLabel(new ImageIcon("C:/Users/seoyy/git/project444/project444/src/image/바나나마켓1.png"));
+	  jlLevelImg=new JLabel(new ImageIcon("C:/Users/owner/git/project444/project444/src/image/바나나마켓.png"));
 		this.id=id;
 		this.rmm=rmm;
 		
