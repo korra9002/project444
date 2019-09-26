@@ -156,7 +156,7 @@ public class SaleList extends JDialog {
 		jtp = new JTabbedPane();
 		
 		jtp.add("판매중",jpSellList);
-		jtp.add("거래완료",jpCompList);
+		jtp.add("판매완료",jpCompList);
 		add(jtp);
 		
 		setBounds(100, 100, 560, 700);
