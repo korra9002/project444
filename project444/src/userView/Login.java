@@ -1,6 +1,7 @@
 package userView;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -59,10 +60,12 @@ public class Login extends JFrame {
 		add(jbtForgotPw);
 		
 		jlLoginFail.setForeground(Color.RED);
-		
+		Container c = getContentPane();
+//		c.setBackground(Color.white);
+		c.setBackground(new Color(0xE8E8E8));
 		// 윈도우 사이즈
 		setBounds(100, 100, 480, 330);
-
+		setBackground(Color.WHITE);
 		// 임시 테스트용 이벤트처리
 		LoginEvt le = new LoginEvt(this);
 		jbtSignUp.addActionListener(le);
@@ -73,6 +76,10 @@ public class Login extends JFrame {
 		jtfId.addActionListener(le);
 		jpfPw.addActionListener(le);
 		
+		jbtSignUp.setBackground(new Color(0xFFCC66));
+		jbtForgotId.setBackground(new Color(0xFFCC66));
+		jbtLogin.setBackground(new Color(0xFFCC66));
+		jbtForgotPw.setBackground(new Color(0xFFCC66));
 
 		// 가시화
 		setVisible(true);

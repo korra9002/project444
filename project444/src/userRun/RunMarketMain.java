@@ -1,14 +1,15 @@
 package userRun;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.Container;
 import java.sql.SQLException;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
+import javax.swing.border.LineBorder;
 
-import userControl.InsertProductEvt;
 import userControl.RunMarketMainEvt;
 import userView.ChatList;
 import userView.InsertProduct;
@@ -28,8 +29,6 @@ private ChatList cl;
 	public RunMarketMain(String id) throws SQLException {
 		
 		
-		
-		
 		userId = id;
 		setLayout(null);
 		jtp = new JTabbedPane();
@@ -40,12 +39,14 @@ private ChatList cl;
 		jtp.add("MyPage", new UserInfo(id,this));
 		  
 		jtp.setBounds(10, 10, 810, 830);
-		 
-	 
+		jtp.setBackground(new Color(0xFFCC66));
+		Container c = getContentPane();
+		c.setBackground(Color.white);
+		
+		
 		add(jtp); 
 		
 	 
-		add(jtp);
 		setVisible(true);
 		setBounds(10, 10, 850, 900);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

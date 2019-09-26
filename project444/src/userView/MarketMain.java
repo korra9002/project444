@@ -1,7 +1,9 @@
 package userView;
 
 
-   import java.awt.event.KeyAdapter;
+   import java.awt.Color;
+import java.awt.Container;
+import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
@@ -18,6 +20,8 @@ import javax.swing.DefaultComboBoxModel;
    import javax.swing.JTable;
    import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -175,14 +179,14 @@ import userControl.MarketMainEvt;
       add(jbSearch);
       
       add(jcbCategory);
-      add(jrbSubject);
-      add(jrbId);
       
       
       add(jbRecent);
       add(jbPrice);
       add(jbRefresh);
             
+      add(jrbSubject);
+      add(jrbId);
       
       jspProductList.setBounds(20, 180, 760, 600);
       jcbArea.setBounds(20, 20, 180, 40);
@@ -199,9 +203,41 @@ import userControl.MarketMainEvt;
       //윈도우 가시화
       setVisible(true);
       
-      
-      
-      
+		setBackground(new Color(0xE8E8E8));
+		
+//		jbSearch.setBackground(new Color(0xFFB495));
+//		jbRecent.setBackground(new Color(0xFFB495));
+//		jbPrice.setBackground(new Color(0xFFB495));
+//		jbRefresh.setBackground(new Color(0xFFB495));
+		jbSearch.setBackground(new Color(0xFFCC66));
+		jbRecent.setBackground(new Color(0xFFCC66));
+		jbPrice.setBackground(new Color(0xFFCC66));
+		jbRefresh.setBackground(new Color(0xFFCC66));
+
+		jcbArea.setBackground(new Color(0xE8E8E8));
+		jcbCategory.setBackground(new Color(0xE8E8E8));
+		
+		jrbSubject.setBackground(new Color(0xE8E8E8));
+		jrbId.setBackground(new Color(0xE8E8E8));
+		jtProductList.getTableHeader().setBackground(new Color(0xFFCC66));
+		jspProductList.getVerticalScrollBar().setBackground(new Color(0xFFFFFF));
+		
+		jspProductList.getVerticalScrollBar().setUI(new BasicScrollBarUI()
+        {
+			
+            @Override
+            protected void configureScrollBarColors()
+            {
+                this.thumbColor = new Color(0xFFCC66);
+            }
+            
+        });
+		
+		
+		
+		
+		
+		
    //이벤트 처리
       
       MarketMainEvt mme=new MarketMainEvt(this, id,null);

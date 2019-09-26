@@ -6,6 +6,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 import userControl.UserInfoEvt;
 import userRun.RunMarketMain;
@@ -65,6 +66,13 @@ public class UserInfo extends JPanel {
 //      setResizable(false);
 //		setBounds(100, 100, 540, 470);
 
+		setBackground(new Color(0xFFFFFF));
+		jbtPersonalData.setBackground(new Color(0xc8ddf2));
+		jbtBuy.setBackground(new Color(0xc8ddf2));	
+		jbtSell.setBackground(new Color(0xc8ddf2));
+		jbtLike.setBackground(new Color(0xc8ddf2));	
+		jbtLogout.setBackground(new Color(0xc8ddf2));	
+	
 		// 이벤트처리
 		UserInfoEvt uife = new UserInfoEvt(this, rmm);
 		jbtPersonalData.addActionListener(uife);
@@ -74,7 +82,8 @@ public class UserInfo extends JPanel {
 		jbtLogout.addActionListener(uife);
 		// 가시화
 		setVisible(true);
-
+		
+		
 	}// UserMy
 
 	public JLabel getJlLevelImg() {

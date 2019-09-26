@@ -1,5 +1,7 @@
 package userView;
 
+import java.awt.Color;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -54,6 +56,11 @@ public class InsertProduct extends JPanel {
 		jcbCategory = new JComboBox<String>(dcbCategory);
 		jcbCategory.setBorder(new TitledBorder("카테고리 종류"));
 		
+		
+		
+		
+		
+		
 		jtfSubject = new JTextField("글 제목");//이벤트처리-클릭 시 텍스트 사라지게
 		jtfPrice = new JTextField("가격 입력");//이벤트처리-클릭 시 텍스트 사라지게
 		
@@ -102,6 +109,11 @@ public class InsertProduct extends JPanel {
 		jtaExplain.addMouseListener(ipe);
 		
 		
+		setBackground(new Color(0xE8E8E8));
+		jbtOkay.setBackground(new Color(0xFFCC66));
+		jbtCancel.setBackground(new Color(0xFFCC66));
+		jbtSelectImg.setBackground(new Color(0xFFCC66));
+		jcbCategory.setBackground(new Color(0xE8E8E8));
 		
 		
 		setBounds(100, 100, 420, 640);
