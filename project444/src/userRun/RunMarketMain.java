@@ -1,14 +1,14 @@
 package userRun;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Graphics;
+import java.awt.Insets;
 import java.sql.SQLException;
 
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
-import javax.swing.border.LineBorder;
+import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
 import userControl.RunMarketMainEvt;
 import userView.ChatList;
@@ -43,6 +43,17 @@ private ChatList cl;
 		Container c = getContentPane();
 		c.setBackground(Color.white);
 		
+		// 텝 테두리 없애기 //
+				jtp.setUI(new BasicTabbedPaneUI() {
+				        private final Insets borderInsets = new Insets(0, 0, 0, 0);
+				        @Override
+				        protected void paintContentBorder(Graphics g, int tabPlacement, int selectedIndex) {
+				        }
+				        @Override
+				        protected Insets getContentBorderInsets(int tabPlacement) {
+				            return borderInsets;
+				        }
+				    });
 		
 		add(jtp); 
 		
