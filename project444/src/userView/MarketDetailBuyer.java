@@ -105,7 +105,7 @@ public class MarketDetailBuyer extends JDialog {
 
 		jbtChat.setBounds(20, 350, 150, 30);
 
-		jckLike.setBounds(220, 346, 150, 50);
+		jckLike.setBounds(215, 340, 120, 50);
 
 		// ¹èÄ¡
 		setLayout(null);

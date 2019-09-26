@@ -13,7 +13,6 @@ import userDAO.UserDAO;
 import userRun.RunMarketMain;
 import userVO.FlagVO;
 import userVO.MarketDetailVO;
-import userVO.modifyCommonVO;
 import userView.DealSelect;
 import userView.MarketDetailSeller;
 import userView.MarketMain;

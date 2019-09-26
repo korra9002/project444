@@ -17,7 +17,10 @@ import javax.swing.DefaultComboBoxModel;
    import javax.swing.JTabbedPane;
    import javax.swing.JTable;
    import javax.swing.JTextField;
-   import javax.swing.table.DefaultTableModel;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import userControl.MarketMainEvt;
 
@@ -109,13 +112,23 @@ import userControl.MarketMainEvt;
             };
       
       };
-      
-      jtProductList=new JTable(dtmProductList);
-            
-            
+            jtProductList=new JTable(dtmProductList);              
       
       JScrollPane jspProductList=new JScrollPane(jtProductList);
 
+      
+		//////////////테이블 데이터 가운데 정렬 시작//////////////
+		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();//테이블 데이터 가운데 정렬을 하기 위해
+		dtcr.setHorizontalAlignment(SwingConstants.CENTER);//가운데 정렬 세팅
+		TableColumnModel tcm = jtProductList.getColumnModel();//정렬할 테이블의 컬럼모델을 가져옴
+		
+		for (int i =0; i < tcm.getColumnCount(); i++) {//컬럼의 수만큼 반복하여 가운데정렬함
+			if(i!=0) {
+				
+				tcm.getColumn(i).setCellRenderer(dtcr);
+			}//end if
+		}//end for
+		//////////////테이블 데이터 가운데 정렬 끝//////////////
       
 //      
 //      @Override
@@ -128,24 +141,25 @@ import userControl.MarketMainEvt;
 //      public Class<?> getColumnClass(int column) {
 //         return getValueAt(0, column).getClass();
 //      }//getColumnClass
-//   };
+//   };    
       
+
       
-      
-      
-      
+            
       //리스트 크기, 이동, 편집 불가능하게 설정
+      
+      
       
       
       jtProductList.setRowHeight(100);
       jtProductList.getTableHeader().setReorderingAllowed(false);
       
       jtProductList.getColumnModel().getColumn(0).setPreferredWidth(30);
-      jtProductList.getColumnModel().getColumn(1).setPreferredWidth(30);
-      jtProductList.getColumnModel().getColumn(2).setPreferredWidth(30);
-      jtProductList.getColumnModel().getColumn(3).setPreferredWidth(30);
-      jtProductList.getColumnModel().getColumn(4).setPreferredWidth(50);
-      jtProductList.getColumnModel().getColumn(5).setPreferredWidth(50);
+      jtProductList.getColumnModel().getColumn(1).setPreferredWidth(150);
+      jtProductList.getColumnModel().getColumn(2).setPreferredWidth(10);
+      jtProductList.getColumnModel().getColumn(3).setPreferredWidth(20);
+      jtProductList.getColumnModel().getColumn(4).setPreferredWidth(80);
+      jtProductList.getColumnModel().getColumn(5).setPreferredWidth(30);
       jtProductList.getColumnModel().getColumn(6).setPreferredWidth(30);
       
 //      setResizable(false);

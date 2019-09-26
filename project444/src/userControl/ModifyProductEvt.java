@@ -76,7 +76,13 @@ public class ModifyProductEvt extends MouseAdapter implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if ( ae.getSource() == mp.getJbtCancel() ) {
-			close();
+			switch (JOptionPane.showConfirmDialog(mp, "상품정보 수정을 취소하겠습니까?")) {
+			case JOptionPane.OK_OPTION:
+				JOptionPane.showMessageDialog(mp, "상품수정작업이 취소되었습니다.");
+				close();				
+			case JOptionPane.CANCEL_OPTION:
+				
+			}//end switch
 		}//end if
 		
 		if ( ae.getSource() == mp.getJbtOkay() ) {

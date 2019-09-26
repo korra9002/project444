@@ -321,6 +321,7 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 		ip.getJtaExplain().setText("상세 설명");
 		ip.getJtfSubject().setText("글 제목");
 		ip.getJtfPrice().setText("가격 입력");
+		ip.getJcbCategory().setSelectedIndex(0);
 		ip.getJlbProductImg().setIcon(null);
 		ip.getJlbProductImg().setText("제품 이미지");
 		ip.getJlbProductImg().setHorizontalTextPosition(JLabel.CENTER);
@@ -374,10 +375,16 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 			} // end if
 		} // end if
 
-		if (ae.getSource() == ip.getJbtCancel()) {
-			reset();
-		}
-		
+		if (ae.getSource() == ip.getJbtCancel()) {		
+
+			switch (JOptionPane.showConfirmDialog(ip,"상품등록을 취소하시겠습니까?")) {
+			case JOptionPane.OK_OPTION:
+				reset();
+				JOptionPane.showMessageDialog(ip, "상품등록이 취소되었습니다.");
+			case JOptionPane.CANCEL_OPTION:
+				
+			}//end switch
+		}//end if
 		 
 		////////////////////////////////////////// 고쳐야함 //////////////////////////////////////////////////
 		if(rmm.getJtp().getSelectedIndex()!=1) {

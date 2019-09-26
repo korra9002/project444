@@ -25,7 +25,6 @@ import userRun.RunMarketMain;
 import userVO.InsertProductVO;
 import userVO.MarketDetailVO;
 import userVO.SaleListVO;
-import userVO.modifyCommonVO;
 
 @SuppressWarnings("serial")
 public class ModifyProduct extends JFrame {
