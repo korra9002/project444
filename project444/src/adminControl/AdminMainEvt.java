@@ -94,7 +94,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				//배열에 값을 할당
 				rowData[0] = clv.getProduct_code();
 				
-				if(new File(RunMarketMain.imgPath+"/"+clv.getImg_file()).exists()) {
+				if(new File(AdminLoginView.imgPath+"/"+clv.getImg_file()).exists()) {
 					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+clv.getImg_file()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 //					System.out.println("이미지");
 				}else {
@@ -166,7 +166,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				//배열에 값을 할당
 				rowData[0] = clv.getProduct_code();
 				
-				if(new File(RunMarketMain.imgPath+"/"+clv.getImg_file()).exists()) {
+				if(new File(AdminLoginView.imgPath+"/"+clv.getImg_file()).exists()) {
 					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+clv.getImg_file()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 //					System.out.println("이미지");
 				}else {
@@ -221,7 +221,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				
 				//배열에 값을 할당
 				rowData[0] = clv.getProduct_code();
-				if(new File(RunMarketMain.imgPath+"/"+clv.getImg_file()).exists()) {
+				if(new File(AdminLoginView.imgPath+"/"+clv.getImg_file()).exists()) {
 					
 					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+clv.getImg_file()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 //					System.out.println("이미지");
@@ -339,7 +339,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				//배열에 값을 할당
 				rowData[0] = plv.getProduct_code();
 				
-				if(new File(RunMarketMain.imgPath+"/"+plv.getImg_file()).exists()) {
+				if(new File(AdminLoginView.imgPath+"/"+plv.getImg_file()).exists()) {
 					
 					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+plv.getImg_file()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 //					System.out.println("이미지");
@@ -402,7 +402,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				
 				//배열에 값을 할당
 				rowData[0] = plv.getProduct_code();
-				if(new File(RunMarketMain.imgPath+"/"+plv.getImg_file()).exists()) {
+				if(new File(AdminLoginView.imgPath+"/"+plv.getImg_file()).exists()) {
 					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+plv.getImg_file()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 //					System.out.println("이미지");
 				}else {
@@ -500,7 +500,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				//배열에 값을 할당
 				rowData[0] = plv.getProduct_code();
 				
-				if(new File(RunMarketMain.imgPath+"/"+plv.getImg_file()).exists()) {
+				if(new File(AdminLoginView.imgPath+"/"+plv.getImg_file()).exists()) {
 					rowData[1] = (new ImageIcon(new ImageIcon(AdminLoginView.imgPath+"/"+plv.getImg_file()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 //					System.out.println("이미지");
 				}else {

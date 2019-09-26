@@ -66,9 +66,9 @@ public class AdminCheckDetailView extends JDialog {
 		jbtOk = new JButton("»Æ¿Œ");
 
 		// set text
-		if (new File(RunMarketMain.imgPath + "/" + cdVO.getImg_file()).exists()) {
+		if (new File(AdminLoginView.imgPath + "/" + cdVO.getImg_file()).exists()) {
 
-			jlDetailImg.setIcon(new ImageIcon(new ImageIcon(RunMarketMain.imgPath + "/" + cdVO.getImg_file()).getImage()
+			jlDetailImg.setIcon(new ImageIcon(new ImageIcon(AdminLoginView.imgPath + "/" + cdVO.getImg_file()).getImage()
 					.getScaledInstance(320, 320, Image.SCALE_SMOOTH)));
 		} else {
 			jlDetailImg.setText(cdVO.getImg_file());
