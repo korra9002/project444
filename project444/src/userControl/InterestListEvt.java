@@ -147,7 +147,7 @@ public class InterestListEvt extends MouseAdapter implements ActionListener{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}//end catch
-		}//end if
+		}//end if 
 		}//end if
 		}//mouseClicked
 	@Override
