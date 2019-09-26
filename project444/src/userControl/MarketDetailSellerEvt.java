@@ -13,6 +13,7 @@ import userDAO.UserDAO;
 import userRun.RunMarketMain;
 import userVO.FlagVO;
 import userVO.MarketDetailVO;
+import userVO.sellerFlagVO;
 import userView.DealSelect;
 import userView.MarketDetailSeller;
 import userView.MarketMain;
@@ -33,16 +34,20 @@ public class MarketDetailSellerEvt extends MouseAdapter implements ActionListene
 	
 	
 }
-	public FlagVO checkFlag() {
-		FlagVO fVO = null;
+	public sellerFlagVO checkFlag() {
+		sellerFlagVO sFVO = null;
 		String productCode = mds.getMdVO().getProductCode();
 		UserDAO uDAO = UserDAO.getInstance();
 		try {
-			fVO = uDAO.checkFlag(productCode);
+			sFVO = uDAO.checkFlag2(productCode);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+	
+		return sFVO;
+	}
+	
 		
 //		if(dealFlag == fVO.getDealFLag() && allFlag == fVO.getAllFlag()) {
 //			return;
@@ -109,9 +114,7 @@ public class MarketDetailSellerEvt extends MouseAdapter implements ActionListene
 //			break;
 //
 //		}// end switch
-		return fVO;
-	}
-	
+
 	public void delete() {
 
 		switch (JOptionPane.showConfirmDialog(mds, "판매글을 삭제하시겠습니까?")) {
@@ -189,16 +192,60 @@ public class MarketDetailSellerEvt extends MouseAdapter implements ActionListene
 //			System.out.println(temp+"상품코드");
 			System.out.println(temp);
 			
-			FlagVO fVO = checkFlag();
+			//FlagVO fVO = checkFlag();
+			
+			sellerFlagVO sfVO = checkFlag();
+			if(!sfVO.getAllFLag().equals("P")) {
+				JOptionPane.showMessageDialog(mds, "판매중인 상품이 아닙니다. ");
+//				mds.dispose();
+				return;
+			}else if (sfVO.getpFlag()>0) {
+				JOptionPane.showMessageDialog(mds, "판매 완료된 상품입니다.");
+				return;
+				
+			}else if (sfVO.getyFlag()>0) {
+				JOptionPane.showMessageDialog(mds, "거래 진행중인 상품입니다.");
+				return;
+				
+			}
+			
 			
 			new DealSelect(temp,mds);
 		}//end if
 		
 		if(ae.getSource() == mds.getJbtDelete()) {
+			sellerFlagVO sfVO = checkFlag();
+			if(!sfVO.getAllFLag().equals("P")) {
+				JOptionPane.showMessageDialog(mds, "판매중인 상품이 아닙니다. ");
+//				mds.dispose();
+				return;
+			}else if (sfVO.getpFlag()>0) {
+				JOptionPane.showMessageDialog(mds, "판매 완료된 상품입니다.");
+				return;
+				
+			}else if (sfVO.getyFlag()>0) {
+				JOptionPane.showMessageDialog(mds, "거래 진행중인 상품입니다.");
+				return;
+				
+			}
 			delete();
 		}//end if
 		
 		if(ae.getSource() == mds.getJbtChange()) {
+			sellerFlagVO sfVO = checkFlag();
+			if(!sfVO.getAllFLag().equals("P")) {
+				JOptionPane.showMessageDialog(mds, "판매중인 상품이 아닙니다. ");
+//				mds.dispose();
+				return;
+			}else if (sfVO.getpFlag()>0) {
+				JOptionPane.showMessageDialog(mds, "판매 완료된 상품입니다.");
+				return;
+				
+			}else if (sfVO.getyFlag()>0) {
+				JOptionPane.showMessageDialog(mds, "거래 진행중인 상품입니다.");
+				return;
+				
+			}
 			try {
 				modify();
 			} catch (SQLException e) {

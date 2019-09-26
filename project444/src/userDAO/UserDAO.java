@@ -28,6 +28,7 @@ import userVO.SaleListVO;
 import userVO.SignUpVO;
 import userVO.modifyInformVO;
 import userVO.searchValueVO;
+import userVO.sellerFlagVO;
 
 public class UserDAO {
 	public static UserDAO uDAO;
@@ -1012,12 +1013,12 @@ System.out.println(slv);
 	///////////////////////////////////////////////
 	////////////////////// 디테일창에서 뭔가 누를때마다 플래그 확인
 	///////(검수중인지 거래중인지 판매완료인지 등등)
-	public FlagVO checkFlag2(String productCode) throws SQLException {
+	public sellerFlagVO checkFlag2(String productCode) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		FlagVO fVO = null;
+		sellerFlagVO sFVO = null;
 
 		try {
 			// 2.커넥션 얻기
@@ -1025,15 +1026,17 @@ System.out.println(slv);
 
 			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
 			// 것부터 조회
-			String checkFlag = "   select   sale_flag, all_flag,d.user_id user_id from deal d,product p where  p.product_code = ? and d.product_code = p.product_code   ";
+			String checkFlag = "	select   product_code, (select count( sale_flag)from deal where (sale_flag  = 'P') and product_code=?  ) flag_count_P, (select count( sale_flag)from deal where (sale_flag  = 'Y') and product_code=?  ) flag_count_Y from product  where  product_code = ?;   ";
 
 			pstmt = con.prepareStatement(checkFlag);
 			pstmt.setString(1, productCode);
+			pstmt.setString(2, productCode);
+			pstmt.setString(3, productCode);
 
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				fVO = new FlagVO(rs.getString("sale_flag"), rs.getString("all_flag"), rs.getString("user_id"));
+				sFVO = new sellerFlagVO(rs.getString("product_code"),rs.getInt("flag_count_p"),rs.getInt("flag_count_y") );
 			}
 
 		} finally {
@@ -1046,7 +1049,7 @@ System.out.println(slv);
 				con.close();
 
 		}
-		return fVO;
+		return sFVO;
 
 	}
 	
@@ -1054,6 +1057,12 @@ System.out.println(slv);
 	
 
 /////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////// 셀러 디테일창에서 플래그 확인
+	
+
+	
+	
+	
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 // 로그인 시 이름 출력!!

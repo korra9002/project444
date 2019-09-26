@@ -68,6 +68,7 @@ private String productName,productCode;
 			try {
 				if(uDAO.changeFlag(dealCode)==1) {
 					JOptionPane.showMessageDialog(ds,id+"님에게 판매 메세지를 보냈습니다.");
+					ds.dispose();
 					
 					
 				}else{

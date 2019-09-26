@@ -88,7 +88,11 @@ public class ChattingViewEvt extends MouseAdapter implements ActionListener {
 		int result =0;
 		try {
 			result =uDAO.selectDeal(flag, dealCode);
+		
 			JOptionPane.showMessageDialog(cv, "처리완료");
+			cv.getJlNotice().setVisible(false);
+			cv.getJbtOk().setVisible(false);
+			cv.getJbtCancle().setVisible(false);
 			
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(cv, "오류 발생");
