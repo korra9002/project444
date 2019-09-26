@@ -37,31 +37,18 @@ public class Login extends JFrame {
 		// 수동배치
 		setLayout(null);
 		// 로고
-		logo.setBounds(50,50, 300, 225);
+		logo.setBounds(70,-20, 300, 225);
 		// JLabel
-		jlId.setBounds(30, 310, 20, 25);
-		jlPw.setBounds(30, 340, 20, 25);
+		jlId.setBounds(60, 160, 20, 25);
+		jlPw.setBounds(60, 190, 20, 25);
 		// jtextField
-		jtfId.setBounds(80, 310, 200, 30);
-		jpfPw.setBounds(80, 340, 200, 30);
+		jtfId.setBounds(110, 160, 200, 30);
+		jpfPw.setBounds(110, 190, 200, 30);
 		// jbutton
-		jbtLogin.setBounds(290, 310, 100, 55);
-		jbtSignUp.setBounds(290, 370, 100, 25);
-		jbtForgotId.setBounds(250, 400, 78, 25);
-		jbtForgotPw.setBounds(330, 400, 78, 25);
-//		// 로고
-//		logo.setBounds(70,-20, 300, 225);
-//		// JLabel
-//		jlId.setBounds(60, 160, 20, 25);
-//		jlPw.setBounds(60, 190, 20, 25);
-//		// jtextField
-//		jtfId.setBounds(110, 160, 200, 30);
-//		jpfPw.setBounds(110, 190, 200, 30);
-//		// jbutton
-//		jbtLogin.setBounds(320, 160, 100, 55);
-//		jbtSignUp.setBounds(320, 220, 100, 25);
-//		jbtForgotId.setBounds(280, 250, 78, 25);
-//		jbtForgotPw.setBounds(360, 250, 78, 25);
+		jbtLogin.setBounds(320, 160, 100, 55);
+		jbtSignUp.setBounds(320, 220, 100, 25);
+		jbtForgotId.setBounds(280, 250, 78, 25);
+		jbtForgotPw.setBounds(360, 250, 78, 25);
 		// 배치
 		add(jlId);
 		add(jlPw);
@@ -82,8 +69,7 @@ public class Login extends JFrame {
 //		c.setBackground(Color.white);
 		c.setBackground(new Color(0xf6f2ef));
 		// 윈도우 사이즈
-//		setBounds(100, 100, 480, 330);
-		setBounds(100, 100, 450, 500);
+		setBounds(100, 100, 480, 330);
 		setBackground(Color.WHITE);
 		// 임시 테스트용 이벤트처리
 		LoginEvt le = new LoginEvt(this);
