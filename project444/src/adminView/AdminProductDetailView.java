@@ -138,6 +138,12 @@ public class AdminProductDetailView extends JDialog {
 				
 		Container c = getContentPane();
 		c.setBackground(new Color(0xf6f2ef));
+		
+		jspInfo.getVerticalScrollBar().setUI(new ScrollBarUI());
+		jspInfo.getHorizontalScrollBar().setUI(new ScrollBarUI());
+		
+		jspReason.getHorizontalScrollBar().setUI(new ScrollBarUI());
+		jspReason.getVerticalScrollBar().setUI(new ScrollBarUI());
 		////////////////////////////////////////////////////////////////////////
 		
 		setResizable(false);

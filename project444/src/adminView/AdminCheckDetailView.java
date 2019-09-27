@@ -133,6 +133,9 @@ public class AdminCheckDetailView extends JDialog {
 		
 		Container c = getContentPane();
 		c.setBackground(new Color(0xf6f2ef));
+		
+		jsp.getVerticalScrollBar().setUI(new ScrollBarUI());
+		jsp.getHorizontalScrollBar().setUI(new ScrollBarUI());
 		////////////////////////////////////////////////////////////////////////
 		
 		setResizable(false);
