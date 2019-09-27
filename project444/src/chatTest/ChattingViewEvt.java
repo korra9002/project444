@@ -62,7 +62,7 @@ public class ChattingViewEvt extends MouseAdapter implements ActionListener {
 //		\cv.getJtaChatView()
 //		cv.getJtaChatView().setCaretPosition(txtLog.getDocument().getLength());
 
-
+ 
 	}
 
 	private void sendMsg() throws IOException {
