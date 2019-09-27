@@ -151,7 +151,7 @@ public class MarketDetailSellerEvt extends MouseAdapter implements ActionListene
 		}// end switch
 	}// deleteSaleList
 	 
-	
+	 
 	public void modify() throws SQLException {
 		
 		
