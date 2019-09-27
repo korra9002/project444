@@ -170,8 +170,9 @@ public class PersonalInformEvt implements ActionListener{
 			}//end catch
 		}//end if
 		if(ae.getSource()==psi.getJbtCancle()) {
-			
+			if(JOptionPane.showConfirmDialog(psi, "회원정보를 변경하지 않고 창을 닫으시겠습니까?")==0) {
 				PersonalInformClose();
+			};
 			
 		}//end if
 		if(ae.getSource()==psi.getJbtRegister()) {

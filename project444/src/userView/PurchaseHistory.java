@@ -1,6 +1,8 @@
 package userView;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
 import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
@@ -11,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -98,6 +101,26 @@ public class PurchaseHistory extends JDialog {
 		jtPurchaseList.addMouseListener(phe);
 		
 		/////////////////////////////////첫번째 탭 끝/////////////////////////////////
+		//색 디자인
+		Container c = getContentPane();
+		c.setBackground(new Color(0xf6f2ef));
+		jbtDelete.setBackground(new Color(0xFFCC66));
+		jtPurchaseList.getTableHeader().setBackground(new Color(0xFFCC66));
+		jspPurchase.setBackground(new Color(0xFFFFFF));
+		
+		//스크롤 색 변경 //
+		jspPurchase.getVerticalScrollBar().setUI(new BasicScrollBarUI()
+        {
+			
+            @Override
+            protected void configureScrollBarColors()
+            {
+                this.thumbColor = new Color(0xFFCC66);
+            }
+            
+        });
+		
+		//////////////////////////
 		
 		add(jpHistory);
 		

@@ -1,5 +1,7 @@
 package userView;
 
+import java.awt.Color;
+import java.awt.Container;
 import java.awt.Image;
 import java.io.File;
 import java.sql.SQLException;
@@ -109,6 +111,13 @@ public class MarketDetailBuyer extends JDialog {
 
 		jckLike.setBounds(215, 340, 120, 50);
 
+		//색 디자인
+		Container c = getContentPane();
+		c.setBackground(new Color(0xf6f2ef));
+		jbtChat.setBackground(new Color(0xFFCC66));
+		jckLike.setBackground(new Color(0xf6f2ef));
+		
+		
 		// 배치
 		setLayout(null);
 		add(jlDetailImg);

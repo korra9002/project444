@@ -1,6 +1,8 @@
 package userView;
 
 import java.awt.Checkbox;
+import java.awt.Color;
+import java.awt.Container;
 import java.awt.Image;
 import java.io.File;
 import java.text.DecimalFormat;
@@ -102,7 +104,14 @@ public class MarketDetailSeller extends JDialog {
 		jbtComplete.setBounds(240, 350, 88, 30);
 		jbtDelete.setBounds(20, 350, 88, 30);
 		jbtChange.setBounds(130, 350, 88, 30);
-
+		
+		//색 디자인
+				Container c = getContentPane();
+				c.setBackground(new Color(0xf6f2ef));
+				jbtChange.setBackground(new Color(0xFFCC66));
+				jbtComplete.setBackground(new Color(0xFFCC66));
+				jbtDelete.setBackground(new Color(0xFFCC66));
+		
 		
 		//배치
 		setLayout(null);
