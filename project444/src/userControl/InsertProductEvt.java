@@ -163,7 +163,7 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 //			while (true) {
 				System.out.println("Waiting...");
 				try {
-					sock = new Socket("211.63.89.159",5001);
+					sock = new Socket("localhost",5001);
 					os = sock.getOutputStream();
 					System.out.println("Accepted connection : " + sock);
 					// send file
