@@ -105,16 +105,19 @@ public class InterestListEvt extends MouseAdapter implements ActionListener{
 	}//setInterestList
 	
 	public void deleteInterestList() throws SQLException {
+		if(JOptionPane.showConfirmDialog(il,"관심목록에서 삭제 하시겠습니까?","관심목록 삭제",JOptionPane.OK_OPTION,JOptionPane.INFORMATION_MESSAGE)==0) {
 		UserDAO uDAO = UserDAO.getInstance();
 		InterestListVO irVO = new InterestListVO(productCode,RunMarketMain.userId);
 		int flag=uDAO.insertInterest(irVO,false);
 		if(flag==1) {
-			JOptionPane.showMessageDialog(il, "해당 제품이 삭제되었습니다.");
+			
+				JOptionPane.showMessageDialog(il, "해당 제품이 삭제되었습니다.");
 		}else {
 			JOptionPane.showMessageDialog(il,"삭제하실 제품을 선택해주세요." );
 		}//end else
 		setInterestList();
 		
+		}//end if
 	}//deleteInterestList
 	
 	
