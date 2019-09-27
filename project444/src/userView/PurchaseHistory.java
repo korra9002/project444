@@ -1,14 +1,11 @@
 package userView;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.sql.SQLException;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -104,7 +101,7 @@ public class PurchaseHistory extends JDialog {
 		//색 디자인
 		Container c = getContentPane();
 		c.setBackground(new Color(0xf6f2ef));
-		jbtDelete.setBackground(new Color(0xFFCC66));
+//		jbtDelete.setBackground(new Color(0xFFCC66));
 		jtPurchaseList.getTableHeader().setBackground(new Color(0xFFCC66));
 		jspPurchase.setBackground(new Color(0xFFFFFF));
 		
