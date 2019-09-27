@@ -47,7 +47,7 @@ public class ChattingView extends JFrame {
 		
 		jtaChatView = new JTextArea();
 		jtaChatField = new JTextField();
-		
+		jtaChatView.setLineWrap(true);
 		jsp = new JScrollPane(jtaChatView);
 		
 		JPanel jp = new JPanel();
@@ -114,7 +114,7 @@ public class ChattingView extends JFrame {
 ///////////	상단 상품정보 버튼 or 거래완료 삭제 메세지 
 //		jlResult.setVisible(true);
 //		add(jlResult);
-		
+		 
 //////////////////////
 		//////////////테스트 
 		

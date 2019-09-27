@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
+import javax.swing.text.JTextComponent;
 
 import userDAO.UserDAO;
 import userVO.DCodeAndIdAO;
@@ -57,6 +58,11 @@ public class ChattingViewEvt extends MouseAdapter implements ActionListener {
  
 	private void scrollPosition() {
 		cv.getJsp().getVerticalScrollBar().setValue(cv.getJsp().getVerticalScrollBar().getMaximum());
+//		JTextComponent txtLog;
+//		\cv.getJtaChatView()
+//		cv.getJtaChatView().setCaretPosition(txtLog.getDocument().getLength());
+
+ 
 	}
 
 	private void sendMsg() throws IOException {
