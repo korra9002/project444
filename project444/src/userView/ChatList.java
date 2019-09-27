@@ -92,7 +92,7 @@ public class ChatList extends JPanel {
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++ 2번째 테이블 ++++++++++++++++++++++++++++++++++++++++++++++++ //
 		
 		//Jlabel
-		jlComplete =new JLabel("라벨 여깄다리~");
+		jlComplete =new JLabel("거래 종료된 상품");
 		
 		//JTable
 		dtmProductList2 = new DefaultTableModel(productColumn, 6) {		
