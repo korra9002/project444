@@ -1,6 +1,7 @@
 package adminView;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Image;
 import java.io.File;
 
@@ -132,7 +133,13 @@ public class AdminProductDetailView extends JDialog {
 		// event
 		AdminProductDetailViewEvt apdve = new AdminProductDetailViewEvt(this);
 		jbtOk.addActionListener(apdve);
-
+		
+		//////////////////////////////////색 디자인/////////////////////////////////
+				
+		Container c = getContentPane();
+		c.setBackground(new Color(0xf6f2ef));
+		////////////////////////////////////////////////////////////////////////
+		
 		setResizable(false);
 		setBounds(amv.getX() + 800, amv.getY() + 50, 670, 440);
 		setVisible(true);

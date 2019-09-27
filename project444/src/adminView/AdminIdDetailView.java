@@ -107,12 +107,12 @@ public class AdminIdDetailView extends JDialog {
 		jbtSuspend.addActionListener(auidve);
 		jbtRelief.addActionListener(auidve);
 		
-//////////////////////////////////색 디자인/////////////////////////////////
-		
-Container c = getContentPane();
-c.setBackground(new Color(0XFFFFFF));
-////////////////////////////////////////////////////////////////////////
-		
+	//////////////////////////////////색 디자인/////////////////////////////////
+			
+	Container c = getContentPane();
+	c.setBackground(new Color(0xf6f2ef));
+	////////////////////////////////////////////////////////////////////////
+			
 		setBounds(amv.getX()+900, amv.getY()+50, 270, 380);
 		setVisible(true);
 		setResizable(false);
