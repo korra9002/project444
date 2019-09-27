@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Image;
 import java.io.File;
+import java.text.DecimalFormat;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,6 +26,7 @@ public class AdminProductDetailView extends JDialog {
 	private JButton jbtGrant, jbtReject, jbtOk;
 	private JTextArea jtaReason, jtaInfo;
 	private String code;
+	private DecimalFormat dfPrice = new DecimalFormat("#,###,###");
  
 	private AdminMainView amv;
 
@@ -79,7 +81,7 @@ public class AdminProductDetailView extends JDialog {
 		}
 //		jlDetailImg.setText(pdVO.getImg_file());
 		jtfProductName.setText(pdVO.getProduct_name());
-		jtfPrice.setText(pdVO.getPrice());
+		jtfPrice.setText(dfPrice.format(pdVO.getPrice()));
 		jtfUserId.setText(pdVO.getUser_id());
 		jtfUploadDate.setText(pdVO.getUpload_date());
 		jtfCategory.setText(pdVO.getCategory());

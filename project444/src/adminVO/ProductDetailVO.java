@@ -7,7 +7,8 @@ package adminVO;
  */
 public class ProductDetailVO {
 
-	private String product_code, img_file, product_name, info, upload_date, user_id, category, price, rejectMsg;
+	private String product_code, img_file, product_name, info, upload_date, user_id, category, rejectMsg;
+	private int price;
 
 	public String getProduct_code() {
 		return product_code;
@@ -65,11 +66,11 @@ public class ProductDetailVO {
 		this.category = category;
 	}
 
-	public String getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
