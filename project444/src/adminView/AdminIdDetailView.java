@@ -1,6 +1,7 @@
 package adminView;
 
 import java.awt.Color;
+import java.awt.Container;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -106,6 +107,11 @@ public class AdminIdDetailView extends JDialog {
 		jbtSuspend.addActionListener(auidve);
 		jbtRelief.addActionListener(auidve);
 		
+//////////////////////////////////색 디자인/////////////////////////////////
+		
+Container c = getContentPane();
+c.setBackground(new Color(0XFFFFFF));
+////////////////////////////////////////////////////////////////////////
 		
 		setBounds(amv.getX()+900, amv.getY()+50, 270, 380);
 		setVisible(true);

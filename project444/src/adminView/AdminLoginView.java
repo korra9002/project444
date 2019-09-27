@@ -1,6 +1,7 @@
 package adminView;
 
 import java.awt.Color;
+import java.awt.Container;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -33,7 +34,7 @@ public class AdminLoginView extends JFrame {
 		
 		// Jbutton
 		jbtLogin = new JButton("로그인");
-		jbtLogin .setBackground(new Color(0xFFCC66));
+		
 
 		// 수동배치
 		setLayout(null);
@@ -48,12 +49,16 @@ public class AdminLoginView extends JFrame {
 		jpfPw.setBounds(110, 190, 200, 30);
 		
 		// jbutton
-		jbtLogin.setBounds(320, 160, 100, 55);
+		jbtLogin.setBounds(310, 160, 100, 60);
 		
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		jtfId.setText("admin");
 		jpfPw.setText("1234");
 		///////////////////////////////////////////////////////////////추후 지울것//////////////////////////////////////////////////////////////////////////////////
+		//색 디자인
+		Container c = getContentPane();
+		c.setBackground(new Color(0xf6f2ef));
+		jbtLogin.setBackground(new Color(0xFFCC66));
 		
 		// 배치
 		add(jlId);

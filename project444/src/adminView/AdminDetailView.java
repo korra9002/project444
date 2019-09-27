@@ -1,5 +1,8 @@
 package adminView;
 
+import java.awt.Color;
+import java.awt.Container;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -73,6 +76,7 @@ public class AdminDetailView extends JDialog {
 		add(jbtOkey);
 		add(jbtStop);
 		
+	
 		setBounds(300, 100, 270, 340);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

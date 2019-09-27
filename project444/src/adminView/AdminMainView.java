@@ -1,7 +1,10 @@
 package adminView;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Insets;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -17,6 +20,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -47,7 +51,7 @@ public class AdminMainView extends JFrame {
 
 		dcbCategory1 = new DefaultComboBoxModel<String>(categoryList1);
 		jcbCategory1 = new JComboBox<String>(dcbCategory1);
-		jcbCategory1 .setBackground(new Color(0xFFCC66));
+		jcbCategory1 .setBackground(new Color(0xf6f2ef));
 		
 		jtfSearch1 = new JTextField();
 		
@@ -157,7 +161,7 @@ public class AdminMainView extends JFrame {
 
 		dcbCategory2 = new DefaultComboBoxModel<String>(categoryList2);
 		jcbCategory2 = new JComboBox<String>(dcbCategory2);
-		jcbCategory2 .setBackground(new Color(0xFFCC66));
+		jcbCategory2 .setBackground(new Color(0xf6f2ef));
 		
 		onSale = new JCheckBox("판매중", true);
 		deleteNComplete = new JCheckBox("<html>판매완료/<br>삭제", true);
@@ -275,7 +279,7 @@ public class AdminMainView extends JFrame {
 
 		dcbCategory3 = new DefaultComboBoxModel<String>(searchList);
 		jcbCategory3 = new JComboBox<String>(dcbCategory3);
-		jcbCategory3 .setBackground(new Color(0xFFCC66));
+		jcbCategory3 .setBackground(new Color(0xf6f2ef));
 		
 		jtfSearch3 = new JTextField();
 		
@@ -284,10 +288,7 @@ public class AdminMainView extends JFrame {
 		jbtReset3 = new JButton("초기화");
 		jbtReason = new JButton("정지사유");
 		
-		jbtSearch3 .setBackground(new Color(0xFFCC66));
-		jbtRefresh3 .setBackground(new Color(0xFFCC66));
-		jbtReset3 .setBackground(new Color(0xFFCC66));
-		jbtReason .setBackground(new Color(0xFFCC66));
+
 		JLabel jlbId = new JLabel("아이디");
 		
 		String[] idCol= {"아이디","이름","성별","전화번호","지역","가입일자","정지여부"};
@@ -397,6 +398,48 @@ public class AdminMainView extends JFrame {
 		jcbCategory1.addActionListener(ame);
 		jcbCategory2.addActionListener(ame);
 		jcbCategory3.addActionListener(ame);
+		
+		//////////////////////////////////색 디자인/////////////////////////////////
+		
+		Container c = getContentPane();
+		c.setBackground(new Color(0XFFFFFF));
+		jpCheckList.setBackground(new Color(0xf6f2ef));
+		jpProductList.setBackground(new Color(0xf6f2ef));
+		jpUserList.setBackground(new Color(0xf6f2ef));
+		jtProductList.getTableHeader().setBackground(new Color(0xFFCC66));
+		jtCheckList.getTableHeader().setBackground(new Color(0xFFCC66));
+		jtUserList.getTableHeader().setBackground(new Color(0xFFCC66));
+		
+		
+		jbtSearch3 .setBackground(new Color(0xFFCC66));
+		jbtRefresh3 .setBackground(new Color(0xFFCC66));
+		jbtReset3 .setBackground(new Color(0xFFCC66));
+		jbtReason .setBackground(new Color(0xFFCC66));
+		
+		onSale.setBackground(new Color(0xf6f2ef));
+		deleteNComplete.setBackground(new Color(0xf6f2ef));
+		jrbID1.setBackground(new Color(0xf6f2ef));
+		jrbID2.setBackground(new Color(0xf6f2ef));
+		jrbSubject1.setBackground(new Color(0xf6f2ef));
+		jrbSubject2.setBackground(new Color(0xf6f2ef));
+		
+		// 텝 테두리 없애기 //
+		jtp.setBackground(new Color(0xFFCC66));
+		jtp.setUI(new BasicTabbedPaneUI() {
+		        private final Insets borderInsets = new Insets(0, 0, 0, 0);
+		        @Override
+		        protected void paintContentBorder(Graphics g, int tabPlacement, int selectedIndex) {
+		        }
+		        @Override
+		        protected Insets getContentBorderInsets(int tabPlacement) {
+		            return borderInsets;
+		        }
+		    });
+		
+		///////////////////////////////////////////////////////////////////////
+		
+		
+		
 		
 		///////////////////////////////이벤트처리 끝////////////////////////////////
 		
