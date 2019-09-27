@@ -3,6 +3,7 @@ package adminView;
 import java.awt.Color;
 import java.awt.Container;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,7 +23,9 @@ public class AdminLoginView extends JFrame {
 	
 	public AdminLoginView() {
 		super("관리자 로그인");
-		
+		//Logo
+		ImageIcon ii= new ImageIcon("C:/Users/owner/git/project444/project444/src/image/바나나마켓.png");
+		JLabel logo = new JLabel(ii);
 		// JLabel
 		JLabel jlId = new JLabel("ID");
 		JLabel jlPw = new JLabel("PW");
@@ -38,7 +41,8 @@ public class AdminLoginView extends JFrame {
 
 		// 수동배치
 		setLayout(null);
-		
+		//Logo
+		logo.setBounds(70,-20, 300, 225);
 		// JLabel
 		jlId.setBounds(60, 160, 20, 25);
 		jlPw.setBounds(60, 190, 20, 25);
@@ -69,6 +73,8 @@ public class AdminLoginView extends JFrame {
 		add(jpfPw);
 
 		add(jbtLogin);
+		
+		add(logo);
 		
 		jlLoginFail.setForeground(Color.RED);
 		
