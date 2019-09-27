@@ -35,20 +35,23 @@ public class UserInfoEvt implements ActionListener {
 			e.printStackTrace();
 		}
 		JLabel jlLevelImg = uif.getJlLevelImg();
+		
 		int level = 0;
-		if(cnt>0 && cnt <3) {
+		
+		if(cnt ==0) {
+			
 			level = 1;
-		}else if(cnt>=3 && cnt <5) {
+		}else if(cnt>0 && cnt <3) {
 			level = 2;
+		}else if(cnt>=3 && cnt <5) {
 			
-		}else if(cnt>=5 && cnt <10) {
 			level = 3;
+		}else if(cnt>=5 && cnt <10) {
 			
-		}else if(cnt >=10) {
 			level = 4;
+		}else if(cnt >=10) {
 			
-		}else {
-			level = 6;
+			level = 5;
 		}
 		jlLevelImg.setIcon(new ImageIcon("C:/Users/owner/git/project444/project444/src/image/바나나레벨"+level+".png"));
 	}//setGrade
