@@ -78,7 +78,7 @@ public class AdminSuspendReasonView extends JDialog {
 		
 		AdminSuspendReasonViewEvt asrve = new AdminSuspendReasonViewEvt(this);
 		jbtOk.addActionListener(asrve);
-		
+		 
 		//////////////////////////////////색 디자인/////////////////////////////////
 		Container c = getContentPane();
 		c.setBackground(new Color(0xf6f2ef));
