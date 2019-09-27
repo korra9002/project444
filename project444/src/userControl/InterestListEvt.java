@@ -120,7 +120,7 @@ public class InterestListEvt extends MouseAdapter implements ActionListener{
 		}//end if
 	}//deleteInterestList
 	
-	
+	 
 
 	@Override
 	public void mouseClicked(MouseEvent me) {
