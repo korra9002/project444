@@ -173,7 +173,8 @@ public class OrderThread extends Thread {
 				e.printStackTrace();
 			} // end catch
 
-			jsp.getVerticalScrollBar().setValue(jsp.getVerticalScrollBar().getMaximum());
+			jtaChatView.setCaretPosition(jtaChatView.getDocument().getLength());
+//			jsp.getVerticalScrollBar().setValue(jsp.getVerticalScrollBar().getMaximum());
 			list = null;
 
 //			boolean flag = false;
@@ -186,8 +187,8 @@ public class OrderThread extends Thread {
 					cv = list.get(i);
 					System.out.println(cv.getYou() + " : " + cv.getChat() + "\n");
 					jtaChatView.append(cv.getYou() + " : " + cv.getChat() + "\n");
-
-					jsp.getVerticalScrollBar().setValue(jsp.getVerticalScrollBar().getMaximum());
+					jtaChatView.setCaretPosition(jtaChatView.getDocument().getLength());
+//					jsp.getVerticalScrollBar().setValue(jsp.getVerticalScrollBar().getMaximum());
 				} // end for
 				try {
 					Thread.sleep(500);

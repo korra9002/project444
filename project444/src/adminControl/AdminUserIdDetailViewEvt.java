@@ -38,17 +38,28 @@ public class AdminUserIdDetailViewEvt implements ActionListener {
 		String suspendFlag = aidv.getJtfSuspendFlag().getText();
 		String suspendMsg = "Y";
 		String[] tempData = {"",""};
+		boolean whileFlag = false;
 		int period = 0;
 		
 		try {
 			if (!suspendFlag.equals("Y")) {
-				suspendMsg = JOptionPane.showInputDialog("<HTML>[정지 사유, 정지 기간] 입력<br/>위의 형식으로 입력해주세요.");
-				tempData = suspendMsg.split(",");
+				do {
+					suspendMsg = JOptionPane.showInputDialog("<HTML>[정지 사유, 정지 기간] 입력<br/>위의 형식으로 입력해주세요.");
+					tempData = suspendMsg.split(",");
+					if (tempData.length != 2) {
+						JOptionPane.showMessageDialog(aidv, "형식에 맞게 입력해주세요.");
+						
+					}//end if
+					
+				}while(!whileFlag);
+				
 				suspendMsg = (String) tempData[0];
 				period = Integer.parseInt(tempData[1],10);
+				
 			}//end if
+			
 		} catch (NullPointerException npe) {
-			JOptionPane.showMessageDialog(aidv, "형식에 맞게 입력해주세요.");
+			
 		}
 //		System.out.println(suspendMsg + 11);
 //		System.out.println(tempData.length);
