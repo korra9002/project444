@@ -144,7 +144,9 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 		SignUpVO suVO = new SignUpVO(id, depw, name, gender, phone, loc, pwHint, pwAnswer);
 		UserDAO uDAO = UserDAO.getInstance();
 		try {
+			if(JOptionPane.showConfirmDialog(su,"회원가입을 하시겠습니까?","회원가입",JOptionPane.OK_OPTION,JOptionPane.INFORMATION_MESSAGE)==0) {
 			registerFlag = uDAO.insertLogin(suVO);
+			}
 		} catch (SQLException e) {
 
 		} // end catch
