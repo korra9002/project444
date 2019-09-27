@@ -174,7 +174,7 @@ public class ChatList extends JPanel {
 		jspProductList.getVerticalScrollBar().setUI(new ScrollBarUI());
 		jspProductList2.getVerticalScrollBar().setUI(new ScrollBarUI());
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+ 
 	}// Chat
 
 	public JButton getJbRefresh() {
