@@ -19,6 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
+import adminView.ScrollBarUI;
 import userVO.DCodeAndIdAO;
 import userView.MarketMain;
 
@@ -83,17 +84,7 @@ public class ChattingView extends JFrame {
 		jbtSend.setBackground(new Color(0xFFCC66));
 		
 		jsp.getVerticalScrollBar().setBackground(new Color(0xFFFFFF));
-		
-		jsp.getVerticalScrollBar().setUI(new BasicScrollBarUI()
-        {
-			
-            @Override
-            protected void configureScrollBarColors()
-            {
-                this.thumbColor = new Color(0xFFCC66);
-            }
-            
-        });
+		jsp.getVerticalScrollBar().setUI(new ScrollBarUI());
 		
 		
 		//¹èÄ¡
