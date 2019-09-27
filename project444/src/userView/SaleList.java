@@ -170,7 +170,7 @@ public class SaleList extends JDialog {
 		////// 탭, 색 디자인 //////////////
 		Container c = getContentPane();
 		c.setBackground(new Color(0xFFFFFF));
-		setBackground(new Color(0xFFCC66));
+		setBackground(new Color(0xf6f2ef));
 		jtp.setBackground(new Color(0xFFCC66));
 		jbtDelete.setBackground(new Color(0xFFCC66));
 		jbtModify.setBackground(new Color(0xFFCC66));
@@ -189,6 +189,8 @@ public class SaleList extends JDialog {
 			}
 		});
 		//스크롤 색 변경 //
+		jspComp.getVerticalScrollBar().setBackground(new Color(0xFFFFFF));
+		jspSell.getVerticalScrollBar().setBackground(new Color(0xFFFFFF));
 		jspComp.getVerticalScrollBar().setUI(new BasicScrollBarUI()
         {
 			

@@ -1,5 +1,7 @@
 package userView;
 
+import java.awt.Color;
+import java.awt.Container;
 import java.awt.Image;
 import java.io.File;
 import java.sql.SQLException;
@@ -108,6 +110,13 @@ public class ModifyProduct extends JFrame {
 		jspExplain.setBounds(10, 240, 385, 240);
 		jbtOkay.setBounds(100, 500, 80, 30);
 		jbtCancel.setBounds(230, 500, 80, 30);
+		
+	////// 탭, 색 디자인 //////////////
+			Container c = getContentPane();
+			c.setBackground(new Color(0xf6f2ef));
+			jbtCancel.setBackground(new Color(0xFFCC66));
+			jbtOkay.setBackground(new Color(0xFFCC66));
+			jbtSelectImg.setBackground(new Color(0xFFCC66));
 		
 		add(jlbProductImg);
 //		add(jbtSelectImg);

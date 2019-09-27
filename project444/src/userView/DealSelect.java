@@ -1,11 +1,15 @@
 package userView;
 
+import java.awt.Color;
+import java.awt.Container;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.table.DefaultTableModel;
 
 import userControl.DealSelectEvt;
@@ -63,6 +67,30 @@ public class DealSelect extends JFrame {
 	add(jbtsell);
 	add(jbtcancell);
 	add(jlb);
+	//////탭, 색 디자인 //////////////
+			Container c = getContentPane();
+			c.setBackground(new Color(0xf6f2ef));
+			jbtcancell.setBackground(new Color(0xFFCC66));
+			jbtsell.setBackground(new Color(0xFFCC66));
+			jtpAreaList.getTableHeader().setBackground(new Color(0xFFCC66));
+	
+			
+			jspAreaList.getVerticalScrollBar().setBackground(new Color(0xFFFFFF));
+			
+			//스크롤 색 변경 //
+			jspAreaList.getVerticalScrollBar().setUI(new BasicScrollBarUI()
+	        {
+				
+	            @Override
+	            protected void configureScrollBarColors()
+	            {
+	                this.thumbColor = new Color(0xFFCC66);
+	            }
+	            
+	        });
+			
+			//////////////////////////
+		 
 	
 //	setResizable(false);
 	setBounds(100, 100, 500, 600);

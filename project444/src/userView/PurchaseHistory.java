@@ -104,6 +104,7 @@ public class PurchaseHistory extends JDialog {
 //		jbtDelete.setBackground(new Color(0xFFCC66));
 		jtPurchaseList.getTableHeader().setBackground(new Color(0xFFCC66));
 		jspPurchase.setBackground(new Color(0xFFFFFF));
+		jspPurchase.getVerticalScrollBar().setBackground(new Color(0xFFFFFF));
 		
 		//스크롤 색 변경 //
 		jspPurchase.getVerticalScrollBar().setUI(new BasicScrollBarUI()
