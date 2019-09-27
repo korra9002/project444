@@ -19,11 +19,11 @@ public class ScrollBarUI extends BasicScrollBarUI {
         trackRect.width = 5;
        
         thumbColor = new Color(0xFFCC66);
-        thumbDarkShadowColor = new Color(0xFFCC66);
-        thumbHighlightColor = new Color(0xFFCC66);
-        thumbLightShadowColor = new Color(0xFFCC66);
-        trackColor = new Color(0xFFCC66);
-        trackHighlightColor = new Color(0xFFCC66);
+        thumbDarkShadowColor = new Color(0xFFFFFF);
+        thumbHighlightColor = new Color(0xFFFFFF);
+        thumbLightShadowColor = new Color(0xFFFFFF);
+        trackColor = new Color(0xFFFFFF);
+        trackHighlightColor = new Color(0xFFBF3F);
        
 //        AWTUtilitiesWrapper.setComponentShape((Window)thumbRect, shape);
     }

@@ -1,6 +1,7 @@
 package adminView;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -77,6 +78,14 @@ public class AdminSuspendReasonView extends JDialog {
 		
 		AdminSuspendReasonViewEvt asrve = new AdminSuspendReasonViewEvt(this);
 		jbtOk.addActionListener(asrve);
+		 
+		//////////////////////////////////색 디자인/////////////////////////////////
+		Container c = getContentPane();
+		c.setBackground(new Color(0xf6f2ef));
+
+		jtaSuspendList.getTableHeader().setBackground(new Color(0xFFCC66));
+		jbtOk.setBackground(new Color(0xFFCC66));
+		////////////////////////////////////////////////////////////////////////
 		
 		setBounds(amv.getX()+800, amv.getY()+50, 520, 380);
 		setVisible(true);
