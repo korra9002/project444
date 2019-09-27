@@ -113,7 +113,7 @@ public class MarketDetailSeller extends JDialog {
 				jbtComplete.setBackground(new Color(0xFFCC66));
 				jbtDelete.setBackground(new Color(0xFFCC66));
 				jsp.getVerticalScrollBar().setUI(new ScrollBarUI());
-				jsp.getHorizontalScrollBar().setUI(new ScrollBarUI());
+				jtaStrongPoint.setLineWrap(true);
 		
 		//¹èÄ¡
 		setLayout(null);
