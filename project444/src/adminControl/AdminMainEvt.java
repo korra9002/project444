@@ -7,6 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -35,6 +36,7 @@ import adminView.AdminSuspendReasonView;
 public class AdminMainEvt extends MouseAdapter implements ActionListener{
 
 	private AdminMainView amv;
+	private DecimalFormat dfPrice = new DecimalFormat("#,###,###");
 	
 	public AdminMainEvt(AdminMainView amv) {
 		this.amv = amv;
@@ -102,7 +104,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				rowData[2] = clv.getUser_id();
 				rowData[3] = clv.getCategory();
 				rowData[4] = clv.getProduct_name();
-				rowData[5] = clv.getPrice();
+				rowData[5] = dfPrice.format(clv.getPrice());
 				rowData[6] = clv.getUpload_date();
 				
 				//dtm에 추가
@@ -174,7 +176,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				rowData[2] = clv.getUser_id();
 				rowData[3] = clv.getCategory();
 				rowData[4] = clv.getProduct_name();
-				rowData[5] = clv.getPrice();
+				rowData[5] = dfPrice.format(clv.getPrice());
 				rowData[6] = clv.getUpload_date();
 				
 				//dtm에 추가
@@ -230,7 +232,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				rowData[2] = clv.getUser_id();
 				rowData[3] = clv.getCategory();
 				rowData[4] = clv.getProduct_name();
-				rowData[5] = clv.getPrice();
+				rowData[5] = dfPrice.format(clv.getPrice());
 				rowData[6] = clv.getUpload_date();
 				
 				//dtm에 추가
@@ -348,7 +350,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				rowData[2] = plv.getUser_id();
 				rowData[3] = plv.getCategory();
 				rowData[4] = plv.getProduct_name();
-				rowData[5] = plv.getPrice();
+				rowData[5] = dfPrice.format(plv.getPrice());
 				rowData[6] = plv.getUpload_date();
 
 				switch (plv.getAll_flag()) {
@@ -410,7 +412,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				rowData[2] = plv.getUser_id();
 				rowData[3] = plv.getCategory();
 				rowData[4] = plv.getProduct_name();
-				rowData[5] = plv.getPrice();
+				rowData[5] = dfPrice.format(plv.getPrice());
 				rowData[6] = plv.getUpload_date();
 				
 				switch (plv.getAll_flag()) {
@@ -508,7 +510,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				rowData[2] = plv.getUser_id();
 				rowData[3] = plv.getCategory();
 				rowData[4] = plv.getProduct_name();
-				rowData[5] = plv.getPrice();
+				rowData[5] = dfPrice.format(plv.getPrice());
 				rowData[6] = plv.getUpload_date();
 				
 				switch (plv.getAll_flag()) {

@@ -73,12 +73,5 @@ public class CheckDetailVO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-
-	@Override
-	public String toString() {
-		return "DetailVO [product_code=" + product_code + ", img_file=" + img_file + ", product_name=" + product_name
-				+ ", info=" + info + ", upload_date=" + upload_date + ", user_id=" + user_id + ", category=" + category
-				+ ", price=" + price + "]";
-	}
 	
 }//class

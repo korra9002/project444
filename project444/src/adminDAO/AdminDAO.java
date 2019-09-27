@@ -84,7 +84,7 @@ public class AdminDAO {
 			con = getConnection();
 			
 			selectCheck
-			.append("	select product_code, img_file, user_id, c.category, product_name, to_char(price, '9,999,999') price, to_char(upload_date,'yyyy-mm-dd hh24:mi')upload_date	")
+			.append("	select product_code, img_file, user_id, c.category, product_name, price, to_char(upload_date,'yyyy-mm-dd hh24:mi')upload_date	")
 			.append("	from product p, category_list c	")
 			.append("	where (p.category_code = c.category_code) and all_flag = 'N'	");
 			
@@ -129,7 +129,7 @@ public class AdminDAO {
 			
 			while(rs.next()) {
 				clv = new CheckListVO(rs.getString("product_code"), rs.getString("img_file"), rs.getString("product_name"), 
-						rs.getString("upload_date"), rs.getString("user_id"),rs.getString("category"),rs.getString("price"));
+						rs.getString("upload_date"), rs.getString("user_id"),rs.getString("category"),rs.getInt("price"));
 				list.add(clv);//조회된 레코드를 저장한 VO를 list에 추가
 			
 			}//end while
@@ -165,7 +165,7 @@ public class AdminDAO {
 			con = getConnection();
 			
 			selectCheck
-			.append("	select product_code, img_file, user_id, c.category, product_name, to_char(price,'9,999,999')price, to_char(upload_date,'yyyy-mm-dd hh24:mi')upload_date	")
+			.append("	select product_code, img_file, user_id, c.category, product_name, price, to_char(upload_date,'yyyy-mm-dd hh24:mi')upload_date	")
 			.append("	from product p, category_list c	")
 			.append("	where (p.category_code = c.category_code) and all_flag = 'N'	");
 			
@@ -207,7 +207,7 @@ public class AdminDAO {
 			
 			while(rs.next()) {
 				clv = new CheckListVO(rs.getString("product_code"), rs.getString("img_file"), rs.getString("product_name"), 
-						rs.getString("upload_date"), rs.getString("user_id"),rs.getString("category"),rs.getString("price"));
+						rs.getString("upload_date"), rs.getString("user_id"),rs.getString("category"),rs.getInt("price"));
 				list.add(clv);//조회된 레코드를 저장한 VO를 list에 추가
 			
 			}//end while
@@ -241,7 +241,7 @@ public class AdminDAO {
 			con = getConnection();
 			
 			selectCheck
-			.append("	select product_code, img_file, user_id, c.category, product_name, to_char(price,'9,999,999')price, to_char(upload_date,'yyyy-mm-dd hh24:mi')upload_date	")
+			.append("	select product_code, img_file, user_id, c.category, product_name, price, to_char(upload_date,'yyyy-mm-dd hh24:mi')upload_date	")
 			.append("	from product p, category_list c	")
 			.append("	where (p.category_code = c.category_code) and all_flag = 'N'	");
 			
@@ -255,7 +255,7 @@ public class AdminDAO {
 			
 			while(rs.next()) {
 				clv = new CheckListVO(rs.getString("product_code"), rs.getString("img_file"), rs.getString("product_name"), 
-						rs.getString("upload_date"), rs.getString("user_id"),rs.getString("category"),rs.getString("price"));
+						rs.getString("upload_date"), rs.getString("user_id"),rs.getString("category"),rs.getInt("price"));
 				list.add(clv);//조회된 레코드를 저장한 VO를 list에 추가
 				
 			}//end while
@@ -338,7 +338,7 @@ public class AdminDAO {
 			con = getConnection();
 			
 			selectProduct
-			.append("	select product_code, img_file, user_id, c.category, product_name, to_char(price,'9,999,999')price, to_char(upload_date,'yyyy-mm-dd hh24:mi')upload_date, all_flag	")
+			.append("	select product_code, img_file, user_id, c.category, product_name, price, to_char(upload_date,'yyyy-mm-dd hh24:mi')upload_date, all_flag	")
 			.append("	from product p, category_list c	")
 			.append("	where (p.category_code = c.category_code) and 	").append(pVO.getQuery());
 			
@@ -383,7 +383,7 @@ public class AdminDAO {
 			
 			while(rs.next()) {
 				plv = new ProductListVO(rs.getString("product_code"), rs.getString("img_file"), rs.getString("product_name"), 
-						rs.getString("upload_date"), rs.getString("user_id"),rs.getString("category"),rs.getString("all_flag"),rs.getString("price"));
+						rs.getString("upload_date"), rs.getString("user_id"),rs.getString("category"),rs.getString("all_flag"),rs.getInt("price"));
 				list.add(plv);//조회된 레코드를 저장한 VO를 list에 추가
 			
 			}//end while
@@ -418,7 +418,7 @@ public class AdminDAO {
 			con = getConnection();
 			
 			selectCheck
-			.append("	select product_code, img_file, user_id, c.category, product_name, to_char(price,'9,999,999')price, to_char(upload_date,'yyyy-mm-dd hh24:mi')upload_date, all_flag	")
+			.append("	select product_code, img_file, user_id, c.category, product_name, price, to_char(upload_date,'yyyy-mm-dd hh24:mi')upload_date, all_flag	")
 			.append("	from product p, category_list c	")
 			.append("	where (p.category_code = c.category_code) and (all_flag != 'N' and all_flag != 'F')	");
 			
@@ -432,7 +432,7 @@ public class AdminDAO {
 			
 			while(rs.next()) {
 				plv = new ProductListVO(rs.getString("product_code"), rs.getString("img_file"), rs.getString("product_name"), 
-						rs.getString("upload_date"), rs.getString("user_id"),rs.getString("category"),rs.getString("all_flag"),rs.getString("price"));
+						rs.getString("upload_date"), rs.getString("user_id"),rs.getString("category"),rs.getString("all_flag"),rs.getInt("price"));
 				list.add(plv);//조회된 레코드를 저장한 VO를 list에 추가
 				
 			}//end while
@@ -466,7 +466,7 @@ public class AdminDAO {
 			con = getConnection();
 			
 			selectProduct
-			.append("	select product_code, img_file, user_id, c.category, product_name, to_char(price,'9,999,999')price, to_char(upload_date,'yyyy-mm-dd hh24:mi')upload_date, all_flag	")
+			.append("	select product_code, img_file, user_id, c.category, product_name, price, to_char(upload_date,'yyyy-mm-dd hh24:mi')upload_date, all_flag	")
 			.append("	from product p, category_list c	")
 			.append("	where (p.category_code = c.category_code) and 	").append(pVO.getQuery());
 			
@@ -511,7 +511,7 @@ public class AdminDAO {
 			
 			while(rs.next()) {
 				plv = new ProductListVO(rs.getString("product_code"), rs.getString("img_file"), rs.getString("product_name"), 
-						rs.getString("upload_date"), rs.getString("user_id"),rs.getString("category"),rs.getString("all_flag"),rs.getString("price"));
+						rs.getString("upload_date"), rs.getString("user_id"),rs.getString("category"),rs.getString("all_flag"),rs.getInt("price"));
 				list.add(plv);//조회된 레코드를 저장한 VO를 list에 추가
 			
 			}//end while
@@ -560,7 +560,7 @@ public class AdminDAO {
 				pdVO.setUpload_date(rs.getString("upload_date"));
 				pdVO.setUser_id(rs.getString("user_id"));
 				pdVO.setCategory(rs.getString("category"));
-				pdVO.setPrice(rs.getString("price"));
+				pdVO.setPrice(rs.getInt("price"));
 				pdVO.setRejectMsg(rs.getString("rejection_reason"));
 			}//end while
 			
