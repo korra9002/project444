@@ -76,7 +76,8 @@ public class AdminDetailView extends JDialog {
 		add(jbtOkey);
 		add(jbtStop);
 		
-	
+		
+		
 		setBounds(300, 100, 270, 340);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

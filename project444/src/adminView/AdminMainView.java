@@ -422,7 +422,10 @@ public class AdminMainView extends JFrame {
 		jrbID2.setBackground(new Color(0xf6f2ef));
 		jrbSubject1.setBackground(new Color(0xf6f2ef));
 		jrbSubject2.setBackground(new Color(0xf6f2ef));
-		
+		//스크롤 색상
+		jspCheckList.getVerticalScrollBar().setUI(new ScrollBarUI());
+		jspProductList.getVerticalScrollBar().setUI(new ScrollBarUI());
+		jspUserList.getVerticalScrollBar().setUI(new ScrollBarUI());
 		// 텝 테두리 없애기 //
 		jtp.setBackground(new Color(0xFFCC66));
 		jtp.setUI(new BasicTabbedPaneUI() {
