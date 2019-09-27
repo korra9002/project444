@@ -43,7 +43,7 @@ public class AdminProductDetailView extends JDialog {
 		JLabel jlInputDate = new JLabel("올린일자");
 		JLabel jlCategory = new JLabel("카테고리");
 		JLabel jlReason = new JLabel("거부사유");
-
+ 
 		// JTextField
 		jtfProductName = new JTextField();
 		jtfPrice = new JTextField();
@@ -61,6 +61,10 @@ public class AdminProductDetailView extends JDialog {
 		// JTextArea
 		jtaInfo = new JTextArea();
 		jtaReason = new JTextArea();
+		
+		jtaInfo.setLineWrap(true);
+		jtaReason.setLineWrap(true);
+
 		JScrollPane jspInfo = new JScrollPane(jtaInfo);
 		JScrollPane jspReason = new JScrollPane(jtaReason);
 		jtaInfo.setEditable(false);

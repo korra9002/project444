@@ -61,6 +61,7 @@ public class AdminCheckDetailView extends JDialog {
 		jtaInfo = new JTextArea();
 		JScrollPane jsp = new JScrollPane(jtaInfo);
 		jtaInfo.setEditable(false);
+		jtaInfo.setLineWrap(true); 
 
 		jbtGrant = new JButton("판매승인");
 		jbtReject = new JButton("판매거부");
