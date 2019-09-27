@@ -110,6 +110,7 @@ public class ChatList extends JPanel {
 		jbSell.addActionListener(cle);
 		jtProductList.addMouseListener(cle);
 
+		jspProductList.getVerticalScrollBar().setUI(new ScrollBarUI());
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}// Chat

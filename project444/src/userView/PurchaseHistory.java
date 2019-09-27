@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import adminView.ScrollBarUI;
 import userControl.PurchaseHistoryEvt;
 import userRun.RunMarketMain;
 
@@ -103,9 +104,9 @@ public class PurchaseHistory extends JDialog {
 		c.setBackground(new Color(0xf6f2ef));
 //		jbtDelete.setBackground(new Color(0xFFCC66));
 		jtPurchaseList.getTableHeader().setBackground(new Color(0xFFCC66));
-		jspPurchase.setBackground(new Color(0xFFFFFF));
-		jspPurchase.getVerticalScrollBar().setBackground(new Color(0xFFFFFF));
-		
+//		jspPurchase.setBackground(new Color(0xFFFFFF));
+//		jspPurchase.getVerticalScrollBar().setBackground(new Color(0xFFFFFF));
+		jspPurchase.getVerticalScrollBar().setUI(new ScrollBarUI());
 		//스크롤 색 변경 //
 		jspPurchase.getVerticalScrollBar().setUI(new BasicScrollBarUI()
         {

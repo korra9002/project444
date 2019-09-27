@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import adminView.ScrollBarUI;
 import userControl.InterestListEvt;
 import userRun.RunMarketMain;
 
@@ -112,16 +113,7 @@ public class InterestList extends JDialog {
 			jspInterest.getVerticalScrollBar().setBackground(new Color(0xFFFFFF));
 			
 			//스크롤 색 변경 //
-			jspInterest.getVerticalScrollBar().setUI(new BasicScrollBarUI()
-	        {
-				
-	            @Override
-	            protected void configureScrollBarColors()
-	            {
-	                this.thumbColor = new Color(0xFFCC66);
-	            }
-	            
-	        });
+			jspInterest.getVerticalScrollBar().setUI(new ScrollBarUI());
 			
 			//////////////////////////
 		 

@@ -16,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import adminView.ScrollBarUI;
 import userControl.MarketDetailBuyerEvt;
 import userControl.MarketDetailSellerEvt;
 import userRun.RunMarketMain;
@@ -111,7 +112,8 @@ public class MarketDetailSeller extends JDialog {
 				jbtChange.setBackground(new Color(0xFFCC66));
 				jbtComplete.setBackground(new Color(0xFFCC66));
 				jbtDelete.setBackground(new Color(0xFFCC66));
-		
+				jsp.getVerticalScrollBar().setUI(new ScrollBarUI());
+				jsp.getHorizontalScrollBar().setUI(new ScrollBarUI());
 		
 		//¹èÄ¡
 		setLayout(null);

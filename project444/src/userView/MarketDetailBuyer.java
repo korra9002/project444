@@ -117,7 +117,8 @@ public class MarketDetailBuyer extends JDialog {
 		c.setBackground(new Color(0xf6f2ef));
 		jbtChat.setBackground(new Color(0xFFCC66));
 		jckLike.setBackground(new Color(0xf6f2ef));
-		
+		jsp.getVerticalScrollBar().setUI(new ScrollBarUI());
+		jsp.getHorizontalScrollBar().setUI(new ScrollBarUI());
 		
 		// 배치
 		setLayout(null);
@@ -141,7 +142,7 @@ public class MarketDetailBuyer extends JDialog {
 		setVisible(true);
 
 		MarketDetailBuyerEvt mdbe = new MarketDetailBuyerEvt(mm, this,ile);
-
+		
 		jbtChat.addActionListener(mdbe);
 ////////////////////////////변경사항/////////////////////////////////////////
 		jckLike.addActionListener(mdbe);

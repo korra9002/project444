@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import adminView.ScrollBarUI;
 import userControl.SaleListEvt;
 import userRun.RunMarketMain;
 
@@ -189,28 +190,10 @@ public class SaleList extends JDialog {
 			}
 		});
 		//스크롤 색 변경 //
-		jspComp.getVerticalScrollBar().setBackground(new Color(0xFFFFFF));
-		jspSell.getVerticalScrollBar().setBackground(new Color(0xFFFFFF));
-		jspComp.getVerticalScrollBar().setUI(new BasicScrollBarUI()
-        {
-			
-            @Override
-            protected void configureScrollBarColors()
-            {
-                this.thumbColor = new Color(0xFFCC66);
-            }
-            
-        });
-		jspSell.getVerticalScrollBar().setUI(new BasicScrollBarUI()
-        {
-			
-            @Override
-            protected void configureScrollBarColors()
-            {
-                this.thumbColor = new Color(0xFFCC66);
-            }
-            
-        });
+//		jspComp.getVerticalScrollBar().setBackground(new Color(0xFFFFFF));
+//		jspSell.getVerticalScrollBar().setBackground(new Color(0xFFFFFF));
+		jspComp.getVerticalScrollBar().setUI(new ScrollBarUI());
+		jspSell.getVerticalScrollBar().setUI(new ScrollBarUI());
 		//////////////////////////
 		
 		setBounds(100, 100, 560, 700);
