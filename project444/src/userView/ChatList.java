@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import adminView.ScrollBarUI;
 import userControl.ChatListEvt;
 
 public class ChatList extends JPanel {
@@ -101,12 +102,13 @@ public class ChatList extends JPanel {
 		jbBuy.setBackground(new Color(0xFFCC66));
 		jbSell.setBackground(new Color(0xFFCC66));
 		jbRefresh.setBackground(new Color(0xFFCC66));
+		
 		setVisible(true);
-cle = new ChatListEvt(this);
-jbRefresh.addActionListener(cle);
-jbBuy.addActionListener(cle);
-jbSell.addActionListener(cle);
-jtProductList.addMouseListener(cle);
+		cle = new ChatListEvt(this);
+		jbRefresh.addActionListener(cle);
+		jbBuy.addActionListener(cle);
+		jbSell.addActionListener(cle);
+		jtProductList.addMouseListener(cle);
 
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

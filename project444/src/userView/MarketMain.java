@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import adminView.ScrollBarUI;
 import userControl.MarketMainEvt;
 
 
@@ -214,17 +215,17 @@ import userControl.MarketMainEvt;
 		jrbId.setBackground(new Color(0xf6f2ef));
 		jtProductList.getTableHeader().setBackground(new Color(0xFFCC66));
 		jspProductList.getVerticalScrollBar().setBackground(new Color(0xFFFFFF));
-		
-		jspProductList.getVerticalScrollBar().setUI(new BasicScrollBarUI()
-        {
-			
-            @Override
-            protected void configureScrollBarColors()
-            {
-                this.thumbColor = new Color(0xFFCC66);
-            }
-            
-        });
+		jspProductList.getVerticalScrollBar().setUI(new ScrollBarUI());
+//		jspProductList.getVerticalScrollBar().setUI(new BasicScrollBarUI()
+//        {
+//			
+//            @Override
+//            protected void configureScrollBarColors()
+//            {
+//                this.thumbColor = new Color(0xFFCC66);
+//            }
+//            
+//        });
 		
 		
 		

@@ -16,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import adminView.ScrollBarUI;
 import userControl.InterestListEvt;
 import userControl.MarketDetailBuyerEvt;
 import userDAO.UserDAO;
