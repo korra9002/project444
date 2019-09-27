@@ -4,6 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
+import userDAO.UserDAO;
 import userRun.RunMarketMain;
 import userView.InterestList;
 import userView.Login;
@@ -19,7 +23,44 @@ public class UserInfoEvt implements ActionListener {
 	public UserInfoEvt(UserInfo uif, RunMarketMain rmm) {
 		this.uif = uif;
 		this.rmm= rmm;
+		setGrade();
 	}//UserInfoEvt
+	
+	public void setGrade() {
+		UserDAO uDAO = UserDAO.getInstance();
+		int cnt = 0;
+		try {
+			cnt = uDAO.grade();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		JLabel jlLevelImg = uif.getJlLevelImg();
+		
+		int level = 0;
+		
+		if(cnt ==0) {
+			
+			level = 1;
+		}else if(cnt>0 && cnt <3) {
+			level = 2;
+		}else if(cnt>=3 && cnt <5) {
+			
+			level = 3;
+		}else if(cnt>=5 && cnt <10) {
+			
+			level = 4;
+		}else if(cnt >=10) {
+			
+			level = 5;
+		}
+		jlLevelImg.setIcon(new ImageIcon("C:/Users/owner/git/project444/project444/src/image/바나나레벨"+level+".png"));
+	}//setGrade
+	
+	
+	
+	
+	
+	
 	
 	
 	

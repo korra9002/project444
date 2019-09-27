@@ -1059,7 +1059,54 @@ System.out.println(slv);
 /////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////// 셀러 디테일창에서 플래그 확인
 	
+//////////////////////////////// 등급을 위한 갯수 확인 //////////////////////////
+public int grade() throws SQLException {
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	int cnt = 0;
+	try {
+		// 2.커넥션 얻기
+		con = getConn();
 
+		// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
+		// 것부터 조회
+		String query= "	select (select count(all_flag) from product where user_id =? and all_flag='B') sell_count, (select count(sale_flag) from deal where user_id =? and sale_flag='P'  ) buy_count from dual    ";
+
+		pstmt = con.prepareStatement(query);
+		pstmt.setString(1, RunMarketMain.userId);
+		pstmt.setString(2, RunMarketMain.userId);
+
+		rs = pstmt.executeQuery();
+
+	
+		if (rs.next()) {
+			cnt = rs.getInt("sell_count")+rs.getInt("buy_count");
+		}
+
+	} finally {
+		// 6. 연결 끊기
+		if (rs != null)
+			rs.close();
+		if (pstmt != null)
+			pstmt.close();
+		if (con != null)
+			con.close();
+
+	}
+	
+	return cnt;
+}
+	
+	
+	
+	
+
+	
+	
+	
+	
+////////////////////////////////////////////////////////
 	
 	
 	
