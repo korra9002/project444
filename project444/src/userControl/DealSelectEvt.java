@@ -63,7 +63,8 @@ private String productName,productCode;
 		JTable jtpAreaList=ds.getJtpAreaList();
 		String id=(String) jtpAreaList.getValueAt(jtpAreaList.getSelectedRow(), 0);
 		String dealCode=(String) jtpAreaList.getValueAt(jtpAreaList.getSelectedRow(), 2);
-		if(JOptionPane.showConfirmDialog(ds, id+"님에게 "+productName+"를 판매하시겠습니까?","판매확인",JOptionPane.YES_NO_OPTION,JOptionPane.DEFAULT_OPTION)==0) {
+		if(JOptionPane.showConfirmDialog(ds,id+"님에게 "+productName+"를 판매하시겠습니까?","판매확인",JOptionPane.OK_OPTION,JOptionPane.INFORMATION_MESSAGE)==0) {
+			
 			UserDAO uDAO = UserDAO.getInstance(); 
 			try {
 				if(uDAO.changeFlag(dealCode)==1) {

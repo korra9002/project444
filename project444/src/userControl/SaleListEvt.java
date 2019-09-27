@@ -198,7 +198,7 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 
 	public void deleteSaleList() {
 
-		switch (JOptionPane.showConfirmDialog(sl, "판매글을 삭제하시겠습니까?")) {
+		switch (JOptionPane.showConfirmDialog(sl,"판매글을 삭제하시겠습니까??","판매글 삭제",JOptionPane.OK_OPTION,JOptionPane.INFORMATION_MESSAGE)) {
 		case JOptionPane.OK_OPTION:
 
 			// DBMS에서 레코드를 삭제
