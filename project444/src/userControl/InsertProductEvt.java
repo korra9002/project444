@@ -376,8 +376,8 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 		} // end if
 
 		if (ae.getSource() == ip.getJbtCancel()) {		
-
-			switch (JOptionPane.showConfirmDialog(ip,"상품등록을 취소하시겠습니까?")) {
+			
+			switch (JOptionPane.showConfirmDialog(ip,"상품등록을 취소하시겠습니까?","취소",JOptionPane.OK_OPTION,JOptionPane.INFORMATION_MESSAGE)) {
 			case JOptionPane.OK_OPTION:
 				reset();
 				JOptionPane.showMessageDialog(ip, "상품등록이 취소되었습니다.");

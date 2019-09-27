@@ -198,7 +198,9 @@ public class SignUpEvt extends MouseAdapter implements ActionListener {
 		} // end if
 
 		if (ae.getSource() == su.getJbtCancle()) {
-			signUpClose();
+			if(JOptionPane.showConfirmDialog(su,"회원가입을 하지 않고 창을 닫으시겠습니까?","창닫기",JOptionPane.OK_OPTION,JOptionPane.INFORMATION_MESSAGE)==0) {
+				signUpClose();
+			}//end if
 		} // end if
 	}// actionPerformed
 }// class
