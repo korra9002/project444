@@ -176,10 +176,7 @@ public class PersonalInform extends JDialog {
 			//배경색 변경
 			jtfId.setBackground(new Color(0xf6f2ef));
 			jtfName.setBackground(new Color(0xf6f2ef));
-			jtfGender.setBackground(new Color(0xf6f2ef));
-			jtfName.setBorder(new LineBorder(null, 0));
-			jtfId.setBorder(new LineBorder(null, 0));
-			jtfGender.setBorder(new LineBorder(null, 0));
+			jtfGender.setBackground(new Color(0xf6f2ef));			
 			// 색 디자인
 			Container c = getContentPane();
 			c.setBackground(new Color(0xf6f2ef));
