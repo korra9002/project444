@@ -47,7 +47,7 @@ public class ChattingView extends JFrame {
 		
 		jtaChatView = new JTextArea();
 		jtaChatField = new JTextField();
-		
+		jtaChatView.setLineWrap(true);
 		jsp = new JScrollPane(jtaChatView);
 		
 		JPanel jp = new JPanel();
