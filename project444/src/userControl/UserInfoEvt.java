@@ -78,7 +78,7 @@ public class UserInfoEvt implements ActionListener {
 				new SaleList(rmm);
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}
+			} 
 		} // end if
 		if (ae.getSource() == uif.getJbtBuy()) {
 			try {
