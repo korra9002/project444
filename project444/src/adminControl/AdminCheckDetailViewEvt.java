@@ -21,7 +21,7 @@ public class AdminCheckDetailViewEvt implements ActionListener {
 	private void grant() {
 		
 		String productCode= acdv.getCode();
-		switch (JOptionPane.showConfirmDialog(acdv, "판매 승인을 할까요?")) {
+		switch (JOptionPane.showConfirmDialog(acdv,"판매 승인을 할까요?","창닫기",JOptionPane.OK_OPTION,JOptionPane.INFORMATION_MESSAGE)) {
 		case JOptionPane.OK_OPTION:
 			
 			AdminDAO aDAO=AdminDAO.getInstance();
