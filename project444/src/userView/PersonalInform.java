@@ -168,7 +168,7 @@ public class PersonalInform extends JDialog {
 			jbtPwUpdate.addActionListener(psie);
 			jbtCancle.addActionListener(psie);
 			jbtRegister.addActionListener(psie);
-			
+			 
 			//편집불가
 			jtfId.setEditable(false);
 			jtfGender.setEditable(false);
