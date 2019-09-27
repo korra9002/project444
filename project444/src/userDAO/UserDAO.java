@@ -773,7 +773,7 @@ System.out.println(slv);
 
 			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
 			// 것부터 조회
-			String RecentChat = "   select to_char(input_date,'yyyy-mm-dd hh24:mi:ss') input_date ,chat,sale_flag from  chatting where  (select max(input_date) from chatting where deal_code =?) = input_date   ";
+			String RecentChat = "   select to_char(input_date,'yyyy-mm-dd hh24:mi:ss') input_date ,chat from  chatting where  (select max(input_date) from chatting where deal_code =?) = input_date   ";
 
 			pstmt = con.prepareStatement(RecentChat);
 			pstmt.setString(1, dealCode);
