@@ -61,6 +61,9 @@ public class AdminProductDetailView extends JDialog {
 		// JTextArea
 		jtaInfo = new JTextArea();
 		jtaReason = new JTextArea();
+		jtaInfo.setLineWrap(true);
+		jtaReason.setLineWrap(true);
+
 		JScrollPane jspInfo = new JScrollPane(jtaInfo);
 		JScrollPane jspReason = new JScrollPane(jtaReason);
 		jtaInfo.setEditable(false);
