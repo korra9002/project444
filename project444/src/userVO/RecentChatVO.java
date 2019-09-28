@@ -1,12 +1,13 @@
 package userVO;
 
 public class RecentChatVO {
-	String time, chat;
+	String time, chat, readFlag;
 
-	public RecentChatVO(String time, String chat) {
+	public RecentChatVO(String time, String chat, String readFlag) {
 		super();
 		this.time = time;
 		this.chat = chat;
+		this.readFlag = readFlag;
 	}
 
 	public String getTime() {
@@ -16,5 +17,10 @@ public class RecentChatVO {
 	public String getChat() {
 		return chat;
 	}
+
+	public String getReadFlag() {
+		return readFlag;
+	}
+
 
 }

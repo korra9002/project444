@@ -46,7 +46,7 @@ public class ChatList extends JPanel {
 
 		String[] productColumn = { "제품명", "ID", "지역", "시간", "마지막 대화 내용","거래코드" };
 
-		dtmProductList = new DefaultTableModel(productColumn, 6) {
+		dtmProductList = new DefaultTableModel(productColumn, 0) {
 		
 			
 			
@@ -95,7 +95,7 @@ public class ChatList extends JPanel {
 		jlComplete =new JLabel("거래 종료된 상품");
 		
 		//JTable
-		dtmProductList2 = new DefaultTableModel(productColumn, 6) {		
+		dtmProductList2 = new DefaultTableModel(productColumn, 0) {		
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -118,12 +118,12 @@ public class ChatList extends JPanel {
 		/////////////////////////테이블 가운데 정렬////////////////////////////////
 		DefaultTableCellRenderer dtcrCenter2 = new DefaultTableCellRenderer();
 		dtcrCenter2.setHorizontalAlignment(SwingConstants.CENTER);
-		TableColumnModel tcm2 = jtProductList.getColumnModel();
-		tcm2.getColumn(0).setCellRenderer(dtcrCenter);
-		tcm2.getColumn(1).setCellRenderer(dtcrCenter);
-		tcm2.getColumn(2).setCellRenderer(dtcrCenter);
-		tcm2.getColumn(3).setCellRenderer(dtcrCenter);
-		tcm2.getColumn(5).setCellRenderer(dtcrCenter);
+		TableColumnModel tcm2 = jtProductList2.getColumnModel();
+		tcm2.getColumn(0).setCellRenderer(dtcrCenter2);
+		tcm2.getColumn(1).setCellRenderer(dtcrCenter2);
+		tcm2.getColumn(2).setCellRenderer(dtcrCenter2);
+		tcm2.getColumn(3).setCellRenderer(dtcrCenter2);
+		tcm2.getColumn(5).setCellRenderer(dtcrCenter2);
 		/////////////////////////테이블 가운데 정렬////////////////////////////////
 
 		

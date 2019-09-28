@@ -742,7 +742,7 @@ System.out.println(slv);
 				dealCode = rs.getString("deal_code");
 				rcVO = recentChat(dealCode);
 				clVO = new ChatListVO(rs.getString("product_name"), rs.getString("id"), rs.getString("loc"),
-						rcVO.getTime(), rcVO.getChat(), dealCode);
+						rcVO.getTime(), rcVO.getChat(), dealCode,rs.getString("all_flag"),rs.getString("sale_flag"),rcVO.getReadFlag());
 				list.add(clVO);// 조회된 레코드를 저장한 VO를 list에 추가
 			}
 
@@ -773,7 +773,7 @@ System.out.println(slv);
 
 			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
 			// 것부터 조회
-			String RecentChat = "   select to_char(input_date,'yyyy-mm-dd hh24:mi:ss') input_date ,chat from  chatting where  (select max(input_date) from chatting where deal_code =?) = input_date   ";
+			String RecentChat = "   select to_char(input_date,'yyyy-mm-dd hh24:mi:ss') input_date ,sender||' : '||chat chat, read_flag from  chatting where  (select max(input_date) from chatting where deal_code =?) = input_date   ";
 
 			pstmt = con.prepareStatement(RecentChat);
 			pstmt.setString(1, dealCode);
@@ -781,9 +781,9 @@ System.out.println(slv);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				rcVO = new RecentChatVO(rs.getString("input_date"), rs.getString("chat"));
+				rcVO = new RecentChatVO(rs.getString("input_date"), rs.getString("chat"),rs.getString("read_flag"));
 			} else {
-				rcVO = new RecentChatVO("", "");
+				rcVO = new RecentChatVO("", "","");
 			}
 
 		} finally {
