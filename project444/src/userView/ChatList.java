@@ -44,7 +44,7 @@ public class ChatList extends JPanel {
 		jbSell = new JButton("판매중");		   
 		// JTable
 
-		String[] productColumn = { "제품명", "ID", "지역", "시간", "마지막 대화 내용","거래코드" };
+		String[] productColumn = { "제품명", "ID", "지역", "시간", "마지막 대화 내용","","거래코드" };
 
 		dtmProductList = new DefaultTableModel(productColumn, 0) {
 		
@@ -70,12 +70,13 @@ public class ChatList extends JPanel {
 		jtProductList.setRowHeight(30);
 		jtProductList.getTableHeader().setReorderingAllowed(false);
 
-		jtProductList.getColumnModel().getColumn(0).setPreferredWidth(100);
-		jtProductList.getColumnModel().getColumn(1).setPreferredWidth(10);
-		jtProductList.getColumnModel().getColumn(2).setPreferredWidth(10);
-		jtProductList.getColumnModel().getColumn(3).setPreferredWidth(90);
-		jtProductList.getColumnModel().getColumn(4).setPreferredWidth(220);
-		jtProductList.getColumnModel().getColumn(5).setPreferredWidth(10);
+		jtProductList.getColumnModel().getColumn(0).setPreferredWidth(150);
+		jtProductList.getColumnModel().getColumn(1).setPreferredWidth(64);
+		jtProductList.getColumnModel().getColumn(2).setPreferredWidth(64);
+		jtProductList.getColumnModel().getColumn(3).setPreferredWidth(123);
+		jtProductList.getColumnModel().getColumn(4).setPreferredWidth(260);
+		jtProductList.getColumnModel().getColumn(5).setPreferredWidth(24);
+		jtProductList.getColumnModel().getColumn(6).setPreferredWidth(65);
 		/////////////////////////테이블 가운데 정렬////////////////////////////////
 		DefaultTableCellRenderer dtcrCenter = new DefaultTableCellRenderer();
 		dtcrCenter.setHorizontalAlignment(SwingConstants.CENTER);
@@ -85,6 +86,7 @@ public class ChatList extends JPanel {
 		tcm.getColumn(2).setCellRenderer(dtcrCenter);
 		tcm.getColumn(3).setCellRenderer(dtcrCenter);
 		tcm.getColumn(5).setCellRenderer(dtcrCenter);
+		tcm.getColumn(6).setCellRenderer(dtcrCenter);
 		/////////////////////////테이블 가운데 정렬////////////////////////////////
 		
 		
@@ -109,12 +111,13 @@ public class ChatList extends JPanel {
 		jtProductList2.setRowHeight(30);
 		jtProductList2.getTableHeader().setReorderingAllowed(false);
 		
-		jtProductList2.getColumnModel().getColumn(0).setPreferredWidth(100);
-		jtProductList2.getColumnModel().getColumn(1).setPreferredWidth(10);
-		jtProductList2.getColumnModel().getColumn(2).setPreferredWidth(10);
-		jtProductList2.getColumnModel().getColumn(3).setPreferredWidth(90);
-		jtProductList2.getColumnModel().getColumn(4).setPreferredWidth(220);
-		jtProductList2.getColumnModel().getColumn(5).setPreferredWidth(10);
+		jtProductList2.getColumnModel().getColumn(0).setPreferredWidth(150);
+		jtProductList2.getColumnModel().getColumn(1).setPreferredWidth(64);
+		jtProductList2.getColumnModel().getColumn(2).setPreferredWidth(64);
+		jtProductList2.getColumnModel().getColumn(3).setPreferredWidth(123);
+		jtProductList2.getColumnModel().getColumn(4).setPreferredWidth(260);
+		jtProductList2.getColumnModel().getColumn(5).setPreferredWidth(24);
+		jtProductList2.getColumnModel().getColumn(6).setPreferredWidth(65);
 		/////////////////////////테이블 가운데 정렬////////////////////////////////
 		DefaultTableCellRenderer dtcrCenter2 = new DefaultTableCellRenderer();
 		dtcrCenter2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -124,6 +127,7 @@ public class ChatList extends JPanel {
 		tcm2.getColumn(2).setCellRenderer(dtcrCenter2);
 		tcm2.getColumn(3).setCellRenderer(dtcrCenter2);
 		tcm2.getColumn(5).setCellRenderer(dtcrCenter2);
+		tcm2.getColumn(6).setCellRenderer(dtcrCenter2);
 		/////////////////////////테이블 가운데 정렬////////////////////////////////
 
 		

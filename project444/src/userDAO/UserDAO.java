@@ -682,6 +682,7 @@ public class UserDAO {
 	public void sendChat(String me, String you, String chat, String dealCode) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		System.out.println(me+"/"+you+"/"+chat+"/"+dealCode);
 		try {
 			// 2.
 			con = getConn();

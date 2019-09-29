@@ -58,7 +58,7 @@ public class ChatListEvt extends MouseAdapter implements ActionListener {
 
 	public void openChat(JTable list) {
 
-		String dealCode = (String) list.getValueAt(list.getSelectedRow(), 5);
+		String dealCode = (String) list.getValueAt(list.getSelectedRow(), 6);
 		String id = (String) list.getValueAt(list.getSelectedRow(), 1);
 		new ChattingView(RunMarketMain.userId, new DCodeAndIdAO(dealCode, id));
 		refresh(flag);
@@ -79,21 +79,21 @@ public class ChatListEvt extends MouseAdapter implements ActionListener {
 			list.sort(new Descending());
 			for (int i = 0; i < list.size(); i++) {
 				clVO = list.get(i);
-				rowData = new Object[6];
+				rowData = new Object[7];
 
 				rowData[0] = clVO.getProName();
 				rowData[1] = clVO.getId();
 				rowData[2] = clVO.getLoc();
 				rowData[3] = clVO.getTime();
 				if (clVO.getReadFlag().equals("N") && !clVO.getLastchat().startsWith(RunMarketMain.userId)) {
-					rowData[3] += "!";
+					rowData[5]= "!";
 				}
 				if (clVO.getLastchat().isEmpty()) {
 					rowData[4] = "대화를 시작하세요.";
 				} else {
 					rowData[4] = clVO.getLastchat();
 				}
-				rowData[5] = clVO.getDealCode();
+				rowData[6] = clVO.getDealCode();
 				if (clVO.getAllFlag().equals("P")) {
 
 					dtm.addRow(rowData);
