@@ -11,7 +11,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-import userControl.LoginEvt;;
+import userControl.LoginEvt;
+import userRun.RunMarketMain;;
 
 public class Login extends JFrame {
 	private JLabel jlLoginFail;
@@ -21,7 +22,7 @@ public class Login extends JFrame {
 	public Login() {
 		super("로그인");
 		// JLabel
-		ImageIcon ii= new ImageIcon("C:/Users/seoyy/git/project444/project444/src/image/바나나마켓.png");
+		ImageIcon ii= new ImageIcon(RunMarketMain.basicPath+"바나나마켓.png");
 		JLabel logo = new JLabel(ii);
 		JLabel jlId = new JLabel("ID");
 		JLabel jlPw = new JLabel("PW");
@@ -30,7 +31,7 @@ public class Login extends JFrame {
 		jtfId = new JTextField();
 		jpfPw = new JPasswordField();
 		// Jbutton
-		jbtLogin = new JButton(new ImageIcon("C:/Users/seoyy/git/project444/project444/src/image/로그인.png"));
+		jbtLogin = new JButton(new ImageIcon(RunMarketMain.basicPath+"로그인.png"));
 	//	jbtLogin = new JButton("로그인");
 		jbtSignUp = new JButton("회원가입");
 		jbtForgotId = new JButton("ID찾기");

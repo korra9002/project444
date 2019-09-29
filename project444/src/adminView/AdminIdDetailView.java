@@ -60,7 +60,7 @@ public class AdminIdDetailView extends JDialog {
 		JLabel jlbSuspendFlag = new JLabel("정지여부"); 
 		
 		//settext
-		jlbLevel.setIcon(new ImageIcon(new ImageIcon("C:/Users/taesik/git/project444/project444/src/image/바나나레벨" + level + ".png")
+		jlbLevel.setIcon(new ImageIcon(new ImageIcon(AdminLoginView.basicPath+"/바나나레벨" + level + ".png")
 										.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH)));
 		jtfId.setText(uidVO.getUser_id());
 		jtfName.setText(uidVO.getUser_name());

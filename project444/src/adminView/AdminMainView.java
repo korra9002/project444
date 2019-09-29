@@ -43,6 +43,7 @@ public class AdminMainView extends JFrame {
 	private JCheckBox onSale, deleteNComplete ;
 	private String[] categoryList1, categoryList2;
 	
+		
 	public AdminMainView() {
 		super("관리자");
 		////////////////////////////////첫번째 탭 시작////////////////////////////////

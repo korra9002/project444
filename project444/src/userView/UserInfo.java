@@ -28,7 +28,7 @@ public class UserInfo extends JPanel {
 	
 	public UserInfo(String id,RunMarketMain rmm) {
 	  jlLevelImg=new JLabel();
-	  JLabel jlLine= new JLabel(new ImageIcon("C:/Users/seoyy/git/project444/project444/src/image/아이디받침.png"));
+	  JLabel jlLine= new JLabel(new ImageIcon(RunMarketMain.basicPath+"아이디받침.png"));
 		this.id=id;
 		this.rmm=rmm;
 		
@@ -38,16 +38,16 @@ public class UserInfo extends JPanel {
 		jlaId = new JLabel(id);
 		Dimension size = jlaId.getPreferredSize();
 		int num = (int)size.getWidth();
-		jbtPersonalData = new JButton(new ImageIcon("C:/Users/seoyy/git/project444/project444/src/image/개인정보변경.png"));
-		jbtSell = new JButton(new ImageIcon("C:/Users/seoyy/git/project444/project444/src/image/판매내역.png"));
-		jbtBuy = new JButton(new ImageIcon("C:/Users/seoyy/git/project444/project444/src/image/구매내역.png"));
-		jbtLike = new JButton(new ImageIcon("C:/Users/seoyy/git/project444/project444/src/image/관심목록.png"));
+		jbtPersonalData = new JButton(new ImageIcon(RunMarketMain.basicPath+"개인정보변경.png"));
+		jbtSell = new JButton(new ImageIcon(RunMarketMain.basicPath+"판매내역.png"));
+		jbtBuy = new JButton(new ImageIcon(RunMarketMain.basicPath+"구매내역.png"));
+		jbtLike = new JButton(new ImageIcon(RunMarketMain.basicPath+"관심목록.png"));
 		jbtLogout = new JButton("로그아웃");
 		jbtLevInfo=new JButton("?");
 		
 		
 		
-		jlaAd = new JLabel(new ImageIcon("C:/Users/seoyy/git/project444/project444/src/image/광고이미지.png"));
+		jlaAd = new JLabel(new ImageIcon(RunMarketMain.basicPath+"광고이미지.png"));
 		Font ft = new Font(Font.DIALOG,Font.BOLD, 20);
 		Font ft1 = new Font(Font.DIALOG,Font.BOLD, 30);
 		

@@ -20,11 +20,13 @@ public class AdminLoginView extends JFrame {
 	private JPasswordField jpfPw;
 	private JButton jbtLogin;
 	public static String imgPath = "c:/dev/adminRecieveFile";
+	public static String basicPath = "C:/dev/pro4Images/";
+
 	
 	public AdminLoginView() {
 		super("관리자 로그인"); 
 		//Logo
-		ImageIcon ii= new ImageIcon("C:/Users/seoyy/git/project444/project444/src/image/바나나마켓.png");
+		ImageIcon ii= new ImageIcon(AdminLoginView.basicPath+"바나나마켓.png");
 		JLabel logo = new JLabel(ii);
 		// JLabel
 		JLabel jlId = new JLabel("ID");

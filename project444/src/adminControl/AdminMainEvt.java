@@ -628,7 +628,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				rowData = new Object[8];
 				
 				//배열에 값을 할당
-				rowData[0] = new ImageIcon(new ImageIcon("C:/Users/taesik/git/project444/project444/src/image/바나나레벨" + level + ".png").getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH));
+				rowData[0] = new ImageIcon(new ImageIcon(AdminLoginView.basicPath+"바나나레벨" + level + ".png").getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH));
 				rowData[1] = uiVO.getUser_id();
 				rowData[2] = uiVO.getUser_name();
 				rowData[3] = uiVO.getGender().equals("F")?"여자":"남자";
@@ -677,7 +677,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 				rowData = new Object[8];
 				
 				//배열에 값을 할당
-				rowData[0] = new ImageIcon(new ImageIcon("C:/Users/taesik/git/project444/project444/src/image/바나나레벨" + level + ".png").getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH));
+				rowData[0] = new ImageIcon(new ImageIcon(AdminLoginView.basicPath+"바나나레벨" + level + ".png").getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH));
 				rowData[1] = uiVO.getUser_id();
 				rowData[2] = uiVO.getUser_name();
 				rowData[3] = uiVO.getGender().equals("F")?"여자":"남자";

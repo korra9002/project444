@@ -59,8 +59,8 @@ public class UserInfoEvt implements ActionListener {
 		System.out.println("플래그 총 횟수:"+cnt);
 		System.out.println("레벨:"+level);
 		
-		uif.getSellInfo().setText("판매 :"+ugVO.getSellCount()+", 구매 :"+ugVO.getBuyCount()); 
-		jlLevelImg.setIcon(new ImageIcon("C:/Users/seoyy/git/project444/project444/src/image/바나나레벨"+level+".png"));
+		uif.getSellInfo().setText("판매 :"+ugVO.getSellCount()+"  구매 :"+ugVO.getBuyCount()); 
+		jlLevelImg.setIcon(new ImageIcon(RunMarketMain.basicPath+"바나나레벨"+level+".png"));
 //		System.out.println(jlLevelImg.getIcon().toString());
 //	jlLevelImg = new JLabel(new ImageIcon("C:/Users/owner/git/project444/project444/src/image/2016-03-11_16;56;13.png"));
 
@@ -95,6 +95,7 @@ public class UserInfoEvt implements ActionListener {
 			new InterestList(rmm);
 		} // end if
 		if (ae.getSource() == uif.getjbtLogout()) {
+			
 			new Login();
 			rmm.dispose();
 		}//end if
