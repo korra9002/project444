@@ -1059,7 +1059,7 @@ public class UserDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-//		int cnt = 0;
+//		int cnt = 0; 
 		userGradeVO ugVO = null;
 		try {
 			con = getConn();

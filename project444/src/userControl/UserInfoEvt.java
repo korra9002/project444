@@ -42,7 +42,7 @@ public class UserInfoEvt implements ActionListener {
 		int level = 0;
 		
 		if(cnt ==0) {
-			
+			 
 			level = 1;
 		}else if(cnt>0 && cnt <3) {
 			level = 2;

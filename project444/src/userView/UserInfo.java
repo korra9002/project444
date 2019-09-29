@@ -20,7 +20,7 @@ public class UserInfo extends JPanel {
 	private JLabel jlLevelImg, jlaId;
 	private JButton jbtPersonalData, jbtSell, jbtBuy, jbtLike,jbtLogout,jbtLevInfo;
 	private JLabel jlaAd,sellInfo;
-	
+	 
 	String id;
 	RunMarketMain rmm;
 	
