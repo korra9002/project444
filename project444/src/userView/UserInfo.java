@@ -19,7 +19,7 @@ import userRun.RunMarketMain;
 public class UserInfo extends JPanel {
 	private JLabel jlLevelImg, jlaId;
 	private JButton jbtPersonalData, jbtSell, jbtBuy, jbtLike,jbtLogout,jbtLevInfo;
-	private JLabel jlaAd;
+	private JLabel jlaAd,sellInfo;
 	
 	String id;
 	RunMarketMain rmm;
@@ -32,7 +32,9 @@ public class UserInfo extends JPanel {
 		this.id=id;
 		this.rmm=rmm;
 		
-		
+		/////////////// 
+		sellInfo = new JLabel();
+	//////////////////////////
 		jlaId = new JLabel(id);
 		Dimension size = jlaId.getPreferredSize();
 		int num = (int)size.getWidth();
@@ -48,7 +50,11 @@ public class UserInfo extends JPanel {
 		jlaAd = new JLabel(new ImageIcon("C:/Users/seoyy/git/project444/project444/src/image/±§∞Ì¿ÃπÃ¡ˆ.png"));
 		Font ft = new Font(Font.DIALOG,Font.BOLD, 20);
 		Font ft1 = new Font(Font.DIALOG,Font.BOLD, 30);
+		
 		jlaId.setFont(ft1);
+//		//////////////////////////
+	//	sellInfo.setFont(ft1);
+//////////////////////////
 		jbtSell.setFont(ft);
 		jbtBuy.setFont(ft);
 		jbtLike.setFont(ft);
@@ -56,6 +62,9 @@ public class UserInfo extends JPanel {
 		// setBounds
 	  jlLevelImg.setBounds(50,30, 200, 200);
 		jlaId.setBounds(260, 80, num+200, 50);
+//////////////////////////
+		sellInfo.setBounds(260, 130, 200,50);
+//////////////////////////
 		jlLine.setBounds(200, 120,400 , 5);
 		//jbtLogout.setBounds(630, 50, 120, 70);
 		jbtLogout.setBounds(630, 50, 120, 40);
@@ -68,6 +77,7 @@ public class UserInfo extends JPanel {
 		jlaAd.setOpaque(true);
 		jlaAd.setBackground(Color.WHITE);
 		
+		add(sellInfo);
 	  add(jlLevelImg);
 		add(jlaId);
 		add(jbtPersonalData);
@@ -107,6 +117,10 @@ public class UserInfo extends JPanel {
 		
 		
 	}// UserMy
+
+	public JLabel getSellInfo() {
+		return sellInfo;
+	}
 
 	public JButton getJbtLevInfo() {
 		return jbtLevInfo;

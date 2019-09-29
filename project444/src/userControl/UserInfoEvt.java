@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 
 import userDAO.UserDAO;
 import userRun.RunMarketMain;
+import userVO.userGradeVO;
 import userView.InterestList;
 import userView.LevelInfo;
 import userView.Login;
@@ -30,13 +31,14 @@ public class UserInfoEvt implements ActionListener {
 	public void setGrade() {
 		UserDAO uDAO = UserDAO.getInstance();
 		int cnt = 0;
+		userGradeVO ugVO = null;
 		try {
-			cnt = uDAO.grade();
+			ugVO = uDAO.grade();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		JLabel jlLevelImg = uif.getJlLevelImg();
-		
+		cnt = ugVO.getSellCount()+ugVO.getBuyCount();
 		int level = 0;
 		
 		if(cnt ==0) {
@@ -56,7 +58,8 @@ public class UserInfoEvt implements ActionListener {
 		}
 		System.out.println("플래그 총 횟수:"+cnt);
 		System.out.println("레벨:"+level);
-		 
+		
+		uif.getSellInfo().setText("판매 :"+ugVO.getSellCount()+", 구매 :"+ugVO.getBuyCount()); 
 		jlLevelImg.setIcon(new ImageIcon("C:/Users/seoyy/git/project444/project444/src/image/바나나레벨"+level+".png"));
 //		System.out.println(jlLevelImg.getIcon().toString());
 //	jlLevelImg = new JLabel(new ImageIcon("C:/Users/owner/git/project444/project444/src/image/2016-03-11_16;56;13.png"));
