@@ -210,7 +210,7 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 //			StringBuilder removeFileName = new StringBuilder(ld.getJlImg().getIcon().toString());
 				String temp = (String) sl.getJtSell().getValueAt(sl.getJtSell().getSelectedRow(), 1);
 				String product_code = temp.substring(temp.lastIndexOf("(") + 1, temp.lastIndexOf(")"));
-				System.out.println(product_code);
+//				System.out.println(product_code);
 				if (uDAO.deletePost(product_code)) {
 					// 삭제된 이후 업로드된 파일을 삭제한다.
 //					File originFile=new File(removeFileName.toString());

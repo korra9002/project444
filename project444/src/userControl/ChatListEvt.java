@@ -62,6 +62,8 @@ public class ChatListEvt extends MouseAdapter implements ActionListener {
 		String dealCode = (String)list.getValueAt(list.getSelectedRow(), 5);
 		String id = (String)list.getValueAt(list.getSelectedRow(), 1);
 		new ChattingView( RunMarketMain.userId, new DCodeAndIdAO(dealCode, id));
+	refresh(flag);
+		
 	}
 
 	public void refresh(String flag) {

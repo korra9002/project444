@@ -29,7 +29,7 @@ public class RunMarketMainEvt extends MouseAdapter{
 	public void mouseClicked(MouseEvent e) {
 	if(e.getSource() == rmm.getJtp()) {
 		if(rmm.getJtp().getSelectedIndex() == 2) {
-			System.out.println("”î");
+//			System.out.println("”î");
 			cle = rmm.getCl().getCle();
 			cle.refresh(cle.getFlag());
 		}
