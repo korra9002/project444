@@ -291,22 +291,22 @@ public class AdminMainView extends JFrame {
 
 		JLabel jlbId = new JLabel("아이디");
 		
-		String[] idCol= {"아이디","이름","성별","전화번호","지역","가입일자","정지여부"};
+		String[] idCol= {"회원레벨","아이디","이름","성별","전화번호","지역","가입일자","정지여부"};
 		Object[][] idRow = {
-				{"","","","","","",""},
+				{"","","","","","","",""},
 				};
 		
-		dtmUserList = new DefaultTableModel(idRow, idCol) {//셀 내용 수정 금지
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}//isCellEditable
-		};
+		dtmUserList = new DefaultTableModel(idRow, idCol);
 		jtUserList = new JTable(dtmUserList) {
 			@Override
 			public Class<?> getColumnClass(int column) {
 				return getValueAt(0, column).getClass();
 			}//getColumnClass
+			
+			@Override
+			public boolean isCellEditable(int row, int column) {//셀 내용 수정 금지
+				return false;
+			}//isCellEditable
 		};
 		
 		JScrollPane jspUserList = new JScrollPane(jtUserList);
@@ -317,7 +317,9 @@ public class AdminMainView extends JFrame {
 		TableColumnModel tcm3 = jtUserList.getColumnModel();//정렬할 테이블의 컬럼모델을 가져옴
 		
 		for (int i = 0; i < tcm3.getColumnCount(); i++) {//컬럼의 수만큼 반복하여 가운데정렬함
+			if(i!=0){
 			tcm3.getColumn(i).setCellRenderer(dtcr3);
+			}
 		}//end for
 		//////////////테이블 데이터 가운데 정렬 끝//////////////
 		
@@ -327,22 +329,24 @@ public class AdminMainView extends JFrame {
 		////////테이블 크기설정 시작////////
 		jtUserList.getTableHeader().setReorderingAllowed(false);//테이블 컬럼 위치 변경 금지
 		
-		jtUserList.getColumnModel().getColumn(0).setPreferredWidth(140);
+		jtUserList.getColumnModel().getColumn(0).setPreferredWidth(90);
 		jtUserList.getColumnModel().getColumn(0).setResizable(false);;//테이블 컬럼 사이즈 변경 금지
-		jtUserList.getColumnModel().getColumn(1).setPreferredWidth(90);
+		jtUserList.getColumnModel().getColumn(1).setPreferredWidth(130);
 		jtUserList.getColumnModel().getColumn(1).setResizable(false);;
-		jtUserList.getColumnModel().getColumn(2).setPreferredWidth(100);
+		jtUserList.getColumnModel().getColumn(2).setPreferredWidth(80);
 		jtUserList.getColumnModel().getColumn(2).setResizable(false);;
-		jtUserList.getColumnModel().getColumn(3).setPreferredWidth(130);
+		jtUserList.getColumnModel().getColumn(3).setPreferredWidth(90);
 		jtUserList.getColumnModel().getColumn(3).setResizable(false);;
-		jtUserList.getColumnModel().getColumn(4).setPreferredWidth(110);
+		jtUserList.getColumnModel().getColumn(4).setPreferredWidth(120);
 		jtUserList.getColumnModel().getColumn(4).setResizable(false);;
-		jtUserList.getColumnModel().getColumn(5).setPreferredWidth(150);
+		jtUserList.getColumnModel().getColumn(5).setPreferredWidth(100);
 		jtUserList.getColumnModel().getColumn(5).setResizable(false);;
-		jtUserList.getColumnModel().getColumn(6).setPreferredWidth(90);
+		jtUserList.getColumnModel().getColumn(6).setPreferredWidth(140);
 		jtUserList.getColumnModel().getColumn(6).setResizable(false);;
+		jtUserList.getColumnModel().getColumn(7).setPreferredWidth(60);
+		jtUserList.getColumnModel().getColumn(7).setResizable(false);;
 		
-		jtUserList.setRowHeight(30);
+		jtUserList.setRowHeight(90);
 		////////테이블 크기설정 끝////////
 		
 		JPanel jpUserList = new JPanel(null);

@@ -2,7 +2,9 @@ package adminView;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -14,15 +16,17 @@ import adminVO.UserIdDetailVO;
 
 @SuppressWarnings("serial")
 public class AdminIdDetailView extends JDialog {
+	private JLabel jlbLevel;
 	private JTextField jtfId, jtfName, jtfGender, jtfPhone, jtfLoc, jtfJoinDate, jtfSuspendFlag;
 	private JButton jbtOkey, jbtSuspend, jbtRelief; 
 	
 	private AdminMainView amv;
 	
-	public AdminIdDetailView(AdminMainView amv, UserIdDetailVO uidVO) {
+	public AdminIdDetailView(AdminMainView amv, UserIdDetailVO uidVO, int level) {
 		super(amv,"아이디 상세 정보",true);
 		this.amv = amv; 
 		
+		jlbLevel = new JLabel();
 		jtfId = new JTextField();
 		jtfName = new JTextField();
 		jtfGender = new JTextField();
@@ -56,6 +60,8 @@ public class AdminIdDetailView extends JDialog {
 		JLabel jlbSuspendFlag = new JLabel("정지여부"); 
 		
 		//settext
+		jlbLevel.setIcon(new ImageIcon(new ImageIcon("C:/Users/taesik/git/project444/project444/src/image/바나나레벨" + level + ".png")
+										.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH)));
 		jtfId.setText(uidVO.getUser_id());
 		jtfName.setText(uidVO.getUser_name());
 		jtfGender.setText(uidVO.getGender().equals("M")?"남자":"여자");
@@ -64,27 +70,29 @@ public class AdminIdDetailView extends JDialog {
 		jtfJoinDate.setText(uidVO.getJoin_date());
 		jtfSuspendFlag.setText(uidVO.getSuspend_flag());
 		
-		jlbID.setBounds(10, 10, 100, 30);
-		jlbName.setBounds(10, 50, 100, 30);
-		jlbGender.setBounds(10, 90, 100, 30);
-		jlbPhone.setBounds(10, 130, 100, 30);
-		jlbLoc.setBounds(10, 170, 100, 30);
-		jlbJoinDate.setBounds(10, 210, 100, 30);
-		jlbSuspendFlag.setBounds(10, 250, 100, 30);
+		jlbID.setBounds(10, 110, 100, 30);
+		jlbName.setBounds(10, 150, 100, 30);
+		jlbGender.setBounds(10, 190, 100, 30);
+		jlbPhone.setBounds(10, 230, 100, 30);
+		jlbLoc.setBounds(10, 270, 100, 30);
+		jlbJoinDate.setBounds(10, 310, 100, 30);
+		jlbSuspendFlag.setBounds(10, 350, 100, 30);
 		
-		jtfId.setBounds(125, 10, 120, 30);
-		jtfName.setBounds(125, 50, 120, 30);
-		jtfGender.setBounds(125, 90, 120, 30);
-		jtfPhone.setBounds(125, 130, 120, 30);
-		jtfLoc.setBounds(125, 170, 120, 30);
-		jtfJoinDate.setBounds(125, 210, 120, 30);
-		jtfSuspendFlag.setBounds(125, 250, 120, 30);
+		jlbLevel.setBounds(90, 10, 90, 90);
+		jtfId.setBounds(125, 110, 120, 30);
+		jtfName.setBounds(125, 150, 120, 30);
+		jtfGender.setBounds(125, 190, 120, 30);
+		jtfPhone.setBounds(125, 230, 120, 30);
+		jtfLoc.setBounds(125, 270, 120, 30);
+		jtfJoinDate.setBounds(125, 310, 120, 30);
+		jtfSuspendFlag.setBounds(125, 350, 120, 30);
 		
-		jbtOkey.setBounds(20, 300, 60, 30);
-		jbtSuspend.setBounds(100, 300, 60, 30);
-		jbtRelief.setBounds(180, 300, 60, 30);
+		jbtOkey.setBounds(20, 400, 60, 30);
+		jbtSuspend.setBounds(100, 400, 60, 30);
+		jbtRelief.setBounds(180, 400, 60, 30);
 		
 		setLayout(null);
+		add(jlbLevel);
 		add(jlbID);
 		add(jtfId);
 		add(jlbName);
@@ -109,15 +117,15 @@ public class AdminIdDetailView extends JDialog {
 		jbtSuspend.addActionListener(auidve);
 		jbtRelief.addActionListener(auidve);
 		
-	//////////////////////////////////색 디자인/////////////////////////////////
+		//////////////////////////////////색 디자인/////////////////////////////////
 			
-	Container c = getContentPane();
-	c.setBackground(new Color(0xf6f2ef));
-	////////////////////////////////////////////////////////////////////////
-			
-		setBounds(amv.getX()+900, amv.getY()+50, 270, 380);
-		setVisible(true);
+		Container c = getContentPane();
+		c.setBackground(new Color(0xf6f2ef));
+		////////////////////////////////////////////////////////////////////////
+				
 		setResizable(false);
+		setBounds(amv.getX()+700, amv.getY()+50, 270, 480);
+		setVisible(true);
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}//AdminDetailView

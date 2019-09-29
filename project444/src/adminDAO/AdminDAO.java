@@ -17,6 +17,7 @@ import adminVO.SuspendIdVO;
 import adminVO.UserIdControlVO;
 import adminVO.UserIdDetailVO;
 import adminVO.UserIdVO;
+import userRun.RunMarketMain;
 import adminVO.CheckDetailVO;
 
 /**
@@ -649,6 +650,43 @@ public class AdminDAO {
 		return list;
 		
 	}//selectAllUserIdList
+	
+	public int grade(String userId) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int cnt = 0;
+		try {
+			// 2.커넥션 얻기
+			con = getConnection();
+
+			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
+			// 것부터 조회
+			String query = "	select (select count(all_flag) from product where user_id =? and all_flag='B') sell_count, (select count(sale_flag) from deal where user_id =? and sale_flag='P'  ) buy_count from dual    ";
+
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userId);
+			
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				cnt = rs.getInt("sell_count") + rs.getInt("buy_count");
+			}
+
+		} finally {
+			// 6. 연결 끊기
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (con != null)
+				con.close();
+
+		}
+
+		return cnt;
+	}
 	
 	/**
 	 * DMBS테이블에 존재하는 모든 조건을 초기화하여 검수 목록을 조회

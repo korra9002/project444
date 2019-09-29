@@ -11,6 +11,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -32,6 +33,7 @@ import adminView.AdminLoginView;
 import adminView.AdminMainView;
 import adminView.AdminProductDetailView;
 import adminView.AdminSuspendReasonView;
+import userDAO.UserDAO;
 
 public class AdminMainEvt extends MouseAdapter implements ActionListener{
 
@@ -559,13 +561,46 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 	}//openCheckDetail
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////세번째 탭////////////.//////////////////////////////////////////////
-	
+	public int setGrade(String userId) {
+		AdminDAO aDAO = AdminDAO.getInstance();
+		int cnt = 0;
+		try {
+			cnt = aDAO.grade(userId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+//		JLabel jlLevelImg = uif.getJlLevelImg();
+		
+		int level = 0;
+		
+		if(cnt ==0) {
+			level = 1;
+		}else if(cnt>0 && cnt <3) {
+			level = 2;
+		}else if(cnt>=3 && cnt <5) {
+			level = 3;
+		}else if(cnt>=5 && cnt <10) {
+			level = 4;
+		}else if(cnt >=10) {
+			level = 5;
+		}//end else
+		
+//		System.out.println("플래그 총 횟수:"+cnt);
+//		System.out.println("레벨:"+level);
+		return level;
+		 
+//		jlLevelImg.setIcon(new ImageIcon("C:\\Users\\owner\\git\\project444\\project444\\src\\image\\바나나레벨"+level+".png"));
+//		System.out.println(jlLevelImg.getIcon().toString());
+//		jlLevelImg = new JLabel(new ImageIcon("C:/Users/owner/git/project444/project444/src/image/2016-03-11_16;56;13.png"));
+
+	}// setGrade
 	/**
 	 * DBMS테이블에서 각 조건별로 조회한 ID 리스트를 JTable에 설정 
 	 */
 	public void setUserIdList() {
 		DefaultTableModel dtm = amv.getDtmUserList();
 		String userId = null;
+		int level = 0;
 		
 		userId = amv.getJtfSearch3().getText().trim();
 		
@@ -579,27 +614,28 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 		try {
 			List<UserIdVO> list = aDAO.selectAllUserIdList(userId);
 			
-			if(list.isEmpty()) {//제품이 없는 경우
+			if(list.isEmpty()) {//유저가 없는 경우
 				JOptionPane.showMessageDialog(amv, "등록된 유저가 없습니다.");
-				resetUserIdList();
+//				resetUserIdList();
 			}//end if
 			
 			UserIdVO uiVO = null;
 			
 			for(int i = 0 ; i < list.size() ; i++) {
 				uiVO = list.get(i);
-				
+				level = setGrade(uiVO.getUser_id());
 				//조회결과로 JTable 레코드에 들어갈 데이터를 생성하고, dtm에 추가
-				rowData = new Object[7];
+				rowData = new Object[8];
 				
 				//배열에 값을 할당
-				rowData[0] = uiVO.getUser_id();
-				rowData[1] = uiVO.getUser_name();
-				rowData[2] = uiVO.getGender().equals("F")?"여자":"남자";
-				rowData[3] = uiVO.getPhone();
-				rowData[4] = uiVO.getLoc();
-				rowData[5] = uiVO.getJoin_date();
-				rowData[6] = uiVO.getSuspend_flag();
+				rowData[0] = new ImageIcon(new ImageIcon("C:/Users/taesik/git/project444/project444/src/image/바나나레벨" + level + ".png").getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH));
+				rowData[1] = uiVO.getUser_id();
+				rowData[2] = uiVO.getUser_name();
+				rowData[3] = uiVO.getGender().equals("F")?"여자":"남자";
+				rowData[4] = uiVO.getPhone();
+				rowData[5] = uiVO.getLoc();
+				rowData[6] = uiVO.getJoin_date();
+				rowData[7] = uiVO.getSuspend_flag();
 				
 				//dtm에 추가
 				dtm.addRow(rowData);
@@ -617,7 +653,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 	 * DBMS테이블에서 조회한 모든 ID 리스트를 JTable에 설정 
 	 */
 	private void resetUserIdList() {
-		
+		int level = 0;
 		DefaultTableModel dtm = amv.getDtmUserList();
 		//JTable의 레코드 초기화
 		dtm.setRowCount(0);
@@ -636,18 +672,19 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 			
 			for(int i = 0 ; i < list.size() ; i++) {
 				uiVO = list.get(i);
-				
+				level = setGrade(uiVO.getUser_id());
 				//조회결과로 JTable 레코드에 들어갈 데이터를 생성하고, dtm에 추가
-				rowData = new Object[7];
+				rowData = new Object[8];
 				
 				//배열에 값을 할당
-				rowData[0] = uiVO.getUser_id();
-				rowData[1] = uiVO.getUser_name();
-				rowData[2] = uiVO.getGender().equals("F")?"여자":"남자";
-				rowData[3] = uiVO.getPhone();
-				rowData[4] = uiVO.getLoc();
-				rowData[5] = uiVO.getJoin_date();
-				rowData[6] = uiVO.getSuspend_flag();
+				rowData[0] = new ImageIcon(new ImageIcon("C:/Users/taesik/git/project444/project444/src/image/바나나레벨" + level + ".png").getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH));
+				rowData[1] = uiVO.getUser_id();
+				rowData[2] = uiVO.getUser_name();
+				rowData[3] = uiVO.getGender().equals("F")?"여자":"남자";
+				rowData[4] = uiVO.getPhone();
+				rowData[5] = uiVO.getLoc();
+				rowData[6] = uiVO.getJoin_date();
+				rowData[7] = uiVO.getSuspend_flag();
 				
 				//dtm에 추가
 				dtm.addRow(rowData);
@@ -669,10 +706,11 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 	 */
 	private void openUserIdDetail(JTable temp){
 		UserIdDetailVO uidVO = new UserIdDetailVO();
+		int level = 0;
 		
 		//선택한 행의 ID 얻기
-		String user_id = (String)temp.getValueAt(temp.getSelectedRow(), 0);
-		
+		String user_id = (String)temp.getValueAt(temp.getSelectedRow(), 1);
+		level = setGrade(user_id);
 		uidVO.setUser_id(user_id);
 		
 //		System.out.println(dv);
@@ -683,7 +721,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 			aDAO.userIdDetail(uidVO);
 			
 			//값을 가진 VO를 할당하여 상세화면을 띄워준다.
-			new AdminIdDetailView(amv, uidVO);
+			new AdminIdDetailView(amv, uidVO, level);
 			
 //			System.out.println(dv);
 		} catch (SQLException e) {
