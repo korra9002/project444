@@ -101,11 +101,17 @@ public class UserInfo extends JPanel {
 		jbtLike.addActionListener(uife);
 		jbtSell.addActionListener(uife);
 		jbtLogout.addActionListener(uife);
+		jbtLevInfo.addActionListener(uife);
 		// ∞°Ω√»≠
 		setVisible(true);
 		
 		
 	}// UserMy
+
+	public JButton getJbtLevInfo() {
+		return jbtLevInfo;
+	}//getJbtLevInfo
+
 
 	public JLabel getJlLevelImg() {
 		return jlLevelImg;

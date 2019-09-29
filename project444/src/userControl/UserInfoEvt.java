@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import userDAO.UserDAO;
 import userRun.RunMarketMain;
 import userView.InterestList;
+import userView.LevelInfo;
 import userView.Login;
 import userView.PersonalInform;
 import userView.PurchaseHistory;
@@ -93,6 +94,9 @@ public class UserInfoEvt implements ActionListener {
 		if (ae.getSource() == uif.getjbtLogout()) {
 			new Login();
 			rmm.dispose();
+		}//end if
+		if(ae.getSource()==uif.getJbtLevInfo()) {
+			new LevelInfo();
 		}
 	}// actionPerformed
 
