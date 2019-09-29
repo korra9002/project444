@@ -41,29 +41,28 @@ public class ChatListEvt extends MouseAdapter implements ActionListener {
 		if (e.getSource() == cl.getJbRefresh()) {
 			refresh(flag);
 		}
-		
-		
+
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent me) {
-		if(me.getClickCount() == 2) {//더블클릭
-			if(me.getSource() == cl.getJtProductList() ) {
+		if (me.getClickCount() == 2) {// 더블클릭
+			if (me.getSource() == cl.getJtProductList()) {
 				openChat(cl.getJtProductList());
-			}//end if	
-			if(me.getSource() ==cl.getJtProductList2()) {
+			} // end if
+			if (me.getSource() == cl.getJtProductList2()) {
 				openChat(cl.getJtProductList2());
 			}
-		}//end if
+		} // end if
 	}
-	
+
 	public void openChat(JTable list) {
-		
-		String dealCode = (String)list.getValueAt(list.getSelectedRow(), 5);
-		String id = (String)list.getValueAt(list.getSelectedRow(), 1);
-		new ChattingView( RunMarketMain.userId, new DCodeAndIdAO(dealCode, id));
-	refresh(flag);
-		
+
+		String dealCode = (String) list.getValueAt(list.getSelectedRow(), 5);
+		String id = (String) list.getValueAt(list.getSelectedRow(), 1);
+		new ChattingView(RunMarketMain.userId, new DCodeAndIdAO(dealCode, id));
+		refresh(flag);
+
 	}
 
 	public void refresh(String flag) {
@@ -86,22 +85,22 @@ public class ChatListEvt extends MouseAdapter implements ActionListener {
 				rowData[1] = clVO.getId();
 				rowData[2] = clVO.getLoc();
 				rowData[3] = clVO.getTime();
-				if(clVO.getReadFlag().equals("N") && !clVO.getLastchat().startsWith(RunMarketMain.userId)) {
-					rowData[3] +="!";
+				if (clVO.getReadFlag().equals("N") && !clVO.getLastchat().startsWith(RunMarketMain.userId)) {
+					rowData[3] += "!";
 				}
-				if(clVO.getLastchat().isEmpty()) {
+				if (clVO.getLastchat().isEmpty()) {
 					rowData[4] = "대화를 시작하세요.";
-				}else {
+				} else {
 					rowData[4] = clVO.getLastchat();
 				}
 				rowData[5] = clVO.getDealCode();
-				if(clVO.getAllFlag().equals("P")) {
-					
+				if (clVO.getAllFlag().equals("P")) {
+
 					dtm.addRow(rowData);
-				}else {
+				} else {
 					dtm2.addRow(rowData);
 				}
-				
+
 			} // end for
 
 		} catch (SQLException e) {
