@@ -41,7 +41,7 @@ public class UserInfo extends JPanel {
 		jbtBuy = new JButton(new ImageIcon("C:/Users/seoyy/git/project444/project444/src/image/구매내역.png"));
 		jbtLike = new JButton(new ImageIcon("C:/Users/seoyy/git/project444/project444/src/image/관심목록.png"));
 		jbtLogout = new JButton("로그아웃");
-		jbtLevInfo=new JButton("!");
+		jbtLevInfo=new JButton("?");
 		
 		
 		
