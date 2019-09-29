@@ -20,7 +20,7 @@ public class AdminCheckDetailViewEvt implements ActionListener {
 	}//AdminCheckDetailViewEvt
 	
 	private void grant() {
-		String productCode= acdv.getCode();
+		String productCode=  acdv.getCode();
 		String msg = "";
 		
 		switch (JOptionPane.showConfirmDialog(acdv,"판매 승인처리 하시겠습니까?","창닫기",JOptionPane.OK_OPTION,JOptionPane.INFORMATION_MESSAGE)) {
