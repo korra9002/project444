@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.swing.JOptionPane;
 
+import adminDAO.AdminDAO;
 import adminFileServer.AdminFileRecieve;
 import adminFileServer.AdminFileSend;
 import adminView.AdminLoginView;
@@ -39,6 +40,13 @@ public class AdminLoginEvt implements ActionListener {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}//end catch 
+			AdminDAO aDAO = AdminDAO.getInstance();
+			int cnt = aDAO.setIP();
+			if( cnt != 1) {
+				JOptionPane.showMessageDialog(alv, "아이피 저장 실패");
+				System.out.println(cnt);
+			}
+			
 			alv.dispose();
 		}else {
 			JOptionPane.showMessageDialog(alv, "아이디 또는 비밀번호를 확인해주세요.");

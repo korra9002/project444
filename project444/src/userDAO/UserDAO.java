@@ -61,7 +61,7 @@ public class UserDAO {
 		// 2. Connection ¾ò±â
 
 //		String url="jdbc:oracle:thin:@localhost:1521:orcl";
-		String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+		String url = "jdbc:oracle:thin:@211.63.89.159:1521:orcl";
 		String id = "junggo";
 		String pass = "1234";
 
@@ -69,6 +69,29 @@ public class UserDAO {
 
 		return con;
 	}// getConn
+	
+	public String getIP() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String ip = "";
+		try {
+			con = getConn();
+			String query =" select ip from admin where admin_id ='admin'	";
+			pstmt = con.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				
+				ip =	rs.getString("ip");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return ip;
+	}
 
 	public List<AllListVO> setList(searchValueVO svVO) throws SQLException {
 		List<AllListVO> list = new ArrayList<AllListVO>();

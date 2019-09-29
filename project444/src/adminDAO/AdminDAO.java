@@ -1,5 +1,7 @@
 package adminDAO;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -57,7 +59,7 @@ public class AdminDAO {
 		}//end catch
 
 		//2. Connection ¾ò±â
-		String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+		String url = "jdbc:oracle:thin:@211.63.89.159:1521:orcl";
 		String id = "junggo";
 		String pass = "1234";
 		
@@ -65,6 +67,24 @@ public class AdminDAO {
 		
 		return con;
 	}//getConnection
+	
+	public int setIP() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int cnt = 0;
+		try {
+			con = getConnection();
+			String ip = InetAddress.getLocalHost().getHostAddress();
+			String query = " update admin set ip ='"+ip+"' where admin_id ='admin'	";
+			pstmt = con.prepareStatement(query);
+		cnt =	pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
 	
 	public boolean isNumber(String str) {
 		boolean result = false;

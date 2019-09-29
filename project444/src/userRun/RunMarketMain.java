@@ -23,6 +23,7 @@ public class RunMarketMain extends JFrame{
 public static String userId;
 public static String imgPath = "c:/dev/userRecieveFile";
 public static String basicPath = "C:/dev/pro4Images/";
+public static String ip;
 private JTabbedPane jtp;
 
 

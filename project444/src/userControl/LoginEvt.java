@@ -52,7 +52,9 @@ public class LoginEvt implements ActionListener {
 				
 				String Login_name = uDAO.loginRun(lvo)[0];
 				String suspend_flag = uDAO.loginRun(lvo)[1];
-				
+				String conIP = uDAO.getIP();
+				RunMarketMain.ip = conIP;
+				System.out.println(RunMarketMain.ip);
 				//°ü¸®ÀÚ
 				if(id.equals("admin")&&pw.equals("1234")) {
 					new AdminMainView();
