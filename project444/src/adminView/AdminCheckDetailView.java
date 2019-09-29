@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 
 import adminControl.AdminCheckDetailViewEvt;
+import adminControl.AdminMainEvt;
 import adminVO.CheckDetailVO;
 
 @SuppressWarnings("serial")
@@ -26,7 +27,7 @@ public class AdminCheckDetailView extends JDialog {
 	private JButton jbtGrant, jbtReject, jbtOk;
 	private JTextArea jtaInfo;
 	private String code;
-	private DecimalFormat dfPrice = new DecimalFormat("#,###,###");
+	private DecimalFormat dfPrice;
 
 	private AdminMainView amv;
  
@@ -72,6 +73,8 @@ public class AdminCheckDetailView extends JDialog {
 		jbtOk .setBackground(new Color(0xFFCC66));
 		
 		// set text
+		dfPrice = new DecimalFormat("#,###,###");
+		
 		if (new File(AdminLoginView.imgPath + "/" + cdVO.getImg_file()).exists()) {
 
 			jlDetailImg.setIcon(new ImageIcon(new ImageIcon(AdminLoginView.imgPath + "/" + cdVO.getImg_file()).getImage()
@@ -126,8 +129,9 @@ public class AdminCheckDetailView extends JDialog {
 		add(jbtOk);
 		add(jtfUploadDate);
 		add(jtfCategory);
-
-		AdminCheckDetailViewEvt acdve = new AdminCheckDetailViewEvt(this);
+		
+		AdminMainEvt ame = new AdminMainEvt(amv);
+		AdminCheckDetailViewEvt acdve = new AdminCheckDetailViewEvt(this, ame);
 		jbtGrant.addActionListener(acdve);
 		jbtReject.addActionListener(acdve);
 		jbtOk.addActionListener(acdve);

@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import adminControl.AdminMainEvt;
 import adminControl.AdminUserIdDetailViewEvt;
 import adminVO.UserIdDetailVO;
 
@@ -102,7 +103,8 @@ public class AdminIdDetailView extends JDialog {
 		add(jbtSuspend);
 		add(jbtRelief);
 		
-		AdminUserIdDetailViewEvt auidve=new AdminUserIdDetailViewEvt(this);
+		AdminMainEvt ame = new AdminMainEvt(amv);
+		AdminUserIdDetailViewEvt auidve=new AdminUserIdDetailViewEvt(this, ame);
 		jbtOkey.addActionListener(auidve);
 		jbtSuspend.addActionListener(auidve);
 		jbtRelief.addActionListener(auidve);

@@ -42,6 +42,7 @@ public class AdminLoginEvt implements ActionListener {
 			alv.dispose();
 		}else {
 			JOptionPane.showMessageDialog(alv, "아이디 또는 비밀번호를 확인해주세요.");
+			alv.getJtfId().setText("");
 			alv.getJpfPw().setText("");
 			alv.getJpfPw().requestFocus();
 		}//end else

@@ -65,6 +65,19 @@ public class AdminDAO {
 		return con;
 	}//getConnection
 	
+	public boolean isNumber(String str) {
+		boolean result = false;
+		
+		try {
+			Double.parseDouble(str);
+			result = true;
+		}catch(NumberFormatException nfe) {
+			
+		}//end catch
+		
+		return result;
+		
+	}//isNumber
 	
 	/**
 	 * DMBS테이블에 존재하는 모든 검수 목록을 조회
