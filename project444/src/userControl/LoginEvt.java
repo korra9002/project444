@@ -133,10 +133,12 @@ public class LoginEvt implements ActionListener {
 		if (ae.getSource() == lg.getJbtForgotPw()) {
 			new ForgotPw(lg);
 		} // end if
-		if(ae.getSource()==lg.getJbtLogin()||ae.getSource()==lg.getJtfId()||ae.getSource()==lg.getJpfPw()) {
+		if(ae.getSource()==lg.getJbtLogin()||ae.getSource()==lg.getJpfPw()) {
 			loginRun();
 		}//end if
-		
+		if(ae.getSource()==lg.getJtfId()) {
+			lg.getJpfPw().requestFocus();
+		}//end if
 	}//actionPerformed
 
 }//class
