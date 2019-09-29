@@ -18,7 +18,7 @@ public class AdminDetailView extends JDialog {
 	public AdminDetailView(adminView av) {
 		super(av,"아이디 상세 정보",true);
 		this.av = av;
-		
+		 
 		jtfId = new JTextField();
 		jtfName = new JTextField();
 		jtfGender = new JTextField();

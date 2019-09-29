@@ -31,7 +31,7 @@ import adminControl.AdminMainEvt;
 @SuppressWarnings("serial")
 public class AdminMainView extends JFrame {
 	
-	private JTabbedPane jtp;
+	private JTabbedPane jtp; 
 	private JButton jbtSearch1, jbtRefresh1, jbtRecent1, jbtReset1, jbtReset2, jbtReset3, jbtSearch2, jbtRefresh2, jbtRecent2, 
 		jbtSearch3, jbtRefresh3, jbtReason;
 	private JTable jtCheckList, jtProductList, jtUserList;

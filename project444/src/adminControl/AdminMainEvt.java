@@ -42,7 +42,7 @@ public class AdminMainEvt extends MouseAdapter implements ActionListener{
 	
 	public AdminMainEvt(AdminMainView amv) {
 		this.amv = amv;
-		setCheckList();
+		setCheckList(); 
 	}//AdminMainEvt
 
 	
