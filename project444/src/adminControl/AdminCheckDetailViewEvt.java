@@ -27,7 +27,7 @@ public class AdminCheckDetailViewEvt implements ActionListener {
 		case JOptionPane.OK_OPTION:
 			AdminDAO aDAO=AdminDAO.getInstance();
 			
-			try {
+			try { 
 				 msg = "판매 여부가 변경되지 않았습니다.";
 				
 				if (aDAO.updateApproval(productCode)) {

@@ -22,7 +22,7 @@ public class AdminLoginEvt implements ActionListener {
 		
 	}//AdminLoginEvt
 	
-	private void login() {
+	private void login() { 
 		String id = alv.getJtfId().getText();
 		String pw = "";
 		char[] cPw = alv.getJpfPw().getPassword();

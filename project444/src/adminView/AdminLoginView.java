@@ -22,7 +22,7 @@ public class AdminLoginView extends JFrame {
 	public static String imgPath = "c:/dev/adminRecieveFile";
 	
 	public AdminLoginView() {
-		super("관리자 로그인");
+		super("관리자 로그인"); 
 		//Logo
 		ImageIcon ii= new ImageIcon("C:/Users/seoyy/git/project444/project444/src/image/바나나마켓.png");
 		JLabel logo = new JLabel(ii);

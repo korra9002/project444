@@ -26,7 +26,7 @@ import adminVO.CheckDetailVO;
 public class AdminDAO {
 	
 	private static AdminDAO aDAO;
-	
+	 
 	private AdminDAO() {
 		
 	}//AdminDAO

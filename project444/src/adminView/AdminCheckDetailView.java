@@ -29,7 +29,7 @@ public class AdminCheckDetailView extends JDialog {
 	private String code;
 	private DecimalFormat dfPrice;
 
-	private AdminMainView amv;
+	private AdminMainView amv; 
  
 	public AdminCheckDetailView(AdminMainView amv, CheckDetailVO cdVO) {
 		super(amv, "제품상세", true);

@@ -18,7 +18,7 @@ public class AdminUserIdDetailViewEvt implements ActionListener {
 	public AdminUserIdDetailViewEvt(AdminIdDetailView aidv, AdminMainEvt ame) {
 		this.aidv=aidv;
 		this.ame=ame;
-		jbtActive();
+		jbtActive(); 
 	}//AdminUserIdDetailViewEvt
 	
 	private void jbtActive() {
