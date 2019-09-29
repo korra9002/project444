@@ -27,8 +27,8 @@ public class Login extends JFrame {
 		JLabel jlPw = new JLabel("PW");
 		jlLoginFail = new JLabel();
 		// JTextField
-		jtfId = new JTextField("baek");
-		jpfPw = new JPasswordField("1234");
+		jtfId = new JTextField();
+		jpfPw = new JPasswordField();
 		// Jbutton
 		jbtLogin = new JButton(new ImageIcon("C:/Users/seoyy/git/project444/project444/src/image/로그인.png"));
 	//	jbtLogin = new JButton("로그인");
