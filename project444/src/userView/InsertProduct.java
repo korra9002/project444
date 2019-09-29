@@ -61,10 +61,10 @@ public class InsertProduct extends JPanel {
 		
 		
 		
-		jtfSubject = new JTextField("글 제목");//이벤트처리-클릭 시 텍스트 사라지게
-		jtfPrice = new JTextField("가격 입력");//이벤트처리-클릭 시 텍스트 사라지게
+		jtfSubject = new JTextField();//이벤트처리-클릭 시 텍스트 사라지게
+		jtfPrice = new JTextField();//이벤트처리-클릭 시 텍스트 사라지게
 		
-		jtaExplain = new JTextArea("상세 설명");//이벤트처리-클릭 시 텍스트 사라지게
+		jtaExplain = new JTextArea();//이벤트처리-클릭 시 텍스트 사라지게
 		JScrollPane jspExplain = new JScrollPane(jtaExplain);
 		
 		jbtOkay = new JButton("완료");

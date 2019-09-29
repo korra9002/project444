@@ -50,50 +50,50 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 		this.rmm = rmm;
 		id = RunMarketMain.userId;
 
-		ip.getJtfSubject().addKeyListener(new KeyAdapter() {
-//			boolean flag = true;
-			
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (subjectFlag) {
-						ip.getJtfSubject().setText("");
-//						flag = false;
-						subjectFlag = false;
-	//					priceFlag=false;
-	//					detailFlag=false;
-				} // end if
-			}// keyPressed
-		});// KeyAdapter
-
-		ip.getJtfPrice().addKeyListener(new KeyAdapter() {
-//			boolean flag = true;
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (priceFlag) {
-					ip.getJtfPrice().setText("");
-//					flag = false;
-//					subjectFlag=false;
-					priceFlag = false;
-//					detailFlag=false;
-				} // end if
-			}// keyPressed
-		});// KeyAdapter
-
-		ip.getJtaExplain().addKeyListener(new KeyAdapter() {
-//			boolean flag = true;
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (detailFlag) {
-					ip.getJtaExplain().setText("");
-//					flag = false;
-//					subjectFlag=false;
-//					priceFlag=false;
-					detailFlag = false;
-				} // end if
-			}// keyPressed
-		});// KeyAdapter
+//		ip.getJtfSubject().addKeyListener(new KeyAdapter() {
+////			boolean flag = true;
+//			
+//			@Override
+//			public void keyPressed(KeyEvent e) {
+//				if (subjectFlag) {
+//						ip.getJtfSubject().setText("");
+////						flag = false;
+//						subjectFlag = false;
+//	//					priceFlag=false;
+//	//					detailFlag=false;
+//				} // end if
+//			}// keyPressed
+//		});// KeyAdapter
+//
+//		ip.getJtfPrice().addKeyListener(new KeyAdapter() {
+////			boolean flag = true;
+//
+//			@Override
+//			public void keyPressed(KeyEvent e) {
+//				if (priceFlag) {
+//					ip.getJtfPrice().setText("");
+////					flag = false;
+////					subjectFlag=false;
+//					priceFlag = false;
+////					detailFlag=false;
+//				} // end if
+//			}// keyPressed
+//		});// KeyAdapter
+//
+//		ip.getJtaExplain().addKeyListener(new KeyAdapter() {
+////			boolean flag = true;
+//
+//			@Override
+//			public void keyPressed(KeyEvent e) {
+//				if (detailFlag) {
+//					ip.getJtaExplain().setText("");
+////					flag = false;
+////					subjectFlag=false;
+////					priceFlag=false;
+//					detailFlag = false;
+//				} // end if
+//			}// keyPressed
+//		});// KeyAdapter
 
 	}// InsertProductEvt
 
@@ -109,6 +109,12 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 		
 //		System.out.println(path+file);
 		if (path != null && name != null) {
+			pathAndName = path + name;
+			file = new File(pathAndName);
+			if(!file.exists()) {
+				JOptionPane.showMessageDialog(rmm, "파일이 존재하지 않습니다.");
+				return;
+			}
 
 			if ((name.toLowerCase().endsWith(".jpg") || name.toLowerCase().endsWith(".png")) ) {
 				try {
@@ -116,11 +122,9 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 //				t = new Test(file);
 //				jlnotice.setText(String.format(" 범위  [ %d - %d ]", 1, t.getLastIndex()));
 					// openFlag = true;
-					pathAndName = path + name;
 //					Image img = new ImageIcon(pathAndName).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
 					ip.getJlbProductImg().setText("");
 					ip.getJlbProductImg().setIcon(new ImageIcon(new ImageIcon(pathAndName).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH)));
-					file = new File(pathAndName);
 					imgFlag = true;
 					return;
 				} catch (NullPointerException ne) {
@@ -246,45 +250,72 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 		SimpleDateFormat s = new SimpleDateFormat("yyyyMMddHHmmss");
 		System.out.println(s.format(today));
 		// 입력된 값을 가지고 VO에 설정하고
-		String img = file.getName();
+		
 		String category = Integer.toString(ip.getJcbCategory().getSelectedIndex());
 		String subject = ip.getJtfSubject().getText().trim(); // 제목은 무조건 상품명으로-
 		String pDetail = ip.getJtaExplain().getText().trim();
-		String newName = id+"_"+s.format(today)+"_"+img;
+		if(file == null) {
+			JOptionPane.showMessageDialog(ip, "이미지를 선택해주세요.");
+			return;
+		}
+		String img = file.getName();
+		
+		if(subject.isEmpty()) {
+			JOptionPane.showMessageDialog(ip, "상품명을 입력해 주세요.");
+			return;
+		}
+		
+		if(ip.getJtfPrice().getText().trim().isEmpty()) {
+			JOptionPane.showMessageDialog(ip, "가격을 입력해 주세요.");
+			return;
+		}
 		int price = 0;
 		try {
 			price = Integer.parseInt(ip.getJtfPrice().getText().trim());
-			System.out.println(img + " " + category + " " + subject + " " + pDetail + " " + price);
+			
+		}catch (NumberFormatException nfe) {
+			nfe.printStackTrace();
+			JOptionPane.showMessageDialog(ip, "가격은 정수 형태로만 입력해주세요.");
+			return;
+		}
+		
+		if(pDetail.isEmpty()) {
+			JOptionPane.showMessageDialog(ip, "상품 내용을 입력해 주세요.");
+			return;
+		}
+		
+		String newName = id+"_"+s.format(today)+"_"+img;
+		
+		
+		try {
+//			System.out.println(img + " " + category + " " + subject + " " + pDetail + " " + price);
 			InsertProductVO ipVO = new InsertProductVO(newName, category, subject, pDetail, price);
 
 //			System.out.println(imgFlag);
-
-			if (!imgFlag) {
-				JOptionPane.showMessageDialog(ip, "이미지를 선택해주세요.");
-				return;
-			} // end if
+//
+//			if (!imgFlag) {
+//				JOptionPane.showMessageDialog(ip, "이미지를 선택해주세요.");
+//				return;
+//			} // end if
 				// 이미지 업로드
 			
-			System.out.println(newName+"새이름");
+//			System.out.println(newName+"새이름");
 			uploadImg(newName);
 			
 			// DBMS에 추가
 			UserDAO uDAO = UserDAO.getInstance();
 			uDAO.insertProduct(ipVO, id);
 			JOptionPane.showMessageDialog(ip, "상품 정보를 추가하였습니다.");
-			reset();
 			// 부모창의 도시락 리스트를 갱신하고
 			// 이거 지금 못하는중ㅠ
 //			lme.setLunchList();
 			// 다음 도시락이 추가될 때 이미지를 다시 선택할 수 있도록 기준 변수를 변경한다.
 			imgFlag = false;
+			reset();
 
-		} catch (NumberFormatException nfe) {
-			nfe.printStackTrace();
-			JOptionPane.showMessageDialog(ip, "가격은 정수 형태로만 입력해주세요.");
 		} catch (IOException ie) {
 			ie.printStackTrace();
-			JOptionPane.showMessageDialog(ip, "이미지 선택 중 문제 발생");
+			JOptionPane.showMessageDialog(ip, "이미지 전송 중 문제 발생");
 		} catch (SQLException se) {
 			JOptionPane.showMessageDialog(ip, "DBMS에서 문제 발생");
 			se.printStackTrace();
@@ -294,43 +325,43 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 
 	@Override
 	public void mouseClicked(MouseEvent me) {
-		// 0917- flag 줘야함
-		if (subjectFlag) {
-			if (me.getSource() == ip.getJtfSubject()) {
-				ip.getJtfSubject().setText("");
-				subjectFlag = false;
-			} // end if
-		} // end if
-		if (priceFlag) {
-			if (me.getSource() == ip.getJtfPrice()) {
-				ip.getJtfPrice().setText("");
-				priceFlag = false;
-			} // end if
-		} // end if
-		if (detailFlag) {
-			if (me.getSource() == ip.getJtaExplain()) {
-				ip.getJtaExplain().setText("");
-				detailFlag = false;
-			} // end if
-		} // end if		
+//		// 0917- flag 줘야함
+//		if (subjectFlag) {
+//			if (me.getSource() == ip.getJtfSubject()) {
+//				ip.getJtfSubject().setText("");
+////				subjectFlag = false;
+//			} // end if
+//		} // end if
+//		if (priceFlag) {
+//			if (me.getSource() == ip.getJtfPrice()) {
+//				ip.getJtfPrice().setText("");
+////				priceFlag = false;
+//			} // end if
+//		} // end if
+//		if (detailFlag) {
+//			if (me.getSource() == ip.getJtaExplain()) {
+//				ip.getJtaExplain().setText("");
+////				detailFlag = false;
+//			} // end if
+//		} // end if		
 
 
 	}// mouseClicked
 
 	public void reset() {
-		ip.getJtaExplain().setText("상세 설명");
-		ip.getJtfSubject().setText("글 제목");
-		ip.getJtfPrice().setText("가격 입력");
+		ip.getJtaExplain().setText("");
+		ip.getJtfSubject().setText("");
+		ip.getJtfPrice().setText("");
 		ip.getJcbCategory().setSelectedIndex(0);
 		ip.getJlbProductImg().setIcon(null);
 		ip.getJlbProductImg().setText("제품 이미지");
 		ip.getJlbProductImg().setHorizontalTextPosition(JLabel.CENTER);
 		pathAndName="";
 		file = null;
-		subjectFlag = true;
-		priceFlag = true;
-		detailFlag = true;
-		imgFlag = true;
+//		subjectFlag = true;
+//		priceFlag = true;
+//		detailFlag = true;
+//		imgFlag = true;
 
 	}
 
@@ -353,27 +384,27 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 			addImg();
 //			System.out.println(imgFlag+"addimg()후 플래그값");			
 		} // end if
-
-		if (ae.getSource() == ip.getJtfSubject()) {
-			if (!ip.getJtfSubject().getText().equals("")) {
-				ip.getJtfPrice().requestFocus();
-				if (priceFlag) {
-					ip.getJtfPrice().setText("");
-					priceFlag = false;
-				} // end if
-			} // end if
-		} // end if	
+//
+//		if (ae.getSource() == ip.getJtfSubject()) {
+//			if (!ip.getJtfSubject().getText().equals("")) {
+//				ip.getJtfPrice().requestFocus();
+//				if (priceFlag) {
+//					ip.getJtfPrice().setText("");
+//					priceFlag = false;
+//				} // end if
+//			} // end if
+//		} // end if	
 		
 
-		if (ae.getSource() == ip.getJtfPrice()) {
-			if (!ip.getJtfPrice().getText().equals("")) {
-				ip.getJtaExplain().requestFocus();
-				if (priceFlag) {
-					ip.getJtaExplain().setText("");
-					detailFlag = false;
-				} // end if
-			} // end if
-		} // end if
+//		if (ae.getSource() == ip.getJtfPrice()) {
+//			if (!ip.getJtfPrice().getText().equals("")) {
+//				ip.getJtaExplain().requestFocus();
+//				if (priceFlag) {
+//					ip.getJtaExplain().setText("");
+//					detailFlag = false;
+//				} // end if
+//			} // end if
+//		} // end if
 
 		if (ae.getSource() == ip.getJbtCancel()) {		
 			
@@ -387,13 +418,13 @@ public class InsertProductEvt extends MouseAdapter implements ActionListener {
 		}//end if
 		 
 		////////////////////////////////////////// 고쳐야함 //////////////////////////////////////////////////
-		if(rmm.getJtp().getSelectedIndex()!=1) {
-			System.out.println("되나?");
-		}
-		if (ae.getSource() == rmm.getJtp()) {
-			System.out.println("왜안됑?");
-			reset();
-			//취소할때나 이동할 때 ㅌ컨펌메세지 받기
-		}
+//		if(rmm.getJtp().getSelectedIndex()!=1) {
+//			System.out.println("되나?");
+//		}
+//		if (ae.getSource() == rmm.getJtp()) {
+////			System.out.println("왜안됑?");
+//			reset();
+//			//취소할때나 이동할 때 ㅌ컨펌메세지 받기
+//		}
 	}// actionPerformed
 }// class
