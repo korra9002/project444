@@ -257,7 +257,7 @@ public class MarketMainEvt extends MouseAdapter implements ActionListener {
 				// 다르다면 MarketDetailSeller
 				System.out.println(id + "/" + mdVO.getSellerID());
 				if (mdVO.getSellerID().equals(id)) {
-					new MarketDetailSeller(mm, mdVO, id);
+					new MarketDetailSeller(mm, mdVO, id, null);
 				} else {
 					new MarketDetailBuyer(mm, mdVO, id, ile);
 				} // end else

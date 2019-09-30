@@ -188,7 +188,7 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 		
 		
 		mdVO=uDAO.selectProDetail(product_Code, "M");
-		
+		System.out.println(this+"1");
 		new ModifyProduct(mdVO ,this, rmm);
 		
 
@@ -258,7 +258,7 @@ public class SaleListEvt extends MouseAdapter implements ActionListener {
 
 			// 현재 접속한 아이디와 포스팅 판매자 아이디와 같으면 MarketDetailBuyer
 			// 다르다면 MarketDetailSeller
-			new MarketDetailSeller(null, mdVO, id);
+			new MarketDetailSeller(null, mdVO, id,this);
 		} else {
 			JOptionPane.showMessageDialog(sl, "판매중인 상품이 아닙니다.");
 		}

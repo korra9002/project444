@@ -128,7 +128,7 @@ public class ModifyProduct extends JFrame {
 		add(jspExplain);
 		add(jbtOkay);
 		add(jbtCancel);
-		 
+		 System.out.println(sle1+"2");
 		ModifyProductEvt mpe=new ModifyProductEvt(this, sle1,  rmm);
 		
 		jbtOkay.addActionListener(mpe);

@@ -128,7 +128,7 @@ public class ChattingViewEvt extends MouseAdapter implements ActionListener {
 				// 다르다면 MarketDetailSeller
 				System.out.println(me + "/" + mdVO.getSellerID());
 				if (mdVO.getSellerID().equals(me)) {
-					new MarketDetailSeller(null, mdVO, me);
+					new MarketDetailSeller(null, mdVO, me,null);
 				} else {
 					new MarketDetailBuyer(null, mdVO, me, null);
 				} // end else

@@ -138,6 +138,9 @@ public class MarketDetailSellerEvt extends MouseAdapter implements ActionListene
 //					thumbFile.delete();
 
 					msg = "선택하신 판매글을 삭제하였습니다.";
+					if(mds.getSle() != null) {
+						mds.getSle().setAllList();
+					}
 					mds.dispose();
 					// 부모창의 도시락 리스트를 갱신
 					
@@ -167,7 +170,14 @@ public class MarketDetailSellerEvt extends MouseAdapter implements ActionListene
 		
 		mdVO=uDAO.selectProDetail(product_Code, "M");
 		
-		new ModifyProduct(mdVO ,null, null);
+		
+		if(mds.getSle() != null) {
+			
+			new ModifyProduct(mdVO ,mds.getSle(), null);
+		}else {
+			
+			new ModifyProduct(mdVO ,null, null);
+		}
 		
 		/*
 		 * ImageIcon image=(ImageIcon)mds.getJlDetailImg().getIcon();

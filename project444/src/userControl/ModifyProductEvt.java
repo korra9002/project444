@@ -28,7 +28,7 @@ public class ModifyProductEvt extends MouseAdapter implements ActionListener{
 		this.mp=mp;
 		this.sle=sle;
 		this.rmm=rmm;		
-		System.out.println(sle);
+		System.out.println(sle+"3");
 		id=RunMarketMain.userId;
 	}//ModifyProductEvt
 	 
@@ -58,7 +58,10 @@ public class ModifyProductEvt extends MouseAdapter implements ActionListener{
 		
 		//SY : 마켓메인도 불러서 새로고침 해야함.
 		//상품 디테일 창도 새로고침 되야함.
-		sle.setAllList();
+		if( sle != null) {
+			sle.setAllList();
+			
+		}
 		
 		close();
 		
