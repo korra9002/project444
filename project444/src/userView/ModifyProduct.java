@@ -37,10 +37,12 @@ public class ModifyProduct extends JFrame {
 	private JTextArea jtaExplain;
 	private JComboBox<String> jcbCategory;
 	private DefaultComboBoxModel<String> dcbCategory;
+	private SaleListEvt sle1;
+	
 	
 	public ModifyProduct(MarketDetailVO mdVO, SaleListEvt sle, RunMarketMain rmm) {
 		super("상품 수정");
-		
+		this.sle1 = sle;
 		String selectedValue0=mdVO.getImage();//이미지
 		String selectedValue1=mdVO.getProductName()+"("+mdVO.getProductCode()+")"; 
 		int selectedValue2=mdVO.getPrice();	//가격	
@@ -127,7 +129,7 @@ public class ModifyProduct extends JFrame {
 		add(jbtOkay);
 		add(jbtCancel);
 		 
-		ModifyProductEvt mpe=new ModifyProductEvt(this, sle,  rmm);
+		ModifyProductEvt mpe=new ModifyProductEvt(this, sle1,  rmm);
 		
 		jbtOkay.addActionListener(mpe);
 		jbtCancel.addActionListener(mpe);

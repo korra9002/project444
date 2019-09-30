@@ -21,14 +21,14 @@ import userView.SaleList;
 public class ModifyProductEvt extends MouseAdapter implements ActionListener{
 	
 	private ModifyProduct mp;
-	private SaleListEvt sle;
+	private SaleListEvt sle ;
 	private RunMarketMain rmm;
 	private String id;
 	public ModifyProductEvt(ModifyProduct mp, SaleListEvt sle, RunMarketMain rmm) {
 		this.mp=mp;
 		this.sle=sle;
 		this.rmm=rmm;		
-		
+		System.out.println(sle);
 		id=RunMarketMain.userId;
 	}//ModifyProductEvt
 	 
