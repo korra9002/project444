@@ -11,6 +11,7 @@ import userDAO.UserDAO;
 import userRun.RunMarketMain;
 import userVO.DCodeAndIdAO;
 import userVO.InterestListVO;
+import userVO.sellerFlagVO;
 import userView.MarketDetailBuyer;
 import userView.MarketMain;
 
@@ -91,18 +92,59 @@ public class MarketDetailBuyerEvt implements ActionListener{
 		}//end if
 	
 	}//addInterest
+	public sellerFlagVO checkFlag() {
+		sellerFlagVO sFVO = null;
+		String productCode = mdb.getProductCode();
+		UserDAO uDAO = UserDAO.getInstance();
+		try {
+			sFVO = uDAO.checkFlag2(productCode);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	
+		return sFVO;
+	}
 	
 //////////////////////////////////////////////////////////////////////////	
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == mdb.getJbtChat()) {
 //			new ChattingView(mm);
+			sellerFlagVO sfVO = checkFlag();
+			if(!sfVO.getAllFLag().equals("P")) {
+				JOptionPane.showMessageDialog(mdb, "판매중인 상품이 아닙니다. ");
+//				mds.dispose();
+				return;
+			}else if (sfVO.getpFlag()>0) {
+				JOptionPane.showMessageDialog(mdb, "판매 완료된 상품입니다.");
+				return;
+				
+			}else if (sfVO.getyFlag()>0) {
+				JOptionPane.showMessageDialog(mdb, "거래 진행중인 상품입니다.");
+				return;
+				
+			}
 			dealStart();
 		}//end if
 ////////////////////////////변경사항/////////////////////////////////////////
 		if(ae.getSource()==mdb.getjckLike()) {
 			try {
+				sellerFlagVO sfVO = checkFlag();
+				if(!sfVO.getAllFLag().equals("P")) {
+					JOptionPane.showMessageDialog(mdb, "판매중인 상품이 아닙니다. ");
+//					mds.dispose();
+					return;
+				}else if (sfVO.getpFlag()>0) {
+					JOptionPane.showMessageDialog(mdb, "판매 완료된 상품입니다.");
+					return;
+					
+				}else if (sfVO.getyFlag()>0) {
+					JOptionPane.showMessageDialog(mdb, "거래 진행중인 상품입니다.");
+					return;
+					
+				}
+				
 				addInterest();
 			} catch (SQLException e) {
 				e.printStackTrace();
