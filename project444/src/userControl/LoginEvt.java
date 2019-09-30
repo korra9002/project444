@@ -87,9 +87,13 @@ public class LoginEvt implements ActionListener {
 									exitFlag = true;
 									break;
 									
+								}else if((cnt=uDAO.suspendRelief(id))==0){
+									JOptionPane.showMessageDialog(lg, "아직 정지기간입니다.");
+									exitFlag = true;
+									break;
 								}//end if
 							
-							default : JOptionPane.showMessageDialog(lg, "제대로 입력해주세요.");
+							default : JOptionPane.showMessageDialog(lg, "제대로 입력하세요.");
 							
 //							System.out.println(exitFlag);
 							}//end switch
