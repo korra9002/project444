@@ -744,11 +744,8 @@ public class UserDAO {
 
 		String dealCode = "";
 		try {
-			// 2.커넥션 얻기
 			con = getConn();
 
-			// 3. 쿼리문 생성객체 얻기 : lunch테이블에서 이름, 코드, 가격, 입력일을 가장최근에 입력된
-			// 것부터 조회
 			String chatList = "   select p.product_name product_name ,p.user_id id ,l.loc loc,deal_code, all_flag,sale_flag from product p, deal d,id_info i,location_list l   "
 					+ " where  d.user_id=? and p.product_code = d.product_code and p.user_id = i.user_id and l.loc_code=i.loc_code   ";
 			if (flag.equals("sell")) {

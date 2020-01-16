@@ -31,14 +31,11 @@ public class ChattingView extends JFrame {
 	private JScrollPane jsp;
 	
 	
-//	private AdminDAO aDAO;
 	private String id;
-//	private MarketMain mm;
 
 	public ChattingView(String id,DCodeAndIdAO DIAO) {
 		super("채팅");
 		this.id = id;
-	//	this.mm=mm;
 		
 		jlResult = new JLabel();
 		
@@ -87,8 +84,6 @@ public class ChattingView extends JFrame {
 		jsp.getVerticalScrollBar().setUI(new ScrollBarUI());
 		
 		
-		//배치
-//	
 		add(jbtProductInfo);
 		add(jsp);
 		add(jtaChatField);
@@ -96,7 +91,6 @@ public class ChattingView extends JFrame {
 		add(jlNotice);
 		add(jbtOk);
 		add(jbtCancle);
-		//// 판매확인 메세지 숨기기
 		jlNotice.setVisible(true);
 		jbtOk.setVisible(false);
 		jbtCancle.setVisible(false);
