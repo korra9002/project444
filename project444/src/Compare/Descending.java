@@ -4,6 +4,11 @@ import java.util.Comparator;
 
 import userVO.ChatListVO;
 
+/**
+ * 채팅 목록 정렬을 위한 클래스
+ * @author BAEK
+ *
+ */
 public class Descending implements Comparator{
 
 	@Override
@@ -11,7 +16,6 @@ public class Descending implements Comparator{
 		if (o1 instanceof ChatListVO && o2 instanceof ChatListVO) {
 			ChatListVO clVO1 = (ChatListVO)o1;
 			ChatListVO clVO2 = (ChatListVO)o2;
-//			System.out.println("컴페어"+(clVO1.getTime().isEmpty() ? "공백" : (clVO1.getTime().compareTo(clVO2.getTime())*-1)));
 			if (clVO1.getTime().isEmpty() && clVO2.getTime().isEmpty()) {
 				return 0;
 			}

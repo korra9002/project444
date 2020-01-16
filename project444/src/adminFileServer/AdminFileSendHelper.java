@@ -20,7 +20,6 @@ public class AdminFileSendHelper extends Thread {
 	private File temp1 = null;
 
 private ServerSocket server;
-	////////////////
 	private FileInputStream fis;
 	private BufferedInputStream bis;
 	private OutputStream os;
@@ -32,7 +31,6 @@ private ServerSocket server;
 		this.client = client;
 		this.client2 = client2;
 		this.server = server;
-		// 4. 데이터를 주고 받을 스트림 연결
 
 		os = client.getOutputStream();
 		dis2 = new DataInputStream(client.getInputStream());
@@ -42,39 +40,31 @@ private ServerSocket server;
 		temp1 = null;
 		File[] serverFile = null;
 
-		// 6. 클라이언트가 보내오는 파일 목록 받기
 
 		temp = dis.readUTF(); // 11111
 		System.out.println(temp+"받은 파일목록");
 		
 		
-		// C:\dev\workspace\jdbc_prj\src\kr\co\sist\admin\img
-		// temp에 존재하는 파일과 admin에 존재하는 파일을 비교하여 없는 파일을 찾아 출력
+
 
 		temp1 = new File("c:/dev/adminRecieveFile");
 		serverFile = temp1.listFiles();
 		listSendFile = new ArrayList<String>();
 
 		for (int j = 0; j < serverFile.length; j++) {
-			// && !serverFile[j].getName().startsWith("rs_")
 			if (!temp.contains(serverFile[j].getName())) {
 				listSendFile.add(serverFile[j].getName());
 			} // end if
 		} // end for
 
-		// 7. 전송할 파일의 갯수 보내기 (클라이언트는 이 횟수로 반복시켜 읽는다.)
 		dos.writeInt(listSendFile.size());//2222222222
-		// dos.flush();
 
-		////////////////////////////////////
-		// dis.close();
 
 	}// FileHelper
 
 	public void run() {
 
 		try {
-			// 8. 전송할 파일 정보 얻기
 
 			for (int i = 0; i < listSendFile.size(); i++) {
 				
@@ -102,16 +92,12 @@ private ServerSocket server;
 			
 				System.out.println("Done.");
 				System.out.println(client.getInetAddress());
-//				client.shutdownOutput();
 				System.out.println(client.getInetAddress());
-//				os.write(byteArray,0,byteArray.length);
 				
 				bis.close();
-//				fis.close();
 				
 				int msg = dis.readInt();
 				System.out.println(msg );
-//				System.out.println(dis2.readUTF());///5555
 			
 			} // end for
 		} catch (IOException ie) {

@@ -31,14 +31,13 @@ public class AdminFileRecieve extends Thread {
 
 	public void run() {
 		try {
-//		      servsock = new ServerSocket(SOCKET_PORT);
 
 			while (true) {
 				System.out.println("Waiting...");
 				try {
 					sock = servSock.accept();
 					System.out.println("Accepted connection : " + sock);
-					// send file
+
 					byte[] mybytearray = new byte[6022386];
 					InputStream is = sock.getInputStream();
 
@@ -48,8 +47,8 @@ public class AdminFileRecieve extends Thread {
 
 					fos = new FileOutputStream("c:/dev/adminRecieveFile/" + newName);
 					bos = new BufferedOutputStream(fos);
-					
-					bytesRead =0;
+
+					bytesRead = 0;
 					current = 0;
 					do {
 						bytesRead = is.read(mybytearray, current, (mybytearray.length - current));
@@ -57,18 +56,14 @@ public class AdminFileRecieve extends Thread {
 							current += bytesRead;
 						System.out.println(bytesRead);
 					} while (bytesRead > -1);
-//				} while (bytesRead > -1);
 
 					bos.write(mybytearray, 0, current);
 					bos.flush();
 					System.out.println("File " + "c:/dev/adminRecieveFile/" + newName + " downloaded (" + current
 							+ " bytes read)");
 
-//					bos.close();
 					is.close();
-//					dis.close();
-//					ImageResize.resizeImage("c:/dev/adminRecieveFile/"+newName, 100, 100);
-//					ImageResize.resizeImage("c:/dev/adminRecieveFile/"+newName, 200, 200);
+
 				} catch (IOException e) {
 					e.printStackTrace();
 				} finally {

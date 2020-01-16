@@ -70,8 +70,6 @@ public class LoginEvt implements ActionListener {
 					}//end if
 					
 				} else {
-//					System.out.println(id);
-//					System.out.println(Login_name);
 					int cnt = 0;
 					if (!Login_name.isEmpty() &&!id.equals("admin")) {
 						boolean exitFlag = false;
