@@ -21,12 +21,10 @@ public class AdminFileRecieve extends Thread {
 	private FileOutputStream fos = null;
 	private BufferedOutputStream bos = null;
 	private Socket sock = null;
-
 	private ServerSocket servSock = null;
 
 	public AdminFileRecieve() throws IOException {
 		servSock = new ServerSocket(5001);
-
 	}
 
 	public void run() {
